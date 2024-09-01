@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Data
-@Entity
+@Entity(name = "themes")
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class Tema {
@@ -33,7 +33,7 @@ public class Tema {
 	private String tema_name;
 	@NonNull
 	private String cafe_name;
-	
+	@NonNull
 	private String genre;
 	private String location;
 	private int difficulty; 
