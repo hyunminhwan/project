@@ -1,11 +1,26 @@
 import './Announcement.css';
-function Announcement() {
+import axios from "axios";
+import { useEffect, useState } from "react";
 
+<link rel="stylesheet" href="https://fonts.google.com/specimen/Stylish?preview.text=scard%0A&script=Kore"></link>
+
+function Announcement() {
+    const [write, setWrite] = useState([]);
+    useEffect(() => {
+        axios.get("/board/write")
+            .then((board) => {
+                console.log(board.data)
+                setWrite(board.data);
+            })
+            .catch(() => {
+                console.log("실패")
+            })
+    }, [])
     return (
         <>
             <h1> 공지 사항</h1>
             <br /><br /><br /><br /><br /><br />
-            <table align="center" style={{border:' 1px solid '}}>
+            <table align="center" style={{ border: ' 1px solid ' }}>
                 <thead>
                     <tr >
                         <th> 글 번호 </th>
@@ -16,16 +31,19 @@ function Announcement() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>공지사항 제목</td>
-                        <td>관리자 작성자</td>
-                        <td>조회수</td>
-                        <td>2024-09-01</td>
-                    </tr>
+                        {
+                            write.map((p) => (                               
+                                <tr>
+                                    <td>{p.boardNo}</td>
+                                    <td onClick={() => {'/AnnouncementdetailForm'}}>{p.boardTitle}</td>
+                                    <td>{p.managerId}</td>
+                                    <td>{p.boardCount}</td>
+                                    <td>{p.boardCreateDate}</td>
+                                </tr>                              
+                            ))
+                        }
                 </tbody>
             </table>
-
             <hr />
 
         </>

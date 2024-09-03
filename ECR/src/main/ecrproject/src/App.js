@@ -43,7 +43,7 @@ function App() {
         }/>
         <Route path='/list' element={<TemaList />} />
         <Route path='/detail/:num' element={ <Detail /> } /> 
-        <Route path='/Announcement' element={ <Announcement /> } />  
+        <Route path='/AnnouncementBoard' element={ <Announcement /> } />  
         <Route path='*' element={<div>없는 페이지 입니다.</div>} />
       </Routes>
 
