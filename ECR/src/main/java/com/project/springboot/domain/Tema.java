@@ -29,29 +29,29 @@ public class Tema {
 			)
 	@GeneratedValue(generator = "temaseq")
 	@Column(name = "tema_no")
-	private Long temaNo;
+	private Long temaNo;		//테마번호
 	
 	@NonNull
 	@Column(name = "tema_name")
-	private String temaName;
+	private String temaName; 	//테마이름
 	@NonNull
 	@Column(name = "cafe_name")
-	private String cafeName;
+	private String cafeName;	//카페이름
 	@NonNull
-	private String genre;
-	private String location;
-	private Long difficulty; 
+	private String genre;		//장르
+	private String location;	//지역
+	private Long difficulty; 	//난이도
 	
 	@Column(name = "tema_content")
-	private String temaContent;
-	private Long rating;
-	private Long timetaken;
-	private Long price;
-	private Long personnel;
+	private String temaContent;	//내용
+	private Long rating;		//평점
+	private Long timetaken;		//소요시간	
+	private Long price;			//가격
+	private Long personnel;		//인원수
 	
 	@CreatedDate
 	@Column(name = "tema_created_date")
-	private LocalDateTime temaCreatedDate;
+	private LocalDateTime temaCreatedDate;	//등록일
     
     
    

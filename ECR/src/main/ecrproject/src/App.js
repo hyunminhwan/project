@@ -4,12 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route, useNavigate,} from 'react-router-dom';
 import { Navbar, Container, Nav, Row} from 'react-bootstrap';
 import TemaList from './tema/temaList';
-
-
+import Detail from './tema/detail';
 
 //npm i react-router-dom
 //npm install @reduxjs/toolkit react-redux
 // npm install react-bootstrap bootstrap
+//npm install axios
 function App() {
 
   let navigate = useNavigate();
@@ -40,6 +40,7 @@ function App() {
           </>
         }/>
         <Route path='/list' element={<TemaList />} />
+        <Route path='/detail/:num' element={ <Detail /> } />   
         <Route path='*' element={<div>없는 페이지 입니다.</div>} />
       </Routes>
 
