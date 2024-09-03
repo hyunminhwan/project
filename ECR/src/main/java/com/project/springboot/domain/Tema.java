@@ -29,6 +29,7 @@ public class Tema {
 			)
 	@GeneratedValue(generator = "temaseq")
 	@Column(name = "tema_no")
+
 	private Long temaNo;		//테마번호
 	
 	@NonNull
@@ -52,6 +53,7 @@ public class Tema {
 	@CreatedDate
 	@Column(name = "tema_created_date")
 	private LocalDateTime temaCreatedDate;	//등록일
+
     
     
    

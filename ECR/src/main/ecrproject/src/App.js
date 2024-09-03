@@ -6,6 +6,9 @@ import { Navbar, Container, Nav, Row} from 'react-bootstrap';
 import TemaList from './tema/temaList';
 import Detail from './tema/detail';
 
+import Announcement from './Announcement/AnnouncementBoard';
+
+
 //npm i react-router-dom
 //npm install @reduxjs/toolkit react-redux
 // npm install react-bootstrap bootstrap
@@ -23,6 +26,7 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link onClick={() => { navigate('/') }}>Home</Nav.Link>
             <Nav.Link onClick={() => { navigate('/list')}}>테마</Nav.Link>
+            <Nav.Link onClick={() => { navigate('/AnnouncementBoard')}}>공지사항</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -40,7 +44,8 @@ function App() {
           </>
         }/>
         <Route path='/list' element={<TemaList />} />
-        <Route path='/detail/:num' element={ <Detail /> } />   
+        <Route path='/detail/:num' element={ <Detail /> } /> 
+        <Route path='/Announcement' element={ <Announcement /> } />   
         <Route path='*' element={<div>없는 페이지 입니다.</div>} />
       </Routes>
 
