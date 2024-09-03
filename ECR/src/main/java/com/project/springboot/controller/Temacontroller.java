@@ -30,14 +30,6 @@ public class Temacontroller {
 		return temaService.menu();
 	}
 	
-	//페이징처리
-	@PostMapping("/list")
-	public Page<Tema> list(@RequestBody Map<String, Integer> params, Model model) {
-	    int nowPage = params.get("nowPage");
-	    int pageSize = params.get("pageSize");
-	    return temaService.list(PageRequest.of(nowPage, pageSize, Sort.by(Sort.Direction.DESC, "temano")));
-	    
-	  
-	}
+	
 	
 }
