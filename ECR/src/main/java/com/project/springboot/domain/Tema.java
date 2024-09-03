@@ -54,7 +54,6 @@ public class Tema {
 	@Column(name = "tema_created_date")
 	private LocalDateTime temaCreatedDate;	//등록일
 
-	
     
     
    
