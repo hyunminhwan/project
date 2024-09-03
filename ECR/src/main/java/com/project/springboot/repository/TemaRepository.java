@@ -10,7 +10,7 @@ import com.project.springboot.domain.Tema;
 @Repository
 public interface TemaRepository extends JpaRepository<Tema, Long>{
 
-	
+	List<Tema> findAllByOrderByTemaNoAsc();
 
 
 }
