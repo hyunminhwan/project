@@ -54,30 +54,7 @@ public class Tema {
 	@Column(name = "tema_created_date")
 	private LocalDateTime temaCreatedDate;	//등록일
 
-	private Long temaNo;
 	
-	@NonNull
-	@Column(name = "tema_name")
-	private String temaName;
-	@NonNull
-	@Column(name = "cafe_name")
-	private String cafeName;
-	@NonNull
-	private String genre;
-	private String location;
-	private Long difficulty; 
-	
-	@Column(name = "tema_content")
-	private String temaContent;
-	private Long rating;
-	private Long timetaken;
-	private Long price;
-	private Long personnel;
-	
-	@CreatedDate
-	@Column(name = "tema_created_date")
-	private LocalDateTime temaCreatedDate;
-
     
     
    
