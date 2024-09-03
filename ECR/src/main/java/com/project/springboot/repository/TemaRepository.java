@@ -10,9 +10,11 @@ import com.project.springboot.domain.Tema;
 @Repository
 public interface TemaRepository extends JpaRepository<Tema, Long>{
 
-	List<Tema> findAll();
+	List<Tema> findAllByOrderByTemaNoAsc();
 
-	List<Tema> findAllOrderBytema_no();
+	
+
+
 
 
 
