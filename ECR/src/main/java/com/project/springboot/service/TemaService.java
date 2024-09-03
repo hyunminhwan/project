@@ -18,7 +18,7 @@ public class TemaService {
 	TemaRepository temarepository;
 
 	public List<Tema> menu() {
-		return temarepository.findAll();
+		return temarepository.findAllByOrderByTemaNoAsc();
 	}
 
 	public Page<Tema> list(PageRequest of) {

@@ -1,54 +1,49 @@
 import './App.css';
-import axios from 'axios';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Routes, Route, useNavigate,} from 'react-router-dom';
+import { Navbar, Container, Nav, Row} from 'react-bootstrap';
+import TemaList from './tema/temaList';
 
-import { useState } from 'react';
 
 
+//npm i react-router-dom
+//npm install @reduxjs/toolkit react-redux
+// npm install react-bootstrap bootstrap
 function App() {
-  const [menuList, setMenuList] = useState([]);
 
-
+  let navigate = useNavigate();
   return (
+
     <div className="App">
      
+     <Navbar bg="dark" data-bs-theme="dark">
+        <Container>
+          <Navbar.Brand href="#home">방탈출</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link onClick={() => { navigate('/') }}>Home</Nav.Link>
+            <Nav.Link onClick={() => { navigate('/list')}}>테마</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
 
-      {
-        menuList.map((menu,i) => {
-          return (
-            <>
-            <div>테마번호 :{i+1}</div>
-            <h2>테마이름 : {menu.tema_name}</h2>
-            <div>카페이름 :{menu.cafe_name}</div>
-            <div>장르 : {menu.genre}</div>
-            <div>지역 : {menu.location}</div>
-            <div>난이도 : {menu.difficulty}</div>
-            <div>내용 : {menu.tema_content}</div>
-            <div>평점 : {menu.rating}</div>
-            <div>소요시간 :{menu.timetaken}분</div>
-            <div>가격 : {menu.price} 원</div>
-            <div>인원수 :{menu.personnel}</div>
-            <div>등록일 :{menu.tema_created_date}</div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            </>
-          )
-        })
-      }
-      <button onClick={() => {
-        axios.get('/api/menu')
-             .then(result => {
-              console.log(result);
-              setMenuList(result.data);
-             })
-             .catch(() => {
-              console.log("실패");
-             })
-      }}>서버에서 메뉴가져오기</button>
-      
-      
+      <Routes>
+        <Route path='/' element={
+          <>
+            <div className='main-bg'/>
+            <Container>
+              <Row>
+              <h2>안녕하세요</h2>
+              </Row>
+            </Container>
+
+          </>
+        }/>
+        <Route path='/list' element={<TemaList />} />
+        <Route path='*' element={<div>없는 페이지 입니다.</div>} />
+      </Routes>
+
+       
     </div>
   );
 }

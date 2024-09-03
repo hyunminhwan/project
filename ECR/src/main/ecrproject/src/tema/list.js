@@ -1,6 +1,0 @@
-
-function list() {
-    <div>
-        
-    </div>
-}

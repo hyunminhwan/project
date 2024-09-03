@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
@@ -27,24 +28,30 @@ public class Tema {
 			allocationSize = 1
 			)
 	@GeneratedValue(generator = "temaseq")
-	private Long tema_no;
+	@Column(name = "tema_no")
+	private Long temaNo;
 	
 	@NonNull
-	private String tema_name;
+	@Column(name = "tema_name")
+	private String temaName;
 	@NonNull
-	private String cafe_name;
+	@Column(name = "cafe_name")
+	private String cafeName;
 	@NonNull
 	private String genre;
 	private String location;
-	private int difficulty; 
-	private String tema_content;
-	private int rating;
-	private int timetaken;
-	private int price;
-	private int personnel;
+	private Long difficulty; 
+	
+	@Column(name = "tema_content")
+	private String temaContent;
+	private Long rating;
+	private Long timetaken;
+	private Long price;
+	private Long personnel;
 	
 	@CreatedDate
-	private LocalDateTime tema_created_date;
+	@Column(name = "tema_created_date")
+	private LocalDateTime temaCreatedDate;
     
     
    
