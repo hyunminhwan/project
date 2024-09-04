@@ -23,22 +23,22 @@ import lombok.NoArgsConstructor;
 public class Announcement {
 
 	@Id
-	private String boardNo; // 공지사항 번호
+	private Long boardNo; // 공지사항 번호
 	@Column( name = "board_title")
 	private String boardTitle; // 공지사항의 제목
 	@Column ( name = "board_content")
 	private String boardContent;  // 공지사항의 내용
 	
 	private String managerId; // 관리자아이디
-	private String boardCount; // 조회수
+	private Long boardCount; // 조회수
 	
 	@CreatedDate
 	@Column(name = "board_create_date")
-	private String boardCreateDate; // 공지사항의 생성일자
+	private LocalDateTime boardCreateDate; // 공지사항의 생성일자
 	
 
 	@LastModifiedDate
 	@Column(name="board_update_date")
-	private String boardUpdateDate; // 공지사항의 수정일자
+	private LocalDateTime boardUpdateDate; // 공지사항의 수정일자
 
 }

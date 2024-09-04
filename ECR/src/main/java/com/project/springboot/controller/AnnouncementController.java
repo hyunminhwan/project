@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,11 @@ public class AnnouncementController {
 	@GetMapping("/write")
 	public List<Announcement> write() {
 		return announcementService.write();
+	}
+	
+	@GetMapping("/form/{boardNo}")
+	public Announcement findBYid(@PathVariable(name="boardNo") Long boardNo) {
+		return announcementService.findById(boardNo).get();
 	}
 	
 }
