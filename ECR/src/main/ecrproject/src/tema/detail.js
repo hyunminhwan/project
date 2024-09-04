@@ -1,12 +1,16 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
-
-function Detail(props) {
+import Location from "./location";
+import Review from "./review";
+function Detail() {
     const location = useLocation();
     const { menu } = location.state;
 
+    
+
     return (
         <>
+        
             <Container>
                 <Row>
                     <Col>
@@ -24,11 +28,16 @@ function Detail(props) {
                         <div>인원수 : {menu.personnel}</div>
                         <div>등록일 : {menu.temaCreatedDate.slice(0, 10)}</div>
                         <br />
+                        
                     </Col>
                 </Row>
-            </Container>
+                <Location/>
+                <Review temaNo={menu.temaNo}/>
+            </Container >
+           
+            
         </>
-    );
+    )
 
 
 }

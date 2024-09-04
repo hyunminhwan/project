@@ -16,14 +16,12 @@ public class TemaService {
 	
 	@Autowired
 	TemaRepository temarepository;
-
+	
+	//모든메뉴를 테마번호 오름차순으로 정렬해서 가지고오기
 	public List<Tema> menu() {
 		return temarepository.findAllByOrderByTemaNoAsc();
 	}
 
-	public Page<Tema> list(PageRequest of) {
-		return temarepository.findAll(of);
-	}
 	
 	
 }

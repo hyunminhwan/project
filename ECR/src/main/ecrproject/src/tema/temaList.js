@@ -8,6 +8,7 @@ function TemaList() {
     let [menuList, setMenuList] = useState([]); //bd에 있는 모든테마를 담을 변수 선언
     let [menuCount, setMenuCount] = useState(9); //  10개씩 보여주는 초기값 설정
     let [filteredMenuList, setFilteredMenuList] = useState([]); // 필터링된 테마 리스트
+    let [countPage,setCountPage]=useState(0);
     let [filters, setFilters] = useState({
         genre: '',
         location: '',
@@ -44,7 +45,7 @@ function TemaList() {
         setMenuCount(p => p + 9); //10개씩 추가로 보여주기
     }
 
-    const handleFilterChange = (e) => {
+    const FilterChange = (e) => {
         const { name, value } = e.target;
         setFilters({
             ...filters,
@@ -53,6 +54,7 @@ function TemaList() {
     };
     return (
         <div>
+            
             <Container>
                 <Row>
                     <h4>카테고리</h4>
@@ -61,9 +63,9 @@ function TemaList() {
                             <Col md={3} >
                                 <Form.Group controlId="genre">
                                     <Form.Label>장르</Form.Label>
-                                    <Form.Select  name="genre" onChange={handleFilterChange}>
+                                    <Form.Select  name="genre" onChange={FilterChange}>
                                         <option value="">전체</option>
-                                        <option value="공포">공포</option>
+                                        <option value="미스터리">미스터리</option>
                                         <option value="호러">호러</option>
                                         <option value="SF">SF</option>
                                         <option value="추리">추리</option>
@@ -75,7 +77,7 @@ function TemaList() {
                             <Col md={3}>
                                 <Form.Group controlId="location">
                                     <Form.Label>지역</Form.Label>
-                                    <Form.Select  name="location" onChange={handleFilterChange}>
+                                    <Form.Select  name="location" onChange={FilterChange}>
                                         <option value="">전체</option>
                                         <option value="서울">서울</option>
                                         <option value="부산">부산</option>
@@ -87,7 +89,7 @@ function TemaList() {
                             <Col md={3}>
                                 <Form.Group controlId="difficulty">
                                     <Form.Label>난이도</Form.Label>
-                                    <Form.Select  name="difficulty" onChange={handleFilterChange}>
+                                    <Form.Select  name="difficulty" onChange={FilterChange}>
                                         <option value="">전체</option>
                                         <option value={1}>1</option>
                                         <option value={2}>2</option>
@@ -100,7 +102,7 @@ function TemaList() {
                             <Col md={3}>
                                 <Form.Group controlId="personnel">
                                     <Form.Label>인원수</Form.Label>
-                                    <Form.Select  name="personnel" onChange={handleFilterChange}>
+                                    <Form.Select  name="personnel" onChange={FilterChange}>
                                         <option value="">전체</option>
                                         <option value={4}>4명</option>
                                         <option value={5}>5명</option>
@@ -114,6 +116,7 @@ function TemaList() {
                 <Row>
                     {
                         filteredMenuList.slice(0, menuCount).map((menu, i) => (
+                            
                             <Col lg={4} onClick={() => {
                                 navigate(`/detail/${menu.temaNo}`, { state: { menu } })
                             }} style={{ cursor: 'pointer' }} >
@@ -139,7 +142,7 @@ function TemaList() {
                 </Row>
                 {menuCount < menuList.length && ( // 모든 항목을 다 보여준 상태가 아니라면 버튼을 보여줍니다.
                     <div className="text-center">
-                        <Button  size="lg" onClick={loadMore} variant="primary">더보기  {menuCount}/{filteredMenuList.length}</Button>
+                        <Button  size="lg" onClick={loadMore} variant="primary">더보기  {countPage<9 ? filteredMenuList.length-countPage:countPage}/{filteredMenuList.length}</Button>
                     </div>
                 )}
             </Container>
