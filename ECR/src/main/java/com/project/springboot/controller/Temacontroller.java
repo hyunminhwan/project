@@ -29,7 +29,5 @@ public class Temacontroller {
 	public List<Tema> menu() {
 		return temaService.menu();
 	}
-	
-	
-	
+
 }
