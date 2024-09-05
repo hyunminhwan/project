@@ -22,8 +22,8 @@ function Anc_DetailForm() {
 
     if (!announcement) return <p>로딩 중...</p>;
 
-    const handleEditClick = () => {
-        navigate(`/announcement/edit/${boardNo}`);
+    const handleEditClick = (boardNo) => {
+        navigate(`Anc_EditForm/${boardNo}`);
     };
 
     return (
@@ -89,7 +89,7 @@ function Anc_DetailForm() {
                     </tbody>
                 </table>
                 <br/>
-                <button type="button" onClick={handleEditClick}>수정하기</button>
+                <button type="button" onClick={()=>{handleEditClick(announcement.boardNo)}}>수정하기</button>
             </form>
         </>
     );

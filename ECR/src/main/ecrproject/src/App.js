@@ -51,7 +51,7 @@ function App() {
         <Route path='/Anc_Board' element={ <Anc_Board /> } />
         <Route path='/Anc_DetailForm/:num' element={ <Anc_DetailForm /> } />
 
-        <Route path='/Anc_EditForm/:num' element={ <Anc_EditForm /> } /> 
+        <Route path='/Anc_DetailForm/:num/Anc_EditForm/:num' element={ <Anc_EditForm /> } /> 
         <Route path='*' element={<div>없는 페이지 입니다.</div>} />
       </Routes>
 
