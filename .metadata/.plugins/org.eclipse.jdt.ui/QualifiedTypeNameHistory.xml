@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="jakarta.persistence.Entity"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Id"/>
+    <fullyQualifiedTypeName name="io.micrometer.common.lang.NonNull"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+</qualifiedTypeNameHistroy>
