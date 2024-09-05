@@ -5,6 +5,7 @@ import { Routes, Route, useNavigate,} from 'react-router-dom';
 import { Navbar, Container, Nav, Row} from 'react-bootstrap';
 import TemaList from './tema/temaList';
 import Detail from './tema/detail';
+import InsertTema from './tema/insertTema';
 
 //npm i react-router-dom
 //npm install @reduxjs/toolkit react-redux
@@ -19,10 +20,11 @@ function App() {
      
      <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="#home">방탈출</Navbar.Brand>
+          <Navbar.Brand >방탈출</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link onClick={() => { navigate('/') }}>Home</Nav.Link>
             <Nav.Link onClick={() => { navigate('/list')}}>테마</Nav.Link>
+            <Nav.Link onClick={() => { navigate('/InsertTema')}}>테마 등록</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -40,7 +42,8 @@ function App() {
           </>
         }/>
         <Route path='/list' element={<TemaList />} />
-        <Route path='/detail/:num' element={ <Detail /> } />   
+        <Route path='/detail/:num' element={ <Detail /> } /> 
+        <Route path='/InsertTema' element={ <InsertTema /> } />  
         <Route path='*' element={<div>없는 페이지 입니다.</div>} />
       </Routes>
 

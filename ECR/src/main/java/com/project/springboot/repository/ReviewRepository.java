@@ -8,6 +8,7 @@ import com.project.springboot.domain.Reviews;
 
 public interface ReviewRepository extends JpaRepository<Reviews, Long>{
 
-	List<Reviews> findAllByTemaNo(Long temaNo);
+
+	List<Reviews> findAllByTemaNoOrderByReviewNoDesc(Long temaNo);
 
 }
