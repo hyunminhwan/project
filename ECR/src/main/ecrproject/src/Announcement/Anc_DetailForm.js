@@ -23,7 +23,7 @@ function Anc_DetailForm() {
     if (!announcement) return <p>로딩 중...</p>;
 
     const handleEditClick = (boardNo) => {
-        navigate(`Anc_EditForm/${boardNo}`);
+        navigate(`/Anc_EditForm`,{state:{boardNo}});
     };
 
     return (

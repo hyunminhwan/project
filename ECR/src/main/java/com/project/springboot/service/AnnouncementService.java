@@ -23,4 +23,12 @@ public class AnnouncementService {
 		return announcementRepository.findById(boardNo);
 	}
 
+	public Announcement retouch(Announcement announcement) {
+		return announcementRepository.save(announcement);
+	}
+
+	public void delete(Long boardNo) {
+		announcementRepository.deleteById(boardNo);
+	}
+
 }

@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 public class Announcement {
 
 	@Id
+	@Column(name="board_no")
 	private Long boardNo; // 공지사항 번호
 	@Column( name = "board_title")
 	private String boardTitle; // 공지사항의 제목
