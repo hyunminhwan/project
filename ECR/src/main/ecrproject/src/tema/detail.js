@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import Location from "./location";
 import Review from "./review";
@@ -28,7 +28,7 @@ function Detail() {
                         <div>인원수 : {menu.personnel}</div>
                         <div>등록일 : {menu.temaCreatedDate.slice(0, 10)}</div>
                         <br />
-                        
+                        <Button>예약하기</Button>
                     </Col>
                 </Row>
                 <Location/>

@@ -6,9 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 function TemaList() {
     let [menuList, setMenuList] = useState([]); //bd에 있는 모든테마를 담을 변수 선언
-    let [menuCount, setMenuCount] = useState(9); //  10개씩 보여주는 초기값 설정
+    let [menuCount, setMenuCount] = useState(9); //  9개씩 보여주는 초기값 설정
     let [filteredMenuList, setFilteredMenuList] = useState([]); // 필터링된 테마 리스트
-    let [countPage,setCountPage]=useState(0);
     let [filters, setFilters] = useState({
         genre: '',
         location: '',
@@ -138,11 +137,13 @@ function TemaList() {
                                 </div>
                             </Col>
                         ))
+                        
                     }
+                    
                 </Row>
                 {menuCount < menuList.length && ( // 모든 항목을 다 보여준 상태가 아니라면 버튼을 보여줍니다.
                     <div className="text-center">
-                        <Button  size="lg" onClick={loadMore} variant="primary">더보기  {countPage<9 ? filteredMenuList.length-countPage:countPage}/{filteredMenuList.length}</Button>
+                        <Button  size="lg" onClick={loadMore} variant="primary">더보기  {Math.min(menuCount, filteredMenuList.length)}/{filteredMenuList.length}</Button>
                     </div>
                 )}
             </Container>

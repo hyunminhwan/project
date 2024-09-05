@@ -15,11 +15,16 @@ public class ReviewService {
 	ReviewRepository reviewRepository;
 
 	public List<Reviews> reviewByTema(Long temaNo) {
-		return reviewRepository.findAllByTemaNo(temaNo);
+		return reviewRepository.findAllByTemaNoOrderByReviewNoDesc(temaNo);
 	}
 
 	public Reviews reviewInsert(Reviews reviews) {
 		return reviewRepository.save(reviews);
+	}
+
+	public String reviewDelete(Long reviewNo) {
+		reviewRepository.deleteById(reviewNo);
+		return "성공!";
 	}
 	
 }
