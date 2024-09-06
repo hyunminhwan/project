@@ -15,7 +15,9 @@ function Detail() {
                 <Row>
                     <Col>
                         <img id="a" src={`${process.env.PUBLIC_URL}/img/room${menu.temaNo}.jpg`} alt="테마 이미지" />
+                        
                         <div>테마번호 : {menu.temaNo}</div>
+                        <div>조회수 : {menu.temacount}</div>
                         <h2>테마이름 : {menu.temaName}</h2>
                         <div>카페이름 : {menu.cafeName}</div>
                         <div>장르 : {menu.genre}</div>
@@ -27,6 +29,7 @@ function Detail() {
                         <div>가격 : {menu.price} 원</div>
                         <div>인원수 : {menu.personnel}</div>
                         <div>등록일 : {menu.temaCreatedDate.slice(0, 10)}</div>
+
                         <br />
                         <Button>예약하기</Button>
                     </Col>

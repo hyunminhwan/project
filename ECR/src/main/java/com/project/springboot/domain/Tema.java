@@ -50,6 +50,8 @@ public class Tema {
 	private Long price;			//가격
 	private Long personnel;		//인원수
 	
+	@Column(name = "tema_count", columnDefinition = "NUMBER default 0")
+	private Long temaCount; 		//조회수
 	@CreatedDate
 	@Column(name = "tema_created_date")
 	private LocalDateTime temaCreatedDate;	//등록일
