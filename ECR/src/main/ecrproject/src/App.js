@@ -31,7 +31,11 @@ function App() {
             <Nav.Link onClick={() => { navigate('/') }}>Home</Nav.Link>
             <Nav.Link onClick={() => { navigate('/list')}}>테마</Nav.Link>
             <Nav.Link onClick={() => { navigate('/InsertTema')}}>테마 등록</Nav.Link>
+<<<<<<< HEAD
             <Nav.Link onClick={() => { navigate('/Anc_Board')}}>공지사항</Nav.Link>
+=======
+            <Nav.Link onClick={() => { navigate('/AnnouncementBoard')}}>공지사항</Nav.Link>
+>>>>>>> cb793495dc306e10a3a9e2f63b34da0afa7ce22c
 
           </Nav>
         </Container>
@@ -52,9 +56,16 @@ function App() {
         <Route path='/list' element={<TemaList />} />
         <Route path='/detail/:num' element={ <Detail /> } /> 
         <Route path='/InsertTema' element={ <InsertTema /> } />  
+<<<<<<< HEAD
         <Route path='/Anc_Board' element={ <Anc_Board /> } />
         <Route path='/Anc_DetailForm' element={ <Anc_DetailForm /> } />
         <Route path='/Anc_EditForm' element={ <Anc_EditForm /> } /> 
+=======
+        <Route path='/Announcement' element={ <Announcement /> } />   
+        <Route path='/Anc_Board' element={ <Anc_Board /> } />
+        <Route path='/Anc_DetailForm/:num' element={ <Anc_DetailForm /> } />
+        <Route path='/Anc_DetailForm/:num/Anc_EditForm/:num' element={ <Anc_EditForm /> } /> 
+>>>>>>> cb793495dc306e10a3a9e2f63b34da0afa7ce22c
         <Route path='*' element={<div>없는 페이지 입니다.</div>} />
       </Routes>
 
