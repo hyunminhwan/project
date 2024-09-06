@@ -1,0 +1,54 @@
+/* 예시로, 방탈출 테마에 맞춘 무서운 네비게이션 스타일 */
+body {
+    background-color: #111;
+    color: #fff;
+    font-family: 'Creepster', cursive;
+  }
+  
+  .navbar {
+    background-color: #000;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 10;
+  }
+  
+  .nav-links, .nav-right {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    padding: 0;
+  }
+  
+  .nav-links li a, .nav-right li a {
+    text-decoration: none;
+    color: #ff4444;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-links li:hover a, .nav-right li:hover a {
+    background-color: #ff4444;
+    color: #000;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #222;
+    min-width: 150px;
+    list-style: none;
+    padding: 0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+  }
+  
+  .dropdown-content li a {
+    padding: 10px;
+    color: #ff4444;
+    display: block;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  

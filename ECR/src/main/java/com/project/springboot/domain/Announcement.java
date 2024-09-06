@@ -2,6 +2,7 @@ package com.project.springboot.domain;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -10,7 +11,9 @@ import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
@@ -23,6 +26,12 @@ import lombok.NoArgsConstructor;
 public class Announcement {
 
 	@Id
+	@SequenceGenerator(
+			name="boardseq",
+			sequenceName = "board_no_seq",
+			allocationSize = 1
+			)
+	@GeneratedValue(generator = "boardseq")
 	@Column(name="board_no")
 	private Long boardNo; // 공지사항 번호
 	@Column( name = "board_title")
@@ -31,7 +40,9 @@ public class Announcement {
 	private String boardContent;  // 공지사항의 내용
 	
 	private String managerId; // 관리자아이디
-	private Long boardCount; // 조회수
+	
+	@ColumnDefault("0")
+	private Long boardCount = 0L; // 조회수 초기값 설정
 	
 	@CreatedDate
 	@Column(name = "board_create_date")
@@ -42,4 +53,8 @@ public class Announcement {
 	@Column(name="board_update_date")
 	private LocalDateTime boardUpdateDate; // 공지사항의 수정일자
 
+	// 조회수를 증가시키는 메서드
+		public void increaseViewCount() {
+			this.boardCount++;
+		}
 }
