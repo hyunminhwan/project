@@ -1,4 +1,19 @@
 .App {
   text-align: center;
 }
+img{
+  height: 400px;
+  width: 100%;
+}
+.App header {
+  text-align:auto;
+}
+.logincontainer{
+  display: flex;
+  justify-content: flex-end; /* 버튼들을 오른쪽으로 정렬 */
+  gap: 10px; /* 버튼 사이의 간격 */
+}
 
+/* .mypage, .logggin, .join {
+  /* 버튼에 추가 스타일이 필요하면 여기에 작성 */
+  
