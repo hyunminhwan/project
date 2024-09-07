@@ -10,11 +10,6 @@ function Anc_Board() {
     useEffect(() => {
         axios.get("/board/write")
             .then((board) => {
-<<<<<<< HEAD
-                console.log(board.data);
-=======
-                console.log(board.data)
->>>>>>> cb793495dc306e10a3a9e2f63b34da0afa7ce22c
                 setWrite(board.data);
             })
             .catch(() => {
@@ -24,12 +19,8 @@ function Anc_Board() {
 
     // map(p)의 onClick 할 시 쓰이는 함수 
     const handleRowClick = (boardNo) => {
-<<<<<<< HEAD
-        navigate(`/Anc_DetailForm`,{ state: { boardNo } });
-=======
-        navigate(`/Anc_DetailForm/${boardNo}`,{ state: { boardNo } });
->>>>>>> cb793495dc306e10a3a9e2f63b34da0afa7ce22c
-      
+
+        navigate(`/Anc_DetailForm`,{ state: { boardNo } });  
     };
 
     return (

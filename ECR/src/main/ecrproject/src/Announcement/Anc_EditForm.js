@@ -1,17 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-<<<<<<< HEAD
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 function Anc_EditForm() {
     const location = useLocation(); // URL에서 boardNo 가져오기
     const { boardNo } = location.state
-=======
-import { useNavigate, useParams } from 'react-router-dom';
 
-function Anc_EditForm() {
-    const { boardNo } = useParams(); // URL에서 boardNo 가져오기
->>>>>>> cb793495dc306e10a3a9e2f63b34da0afa7ce22c
     const [announcement, setAnnouncement] = useState({
         boardTitle: '',
         managerId: '',
@@ -44,11 +38,7 @@ function Anc_EditForm() {
         e.preventDefault();
         axios.put(`/board/form/${boardNo}`, announcement)
             .then(() => {
-<<<<<<< HEAD
                 navigate('/Anc_DetailForm',{ state: { boardNo } });
-=======
-                navigate(`/announcement/${boardNo}`);
->>>>>>> cb793495dc306e10a3a9e2f63b34da0afa7ce22c
             })
             .catch(() => {
                 console.log("수정 실패");

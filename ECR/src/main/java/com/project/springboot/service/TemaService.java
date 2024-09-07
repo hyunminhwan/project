@@ -22,6 +22,10 @@ public class TemaService {
 		return temarepository.findAllByOrderByTemaNoAsc();
 	}
 
+	public Tema coordinate(Tema tema) {
+		return temarepository.save(tema);
+	}
+
 	
 	
 }
