@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,10 +27,17 @@ public class Temacontroller {
 		return temaService.menu();
 	}
 	
+	//Tema 모두저장
 	@PostMapping("/tema")
-	public Tema coordinate(@RequestBody Tema tema) {
-		return temaService.coordinate(tema);
+	public Tema TemaAllsave(@RequestBody Tema tema) {
+		return temaService.Allsave(tema);
 	}
 	
+	//Tema 조회수 증가
+	@PutMapping("/{temaNo}/count")
+	public Tema Temacount(@PathVariable(name="temaNo") Long temaNo){
+		return temaService.TemaCount(temaNo);
+		
+	}
 	
 }
