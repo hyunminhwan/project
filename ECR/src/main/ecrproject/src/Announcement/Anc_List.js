@@ -6,10 +6,12 @@ function Anc_List() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
-    const handleSubmit = (e) => {
+    const Anc_Submit = (e) => {
         e.preventDefault();
 
-        axios.post('/board/write2',{ managerId: manager, boardTitle: title, boardContent: content })
+        axios.post('/board/write2',{ 
+            managerId: manager, boardTitle: title, boardContent: content })
+
             .then(() => {
                 alert('공지사항이 작성되었습니다.');
                 window.location.href = '/Anc_Board'; // 작성 후 게시판으로 이동
@@ -23,7 +25,7 @@ function Anc_List() {
     return (
         <div>
             <h1>공지사항 작성</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={Anc_Submit}>
                 <table className="form-table">
                     <tbody>
                         <tr>

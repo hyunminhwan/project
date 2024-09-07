@@ -28,13 +28,12 @@ public class AnnouncementController {
 	AnnouncementService announcementService;
 	
 	 // 페이지네이션을 사용한 공지사항 목록 조회
-    @GetMapping("/list")
+    @GetMapping("/list/{page}/{size}")
     public Page<Announcement> list(
-        @RequestParam(defaultValue = "0") int page, // 기본 페이지는 0
-        @RequestParam(defaultValue = "10") int size // 기본 페이지 크기는 10
+    		 @PathVariable(name="page") int page,   // URL 경로에서 페이지 번호를 받아옴
+             @PathVariable(name="size") int size    // URL 경로에서 페이지 크기를 받아옴
     ) {
-    	Pageable pageable = PageRequest.of(page, size, Sort.by("boardNo").descending());
-        return announcementService.findAll(pageable);
+    	  return announcementService.findAll(page, size);
     }
 	
 	@GetMapping("/write")

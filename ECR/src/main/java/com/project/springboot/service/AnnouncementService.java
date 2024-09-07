@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 import com.project.springboot.domain.Announcement;
 import com.project.springboot.repository.AnnouncementRepository;
 
@@ -21,7 +23,10 @@ public class AnnouncementService {
 	}
 	
 	// 페이지네이션 기능 추가
-    public Page<Announcement> findAll(Pageable pageable) {
+    public Page<Announcement> findAll(int page,int size) {
+    	 // Pageable 객체를 생성하여 페이지 번호와 크기 설정
+        Pageable pageable = PageRequest.of(page, size);
+        // Repository를 통해 페이지네이션 처리된 데이터를 반환
         return announcementRepository.findAll(pageable);
     }
 

@@ -6,20 +6,17 @@ import'./test.css';
 function Anc_Board() {
     const navigate = useNavigate();
     const [write, setWrite] = useState([]);
+    const [Nowpage, setPage] = useState(0); // 현재 페이지 번호
+    const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수
+    const [totalElements, setTotalElements] = useState(0); // 전체 글 갯수
+    
 
     useEffect(() => {
-        axios.get("/board/write")
-            .then((board) => {
-                console.log(board.data);
-                setWrite(board.data);
-            })
-            .catch(() => {
-                console.log("실패");
-            });
-    }, []);
+        PageList(Nowpage); // 페이지 변경 시 데이터 요청
+    }, [Nowpage]);
 
     // boardNo에 포함된 내용을 저장해주는 함수
-    const handleRowClick = (boardNo) => {
+    const Anc_DetailForm = (boardNo) => {
         navigate(`/Anc_DetailForm`, { state: { boardNo } });
     };
 
@@ -28,6 +25,31 @@ function Anc_Board() {
         navigate(`/Anc_List`);
     }
 
+    const PageList = (Nowpage) => {
+        axios.get(`/board/list/${Nowpage}/5`) // 백엔드에서 페이지와 크기 요청
+        .then((result) => {
+            setWrite(result.data.content); // 현재 페이지의 공지 데이터
+            setTotalPages(result.data.totalPages); // 전체 페이지 수
+            setTotalElements(result.data.totalElements); // 전체 글 수
+        })
+        .catch(() => {
+            console.log("데이터 가져오기 실패");
+        });
+    }
+
+    // 다음 페이지로 이동하는 함수
+    const nextPage = () => {
+        if (Nowpage < totalPages - 1) {
+            setPage(Nowpage + 1);
+        }
+    };
+
+    // 이전 페이지로 이동하는 함수
+    const prevPage = () => {
+        if (Nowpage > 0) {
+            setPage(Nowpage - 1);
+        }
+    };
     return (
         <div className="anc-board-container">
             <h1>공지 사항</h1>
@@ -47,10 +69,10 @@ function Anc_Board() {
                     </tr>
                 </thead>
                 <tbody>
-                    {write.map((p) => (
-                        // handleRowClick 함수를 씀
-                        <tr key={p.boardNo} onClick={() => handleRowClick(p.boardNo)}>
-                            <td>{p.boardNo}</td>
+                    {write.map((p,i) => (
+                        // Anc_DetailForm 함수를 씀
+                        <tr key={p.boardNo} onClick={() => Anc_DetailForm(p.boardNo)}>
+                            <td>{totalElements - (Nowpage * 5 + i)}</td> 
                             <td>{p.boardTitle}</td>
                             <td>{p.managerId}</td>
                             <td>{p.boardCount}</td>
@@ -59,6 +81,11 @@ function Anc_Board() {
                     ))}
                 </tbody>
             </table>
+            <div className="pagination-controls">
+                <button onClick={prevPage} disabled={Nowpage === 0}>이전 페이지</button>
+                <span>Page {Nowpage + 1} of {totalPages}</span>
+                <button onClick={nextPage} disabled={Nowpage === totalPages - 1}>다음 페이지</button>
+            </div>
         </div>
     );
 }
