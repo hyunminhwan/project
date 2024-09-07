@@ -50,13 +50,21 @@ public class Tema {
 	private Long price;			//가격
 	private Long personnel;		//인원수
 	
+	@Column(name = "latitude")
+	private Double latitude;		//위도
+
+	@Column(name = "longitude")
+	private Double longitude;		//경도
+	
+	private String address;			//주소
+	
 	@Column(name = "tema_count", columnDefinition = "NUMBER default 0")
 	private Long temaCount; 		//조회수
 	@CreatedDate
 	@Column(name = "tema_created_date")
 	private LocalDateTime temaCreatedDate;	//등록일
 
-    
+
     
    
 	

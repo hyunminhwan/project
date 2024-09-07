@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 // import { Map, MapMarker } from "react-kakao-maps-sdk";
 
-function Location () {
+function Location ({ latitude, longitude }) {
   useEffect(() => {
     const initMap = () => {
       const mapOptions = {
-        center: new window.naver.maps.LatLng(37.3595704, 127.105399),
+        center: new window.naver.maps.LatLng(latitude, longitude),
         zoom: 15,
       };
 
@@ -13,7 +13,7 @@ function Location () {
 
       // 마커 추가 (옵션)
       const marker = new window.naver.maps.Marker({
-        position: new window.naver.maps.LatLng(37.3595704, 127.105399),
+        position: new window.naver.maps.LatLng(latitude, longitude),
         map,
       });
     };
@@ -30,27 +30,7 @@ function Location () {
     }
   }, []);
     return (
-      // <div>
-      //   <Map
-      //     center={{ lat: 37.506320759000715, lng: 127.05368251210247 }}
-      //     style={{
-      //       width: '600px',
-      //       height: '500px',
-      //       borderRadius: '20px',
-      //     }}
-      //   >
-        
-        
-      //     <MapMarker
-      //       style={{ border: 'tranparent' }}
-      //       position={{ lat: 37.506320759000715, lng: 127.05368251210247 }}
-      //     >
-       
-          
-      //     </MapMarker>
-      //   </Map>
-      // </div>
-      // //핀에 적힐 이름 (위치 이름)
+     
 
       <div
       id="map"

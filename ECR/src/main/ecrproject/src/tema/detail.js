@@ -20,8 +20,10 @@ function Detail() {
                         <div>조회수 : {menu.temacount}</div>
                         <h2>테마이름 : {menu.temaName}</h2>
                         <div>카페이름 : {menu.cafeName}</div>
+
                         <div>장르 : {menu.genre}</div>
                         <div>지역 : {menu.location}</div>
+                        <div>주소 : {menu.address}</div>
                         <div>난이도 : {menu.difficulty}</div>
                         <div>내용 : {menu.temaContent}</div>
                         <div>평점 : {menu.rating}</div>
@@ -34,7 +36,7 @@ function Detail() {
                         <Button>예약하기</Button>
                     </Col>
                 </Row>
-                <Location/>
+                <Location latitude={menu.latitude} longitude={menu.longitude}/>
                 <Review temaNo={menu.temaNo}/>
             </Container >
            

@@ -117,12 +117,12 @@ function TemaList() {
                         filteredMenuList.slice(0, menuCount).map((menu, i) => (
                             
                             <Col lg={4} onClick={() => {
-                                navigate(`/detail/${menu.temaNo}`, { state: { menu } })
+                                navigate(`/detail`, { state: { menu } })
                             }} style={{ cursor: 'pointer' }} >
                                 <div className="tema">
                                     <img id="a" src={`${process.env.PUBLIC_URL}/img/room${menu.temaNo}.jpg`} alt="테마 이미지" />
                                     <div>테마번호 : {menu.temaNo}</div>
-                                    <h2>테마이름 : {menu.temaName}</h2>
+                                    <h2>테마이름 : {menu.temaName}</h2><h4>조회수 : {menu.temaCount}</h4>
                                     <div>카페이름 : {menu.cafeName}</div>
                                     <div>장르 : {menu.genre}</div>
                                     <div>지역 : {menu.location}</div>
