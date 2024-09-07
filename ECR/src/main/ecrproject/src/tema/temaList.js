@@ -51,6 +51,17 @@ function TemaList() {
             [name]: value
         });
     };
+
+    const temaCount=(menu) =>{
+        axios.put(`/api/${menu.temaNo}/count`)
+             .then((result)=>{
+                const menus =result.data
+                navigate(`/detail`, { state: { menus} })
+             })
+             .catch(()=>{
+                console.log("조회수 증가에 실패 했습니다.")
+             })
+    }
     return (
         <div>
             
@@ -116,11 +127,9 @@ function TemaList() {
                     {
                         filteredMenuList.slice(0, menuCount).map((menu, i) => (
                             
-                            <Col lg={4} onClick={() => {
-                                navigate(`/detail`, { state: { menu } })
-                            }} style={{ cursor: 'pointer' }} >
+                            <Col lg={4} onClick={() => {temaCount(menu)}} style={{ cursor: 'pointer' }} >
                                 <div className="tema">
-                                    <img id="a" src={`${process.env.PUBLIC_URL}/img/room${menu.temaNo}.jpg`} alt="테마 이미지" />
+                                    <img src={`${process.env.PUBLIC_URL}/img/room${menu.temaNo}.jpg`} alt="테마 이미지" />
                                     <div>테마번호 : {menu.temaNo}</div>
                                     <h2>테마이름 : {menu.temaName}</h2><h4>조회수 : {menu.temaCount}</h4>
                                     <div>카페이름 : {menu.cafeName}</div>

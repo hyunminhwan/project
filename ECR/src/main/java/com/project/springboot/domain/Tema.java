@@ -38,6 +38,7 @@ public class Tema {
 	@NonNull
 	@Column(name = "cafe_name")
 	private String cafeName;	//카페이름
+	
 	@NonNull
 	private String genre;		//장르
 	private String location;	//지역
@@ -53,18 +54,20 @@ public class Tema {
 	@Column(name = "latitude")
 	private Double latitude;		//위도
 
+	
 	@Column(name = "longitude")
 	private Double longitude;		//경도
-	
 	private String address;			//주소
+	
 	
 	@Column(name = "tema_count", columnDefinition = "NUMBER default 0")
 	private Long temaCount; 		//조회수
+	
 	@CreatedDate
 	@Column(name = "tema_created_date")
 	private LocalDateTime temaCreatedDate;	//등록일
 
-
+	
     
    
 	
