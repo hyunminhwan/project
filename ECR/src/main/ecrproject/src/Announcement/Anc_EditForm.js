@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Anc_EditForm() {
-    const location = useLocation(); // URL에서 boardNo 가져오기
-    const { boardNo } = location.state
-
+    const location = useLocation();
+    const { boardNo } = location.state; // URL에서 boardNo 가져오기
     const [announcement, setAnnouncement] = useState({
+        boardNo: boardNo,
         boardTitle: '',
         managerId: '',
         boardCreateDate: '',
@@ -18,14 +18,42 @@ function Anc_EditForm() {
 
     useEffect(() => {
         axios.get(`/board/form/${boardNo}`)
-             .then((response) => {
-                setAnnouncement(response.data);
-             })
-             .catch(() => {
+            .then((response) => {
+                const data = response.data;
+                // 날짜 형식 변환 (YYYY-MM-DDTHH:MM)
+                const formatDate = (date) => {
+                    if (!date) return '';
+                    return date.replace(' ', 'T').substring(0, 16); // e.g. '2024-08-05 10:00:00' -> '2024-08-05T10:00'
+                };
+                setAnnouncement({
+                    boardNo: data.boardNo || '',
+                    boardTitle: data.boardTitle || '',
+                    managerId: data.managerId || '',
+                    boardCreateDate: formatDate(data.boardCreateDate) || '',
+                    boardUpdateDate: formatDate(data.boardUpdateDate) || '',
+                    boardContent: data.boardContent || ''
+                });
+            })
+            .catch(() => {
                 console.log("데이터 로드 실패");
-             });
+            });
     }, [boardNo]);
 
+    // 삭제 함수 
+    const anc_delete = (e) => { 
+        if(window.confirm("삭제하시겠습니까?")){
+        axios.delete(`/board/delete/${e}`)
+             .then(() => {
+                alert("삭제되었습니다.");
+                navigate('/Anc_Board');
+             })
+             .catch(()=>{
+                console.log("삭제오류~")
+             })
+        }else{
+            alert("삭제가 취소되었습니다.");
+        }
+    }
     const handleChange = (e) => {
         const { name, value } = e.target;
         setAnnouncement((prev) => ({
@@ -34,11 +62,12 @@ function Anc_EditForm() {
         }));
     };
 
+    // 수정 함수
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.put(`/board/form/${boardNo}`, announcement)
+        axios.put(`/board/retouch`, announcement)
             .then(() => {
-                navigate('/Anc_DetailForm',{ state: { boardNo } });
+                navigate(`/Anc_DetailForm`, { state: { boardNo } });
             })
             .catch(() => {
                 console.log("수정 실패");
@@ -47,10 +76,24 @@ function Anc_EditForm() {
 
     return (
         <>
+            <br /><br />
             <h1>게시판 수정</h1>
             <form onSubmit={handleSubmit}>
-                <table>
+                <br /><br /><br />
+                <table align='center'>
                     <tbody>
+                        <tr>
+                            <td>번호</td>
+                            <td>
+                                <input
+                                    name="boardNo"
+                                    value={announcement.boardNo}
+                                    onChange={handleChange}
+                                    readOnly
+                                />
+                            </td>
+
+                        </tr>
                         <tr>
                             <td>제목</td>
                             <td>
@@ -59,6 +102,7 @@ function Anc_EditForm() {
                                     value={announcement.boardTitle}
                                     onChange={handleChange}
                                 />
+
                             </td>
                         </tr>
                         <tr>
@@ -68,6 +112,7 @@ function Anc_EditForm() {
                                     name="managerId"
                                     value={announcement.managerId}
                                     onChange={handleChange}
+                                    readOnly
                                 />
                             </td>
                         </tr>
@@ -79,6 +124,7 @@ function Anc_EditForm() {
                                     name="boardCreateDate"
                                     value={announcement.boardCreateDate}
                                     onChange={handleChange}
+                                    readOnly
                                 />
                             </td>
                         </tr>
@@ -105,7 +151,9 @@ function Anc_EditForm() {
                         </tr>
                     </tbody>
                 </table>
-                <button type="submit">저장하기</button>
+                <br></br>
+                <button >저장하기</button> &emsp;
+                <button type="button" onClick={()=>anc_delete(announcement.boardNo)}>삭제하기</button>
             </form>
         </>
     );
