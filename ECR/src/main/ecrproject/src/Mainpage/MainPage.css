@@ -1,0 +1,37 @@
+.main-page {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  header {
+    text-align: center;
+    padding: 50px;
+    background-color: #f0f0f0;
+  }
+  
+  .theme-cards {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  .theme-card {
+    width: 200px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .notice-event {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+  }
+  
