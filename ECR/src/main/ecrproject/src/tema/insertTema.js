@@ -30,7 +30,7 @@ function Coordinates(address) {
 }
 
 function InsertTema() {
-    const [formData, setFormData] = useState({
+    const [temaInsert, settemaInsert] = useState({
         cafeName: '',
         temaName: '',
         price: '',
@@ -47,10 +47,10 @@ function InsertTema() {
         event.preventDefault();
 
         // 주소로 좌표 가져오기
-        Coordinates(formData.address).then((coordinates) => {
+        Coordinates(temaInsert.address).then((coordinates) => {
             if (coordinates) {
                 const temaData = {
-                    ...formData,
+                    ...temaInsert,
                     latitude: coordinates.latitude,
                     longitude: coordinates.longitude,
                 };
@@ -70,8 +70,8 @@ function InsertTema() {
     };
 
     const TemaData = (e) => {
-        setFormData({
-            ...formData,
+        settemaInsert({
+            ...temaInsert,
             [e.target.name]: e.target.value
         });
     };
@@ -80,8 +80,8 @@ function InsertTema() {
         new window.daum.Postcode({
             oncomplete: function (data) {
                 // 주소가 선택되면, 그 주소를 폼 데이터에 설정
-                setFormData({
-                    ...formData,
+                settemaInsert({
+                    ...temaInsert,
                     address: data.address
                 });
             }
@@ -99,22 +99,22 @@ function InsertTema() {
             <h2>테마등록</h2>
             <form onSubmit={TemaSubmit}>
                 <label>카페이름:</label>
-                <input name="cafeName" type="text" value={formData.cafeName} onChange={TemaData} required /> <br />
+                <input name="cafeName" type="text" value={temaInsert.cafeName} onChange={TemaData} required /> <br />
 
                 <label>테마이름:</label>
-                <input name="temaName" type="text" value={formData.temaName} onChange={TemaData} required /><br />
+                <input name="temaName" type="text" value={temaInsert.temaName} onChange={TemaData} required /><br />
 
                 <label>가격:</label>
-                <input name="price" type="text" value={formData.price} onChange={TemaData} required /><br />
+                <input name="price" type="text" value={temaInsert.price} onChange={TemaData} required /><br />
 
                 <label>소요시간:</label>
-                <input name="timetaken" type="text" value={formData.timetaken} onChange={TemaData} required /><br />
+                <input name="timetaken" type="text" value={temaInsert.timetaken} onChange={TemaData} required /><br />
 
                 <label>테마설명:</label>
-                <textarea name="temaContent" value={formData.temaContent} onChange={TemaData} required></textarea><br />
+                <textarea name="temaContent" value={temaInsert.temaContent} onChange={TemaData} required></textarea><br />
 
                 <label>지역:</label>
-                <select name="location" value={formData.location} onChange={TemaData}>
+                <select name="location" value={temaInsert.location} onChange={TemaData}>
                     <option value="서울">서울</option>
                     <option value="부산">부산</option>
                     <option value="대구">대구</option>
@@ -123,11 +123,11 @@ function InsertTema() {
 
 
                 <label>주소:</label>
-                <input name="address" type="text" value={formData.address} onChange={TemaData} readOnly required />
+                <input name="address" type="text" value={temaInsert.address} onChange={TemaData} readOnly required />
                 <button type="button" onClick={AddressClick}>주소 검색</button><br />
 
                 <label>인원수:</label>
-                <select name="personnel" value={formData.personnel} onChange={TemaData}>
+                <select name="personnel" value={temaInsert.personnel} onChange={TemaData}>
                     <option value={2}>2명</option>
                     <option value={3}>3명</option>
                     <option value={4}>4명</option>
@@ -136,7 +136,7 @@ function InsertTema() {
                 </select><br />
 
                 <label>난이도:</label>
-                <select name="difficulty" value={formData.difficulty} onChange={TemaData}>
+                <select name="difficulty" value={temaInsert.difficulty} onChange={TemaData}>
                     <option value={1}>1</option>
                     <option value={2}>2</option>
                     <option value={3}>3</option>
@@ -145,7 +145,7 @@ function InsertTema() {
                 </select><br />
 
                 <label>장르:</label>
-                <select name="genre" value={formData.genre} onChange={TemaData}>
+                <select name="genre" value={temaInsert.genre} onChange={TemaData}>
                     <option value="미스터리">미스터리</option>
                     <option value="호러">호러</option>
                     <option value="SF">SF</option>

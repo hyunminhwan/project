@@ -2,6 +2,7 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import Location from "./location";
 import Review from "./review";
+import AvgRating from "./avgRating";
 function Detail() {
     const location = useLocation();
     const { menus } = location.state;
@@ -29,7 +30,7 @@ function Detail() {
                         <div>가격 : {menus.price} 원</div>
                         <div>인원수 : {menus.personnel}</div>
                         <div>등록일 : {menus.temaCreatedDate.slice(0, 10)}</div>
-
+                        <AvgRating temaNo={menus.temaNo}/>
                         <br />
                         <Button>예약하기</Button>
                     </Col>
