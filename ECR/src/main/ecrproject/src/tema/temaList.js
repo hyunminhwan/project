@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import AvgRating from "./avgRating";
 // import {  useNavigate } from "react-router-dom";
 
 function TemaList() {
@@ -13,7 +14,8 @@ function TemaList() {
         location: '',
         difficulty: '',
         personnel: ''
-    });
+    });             //카테고리 설정
+
 
     const navigate = useNavigate();
 
@@ -52,19 +54,19 @@ function TemaList() {
         });
     };
 
-    const temaCount=(menu) =>{
+    const temaCount = (menu) => {
         axios.put(`/api/${menu.temaNo}/count`)
-             .then((result)=>{
-                const menus =result.data
-                navigate(`/detail`, { state: { menus} })
-             })
-             .catch(()=>{
+            .then((result) => {
+                const menus = result.data
+                navigate(`/detail`, { state: { menus } })
+            })
+            .catch(() => {
                 console.log("조회수 증가에 실패 했습니다.")
-             })
+            })
     }
     return (
         <div>
-            
+
             <Container>
                 <Row>
                     <h4>카테고리</h4>
@@ -73,7 +75,7 @@ function TemaList() {
                             <Col md={3} >
                                 <Form.Group controlId="genre">
                                     <Form.Label>장르</Form.Label>
-                                    <Form.Select  name="genre" onChange={FilterChange}>
+                                    <Form.Select name="genre" onChange={FilterChange}>
                                         <option value="">전체</option>
                                         <option value="미스터리">미스터리</option>
                                         <option value="호러">호러</option>
@@ -87,7 +89,7 @@ function TemaList() {
                             <Col md={3}>
                                 <Form.Group controlId="location">
                                     <Form.Label>지역</Form.Label>
-                                    <Form.Select  name="location" onChange={FilterChange}>
+                                    <Form.Select name="location" onChange={FilterChange}>
                                         <option value="">전체</option>
                                         <option value="서울">서울</option>
                                         <option value="부산">부산</option>
@@ -99,7 +101,7 @@ function TemaList() {
                             <Col md={3}>
                                 <Form.Group controlId="difficulty">
                                     <Form.Label>난이도</Form.Label>
-                                    <Form.Select  name="difficulty" onChange={FilterChange}>
+                                    <Form.Select name="difficulty" onChange={FilterChange}>
                                         <option value="">전체</option>
                                         <option value={1}>1</option>
                                         <option value={2}>2</option>
@@ -112,7 +114,7 @@ function TemaList() {
                             <Col md={3}>
                                 <Form.Group controlId="personnel">
                                     <Form.Label>인원수</Form.Label>
-                                    <Form.Select  name="personnel" onChange={FilterChange}>
+                                    <Form.Select name="personnel" onChange={FilterChange}>
                                         <option value="">전체</option>
                                         <option value={4}>4명</option>
                                         <option value={5}>5명</option>
@@ -126,8 +128,8 @@ function TemaList() {
                 <Row>
                     {
                         filteredMenuList.slice(0, menuCount).map((menu, i) => (
-                            
-                            <Col lg={4} onClick={() => {temaCount(menu)}} style={{ cursor: 'pointer' }} >
+
+                            <Col lg={4} onClick={() => { temaCount(menu) }} style={{ cursor: 'pointer' }} >
                                 <div className="tema">
                                     <img src={`${process.env.PUBLIC_URL}/img/room${menu.temaNo}.jpg`} alt="테마 이미지" />
                                     <div>테마번호 : {menu.temaNo}</div>
@@ -137,22 +139,23 @@ function TemaList() {
                                     <div>지역 : {menu.location}</div>
                                     <div>난이도 : {menu.difficulty}</div>
                                     <div>내용 : {menu.temaContent}</div>
-                                    <div>평점 : {menu.rating}</div>
                                     <div>소요시간 : {menu.timetaken}분</div>
                                     <div>가격 : {menu.price} 원</div>
                                     <div>인원수 : {menu.personnel}</div>
                                     <div>등록일 : {menu.temaCreatedDate.slice(0, 10)}</div>
                                     <br />
+                                    <AvgRating temaNo={menu.temaNo}/>
                                 </div>
+                                
                             </Col>
                         ))
-                        
+
                     }
-                    
+
                 </Row>
                 {menuCount < menuList.length && ( // 모든 항목을 다 보여준 상태가 아니라면 버튼을 보여줍니다.
                     <div className="text-center">
-                        <Button  size="lg" onClick={loadMore} variant="primary">더보기  {Math.min(menuCount, filteredMenuList.length)}/{filteredMenuList.length}</Button>
+                        <Button size="lg" onClick={loadMore} variant="primary">더보기  {Math.min(menuCount, filteredMenuList.length)}/{filteredMenuList.length}</Button>
                     </div>
                 )}
             </Container>

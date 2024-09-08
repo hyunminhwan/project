@@ -46,7 +46,9 @@ public class Tema {
 	
 	@Column(name = "tema_content")
 	private String temaContent;	//내용
-	private Long rating;		//평점
+	
+	
+	private double rating;		//평점
 	private Long timetaken;		//소요시간	
 	private Long price;			//가격
 	private Long personnel;		//인원수
@@ -61,7 +63,7 @@ public class Tema {
 	
 	
 	@Column(name = "tema_count", columnDefinition = "NUMBER default 0")
-	private Long temaCount; 		//조회수
+	private Long temaCount = 0L; 		//조회수
 	
 	@CreatedDate
 	@Column(name = "tema_created_date")
