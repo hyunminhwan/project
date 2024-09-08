@@ -10,6 +10,7 @@ import Anc_Board from './Announcement/Anc_Board';
 import Anc_DetailForm from './Announcement/Anc_DetailForm';
 import Anc_EditForm from './Announcement/Anc_EditForm';
 import Anc_List from './Announcement/Anc_List';
+import MainPage from './Mainpage/MainPage';
 
 import Navbar from './Navbar'; // 새로 만든 네비게이션 바 컴포넌트
 import { Container } from 'react-bootstrap';
@@ -23,13 +24,7 @@ function App() {
         <Navbar />
 
       <Routes>
-
-        <Route path='/' element={
-          <>
-            <div className='main-bg' />
-            <h2>안녕하세요</h2>
-          </>
-        } />
+        <Route path='/' element={<MainPage />} />
         <Route path='/list' element={<TemaList />} />
         <Route path='/detail/:num' element={<Detail />} />
         <Route path='/InsertTema' element={<InsertTema />} />
