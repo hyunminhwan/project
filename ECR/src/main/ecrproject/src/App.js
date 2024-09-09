@@ -1,5 +1,6 @@
 import './App.css';
 import './Navbar.css'; // 새롭게 추가한 무서운 테마의 네비게이션 스타일
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
