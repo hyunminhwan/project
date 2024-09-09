@@ -18,6 +18,7 @@ function Review({ temaNo }) {
     const [rating, setRating] = useState(0);
     const [userId] = useState('user01');
     const [reviewCount, setReviewCount] = useState(3);
+  
     useEffect(() => {
         axios.get(`/review/tema/${temaNo}`)
             .then((result) => {
