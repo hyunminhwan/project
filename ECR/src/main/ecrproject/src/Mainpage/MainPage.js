@@ -6,22 +6,22 @@ function MainPage() {
   const [notices, setNotices] = useState([]);
   const [events, setEvents] = useState([]);
 
-  useEffect(() => {
-    // 테마 API 호출
-    fetch('/api/themes')
-      .then(response => response.json())
-      .then(data => setThemes(data));
+  // useEffect(() => {
+  //   // 테마 API 호출
+  //   fetch('/api/themes')
+  //     .then(response => response.json())
+  //     .then(data => setThemes(data));
 
-    // 공지사항 API 호출
-    fetch('/api/notices')
-      .then(response => response.json())
-      .then(data => setNotices(data));
+  //   // 공지사항 API 호출
+  //   fetch('/api/notices')
+  //     .then(response => response.json())
+  //     .then(data => setNotices(data));
 
-    // 이벤트 API 호출
-    fetch('/api/events')
-      .then(response => response.json())
-      .then(data => setEvents(data));
-  }, []);
+  //   // 이벤트 API 호출
+  //   fetch('/api/events')
+  //     .then(response => response.json())
+  //     .then(data => setEvents(data));
+  // }, []);
 
   return (
     <>
