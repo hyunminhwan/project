@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'; // axios 임포트
 import './MainPage.css'; // CSS 파일
+import { Link } from 'react-router-dom';
 
 function MainPage() {
   const [themes, setThemes] = useState([]);
@@ -18,11 +19,11 @@ function MainPage() {
       })
       .catch(error => console.error('Error fetching themes:', error));
 
-    // 공지사항 API 호출 (상위 5개만 가져오기)
-    axios.get('/api/write') // 공지사항 목록을 반환하는 API 호출
+    // 공지사항 board 호출 (상위 5개만 가져오기)
+    axios.get('/board/write') // 공지사항 목록을 반환 호출
       .then(response => {
         const topNotices = response.data.slice(0, 5); // 상위 5개 공지사항만 선택
-        setNotices(topNotices); // notices 상태에 저장
+        setNotices(topNotices);
       })
       .catch(error => console.error('Error fetching notices:', error));
 
@@ -55,16 +56,17 @@ function MainPage() {
           <h2>공지사항</h2>
           <ul>
           {console.log(notices)}
-            {notices.map((notice, index) => (
-              <li key={index}>{notices.boardTitle}</li> // 공지사항 제목만 표시
+            {notices.map((a, index) => (
+              <li key={index}>{a.boardTitle}</li> // 공지사항 제목만 표시
+              
             ))}
           </ul>
         </div>
         <div className="event">
           <h2>이벤트</h2>
           <ul>
-            {events.map((event, index) => (
-              <li key={index}>{event.title}</li>
+            {events.map((b, index) => (
+              <li key={index}>{b.title}</li>
             ))}
           </ul>
         </div>
