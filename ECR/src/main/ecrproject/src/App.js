@@ -1,5 +1,6 @@
 import './App.css';
 import './Navbar.css'; // 새롭게 추가한 무서운 테마의 네비게이션 스타일
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
@@ -26,7 +27,7 @@ function App() {
       <Routes>
         <Route path='/' element={<MainPage />} />
         <Route path='/list' element={<TemaList />} />
-        <Route path='/detail/:num' element={<Detail />} />
+        <Route path='/detail' element={<Detail />} />
         <Route path='/InsertTema' element={<InsertTema />} />
         <Route path='/Anc_Board' element={<Anc_Board />} />
         <Route path='/Anc_DetailForm' element={<Anc_DetailForm />} />
