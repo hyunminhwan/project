@@ -1,67 +1,48 @@
 import './App.css';
+import './Navbar.css'; // 새롭게 추가한 무서운 테마의 네비게이션 스타일
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Routes, Route, useNavigate, } from 'react-router-dom';
-import { Navbar, Container, Nav, Row } from 'react-bootstrap';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+
 import TemaList from './tema/temaList';
 import Detail from './tema/detail';
+import InsertTema from './tema/insertTema';
+import Anc_Board from './Announcement/Anc_Board';
+import Anc_DetailForm from './Announcement/Anc_DetailForm';
+import Anc_EditForm from './Announcement/Anc_EditForm';
+import Anc_List from './Announcement/Anc_List';
+import MainPage from './Mainpage/MainPage';
 import Login from './login/login';
-import Managerlogin from './login/managerlogin';
-import Masterlogin from './login/masterlogin';
 
-//npm i react-router-dom
-//npm install @reduxjs/toolkit react-redux
-// npm install react-bootstrap bootstrap
-//npm install axios
+import Navbar from './Navbar'; // 새로 만든 네비게이션 바 컴포넌트
+import { Container } from 'react-bootstrap';
+
 
 function App() {
 
-  let navigate = useNavigate();
   return (
 
     <div className="App">
-
-      <Navbar bg="dark" data-bs-theme="dark">
-        <Container>
-          <Navbar.Brand href="#home">방탈출</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link onClick={() => { navigate('/') }}>Home</Nav.Link>
-            <Nav.Link onClick={() => { navigate('/list') }}>테마</Nav.Link>
-            <Nav.Link onClick={() => { navigate('/login') }}>로그인</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
-      <Container classname="logincontainer">
-        <button classname="mypage">마이페이지</button>
-        <button classname="logggin" onClick={() => { navigate('/login') }}>로그인</button>
-        <button classname="join">회원가입</button>
-      </Container>
-      
+      {/* 새로운 네비게이션 바 */}
+        <Navbar />
 
       <Routes>
-        <Route path='/' element={
-          <>
-            <div className='main-bg' />
-            <Container>
-              <Row>
-                <h2>안녕하세요</h2>
-              </Row>
-            </Container>
-
-          </>
-        } />
+        <Route path='/' element={<MainPage />} />
         <Route path='/list' element={<TemaList />} />
-        <Route path='/detail/:num' element={<Detail />} />
+        <Route path='/detail' element={<Detail />} />
+        <Route path='/InsertTema' element={<InsertTema />} />
+        <Route path='/Anc_Board' element={<Anc_Board />} />
+        <Route path='/Anc_DetailForm' element={<Anc_DetailForm />} />
+        <Route path='/Anc_EditForm' element={<Anc_EditForm />} />
+        <Route path='/Anc_List' element={<Anc_List />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/managerlogin' element={<Managerlogin />} />
-        <Route path='/masterlogin' element={<Masterlogin />} />
         <Route path='*' element={<div>없는 페이지 입니다.</div>} />
-      </Routes>
-      
 
+
+      </Routes>
 
     </div>
   );
 }
-
 
 export default App;

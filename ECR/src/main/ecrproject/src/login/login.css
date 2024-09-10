@@ -1,12 +1,51 @@
-*{text-align: center;
-
-}
-.form {
-    margin-left:auto; 
-    margin-right:auto;
-}
-.memberjoin{
-    margin-left:auto; 
-    margin-right:auto;
-    color:blueviolet;
-}
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 폼을 가운데 정렬 */
+    justify-content: center;
+    height: 100vh; /* 세로로 가운데 정렬하기 위해 전체 높이 사용 */
+  }
+  
+  table {
+    border-collapse: separate;
+    border-spacing: 10px; /* 입력 필드 간의 간격을 넓히기 위해 테이블 셀 간의 간격을 설정 */
+  }
+  
+  table td {
+    padding: 5px;
+  }
+  
+  button, input[type="password"], input[name="memberId"] {
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .toggle-button-group {
+    margin-top: 10px;
+  }
+  
+  .toggle-button-custom {
+    color: red;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: white;
+  }
+  
+  .toggle-button-custom.active {
+    background-color: black !important; /* 활성화 시 배경을 검정색으로 변경 */
+    border-color: black !important;
+    color: white !important;
+  }
+  
+  .toggle-button-custom:focus, 
+  .toggle-button-custom:hover {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  
+  .toggle-button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
