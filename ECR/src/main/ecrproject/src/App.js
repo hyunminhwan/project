@@ -16,6 +16,7 @@ import MainPage from './Mainpage/MainPage';
 import Navbar from './Navbar'; // 새로 만든 네비게이션 바 컴포넌트
 import SignupForm from './member/joinform';
 import Login from './login/login';
+import MemberForm from './member/memberForm';
 
 function App() {
 
@@ -35,7 +36,7 @@ function App() {
         <Route path='/Anc_EditForm' element={<Anc_EditForm />} />
         <Route path='/Anc_List' element={<Anc_List />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={< SignupForm />} />
+        <Route path='/signup' element={< MemberForm />} />
         SignupForm
         <Route path='*' element={<div>없는 페이지 입니다.</div>} />
       </Routes>
