@@ -23,6 +23,7 @@ function Navbar() {
         <li className="dropdown"
             onMouseEnter={() => setDropdownOpen(true)}
             onMouseLeave={() => setDropdownOpen(false)}>
+              
           <Link to="#">Manager</Link>   {/* 관계자 */}
           {dropdownOpen && (
             <ul className="dropdown-content">

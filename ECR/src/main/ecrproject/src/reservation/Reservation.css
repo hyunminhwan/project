@@ -1,0 +1,26 @@
+.reserveForm {
+    border: 2px solid;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 200px;
+}
+.reserveForm th,td {
+    height: 50px;
+}
+.reservationDetailForm {
+    width: 1000px;
+    margin: 0 auto;
+}
+.reservationDetailForm input {
+    width: 700px;
+}
+.CheckReservationDetails {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+.ResultList {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 40px;
+}

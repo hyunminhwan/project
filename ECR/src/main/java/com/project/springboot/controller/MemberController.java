@@ -1,15 +1,16 @@
 package com.project.springboot.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.springboot.domain.Member;
@@ -22,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
 public class MemberController {
 
 	@Autowired
-	MemberService loginService;
+	MemberService memberService;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -33,7 +34,7 @@ public class MemberController {
 	// 일반 로그인 처리
 	@PostMapping("/userlogin/{loginType}")
 	public Member memberLogin(@PathVariable(name="loginType") int loginType , @RequestBody Member member) {
-		Optional<Member> loginuser = loginService.Member(loginType,member.getMemberId());
+		Optional<Member> loginuser = memberService.Member(loginType,member.getMemberId());
 
 		if (loginuser.isPresent()) {
 			Member log = loginuser.get();
@@ -52,7 +53,12 @@ public class MemberController {
 	public void memberInsert(@RequestBody Member member) {
 		String enPass = passwordEncoder.encode(member.getMemberPwd());
 		member.setMemberPwd(enPass);
-		loginService.memberInsert(member);
+		memberService.memberInsert(member);
+	}
+	
+	@GetMapping("/members")
+	public List<Member> getLoginByType(@RequestParam("loginType") Long loginType) {
+		return memberService.getLoginByType(loginType);
 	}
 
 }

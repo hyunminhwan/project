@@ -43,7 +43,7 @@ function Login({ onLoginSuccess }) {
                 // 서버 응답이 성공적일 때 처리
                 if (response.data.memberId != null) {
                     alert('로그인 성공!');
-                    const userName = response.data.memberName || memberId;  // 서버에서 받은 사용자 이름 또는 입력된 아이디 사용
+                    const userName = response.data.memberName  // 서버에서 받은 사용자 이름 또는 입력된 아이디 사용
                     onLoginSuccess(userName);  // 로그인 성공 시 사용자 이름 전달
                 } else {
                     alert("로그인 실패");
