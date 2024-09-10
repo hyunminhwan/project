@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css'; // 방탈출 느낌의 무서운 테마 스타일
 
 function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownOpen2, setDropdownOpen2] = useState(false);
+  const [loginOn, setLoginOn] = useState(false);
+
+  useEffect(() => {
+    // 여기서 로그인 상태를 확인하는 로직 (예: 세션 또는 API 호출)
+    const loggedIn = true; // 임시로 true, 실제로는 로그인 여부 확인
+    setLoginOn(loginOn);
+  }, []);
+
 
   return (
     <div className="navbar">
@@ -39,10 +47,16 @@ function Navbar() {
         </li>
       </ul>
 
-      <ul className="nav-right">
-        <li><Link to="/mypage">My Page</Link></li>
-        <li><Link to="/login">Sign In</Link></li>
-        <li><Link to="/signup">Sign Up</Link></li>
+      <ul className="nav-right"> 
+        <li style={{ display: loginOn ? 'block' : 'none' }}>
+          <Link to="/mypage">My Page</Link>
+        </li>
+        <li style={{ display: !loginOn ? 'block' : 'none' }}>
+          <Link to="/login">Sign In</Link>
+        </li>
+        <li style={{ display: !loginOn ? 'block' : 'none' }}>
+          <Link to="/signup">Sign Up</Link>
+        </li>
       </ul>
     </div>
   );

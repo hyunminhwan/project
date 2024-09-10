@@ -36,26 +36,31 @@ public class AnnouncementController {
     	  return announcementService.findAll(page, size);
     }
 	
+    // 공지사항 호출
 	@GetMapping("/write")
 	public List<Announcement> write() {
 		return announcementService.write();
 	}
 	
+	// 게시물 상세 조회
 	@GetMapping("/form/{boardNo}")
 	public Announcement findBYid(@PathVariable(name="boardNo") Long boardNo) {
 		return announcementService.findById(boardNo).get();
 	}
 	
+	// 수정하기
 	@PutMapping("/retouch")
 	public Announcement retouch(@RequestBody Announcement announcement) {
 		return announcementService.retouch(announcement);
 	}
 	
+	// 삭제하기
 	@DeleteMapping("/delete/{e}")
 	public void delete(@PathVariable(name="e") Long boardNo)	{
 		announcementService.delete(boardNo);
 	}
 	
+	// 공지사항 작성
 	@PostMapping("/write2")
 	public void write2(@RequestBody Announcement announcement) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 		announcementService.write2(announcement);

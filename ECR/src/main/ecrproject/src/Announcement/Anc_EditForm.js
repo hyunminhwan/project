@@ -54,7 +54,7 @@ function Anc_EditForm() {
             alert("삭제가 취소되었습니다.");
         }
     }
-    const handleChange = (e) => {
+    const Anc_Change = (e) => {
         const { name, value } = e.target;
         setAnnouncement((prev) => ({
             ...prev,
@@ -63,7 +63,7 @@ function Anc_EditForm() {
     };
 
     // 수정 함수
-    const handleSubmit = (e) => {
+    const Anc_Submit = (e) => {
         e.preventDefault();
         axios.put(`/board/retouch`, announcement)
             .then(() => {
@@ -78,7 +78,8 @@ function Anc_EditForm() {
         <>
             <br /><br />
             <h1>게시판 수정</h1>
-            <form onSubmit={handleSubmit}>
+            {/* Anc_Submit (수정)함수 사용 */}
+            <form onSubmit={Anc_Submit}>
                 <br /><br /><br />
                 <table align='center'>
                     <tbody>
@@ -88,7 +89,8 @@ function Anc_EditForm() {
                                 <input
                                     name="boardNo"
                                     value={announcement.boardNo}
-                                    onChange={handleChange}
+                                    // Anc_Change (삭제) 함수 사용
+                                    onChange={Anc_Change}
                                     readOnly
                                 />
                             </td>
@@ -100,7 +102,7 @@ function Anc_EditForm() {
                                 <input
                                     name="boardTitle"
                                     value={announcement.boardTitle}
-                                    onChange={handleChange}
+                                    onChange={Anc_Change}
                                 />
 
                             </td>
@@ -111,7 +113,7 @@ function Anc_EditForm() {
                                 <input
                                     name="managerId"
                                     value={announcement.managerId}
-                                    onChange={handleChange}
+                                    onChange={Anc_Change}
                                     readOnly
                                 />
                             </td>
@@ -123,7 +125,7 @@ function Anc_EditForm() {
                                     type="datetime-local"
                                     name="boardCreateDate"
                                     value={announcement.boardCreateDate}
-                                    onChange={handleChange}
+                                    onChange={Anc_Change}
                                     readOnly
                                 />
                             </td>
@@ -135,7 +137,7 @@ function Anc_EditForm() {
                                     type="datetime-local"
                                     name="boardUpdateDate"
                                     value={announcement.boardUpdateDate}
-                                    onChange={handleChange}
+                                    onChange={Anc_Change}
                                 />
                             </td>
                         </tr>
@@ -145,7 +147,7 @@ function Anc_EditForm() {
                                 <textarea
                                     name="boardContent"
                                     value={announcement.boardContent}
-                                    onChange={handleChange}
+                                    onChange={Anc_Change}
                                 />
                             </td>
                         </tr>
