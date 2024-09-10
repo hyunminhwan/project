@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './insertTema.css';
 
-
+//주소 api
 function KakaoMap() {
     const script = document.createElement('script');
     script.src = 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
     script.async = true;
     document.head.appendChild(script);
 }
+
+//주소를 입력시 좌표로 바꾸어줌
 function Coordinates(address) {
     const apiUrl = `/naverapi/Map/${encodeURIComponent(address)}`;
 
@@ -41,22 +43,37 @@ function InsertTema() {
         difficulty: 1,
         location: '서울',
         genre: '미스터리',
+        imgUrl:null,
     });
 
     const TemaSubmit = (event) => {
         event.preventDefault();
 
-        // 주소로 좌표 가져오기
+        // 주소로 좌표 가져오기 & 모든 내용 저장하기
         Coordinates(temaInsert.address).then((coordinates) => {
             if (coordinates) {
-                const temaData = {
-                    ...temaInsert,
-                    latitude: coordinates.latitude,
-                    longitude: coordinates.longitude,
-                };
+                //이미지를 같이 넣어서 보내주려면  FormData 함수를 사용해야함
+                const formData = new FormData();
+                formData.append('imgUrl', temaInsert.imgUrl);             // 이미지
+                formData.append('cafeName', temaInsert.cafeName);       //카페이름
+                formData.append('temaName', temaInsert.temaName);       //테마이름
+                formData.append('price', temaInsert.price);             //가격
+                formData.append('timetaken', temaInsert.timetaken);     //소요시간
+                formData.append('temaContent', temaInsert.temaContent); //조회수
+                formData.append('address', temaInsert.address);         //주소
+                formData.append('personnel', temaInsert.personnel);     //인원수
+                formData.append('difficulty', temaInsert.difficulty);   //난이도
+                formData.append('location', temaInsert.location);       //지역
+                formData.append('genre', temaInsert.genre);             //장르
+                formData.append('latitude', coordinates.latitude);      //좌표
+                formData.append('longitude', coordinates.longitude);    //좌표
 
-                // 서버로 POST 요청
-                axios.post("/api/tema", temaData)
+                // 서버에 데이터값 보내주기
+                axios.post("/api/tema", formData,{
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    } 
+                })
                     .then((response) => {
                         console.log("완료:", response.data);
                         alert("등록이 완료 되었습니다");
@@ -68,6 +85,13 @@ function InsertTema() {
             }
         });
     };
+    
+    const InsertImg = (e) => {
+        settemaInsert({
+            ...temaInsert,
+            imgUrl: e.target.files[0],  // 파일 선택
+        });
+    };
 
     const TemaData = (e) => {
         settemaInsert({
@@ -75,6 +99,8 @@ function InsertTema() {
             [e.target.name]: e.target.value
         });
     };
+    
+
 
     const AddressClick = () => {
         new window.daum.Postcode({
@@ -154,6 +180,7 @@ function InsertTema() {
                     <option value="어드벤처">어드벤처</option>
                 </select><br />
                 
+                <input type="file" accept='image/*' onChange={InsertImg} required></input>
                 <button type="submit">등록</button>
             </form>
         </div>

@@ -32,8 +32,8 @@ function Navbar() {
           {dropdownOpen2 && (
             <ul className="dropdown-content"> 
               <li><Link to="/manage-members">Membership Management</Link></li> {/* 회원 관리 */}
-              <li><Link to="/manage-companies">Business Management</Link></li> {/* 업체 등록 */}
-              <li><Link to="/manage-reservations">Reservation registration</Link></li> {/* 예약 등록 */}
+              <li><Link to="/manage-companies">Manage vendors</Link></li> {/* 업체 관리 */}
+              <li><Link to="/manage-reservations">Tema Management</Link></li> {/* 테마 관리 */}
             </ul>
           )}
         </li>

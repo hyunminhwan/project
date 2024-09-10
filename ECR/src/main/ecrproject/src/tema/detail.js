@@ -14,6 +14,7 @@ function Detail() {
                 <Row>
                     <Col>
                         <img id="a" src={`${process.env.PUBLIC_URL}/img/room${menus.temaNo}.jpg`} alt="테마 이미지" />
+                        <img src={menus.imgUrl} alt="테마 이미지" />
                         
                         <div>테마번호 : {menus.temaNo}</div>
                         <div>조회수 : {menus.temaCount}</div>
