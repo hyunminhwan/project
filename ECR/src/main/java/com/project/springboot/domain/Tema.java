@@ -55,11 +55,14 @@ public class Tema {
 	
 	@Column(name = "latitude")
 	private Double latitude;		//위도
-
-	
 	@Column(name = "longitude")
 	private Double longitude;		//경도
+	
+	
 	private String address;			//주소
+	
+	@Column(name = "img_url")
+	private String imgUrl;
 	
 	
 	@Column(name = "tema_count", columnDefinition = "NUMBER default 0")

@@ -27,11 +27,13 @@ public class ReviewController {
 		return reviewService.reviewByTema(temaNo);
 	}
 	
+	//
 	@PostMapping
 	public Reviews reviewInsert(@RequestBody Reviews reviews) {
 		return reviewService.reviewInsert(reviews);
 	}
 	
+	//리뷰삭제
 	@DeleteMapping("/delete/{reviewNo}")
 	public String reviewDelete(@PathVariable(name="reviewNo") Long reviewNo) {
 		return reviewService.reviewDelete(reviewNo);

@@ -26,7 +26,10 @@ function Anc_DetailForm() {
     const handleEditClick = (boardNo) => {
         navigate(`/Anc_EditForm`,{state:{boardNo}});
     };
-
+    const formatDate = (date) => {
+        if (!date) return '';
+        return date.replace(' ', 'T').substring(0, 16); // e.g. '2024-08-05 10:00:00' -> '2024-08-05T10:00'
+    };
     return (
         <>
             <br/><br/>
@@ -61,7 +64,7 @@ function Anc_DetailForm() {
                                 <input
                                     type="datetime-local"
                                     name="date"
-                                    value={announcement.boardCreateDate}
+                                    value={formatDate(announcement.boardCreateDate)}
                                     readOnly
                                 />
                             </td>
@@ -72,7 +75,7 @@ function Anc_DetailForm() {
                                 <input
                                     type="datetime-local"
                                     name="updateDate"
-                                    value={announcement.boardUpdateDate}
+                                    value={formatDate(announcement.boardUpdateDate)}
                                     readOnly
                                 />
                             </td>

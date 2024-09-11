@@ -12,5 +12,5 @@ public interface TemaRepository extends JpaRepository<Tema, Long>{
 
 	List<Tema> findAllByOrderByTemaNoAsc();
 
-
+	 List<Tema> findByOrderByRatingDesc();
 }

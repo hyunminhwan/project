@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css'; // 방탈출 느낌의 무서운 테마 스타일
 
 function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownOpen2, setDropdownOpen2] = useState(false);
+  const [loginOn, setLoginOn] = useState(false);
+
+  useEffect(() => {
+    // 여기서 로그인 상태를 확인하는 로직 (예: 세션 또는 API 호출)
+    const loggedIn = true; // 임시로 true, 실제로는 로그인 여부 확인
+    setLoginOn(loginOn);
+  }, []);
+
 
   return (
     <div className="navbar">
@@ -15,7 +23,8 @@ function Navbar() {
         <li className="dropdown"
             onMouseEnter={() => setDropdownOpen(true)}
             onMouseLeave={() => setDropdownOpen(false)}>
-          <Link to="#">Manager</Link>   {/* 관계자 */}
+              
+          <Link >Manager</Link>   {/* 관계자 */}
           {dropdownOpen && (
             <ul className="dropdown-content">
               <li><Link to="/InsertTema">Register theme</Link></li> {/* 테마 등록 */}
@@ -28,21 +37,27 @@ function Navbar() {
         <li className="dropdown"
             onMouseEnter={() => setDropdownOpen2(true)}
             onMouseLeave={() => setDropdownOpen2(false)}>
-          <Link to="#">Official</Link>  {/* 관리자 */}
+          <Link >Official</Link>  {/* 관리자 */}
           {dropdownOpen2 && (
             <ul className="dropdown-content"> 
               <li><Link to="/manage-members">Membership Management</Link></li> {/* 회원 관리 */}
-              <li><Link to="/manage-companies">Business Management</Link></li> {/* 업체 등록 */}
-              <li><Link to="/manage-reservations">Reservation registration</Link></li> {/* 예약 등록 */}
+              <li><Link to="/manage-companies">Manage vendors</Link></li> {/* 업체 관리 */}
+              <li><Link to="/manage-reservations">Tema Management</Link></li> {/* 테마 관리 */}
             </ul>
           )}
         </li>
       </ul>
 
-      <ul className="nav-right">
-        <li><Link to="/mypage">My Page</Link></li>
-        <li><Link to="/login">Sign In</Link></li>
-        <li><Link to="/signup">Sign Up</Link></li>
+      <ul className="nav-right"> 
+        <li style={{ display: loginOn ? 'block' : 'none' }}>
+          <Link to="/mypage">My Page</Link>
+        </li>
+        <li style={{ display: !loginOn ? 'block' : 'none' }}>
+          <Link to="/login">Sign In</Link>
+        </li>
+        <li style={{ display: !loginOn ? 'block' : 'none' }}>
+          <Link to="/signup">Sign Up</Link>
+        </li>
       </ul>
     </div>
   );

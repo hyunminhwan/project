@@ -1,12 +1,12 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import {useLocation, useNavigate } from "react-router-dom";
 import Location from "./location";
 import Review from "./review";
 import AvgRating from "./avgRating";
 function Detail() {
     const location = useLocation();
     const { menus } = location.state;
-    
+    const navigate = useNavigate();
     return (
         <>
         
@@ -14,6 +14,7 @@ function Detail() {
                 <Row>
                     <Col>
                         <img id="a" src={`${process.env.PUBLIC_URL}/img/room${menus.temaNo}.jpg`} alt="테마 이미지" />
+                        <img src={menus.imgUrl} alt="테마 이미지" />
                         
                         <div>테마번호 : {menus.temaNo}</div>
                         <div>조회수 : {menus.temaCount}</div>
@@ -32,7 +33,9 @@ function Detail() {
                         <div>등록일 : {menus.temaCreatedDate.slice(0, 10)}</div>
                         <AvgRating temaNo={menus.temaNo}/>
                         <br />
-                        <Button>예약하기</Button>
+                        <Button onClick={()=>{
+                            navigate('/reserve', { state: { menus } });
+                        }}>예약하기</Button>
                     </Col>
                 </Row>
                 <Location latitude={menus.latitude} longitude={menus.longitude}/>

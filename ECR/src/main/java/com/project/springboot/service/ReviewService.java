@@ -22,6 +22,7 @@ public class ReviewService {
 		return reviewRepository.save(reviews);
 	}
 
+	//리뷰삭제
 	public String reviewDelete(Long reviewNo) {
 		reviewRepository.deleteById(reviewNo);
 		return "성공!";

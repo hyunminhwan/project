@@ -19,6 +19,7 @@ function Review({ temaNo }) {
     const [userId] = useState('user01');
     const [reviewCount, setReviewCount] = useState(3);
   
+    //해당테마에 대한 리뷰 가져오기
     useEffect(() => {
         axios.get(`/review/tema/${temaNo}`)
             .then((result) => {
@@ -30,6 +31,7 @@ function Review({ temaNo }) {
     }, [temaNo])
     console.log(reviewList);
 
+    //리뷰등록하기
     const reviewinsert = (e) => {
         e.preventDefault();
         axios.post("/review", {
@@ -58,12 +60,13 @@ function Review({ temaNo }) {
         setReviewCount(e => e + 3);
     }
 
-
+        //리뷰삭제하기
     const reviewDelete = (reviewNo) => {
         axios.delete(`/review/delete/${reviewNo}`)
              .then(()=>{
-                if( window.confirm("리뷰를 삭제하시겠습니다?")){
+                if( window.confirm("리뷰를 삭제하시겠습니까?")){
                     alert("리뷰를 삭제하였습니다.");
+                    //삭제후 리뷰다시 가져오기
                     axios.get(`/review/tema/${temaNo}`)
                     .then((result) => {
                        setReviewList(result.data);
