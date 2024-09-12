@@ -18,9 +18,9 @@ public class MemberService {
 	 
 	@Autowired
 	MemberRepository memberRepository;
-
+	
 	@Autowired
-	ReservationRepository reserationRepository;	// 예약 데이터 삭제를 위한 Repository 주입
+	ReservationRepository reservationRepository;
 
 	public Optional<Member> Member(int loginType , String memberId) {
 		return memberRepository.findMemberByLoginTypeAndMemberId(loginType,memberId);
@@ -33,22 +33,21 @@ public class MemberService {
 	}
 	
 	
-	public List<Member> getLoginByType(int loginType) {
+	public List<Member> getLoginByType(Long loginType) {
 		return memberRepository.findByLoginType(loginType);
 
 
 	}
 
 	// 관리자: 회원삭제
-	@Transactional  // 트랜잭션 설정 추가
-	public void deleteMemberAndReservations(String memberId) {
-		if(memberRepository.existsById(memberId)) {
-			reserationRepository.deleteByUserId(memberId);
-			memberRepository.deleteById(memberId);
-		} else {
-			throw new IllegalArgumentException("해당 회원을 찾을 수 없습니다");
+		@Transactional  // 트랜잭션 설정 추가
+		public void deleteMemberAndReservations(String memberId) {
+			if(memberRepository.existsById(memberId)) {
+				reservationRepository.deleteByUserId(memberId);
+				memberRepository.deleteById(memberId);
+			} else {
+				throw new IllegalArgumentException("해당 회원을 찾을 수 없습니다");
+			}
+			
 		}
-		
-	}
-
 }

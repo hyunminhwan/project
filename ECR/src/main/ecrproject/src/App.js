@@ -18,8 +18,10 @@ import SignupForm from './member/joinform';
 import Login from './login/login';
 import MemberForm from './member/memberForm';
 import MembershipManagement from './Admin/MembershipManagement';
-import CompanyManagement from './Admin/CompanyManagement';
 import Reserve from './reservation/Reserve';
+import EditTema from './tema/EditTema';
+import ReservationList from './Admin/Component/ReservationList';
+import CompanyManagement from './Admin/CompanyManagement';
 
 function App() {
 
@@ -40,9 +42,12 @@ function App() {
         <Route path='/Anc_List' element={<Anc_List />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={< MemberForm />} />
-        <Route path='/manage-members' element={< MembershipManagement />} />
-        <Route path='/manage-companies' element={< CompanyManagement />} />
+        <Route path='/manage-members' element={< MembershipManagement />} />\
         <Route path='/reserve' element={<Reserve />} />
+        <Route path='/edit-theme' element={<EditTema />} />
+        <Route path='/manage-reservations' element={<ReservationList />} />
+        <Route path='/manage-companies' element={<CompanyManagement />} />
+        
         <Route path='*' element={<div>없는 페이지 입니다.</div>} />
       </Routes>
 

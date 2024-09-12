@@ -3,14 +3,17 @@ import axios from "axios";
 import "./login.css";
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import { useDispatch } from "react-redux";
+import { login } from "../store/loginStore";
+import { useNavigate } from "react-router-dom";
 
-function Login({ onLoginSuccess }) {
+function Login() {
     const [loginType, setLoginType] = useState(1); // 1: 일반, 2: 관계자, 3: 관리자
-    const [errorMessage, setErrorMessage] = useState(''); // 에러 메시지 상태
     const [showLinks, setShowLinks] = useState(true); // 링크를 숨기거나 보여줄 상태
-
+    let dispatch = useDispatch();
+    const navigate = useNavigate();
     // 로그인 처리 로직
-    const handleLogin = (e) => {
+    const loginOn = (e) => {
         e.preventDefault();
 
         const memberId = e.target.memberId.value.trim();
@@ -18,33 +21,24 @@ function Login({ onLoginSuccess }) {
 
         // 유효성 검사: 아이디와 비밀번호가 입력되었는지 확인
         if (!memberId || !memberPwd) {
-            setErrorMessage("아이디와 비밀번호를 입력해주세요.");
+            alert("아이디와 비밀번호를 입력해주세요.");
             return; // 빈 값일 경우 서버 요청 중단
         }
 
-        // let loginUrl = '';
-
-        // // 선택된 로그인 타입에 따라 다른 URL로 요청
-        // if (loginType === 1) {
-        //     loginUrl = `/api/userlogin/${loginType}`;  // 일반 사용자 로그인 처리
-        // } else if (loginType === 2) {
-        //     loginUrl = `/api/managerlogin/${loginType}`; // 관계자 로그인 처리
-        // } else if (loginType === 3) {
-        //     loginUrl = `/api/masterlogin/${loginType}`;  // 관리자 로그인 처리
-        // }
-
-        // 선택된 URL로 POST 요청을 보냅니다. (로그인 폼 데이터를 같이 전송)
-        axios.post(`/api/userlogin/${loginType}`, {
+       
+        axios.post(`/api/memberLogin/${loginType}`, {
                 memberId: memberId,
                 memberPwd: memberPwd,
         })
             .then(response => {
-                console.log(response);
                 // 서버 응답이 성공적일 때 처리
-                if (response.data.memberId != null) {
-                    alert('로그인 성공!');
-                    const userName = response.data.memberName  // 서버에서 받은 사용자 이름 또는 입력된 아이디 사용
-                    onLoginSuccess(userName);  // 로그인 성공 시 사용자 이름 전달
+                if (response.status === 200) {
+                   // 로그인 성공 시
+                const memberData = response.data; // 서버에서 받은 사용자 정보
+                sessionStorage.setItem("memberId",memberData);
+                
+                dispatch(login(memberData)); // 리덕스에 사용자 정보 저장
+                navigate("/");
                 } else {
                     alert("로그인 실패");
                 }
@@ -64,7 +58,7 @@ function Login({ onLoginSuccess }) {
     return (
         <>
             <div className="login-form">
-                <form onSubmit={handleLogin}>
+                <form onSubmit={loginOn}>
                     <table>
                         <tr>
                             <td>아이디</td>
@@ -99,10 +93,12 @@ function Login({ onLoginSuccess }) {
 
                             </td>
                         </tr>
-                        <tr>
-                            <td colSpan={3}><button type="submit">로그인</button></td>
+                        <tr>      
+                          <td colSpan={3}><button type="submit">로그인</button></td>
+                        
                         </tr>
                     </table>
+                        
 
                     {/* 관리자 로그인이 아닐 때만 링크 표시 */}
                     {showLinks && (
