@@ -32,15 +32,20 @@ function App() {
         <Route path='/' element={<MainPage />} />
         <Route path='/list' element={<TemaList />} />
         <Route path='/detail' element={<Detail />} />
+
         <Route path='/InsertTema' element={<InsertTema />} />
         <Route path='/Anc_Board' element={<Anc_Board />} />
+
+        {/* 공지사항에서 공지사항 디테일로 가는 라우트 */}
         <Route path='/Anc_DetailForm' element={<Anc_DetailForm />} />
         <Route path='/Anc_EditForm' element={<Anc_EditForm />} />
         <Route path='/Anc_List' element={<Anc_List />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={< MemberForm />} />
-        <Route path='/manage-members' element={< MembershipManagement />} />\
+        <Route path='/manage-members' element={< MembershipManagement />} />
         <Route path='/reserve' element={<Reserve />} />
+
+        {/* 메인페이지에서 공지사항디테일로 가는 라우트 */}
         <Route path='/Anc_DetailForm/:num' element={<Anc_DetailForm />} />
         <Route path='*' element={<div>없는 페이지 입니다.</div>} />
       </Routes>

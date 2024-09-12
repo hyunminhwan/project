@@ -117,4 +117,10 @@ function Login({ onLoginSuccess }) {
     );
 }
 
+localStorage.setItem("id","user01")
+localStorage.setItem("addr","서울")
+
+localStorage.getItem("id")
+
+localStorage.removeItem("id")
 export default Login;

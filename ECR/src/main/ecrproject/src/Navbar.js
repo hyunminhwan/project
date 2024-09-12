@@ -29,7 +29,6 @@ function Navbar() {
             <ul className="dropdown-content">
               <li><Link to="/InsertTema">Register theme</Link></li> {/* 테마 등록 */}
               <li><Link to="/edit-theme">Edit theme</Link></li> {/* 테마 수정 */}
-              <li><Link to="/real-check">Performance inquiry</Link></li> {/* 실적 조회 */}
             </ul>
           )}
         </li>
@@ -48,14 +47,17 @@ function Navbar() {
         </li>
       </ul>
 
+{/* Member information 회원 정보 */}
+{/* Reservation confirmation 예약 확인*/}
       <ul className="nav-right"> 
-        <li style={{ display: loginOn ? 'block' : 'none' }}>
+        
+        <li >
           <Link to="/mypage">My Page</Link>
         </li>
-        <li style={{ display: !loginOn ? 'block' : 'none' }}>
+        <li >
           <Link to="/login">Sign In</Link>
         </li>
-        <li style={{ display: !loginOn ? 'block' : 'none' }}>
+        <li >
           <Link to="/signup">Sign Up</Link>
         </li>
       </ul>

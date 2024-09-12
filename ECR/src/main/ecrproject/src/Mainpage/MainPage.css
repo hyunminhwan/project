@@ -1,10 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
-/*    font-family: 'Creepster', cursive; 로 씀 */
 @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
-/* font-family: 'Gasoek One', sans-serif; 로 씀 */
+/* font-family: 'Gasoek One', sans-serif; */
 @import url('https://fonts.googleapis.com/css2?family=Song+Myung&display=swap');
-/* font-family: 'Song Myung', serif;  */
-
 
 /* 전체 페이지 */
 html, body {
@@ -16,7 +12,7 @@ html, body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  color: #f5f5f5; /* 밝은 글자색 */
+  color: #f5f5f5;
   font-family: 'Song Myung', serif;
 }
 
@@ -25,25 +21,24 @@ html, body {
   font-size: 60px;
   background-image: linear-gradient(to right, #715d5d, #c54242, #9b1313); /* 그라데이션 */
   background-clip: text;
-  -webkit-background-clip: text; /* 웹킷 브라우저 지원 */
-    color: transparent; /* 텍스트를 투명하게 설정 */
-  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8); /* 무서운 느낌을 위한 텍스트 그림자 추가 */
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8); /* 그림자 추가 */
 }
-
 
 #b {
   font-size: 20px;
-  font-family: 'Song Myung', serif;;
+  font-family: 'Song Myung', serif;
   background-image: linear-gradient(to right, #a98787, #a16565, #918181); /* 그라데이션 */
   background-clip: text;
-  -webkit-background-clip: text; /* 웹킷 브라우저 지원 */
-    color: transparent; /* 텍스트를 투명하게 설정 */
-  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8); /* 무서운 느낌을 위한 텍스트 그림자 추가 */
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
 }
 
 /* 섹션을 전체 화면 높이로 설정 */
 header, .theme-cards, .notice-event {
-  min-height: 100vh; /* 화면 전체 높이 */
+  min-height: 100vh;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -51,7 +46,7 @@ header, .theme-cards, .notice-event {
 /* 헤더 */
 header {
   background-color: rgba(0, 0, 0, 0.5); /* 배경을 약간 투명하게 설정 */
-  color: #ff0000; /* 붉은 글자색 */
+  color: #ff0000;
   text-align: center;
   padding: 50px;
   display: flex;
@@ -60,22 +55,42 @@ header {
   align-items: center;
 }
 
-/* 테마 카드 섹션 */
+
+/* 테마 가운데로  */
 .theme-cards {
   display: flex;
-  justify-content: space-around;
-  padding: 20px;
-  max-width: 1600px;
-  margin: 0 auto;
-  gap: 20px;
+  flex-direction: column; /* 요소들을 세로로 나열 */
+  align-items: center; /* 모든 항목을 가로 중앙 정렬 */
+  gap: 20px; /* h2와 테마 카드 사이에 간격 추가 */
+  padding: 15px;
   background-color: rgba(0, 0, 0, 0.5); /* 배경을 약간 투명하게 설정 */
+}
+
+.theme-cards .theme-h2 {
+  text-align: center; /* h2 내부 텍스트 가운데 정렬 */
+  font-size: 60px; /* 글자 크기 설정 */
+  color: #fff; /* 텍스트 색상 */
+  margin-bottom: 150px; /* 아래 여백 추가 */
+  background-image: linear-gradient(to right, #530909, #552222, #161515);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
+}
+
+.theme-cards-container {
+  display: flex;
+  justify-content: space-between; /* 카드 사이를 동일하게 배치 */
+  align-items: center; /* 수직 중앙 정렬 */
+  gap: 20px; /* 카드 사이 간격 */
+  width: 100%; /* 전체 너비 사용 */
+  max-width: 2000px; /* 최대 너비 설정 */
 }
 
 /* 테마 카드 */
 .theme-card {
-  width: 300px;
+  flex: 1 1 ; /* 5개가 한 줄에 들어가도록 카드의 너비를 18%로 설정 */
   text-align: center;
-  border: 2px solid #ff0000;
   border-radius: 10px;
   padding: 20px;
   background-color: transparent;
@@ -83,70 +98,79 @@ header {
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
+.theme-card img {
+  border-radius: 5px;
+  margin-bottom: 10px;
+
+  height: auto; /* 이미지의 비율을 유지 */
+}
+
 .theme-card:hover {
   transform: scale(1.05);
   box-shadow: 0 0 15px #ff0000;
 }
 
-.theme-card img {
-  border-radius: 5px;
-  margin-bottom: 10px;
+.notice {
+  text-align: center;
 }
 
-/* 공지사항과 이벤트 섹션 */
-.notice-event {
+.notice img {
+  width: 100px; /* 이미지 크기를 적절히 조정 */
+  height: auto;
+  margin: 0 100px; /* 이미지 사이에 간격 추가 */
+}
+
+.notice-icons {
   display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  gap: 20px;
-  background-color: rgba(0, 0, 0, 0.5); /* 배경을 약간 투명하게 설정 */
+  justify-content: center; /* 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+  gap: 30px; /* 아이콘 간의 간격 */
 }
 
-/* 공지사항과 이벤트 각각 */
-.notice, .event {
-  border: 2px solid #ff0000;
-  width: 48%;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: rgba(0, 0, 0, 0.5); /* 배경을 약간 투명하게 설정 */
-  color: #f5f5f5;
-  transition: transform 0.3s, box-shadow 0.3s;
+.icon-item {
+  display: flex;
+  flex-direction: column; /* 아이콘과 텍스트를 세로 정렬 */
+  align-items: center; /* 가운데 정렬 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  width: 350px; /* 각 아이콘 아이템의 너비 조정 */
 }
 
-.notice:hover, .event:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 15px #ff0000;
+.icon-item img {
+  width: 85px; /* 아이콘 크기 조정 */
+  height: auto;
+  margin-bottom: 20px; /* 아이콘과 텍스트 사이에 여백 추가 */
 }
 
-/* 공지사항과 이벤트 제목 */
-.notice h2, .event h2 {
-  text-align: center;
-  border-bottom: 2px solid #ff0000;
-  margin-bottom: 20px;
-  color: #ff0000;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+.icon-item p {
+  margin: 15px 0; /* 텍스트 사이 간격 */
+  font-size: 20px; /* 텍스트 크기 조정 */
+  color: black;
 }
 
-/* 리스트 스타일 */
-.notice ul, .event ul {
-  list-style: none;
-  padding: 0;
+#NoticeText {
+  color: black;
+  font-size: 50px;
 }
 
-.notice li, .event li {
-  margin: 10px 0;
-  border-bottom: 1px solid #ff0000;
-  padding: 10px 0;
-  text-align: center;
+#NoticeText1 {
+  color: black;
+  font-size: 20px;
+  background-image: linear-gradient(to right, #000000, #000000); /* 원하는 그라데이션 색상 */
+  background-clip: text;
+}
+
+#FONT {font-family: 'Gasoek One', sans-serif;}
+
+.FONT_P {
+  background-image: linear-gradient(to right, #000000, #000000); /* 원하는 그라데이션 색상 */
+  background-clip: text;
 }
 
 /* 푸터 */
 footer {
   text-align: center;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.5); /* 배경을 약간 투명하게 설정 */
-  color: #ff0000; /* 붉은 글자색 */
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #ff0000;
+  
 }
