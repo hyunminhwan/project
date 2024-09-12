@@ -32,53 +32,39 @@ public class MemberController {
 
 	// 일반 로그인 처리
 	@PostMapping("/userlogin/{loginType}")
-	public Member userlogin(@PathVariable(name="loginType") int loginType , @RequestBody Member member) {
+	public ResponseEntity<Member> memberLogin(@PathVariable(name="loginType") int loginType , @RequestBody Member member) {
 		Optional<Member> loginuser = loginService.Member(loginType,member.getMemberId());
-
+		System.out.println(loginuser.get().getMemberId());
 		if (loginuser.isPresent()) {
 			Member log = loginuser.get();
-			if (passwordEncoder.matches(log.getMemberPwd(), member.getMemberPwd())) {
-				return log;
-			} else {
-				return null; // 비밀번호 오류
-			}
-		} else {
-			return null; // 아이디오류
-		}
+			if (passwordEncoder.matches(member.getMemberPwd(),log.getMemberPwd())) {
+				  session.setAttribute("loginUser", log);
+		            return new ResponseEntity<>(log, HttpStatus.OK);
+		        } else {
+		            // 비밀번호가 틀린 경우 401 오류 반환
+		            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		        }
+		    } else {
+		        // 아이디가 존재하지 않는 경우 404 오류 반환
+		        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		    }
 	}
 
-//	// 매니저 로그인 처리
-//	@PostMapping("/managerlogin")
-//	public Member managerlogin(@RequestBody Member member) {
-//		Optional<Member> loginuser = loginService.Member(member);
-//
-//		if (loginuser.isPresent()) {
-//			Member log = loginuser.get();
-//			if (passwordEncoder.matches(log.getMemberPwd(), member.getMemberPwd())) {
-//				return log;
-//			} else {
-//				return null; // 비밀번호 오류
-//			}
-//		} else {
-//			return null; // 아이디오류
-//		}
-//	}
-//
-//	// 관리자 로그인 처리
-//	@PostMapping("/masterlogin")
-//	public Member masterlogin(@RequestBody Member member) {
-//		Optional<Member> loginuser = loginService.Member(member);
-//
-//		if (loginuser.isPresent()) {
-//			Member log = loginuser.get();
-//			if (passwordEncoder.matches(log.getMemberPwd(), member.getMemberPwd())) {
-//				return log;
-//			} else {
-//				return null; // 비밀번호 오류
-//			}
-//		} else {
-//			return null; // 아이디오류
-//		}
-//	}
+	@PostMapping("/insert")
+	public void memberInsert(@RequestBody Member member) {
+		String enPass = passwordEncoder.encode(member.getMemberPwd());
+		member.setMemberPwd(enPass);
+		loginService.memberInsert(member);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

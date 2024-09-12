@@ -29,6 +29,10 @@ public class Member {
 	private String memberPwd; // 비밀번호
 	
 	@NonNull
+	@Column(name = "member_pwd_check")
+	private String memberPwdCheck; // 비밀번호
+	
+	@NonNull
 	@Column(name = "member_name")
 	private String memberName; // 이름
 	

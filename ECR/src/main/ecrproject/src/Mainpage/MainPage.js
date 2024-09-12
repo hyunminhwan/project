@@ -1,33 +1,43 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios'; // axios 임포트
 import './MainPage.css'; // CSS 파일
+import { Link } from 'react-router-dom';
 
 function MainPage() {
   const [themes, setThemes] = useState([]);
   const [notices, setNotices] = useState([]);
   const [events, setEvents] = useState([]);
 
-  // useEffect(() => {
-  //   // 테마 API 호출
-  //   fetch('/api/themes')
-  //     .then(response => response.json())
-  //     .then(data => setThemes(data));
+  useEffect(() => {
+    // 테마 API 호출 & 평점 순으로 상위 5개 띄움
+    axios.get('/api/menu')
+      .then(response => {
+        const sortedThemes = response.data
+          .sort((a, b) => b.rating - a.rating) // rating을 기준으로 내림차순 정렬
+          .slice(0, 5); // 상위 5개 선택
+        setThemes(sortedThemes);
+      })
+      .catch(error => console.error('Error fetching themes:', error));
 
-  //   // 공지사항 API 호출
-  //   fetch('/api/notices')
-  //     .then(response => response.json())
-  //     .then(data => setNotices(data));
+    // 공지사항 board 호출 (상위 5개만 가져오기)
+    axios.get('/board/write') // 공지사항 목록을 반환 호출
+      .then(response => {
+        const topNotices = response.data.slice(0, 5); // 상위 5개 공지사항만 선택
+        setNotices(topNotices);
+      })
+      .catch(error => console.error('Error fetching notices:', error));
 
-  //   // 이벤트 API 호출
-  //   fetch('/api/events')
-  //     .then(response => response.json())
-  //     .then(data => setEvents(data));
-  // }, []);
+    // 이벤트 API 호출
+    axios.get('/api/events')
+      .then(response => setEvents(response.data))
+      .catch(error => console.error('Error fetching events:', error));
+  }, []);
 
   return (
     <>
       <header>
         <h1>메인이미지 1~3(?)</h1>
-        <p>메인 테마 컷 이미지<br/>사이트 소개 메인 이미지<br/>이벤트</p>
+        <p>메인 테마 컷 이미지<br />사이트 소개 메인 이미지<br />이벤트</p>
       </header>
 
       {/* 테마 카드 섹션 */}
@@ -35,7 +45,7 @@ function MainPage() {
         {themes.map((theme, index) => (
           <div className="theme-card" key={index}>
             <img src={theme.imageUrl} alt="테마 이미지" />
-            <p>{theme.name}<br/>{theme.genre}<br/>{theme.difficulty}<br/>{theme.description}</p>
+            <p>{theme.temaName}<br />장르 : {theme.genre}<br />난이도 : {theme.difficulty}<br />인원수 : {theme.personnel}</p>
           </div>
         ))}
       </section>
@@ -45,26 +55,20 @@ function MainPage() {
         <div className="notice">
           <h2>공지사항</h2>
           <ul>
-            {notices.map((notice, index) => (
-              <li key={index}>{notice.title}</li>
+          {console.log(notices)}
+            {notices.map((a, index) => (
+              <li key={index}>{a.boardTitle}</li> // 공지사항 제목만 표시
+              
             ))}
           </ul>
         </div>
         <div className="event">
           <h2>이벤트</h2>
           <ul>
-            {events.map((event, index) => (
-              <li key={index}>{event.title}</li>
+            {events.map((b, index) => (
+              <li key={index}>{b.title}</li>
             ))}
           </ul>
-        </div>
-      </section>
-
-      {/* 지도 섹션 */}
-      <section className="map">
-        <h2>오시는 길 (지도 - 네이버 API)</h2>
-        <div id="map-container">
-          {/* 네이버 지도 API 연동 */}
         </div>
       </section>
 

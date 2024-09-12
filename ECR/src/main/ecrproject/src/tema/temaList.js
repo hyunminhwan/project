@@ -3,12 +3,13 @@ import axios from 'axios';
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import AvgRating from "./avgRating";
+import StarRatings from "react-star-ratings";
 // import {  useNavigate } from "react-router-dom";
 
 function TemaList() {
     let [menuList, setMenuList] = useState([]); //bd에 있는 모든테마를 담을 변수 선언
     let [menuCount, setMenuCount] = useState(9); //  9개씩 보여주는 초기값 설정
-    let [filteredMenuList, setFilteredMenuList] = useState([]); // 필터링된 테마 리스트
+    let [filteredMenuList, setFilterMenuList] = useState([]); // 필터링된 테마 리스트
     let [filters, setFilters] = useState({
         genre: '',
         location: '',
@@ -39,7 +40,7 @@ function TemaList() {
             (!filters.difficulty || menu.difficulty === parseInt(filters.difficulty)) &&
             (!filters.personnel || menu.personnel === parseInt(filters.personnel))
         );
-        setFilteredMenuList(filtered);
+        setFilterMenuList(filtered);
     }, [filters, menuList]);
 
     const loadMore = () => {
@@ -131,6 +132,7 @@ function TemaList() {
 
                             <Col lg={4} onClick={() => { temaCount(menu) }} style={{ cursor: 'pointer' }} >
                                 <div className="tema">
+                                    <img src={menu.imgUrl} alt="테마 이미지" />
                                     <img src={`${process.env.PUBLIC_URL}/img/room${menu.temaNo}.jpg`} alt="테마 이미지" />
                                     <div>테마번호 : {menu.temaNo}</div>
                                     <h2>테마이름 : {menu.temaName}</h2><h4>조회수 : {menu.temaCount}</h4>
@@ -144,9 +146,20 @@ function TemaList() {
                                     <div>인원수 : {menu.personnel}</div>
                                     <div>등록일 : {menu.temaCreatedDate.slice(0, 10)}</div>
                                     <br />
-                                    <AvgRating temaNo={menu.temaNo}/>
+                                    <div>
+                                           <h4> 평점</h4>
+                                        <StarRatings
+                                            rating={menu.rating}
+                                            starRatedColor="gold"
+                                            numberOfStars={5}
+                                            starDimension="24px"
+                                            starSpacing="2px"
+                                        />
+                                    </div>
+                                    
+                                    {/* <AvgRating temaNo={menu.temaNo} /> */}
                                 </div>
-                                
+
                             </Col>
                         ))
 
