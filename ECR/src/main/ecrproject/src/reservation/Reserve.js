@@ -11,7 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 function Reserve() {
 const navigate = useNavigate();
 const location = useLocation();
-const { menu } = location.state;                                    // 테마 정보
+const { menus } = location.state;                                    // 테마 정보
 
 const [startDate, setStartDate] = useState(null);                   // 예약날짜
 const [useTime, setUseTime] = useState();                           // 선택한 이용 시간
@@ -23,7 +23,7 @@ const [reservedTimes, setReservedTimes] = useState([]);             // 예약된
 useEffect(() => {
     if(startDate) {
         axios.get('/res/findReservations', {
-            params: { temaNo: menu.temaNo, useDate: startDate.toISOString().split('T')[0] }
+            params: { temaNo: menus.temaNo, useDate: startDate.toISOString().split('T')[0] }
         })
         .then(response => {
             setReservedTimes(response.data);                        // 예약된 시간대 설정
@@ -42,8 +42,8 @@ const isTimeReserved = (time => { reservedTimes.includes(time); })  // 이미 �
 const handleReserve = () => {
     axios.post('/res/addReserve', {
         userId: 1,                                                  // 예시! 임의 값 사용
-        temaNo: menu.temaNo,
-        paymentStatus: 'N',
+        temaNo: menus.temaNo,
+        paymentStatus: '결제대기',
         reservationDate: new Date().toISOString().split('T')[0],    // 오늘 날짜 0000-00-00 형식
         useDate: startDate.toISOString().split('T')[0],             // 선택한 날짜 0000-00-00 형식
         useTime: useTime
@@ -64,12 +64,12 @@ const handleReserve = () => {
                 <table className="reserveForm">
                     <tr>
                         <th>선택 테마</th>
-                        <td>{menu.temaName}</td>
+                        <td>{menus.temaName}</td>
                     </tr>
                     <tr>
                         <th>선택사항</th>
                         <td>
-                            장르:#{menu.genre}&ensp;지점:#{menu.cafeName}&ensp;난이도:#{menu.difficulty}&ensp;인원수:#{menu.personnel}
+                            장르:#{menus.genre}&ensp;지점:#{menus.cafeName}&ensp;난이도:#{menus.difficulty}&ensp;인원수:#{menus.personnel}
                         </td>
                     </tr>
                     <tr>
@@ -139,7 +139,7 @@ const handleReserve = () => {
                     <tr>
                         <th>이용요금</th>
                         <td>
-                            {menu.price}원 <b>※ 예약금 {menu.price*0.5}원 국민은행 00000000000 / 예금주:OOO</b>
+                            {menus.price}원 <b>※ 예약금 {menus.price*0.5}원 국민은행 00000000000 / 예금주:OOO</b>
                         </td>
                         <th></th>
                     </tr>
