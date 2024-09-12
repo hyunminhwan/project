@@ -12,6 +12,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,8 +40,9 @@ public class Reservation {
 	@Column(name = "user_id")
 	private String userId;						// 유저아이디(FK)
 	
-	@Column(name = "tema_no")
-	private Long temaNo;						// 테마번호(FK)
+	@ManyToOne									// Tema 테이블과 다대일 관계(예약관리에서 테마 정보를 받기위해 사용)
+	@JoinColumn(name = "tema_no")				// 테마번호(FK)
+	private Tema tema;							// Tema 객체 참조						
 	
 	@Column(name = "reservation_date")
 	@CreatedDate

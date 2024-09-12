@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './insertTema.css';
+import { useSelector } from 'react-redux';
 
 //주소 api
 function KakaoMap() {
+    
     const script = document.createElement('script');
     script.src = 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
     script.async = true;
@@ -32,8 +34,10 @@ function Coordinates(address) {
 }
 
 function InsertTema() {
+    const loginToMember = useSelector((state) => state.loginMember);
+    const shopName = loginToMember?.member?.shopName;
     const [temaInsert, settemaInsert] = useState({
-        cafeName: '',
+        cafeName: shopName,
         temaName: '',
         price: '',
         timetaken: '',
@@ -125,10 +129,10 @@ function InsertTema() {
             <h2>테마등록</h2>
             <form onSubmit={TemaSubmit}>
                 <label>카페이름:</label>
-                <input name="cafeName" type="text" value={temaInsert.cafeName} onChange={TemaData} required /> <br />
+                <input name="cafeName" type="text" value={temaInsert.cafeName} onChange={TemaData}  readOnly/> <br />
 
                 <label>테마이름:</label>
-                <input name="temaName" type="text" value={temaInsert.temaName} onChange={TemaData} required /><br />
+                <input name="temaName" type="text" value={temaInsert.temaName} onChange={TemaData} required/><br />
 
                 <label>가격:</label>
                 <input name="price" type="text" value={temaInsert.price} onChange={TemaData} required /><br />

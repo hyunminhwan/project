@@ -2,9 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import React from 'react';
 import { Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import StarRatings from 'react-star-ratings';
-
-
 //npm install react-star-ratings  리엑트에 있는 라이브러리
 //npm install styled-components 
 
@@ -18,7 +17,9 @@ function Review({ temaNo }) {
     const [rating, setRating] = useState(0);
     const [userId] = useState('user01');
     const [reviewCount, setReviewCount] = useState(3);
-  
+    const loginToMember = useSelector((state) => state.loginMember);
+
+
     useEffect(() => {
         axios.get(`/review/tema/${temaNo}`)
             .then((result) => {
@@ -40,14 +41,14 @@ function Review({ temaNo }) {
         })
             .then((r) => {
                 axios.get(`/review/tema/${temaNo}`)
-                     .then((result) => {
+                    .then((result) => {
                         setReviewList(result.data);
-                })
-                     .catch(() => {
+                    })
+                    .catch(() => {
                         console.log("리뷰를 가지고 오는데 실패했습니다.")
-                })
-                    setReviewContent('');  // 리뷰 내용 초기화
-                    setRating(0);          // 리뷰 평점 초기화
+                    })
+                setReviewContent('');  // 리뷰 내용 초기화
+                setRating(0);          // 리뷰 평점 초기화
             })
             .catch(() => {
                 console.log("리뷰를 등록이 실패했습니다.");
@@ -61,66 +62,85 @@ function Review({ temaNo }) {
 
     const reviewDelete = (reviewNo) => {
         axios.delete(`/review/delete/${reviewNo}`)
-             .then(()=>{
-                if( window.confirm("리뷰를 삭제하시겠습니다?")){
+            .then(() => {
+                if (window.confirm("리뷰를 삭제하시겠습니다?")) {
                     alert("리뷰를 삭제하였습니다.");
                     axios.get(`/review/tema/${temaNo}`)
-                    .then((result) => {
-                       setReviewList(result.data);
-               })
-                    .catch(() => {
-                       console.log("리뷰를 가지고 오는데 실패했습니다.")
-               })
-                }else{
+                        .then((result) => {
+                            setReviewList(result.data);
+                        })
+                        .catch(() => {
+                            console.log("리뷰를 가지고 오는데 실패했습니다.")
+                        })
+                } else {
                     alert("리뷰를 삭제를 취소하였습니다");
                 }
-               
-             })
-             .catch(()=>{
+
+            })
+            .catch(() => {
                 alert("리뷰삭제에 실패했습니다.")
-             })
+            })
     }
     return (
         <>
-            <div>
-                <h3>후기 작성</h3>
-                <form onSubmit={reviewinsert}>
-                    <div>
-                        <StarRatings
-                            rating={rating}
-                            starRatedColor="gold"
-                            numberOfStars={5}
-                            starDimension="50px"
-                            starSpacing="3px"
-                            changeRating={(newRating) => setRating(newRating)}
-                        />
-                    </div>
-                    <div>
-                        <textarea
-                            value={reviewContent}
-                            onChange={(e) => setReviewContent(e.target.value)}
-                            placeholder="리뷰를 작성하세요"
-                            rows="5"
-                            cols="50"
-                        />
-                    </div>
-                    <button type="submit">리뷰 등록</button>
-                </form>
-            </div>
+            <hr />
+            {loginToMember?.member ? (
+                <div>
 
+
+                    <h3>후기 작성</h3>
+                    <form onSubmit={reviewinsert}>
+                        <div>
+                            <StarRatings
+                                rating={rating}
+                                starRatedColor="gold"
+                                numberOfStars={5}
+                                starDimension="50px"
+                                starSpacing="3px"
+                                changeRating={(newRating) => setRating(newRating)}
+                            />
+                        </div>
+                        <div>
+                            <textarea
+                                value={reviewContent}
+                                onChange={(e) => setReviewContent(e.target.value)}
+                                placeholder="리뷰를 작성하세요"
+                                rows="5"
+                                cols="50"
+                            />
+                        </div>
+
+
+                        <button type="submit">리뷰 등록</button>
+                    </form>
+
+                </div>
+            ) : (
+                <h2>로그인 후 댓글을 등록하세요</h2>
+            )
+            }
+            <hr />
             {
                 reviewList.slice(0, reviewCount).map((review) => {
                     return (
-                        <div key={review.reviewNo}>
-                            <span >{review.userId} </span>
-                            <span>
+                        <div key={review.reviewNo} >
+                            <div >
+                                <span >{review.userId}</span>
                                 <StarRating rating={review.reviewRating} />
-                            </span>
+                            </div>
+
                             <p >{review.reviewContent}</p>
-                            <p >작성일 : {review.reviewCreatedDate.slice(0, 10)}</p>
-                            <span>
-                                <Button onClick={()=>{reviewDelete(review.reviewNo)}}>삭제</Button>
-                            </span>
+
+                            <div >
+                                <span >작성일: {review.reviewCreatedDate.slice(0, 10)}</span>
+
+                                {loginToMember.member?.memberId === review.userId && (
+                                    <div >
+                                        {/* <Button variant="outline-secondary" onClick={() => { }}>수정하기</Button>  잠시 보류*/}
+                                        <Button variant="outline-danger" onClick={() => { reviewDelete(review.reviewNo) }}>삭제</Button>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     )
                 })

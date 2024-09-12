@@ -19,6 +19,7 @@ import Login from './login/login';
 import MemberForm from './member/memberForm';
 import MembershipManagement from './Admin/MembershipManagement';
 import Reserve from './reservation/Reserve';
+import EditTema from './tema/EditTema';
 
 function App() {
 
@@ -41,6 +42,8 @@ function App() {
         <Route path='/signup' element={< MemberForm />} />
         <Route path='/manage-members' element={< MembershipManagement />} />\
         <Route path='/reserve' element={<Reserve />} />
+        <Route path='/edit-theme' element={<EditTema />} />
+        
         <Route path='*' element={<div>없는 페이지 입니다.</div>} />
       </Routes>
 
