@@ -59,6 +59,16 @@ public class TemaService {
 	        return avgRating != null ? avgRating:0.0;
 	}
 
+	//카페이름으로 모든 테마 가져오기
+	public List<Tema> edittema(String cafeName) {
+		return temaRepository.findAllByCafeName(cafeName);
+		
+	}
 	
+	// 평점 높은 테마
+	public List<Tema> findByOrderByRatingDesc() {
+		return temaRepository.findByOrderByRatingDesc();
+	}
+
 	
 }

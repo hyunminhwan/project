@@ -1,12 +1,19 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 function Anc_DetailForm() {
     const [announcement, setAnnouncement] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
     const { boardNo } = location.state || {}; // boardNo를 location.state에서 가져옵니다.
+    const loginToMember = useSelector((state) => state.loginMember);
+
+    const formatDate = (date) => {
+        if (!date) return '';
+        return date.replace(' ', 'T').substring(0, 16); // e.g. '2024-08-05 10:00:00' -> '2024-08-05T10:00'
+    };
 
     useEffect(() => {
         if (boardNo) {
@@ -61,7 +68,7 @@ function Anc_DetailForm() {
                                 <input
                                     type="datetime-local"
                                     name="date"
-                                    value={announcement.boardCreateDate}
+                                    value={formatDate(announcement.boardCreateDate)}
                                     readOnly
                                 />
                             </td>
@@ -72,7 +79,7 @@ function Anc_DetailForm() {
                                 <input
                                     type="datetime-local"
                                     name="updateDate"
-                                    value={announcement.boardUpdateDate}
+                                    value={formatDate(announcement.boardUpdateDate)}
                                     readOnly
                                 />
                             </td>
@@ -91,7 +98,9 @@ function Anc_DetailForm() {
                 </table>
                 <br/>
                 {/* 함수 사용 */}
+                {loginToMember.member?.loginType ===3 &&(
                 <button type="button" onClick={()=>{handleEditClick(announcement.boardNo)}}>수정하기</button>
+                )}
             </form>
         </>
     );

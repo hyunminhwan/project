@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import AvgRating from "./avgRating";
 import StarRatings from "react-star-ratings";
 // import {  useNavigate } from "react-router-dom";
 

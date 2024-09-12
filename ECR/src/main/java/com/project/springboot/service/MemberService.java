@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.project.springboot.domain.Member;
 import com.project.springboot.repository.MemberRepository;
+import com.project.springboot.repository.ReservationRepository;
+
+import jakarta.transaction.Transactional;
 
 
 @Service
@@ -15,7 +18,9 @@ public class MemberService {
 	 
 	@Autowired
 	MemberRepository memberRepository;
-
+	
+	@Autowired
+	ReservationRepository reservationRepository;
 
 	public Optional<Member> Member(int loginType , String memberId) {
 		return memberRepository.findMemberByLoginTypeAndMemberId(loginType,memberId);
@@ -34,4 +39,15 @@ public class MemberService {
 
 	}
 
+	// 관리자: 회원삭제
+		@Transactional  // 트랜잭션 설정 추가
+		public void deleteMemberAndReservations(String memberId) {
+			if(memberRepository.existsById(memberId)) {
+				reservationRepository.deleteByUserId(memberId);
+				memberRepository.deleteById(memberId);
+			} else {
+				throw new IllegalArgumentException("해당 회원을 찾을 수 없습니다");
+			}
+			
+		}
 }

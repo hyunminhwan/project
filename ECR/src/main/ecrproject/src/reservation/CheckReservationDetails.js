@@ -69,10 +69,10 @@ function CheckReservationDetails() {
     const handleConfirmCancel = () => {
         axios.post('/res/cancel', {reservationCode : selectedReservation.reservationCode})
             .then(response => {
-                // 취소신청 성공햇을 때 paymentState를 'C'로 변경
+                // 취소신청 성공햇을 때 paymentState를 '취소신청'로 변경
                 const updatedReservations = reservations.map(reserve =>
                     reserve.reservationCode === selectedReservation.reservationCode ?
-                    {...reserve, paymentState: 'C'} :
+                    {...reserve, paymentState: '취소신청'} :
                     reserve
                 );
                 setReservations(updatedReservations);               // 예약 상태 업데이트
@@ -168,7 +168,7 @@ function CheckReservationDetails() {
                                     <td>{reserve.useTime}</td>
                                     <td>{reserve.paymentState}</td>
                                     <td>
-                                        {reserve.paymentState === 'C' ? 
+                                        {reserve.paymentState === '취소신청' ? 
                                             (<span>취소신청완료</span>) : 
                                             (<button onClick={() => {handleCancelClick(reserve)}}>
                                                 취소하기
