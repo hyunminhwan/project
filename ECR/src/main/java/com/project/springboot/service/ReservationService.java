@@ -29,8 +29,8 @@ public class ReservationService {
 	}  
 	
 	// 일반회원: 예약추가
-	public Reservation addReserve(Reservation reserve) {
-		return reservationRepository.save(reserve);
+	public Reservation saveReservation(Reservation reservation) {
+		return reservationRepository.save(reservation);
 	}
 
 	// 일반회원: 기간 내 특정 테마의 예약 조회

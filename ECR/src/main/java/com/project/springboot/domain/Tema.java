@@ -29,7 +29,6 @@ public class Tema {
 			)
 	@GeneratedValue(generator = "temaseq")
 	@Column(name = "tema_no")
-
 	private Long temaNo;		//테마번호
 	
 	@NonNull

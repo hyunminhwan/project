@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -37,12 +38,12 @@ public class Reservation {
 	@Column(name = "reservation_code")
 	private Long reservationCode;				// 예약번호(PK)
 	
-	@Column(name = "user_id")
-	private String userId;						// 유저아이디(FK)
-	
-	@ManyToOne									// Tema 테이블과 다대일 관계(예약관리에서 테마 정보를 받기위해 사용)
+	@ManyToOne(fetch = FetchType.EAGER)			// Tema 테이블과 다대일 관계(예약관리에서 테마 정보를 받기위해 사용)
 	@JoinColumn(name = "tema_no")				// 테마번호(FK)
-	private Tema tema;							// Tema 객체 참조						
+	private Tema tema;							// Tema 객체 참조	
+	
+	@Column(name = "user_id")
+	private String userId;						// 유저아이디(FK)					
 	
 	@Column(name = "reservation_date")
 	@CreatedDate

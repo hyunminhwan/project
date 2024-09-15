@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.springboot.domain.Reservation;
 import com.project.springboot.service.ReservationService;
+import com.project.springboot.service.TemaService;
 
 @RestController
 @RequestMapping("/res")
@@ -22,7 +23,7 @@ public class ReservationController {
 
 	@Autowired
 	ReservationService reservationService;
-	
+
 	// 일반회원: 사용자가 날짜를 선택했을 때 예약된 시간들을 반환하는 메서드(예약하기)
 	@GetMapping("/findReservations")
 	public List<Reservation> findReservations(@RequestParam("temaNo") Long temaNo, @RequestParam("useDate") LocalDate useDate) {
@@ -32,14 +33,9 @@ public class ReservationController {
 	
 	// 일반회원: 예약 추가 메서드
 	@PostMapping("/addReserve")
-	public ResponseEntity<?> addReserve(@RequestBody Reservation reserve) {
-		try {
-			// 예약정보저장
-			Reservation savedReservation = reservationService.addReserve(reserve);
-			return ResponseEntity.ok(savedReservation);
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body("잘못된 요청입니다 : " + e.getMessage());
-		}
+	public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
+		Reservation savedReservation = reservationService.saveReservation(reservation);
+		return ResponseEntity.ok(savedReservation);
 	}
 	
 	// 일반회원: 특정날짜 범위의 예약 조회(예약내역 조회)

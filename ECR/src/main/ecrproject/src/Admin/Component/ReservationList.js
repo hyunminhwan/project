@@ -49,10 +49,15 @@ function ReservationList() {
             alert('날짜를 선택하세요');
             return ;
         }
+
+        // 종료일에 하루 더하기
+        const adjustedEndDate = new Date(endDate);
+        adjustedEndDate.setDate(adjustedEndDate.getDate() + 1);
+
         axios.get('/res/adminFindDate', {
             params : {
                 startDate : startDate.toISOString().split('T')[0],  // toISOString()는 YYYY-MM-ddTHH:mm:ss...로 반환됨 
-                endDate : endDate.toISOString().split('T')[0]       // split('T')[0]를 통해 ddTHH에서 T를 기준으로 잘라 날짜 형식만 가져옴
+                endDate : adjustedEndDate.toISOString().split('T')[0]       // split('T')[0]를 통해 ddTHH에서 T를 기준으로 잘라 날짜 형식만 가져옴
             }
         })
         .then(response => {
