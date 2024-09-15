@@ -7,6 +7,8 @@ import { Button } from 'react-bootstrap';
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useSelector } from 'react-redux';
+
 
 function Reserve() {
 const navigate = useNavigate();
@@ -15,8 +17,6 @@ const { menus } = location.state;                                    // 테마 �
 
 const [startDate, setStartDate] = useState(null);                   // 예약날짜
 const [useTime, setUseTime] = useState();                           // 선택한 이용 시간
-const [userName, setUserName] = useState();                         // 사용자 이름
-const [userPhone, setUserPhone] = useState();                       // 사용자 전화번호
 const [reservedTimes, setReservedTimes] = useState([]);             // 예약된 시간대
 
 // 사용자가 날짜를 선택하면 해당 날짜의 예약된 시간 정보를 서버로부터 받아옴
@@ -36,24 +36,37 @@ useEffect(() => {
 }, [startDate]);
 
 // 시간대 버튼을 비활성화할지 여부를 확인하는 함수
-const isTimeReserved = (time => { reservedTimes.includes(time); })  // 이미 예약된 시간대인지 여부 확인
+const isTimeReserved = (time) => { 
+    return reservedTimes.includes(time);                            // 배열에서 해당 시간대를 검색
+}  
+
+// 선택된 시간대인지 확인
+const isSelected = (time) => {
+    return useTime === time;
+}
+
+// Redux에서 로그인된 사용자 정보 가져오기
+const userInfo = useSelector(state => state.loginMember.member);
+
 
 // 예약 요청을 처리하는 함수
 const handleReserve = () => {
-    axios.post('/res/addReserve', {
-        userId: 1,                                                  // 예시! 임의 값 사용
+    const reservationData = {
+        userId: userInfo.memberId,                                  // loginStore.js로 로그인 되어있는 아이디 넣기
         temaNo: menus.temaNo,
         paymentStatus: '결제대기',
-        reservationDate: new Date().toISOString().split('T')[0],    // 오늘 날짜 0000-00-00 형식
+        reservationDate: new Date().toISOString(),                  // 오늘 날짜 0000-00-00 형식
         useDate: startDate.toISOString().split('T')[0],             // 선택한 날짜 0000-00-00 형식
-        useTime: useTime
-    })
+        useTime: `${startDate.toISOString().split('T')[0]}T${useTime}:00`       // HH:mm:ss 형식
+    };
+
+    axios.post('/res/addReserve', reservationData)
     .then(response => {
         alert('예약되었습니다');
-        navigate('/payment', { state: { response } });              // 예약완료 페이지로 이동(+ 값 보내기)
+        navigate('/payment', { state: { reservation: response.data, menu: menus } });// 예약완료 페이지로 이동(+ 값 보내기)
     })
     .catch(error => {
-        alert('다시 확인해주세요');
+        alert('예약 중 오류가 발생했습니다');
         console.log('예약 중 오류발생 : ', error);
     })
 };
@@ -73,7 +86,7 @@ const handleReserve = () => {
                         </td>
                     </tr>
                     <tr>
-                        <th>예약 날짜</th>
+                        <th>사용 날짜</th>
                         <td>
                             <DatePicker
                                 showIcon
@@ -86,55 +99,55 @@ const handleReserve = () => {
                         </td>
                     </tr>
                     <tr>
-                        <th>이용 시간</th>
+                        <th>사용 시간</th>
                         <td>
                             <p>
                             <Button 
-                                variant="primary"
+                                variant="dark"
                                 disabled={isTimeReserved('09:00 ~ 11:00')}                              // 예약된 시간은 버튼 비활성화
-                                onClick={() => {setUseTime('09:00 ~ 11:00')}}                           // 선택한 시간으로 값 설정
-                                style={{ background: isTimeReserved('09:00 ~ 11:00') ? 'gray' : '' }}   // 예약되어 있는 시간 스타일 변경
+                                onClick={() => { setUseTime('09:00'); }}           // 선택한 시간으로 값 설정
+                                style={{ background: isSelected('09:00') ? 'red' : isTimeReserved('09:00 ~ 11:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
                             >09:00 ~ 11:00</Button>&ensp;
                             <Button 
-                                variant="primary"
+                                variant="dark"
                                 disabled={isTimeReserved('11:00 ~ 13:00')}                              // 예약된 시간은 버튼 비활성화
-                                onClick={() => {setUseTime('11:00 ~ 13:00')}}                           // 선택한 시간으로 값 설정
-                                style={{ background: isTimeReserved('11:00 ~ 13:00') ? 'gray' : '' }}   // 예약되어 있는 시간 스타일 변경
+                                onClick={() => { setUseTime('11:00'); }}                        // 선택한 시간으로 값 설정
+                                style={{ background: isSelected('11:00') ? 'red' : isTimeReserved('11:00 ~ 13:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
                             >11:00 ~ 13:00</Button>
                             </p>
                             <p>
                             <Button 
-                                variant="primary"
+                                variant="dark"
                                 disabled={isTimeReserved('13:00 ~ 15:00')}                              // 예약된 시간은 버튼 비활성화
-                                onClick={() => {setUseTime('13:00 ~ 15:00')}}                           // 선택한 시간으로 값 설정
-                                style={{ background: isTimeReserved('13:00 ~ 15:00') ? 'gray' : '' }}   // 예약되어 있는 시간 스타일 변경
+                                onClick={() => { setUseTime('13:00'); }}                        // 선택한 시간으로 값 설정
+                                style={{ background: isSelected('13:00') ? 'red' : isTimeReserved('13:00 ~ 15:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
                             >13:00 ~ 15:00</Button>&ensp;
                             <Button 
-                                variant="primary"
+                                variant="dark"
                                 disabled={isTimeReserved('15:00 ~ 17:00')}                              // 예약된 시간은 버튼 비활성화
-                                onClick={() => {setUseTime('15:00 ~ 17:00')}}                           // 선택한 시간으로 값 설정
-                                style={{ background: isTimeReserved('15:00 ~ 17:00') ? 'gray' : '' }}   // 예약되어 있는 시간 스타일 변경
+                                onClick={() => { setUseTime('15:00'); }}                        // 선택한 시간으로 값 설정
+                                style={{ background: isSelected('15:00') ? 'red' : isTimeReserved('15:00 ~ 17:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
                             >15:00 ~ 17:00</Button>
                             </p> 
                             <p>
                             <Button 
-                                variant="primary"
+                                variant="dark"
                                 disabled={isTimeReserved('17:00 ~ 19:00')}                              // 예약된 시간은 버튼 비활성화
-                                onClick={() => {setUseTime('17:00 ~ 19:00')}}                           // 선택한 시간으로 값 설정
-                                style={{ background: isTimeReserved('17:00 ~ 19:00') ? 'gray' : '' }}   // 예약되어 있는 시간 스타일 변경
+                                onClick={() => { setUseTime('17:00'); }}                        // 선택한 시간으로 값 설정
+                                style={{ background: isSelected('17:00') ? 'red' : isTimeReserved('17:00 ~ 19:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
                             >17:00 ~ 19:00</Button>&ensp;
                             <Button 
-                                variant="primary"
+                                variant="dark"
                                 disabled={isTimeReserved('19:00 ~ 21:00')}                              // 예약된 시간은 버튼 비활성화
-                                onClick={() => {setUseTime('19:00 ~ 21:00')}}                           // 선택한 시간으로 값 설정
-                                style={{ background: isTimeReserved('19:00 ~ 21:00') ? 'gray' : '' }}   // 예약되어 있는 시간 스타일 변경
+                                onClick={() => { setUseTime('19:00'); }}                        // 선택한 시간으로 값 설정
+                                style={{ background: isSelected('19:00') ? 'red' : isTimeReserved('19:00 ~ 21:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
                             >19:00 ~ 21:00</Button>
                             </p>     
                         </td>
                     </tr>
                     <tr>
                         <th>이름*</th>
-                        <input name={userName} onChange={e => {setUserName(e.target.value)}} placeholder="예약자 성함" required></input>
+                        <td>{userInfo.memberId}</td>
                     </tr>
                     <tr>
                         <th>이용요금</th>
@@ -145,7 +158,7 @@ const handleReserve = () => {
                     </tr>
                     <tr>
                         <th>연락처*</th>
-                        <input name={userPhone} onChange={e => {setUserPhone(e.target.value)}} placeholder="010-1234-5678" required></input>
+                        <td>0{userInfo.memberPhone}</td>
                     </tr>
                     <tr>
                         <td colSpan='2'>

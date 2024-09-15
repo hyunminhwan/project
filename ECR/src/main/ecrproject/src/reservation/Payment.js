@@ -17,7 +17,7 @@ function Payment() {
                         <tr>
                             <th>예약번호</th>
                             <td>
-                                {reservation.reervationCode}                        {/* 예약테이블에서 가져온 예약번호 */}
+                                {reservation.reservationCode}                        {/* 예약테이블에서 가져온 예약번호 */}
                             </td>
                         </tr>
                         <tr>

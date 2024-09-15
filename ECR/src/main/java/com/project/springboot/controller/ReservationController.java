@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,8 +32,14 @@ public class ReservationController {
 	
 	// 일반회원: 예약 추가 메서드
 	@PostMapping("/addReserve")
-	public Reservation addReserve(@RequestBody Reservation reserve) {
-		return reservationService.addReserve(reserve);
+	public ResponseEntity<?> addReserve(@RequestBody Reservation reserve) {
+		try {
+			// 예약정보저장
+			Reservation savedReservation = reservationService.addReserve(reserve);
+			return ResponseEntity.ok(savedReservation);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("잘못된 요청입니다 : " + e.getMessage());
+		}
 	}
 	
 	// 일반회원: 특정날짜 범위의 예약 조회(예약내역 조회)
