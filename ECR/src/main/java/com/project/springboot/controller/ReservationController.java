@@ -2,6 +2,7 @@ package com.project.springboot.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -40,13 +41,12 @@ public class ReservationController {
 	
 	// 일반회원: 특정날짜 범위의 예약 조회(예약내역 조회)
 	@GetMapping("/findDate")
-	public List<Reservation> getReservationsByDate(
-			@RequestParam("temaNo") Long temaNo,
+	public ResponseEntity<List<Reservation>> getReservationsByDate(
+			@RequestParam("userId") String userId,
 			@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-		
-		// Service에서 temaNo를 통해 테마 정보를 가져온 후, 해당 테마에 대한 예약정보 조회
-        return reservationService.getReservationsByDateRange(temaNo, startDate, endDate);
+		List<Reservation> reservations = reservationService.getReservationsByDateRange(userId, startDate, endDate);
+        return ResponseEntity.ok(reservations);
 	}
 	
 	// 일반회원: 예약번호로 예약정보 조회(예약내역 조회)
@@ -57,8 +57,11 @@ public class ReservationController {
 	
 	// 일반회원: 예약 취소 요청(결제상태 'C'로 변경)(예약내역  조회)
 	@PostMapping("/cancel")
-	public Reservation cancelReservation(@RequestParam("reservationCode") Long reservationCode) {
-		return reservationService.cancelReservation(reservationCode);
+	public ResponseEntity<String> cancelReservation(@RequestBody Map<String, Long> request) {
+		Long reservationCode = request.get("reservationCode");
+		// reservationCode를 이용해 취소 로직 수행
+		reservationService.cancelReservation(reservationCode);
+		return ResponseEntity.ok("취소신청 완료");
 	}
 	
 	

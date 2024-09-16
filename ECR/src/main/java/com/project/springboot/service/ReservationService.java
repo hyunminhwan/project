@@ -34,9 +34,8 @@ public class ReservationService {
 	}
 
 	// 일반회원: 기간 내 특정 테마의 예약 조회
-	public List<Reservation> getReservationsByDateRange(Long temaNo, LocalDate startDate, LocalDate endDate) {
-		Tema tema = temaRepository.findById(temaNo).orElseThrow(() -> new RuntimeException("테마를 찾을 수 없습니다."));
-		return reservationRepository.findByTemaAndUseDateBetween(tema, startDate, endDate);
+	public List<Reservation> getReservationsByDateRange(String userId, LocalDate startDate, LocalDate endDate) {
+		return reservationRepository.findByUserIdAndUseDateBetween(userId, startDate, endDate);
 	}
 
 	// 일반회원: 예약번호로 예약정보 조회

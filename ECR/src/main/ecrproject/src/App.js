@@ -23,6 +23,7 @@ import EditTema from './tema/EditTema';
 import ReservationList from './Admin/Component/ReservationList';
 import CompanyManagement from './Admin/CompanyManagement';
 import Payment from './reservation/Payment';
+import CheckReservationDetails from './reservation/CheckReservationDetails';
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
         <Route path='/manage-reservations' element={<ReservationList />} />
         <Route path='/manage-companies' element={<CompanyManagement />} />
         <Route path='/payment' element={<Payment />} />
+        <Route path='/checkReserve' element={<CheckReservationDetails />} />
         
         <Route path='*' element={<div>없는 페이지 입니다.</div>} />
       </Routes>
