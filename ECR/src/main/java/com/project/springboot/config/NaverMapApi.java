@@ -10,4 +10,5 @@ public class NaverMapApi {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
+	//지도 api config
 }

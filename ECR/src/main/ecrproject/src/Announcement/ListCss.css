@@ -1,0 +1,109 @@
+/* 전체 컨테이너 스타일 */
+.Anc_List {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 20px;
+    min-height: 100vh;
+    color: #f0f0f0;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 제목 스타일 */
+.Anc_List h1 {
+    color: #b12a2a;
+    font-size: 3em;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(212, 28, 28, 0.7), 0 0 20px rgba(212, 28, 28, 0.5), 0 0 30px #ff0000, 0 0 40px #ff0000;
+    margin-bottom: 50px;
+    letter-spacing: 5px;
+    transition: color 0.3s ease;
+    animation: flicker 2.5s infinite;
+    text-align: center; /* 제목을 중앙 정렬 */
+}
+
+/* 깜빡이는 효과 */
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+    }
+    20%, 24%, 55% {
+        opacity: 0.5;
+    }
+}
+
+/* 테이블 스타일 */
+.Anc_List .form-table {
+    margin: 0 auto;
+    width: 50%;
+    border-collapse: collapse;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0, 0, 0, 0.5);
+    color: #f0f0f0;
+}
+
+/* 테이블 데이터 및 헤더 */
+.Anc_List td {
+    padding: 15px;
+    border: 1px solid #444;
+    color: #f0f0f0;
+    font-size: 0.9em;
+}
+
+/* input 및 textarea 스타일 */
+.Anc_List input[type="text"],
+.Anc_List textarea {
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #660000;
+    color: #f0f0f0;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+/* textarea 스타일 수정 */
+.Anc_List textarea {
+    resize: none;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/* 버튼 컨테이너 스타일 */
+.Anc_List td[colspan="2"] {
+    text-align: center; /* 버튼들을 중앙 정렬 */
+}
+
+/* 버튼 스타일 */
+.Anc_List input[type="submit"],
+.Anc_List input[type="reset"] {
+    background-color: rgba(0, 0, 0, 0.7); 
+    color: #f0f0f0; 
+    border: 1px solid #660000;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    margin: 10px;
+}
+
+.Anc_List input[type="submit"]:hover,
+.Anc_List input[type="reset"]:hover {
+    background-color: #550000; 
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ff0000;
+}
+
+.Anc_List input[type="submit"]:active,
+.Anc_List input[type="reset"]:active {
+    background-color: #c92020;
+    transform: scale(1.05);
+}

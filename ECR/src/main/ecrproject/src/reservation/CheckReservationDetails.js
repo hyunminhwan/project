@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import './Reservation.css';
 
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 
 // react DatePicker 사용하기
@@ -21,8 +22,9 @@ function CheckReservationDetails() {
     const [reservationCode, setReservationCode] = useState("");     // 입력한 예약번호
     const [reservations, setReservations] = useState([]);           // 조회한 예약 리스트
 
-    const [isModalOpen, setIsModalOpen] = useState(false);          // 모달 상태
-    const [selectedReservation, setSelectedReservation] = useState(null);   // 선택한 예약 데이터
+
+    // Redux에서 로그인된 사용자 정보 가져오기
+    const userInfo = useSelector(state => state.loginMember.member);
 
     // 날짜를 통한 예약 조회
     const searchByDate = () => {
@@ -30,16 +32,26 @@ function CheckReservationDetails() {
             alert('날짜를 선택하세요');
             return ;
         }
+        
+        // 종료일에 하루 더하기
+        const adjustedEndDate = new Date(endDate);
+        adjustedEndDate.setDate(adjustedEndDate.getDate() + 1);
+        
+        console.log('요청한 시작날짜: ', startDate);    // 디버그용 로그
+        console.log('요청한 끝날짜: ', adjustedEndDate);
+
         axios.get('/res/findDate', {
             params : {
                 startDate : startDate.toISOString().split('T')[0],  // toISOString()는 YYYY-MM-ddTHH:mm:ss...로 반환됨 
-                endDate : endDate.toISOString().split('T')[0]       // split('T')[0]를 통해 ddTHH에서 T를 기준으로 잘라 날짜 형식만 가져옴
+                endDate : adjustedEndDate.toISOString().split('T')[0],      // split('T')[0]를 통해 ddTHH에서 T를 기준으로 잘라 날짜 형식만 가져옴
+                userId: userInfo.memberId                           // Redux에서 가져온 user 정보
             }
         })
         .then(response => {
             setReservations(response.data);                         // 예약 정보 설정
         })
-        .catch(() => {
+        .catch(error => {
+            console.log('날짜별 조회 error: ', error)
             alert('날짜를 다시 선택하세요');
         });
     };
@@ -52,51 +64,49 @@ function CheckReservationDetails() {
         }
         axios.get('/res/findCode', { params : { reservationCode } })
             .then(response => {
-                setReservations(response.data);                     // 예약 정보 설정
+                const data = response.data;
+
+                // 데이터가 배열이 아니면 배열로 변환(searchByCode로 인해 배열로 출력하도록 코드를 짜서 배열로 만드는 부분임)
+                if(Array.isArray(data)) {
+                    setReservations(data);  // 배열이면 그대로 설정
+                } else {
+                    setReservations([data]);    // 단일 객체이면 배열로 감싸서 설정
+                }
             })
-            .catch(() => {
+            .catch(error => {
                 alert('예약번호를 다시 입력하세요');
-            });
+                console.log('searchByCode error :', error);
+            })
     };
 
-    // 취소신청 모달 열기
+    // 취소신청 확인창 열기
     const handleCancelClick = (reservation) => {
-        setSelectedReservation(reservation);                        // 선택한 예약 데이터 설정
-        setIsModalOpen(true);                                       // 모달 상태 설정
+        if(window.confirm("예약을 취소하시겠습니까?")) {
+            handleConfirmCancel(reservation);
+        }
     }
     
-    // 모달 "예" 클릭시 함수
-    const handleConfirmCancel = () => {
-        axios.post('/res/cancel', {reservationCode : selectedReservation.reservationCode})
+    // window.confirm "예" 클릭시 함수
+    const handleConfirmCancel = (reservation) => {
+        axios.post('/res/cancel', {reservationCode : reservation.reservationCode})
             .then(response => {
-                // 취소신청 성공햇을 때 paymentState를 '취소신청'로 변경
+                // 취소신청 성공햇을 때 paymentStatus를 '취소신청'로 변경
                 const updatedReservations = reservations.map(reserve =>
-                    reserve.reservationCode === selectedReservation.reservationCode ?
-                    {...reserve, paymentState: '취소신청'} :
+                    reserve.reservationCode === reservation.reservationCode ?
+                    {...reserve, paymentStatus: '취소신청'} :
                     reserve
                 );
-                setReservations(updatedReservations);               // 예약 상태 업데이트
-                setIsModalOpen(false);                              // 모달 닫기
+                setReservations(updatedReservations);
+            })
+            .catch(error => {
+                alert('취소신청 중 오류가 발생했습니다');
+                console.log('취소신청 에러: ', error.response);
             })
     }
 
-    // 모달 컴포넌트
-    const ConfirmationModal = () => {
-        isModalOpen && (
-            <div className="modal">
-                <div className="modal-content">
-                    <p>취소신청을 하시겠습니까?</p>
-                    <button onClick={ handleConfirmCancel }>예</button>
-                    <button onClick={() => { setIsModalOpen(false) }}>아니오</button>
-                </div>
-            </div>
-        )
-    }
 
     return(
         <>
-            {/* 모달 컴포넌트 */}
-            <ConfirmationModal />
 
             <article>
                 <div>
@@ -115,7 +125,7 @@ function CheckReservationDetails() {
                                             setDateRange(update);                   // 지정날짜 상태 수정
                                         }}
                                         withPortal
-                                        dateFormat="yyyy-mm-dd"                     // 날짜 형식
+                                        dateFormat="yyyy-MM-dd"                     // 날짜 형식
                                         placeholderText="날짜를 지정하세요"
                                     />
                                     <button onClick={ searchByDate }>검색</button>
@@ -162,13 +172,13 @@ function CheckReservationDetails() {
                             reservations.map((reserve, index) => (
                                 <tr key={reserve.reservationCode}>
                                     <td>{index + 1}</td>
-                                    <td>{reserve.cafeName}</td>
-                                    <td>{reserve.temaName}</td>
+                                    <td>{reserve.tema.cafeName}</td>
+                                    <td>{reserve.tema.temaName}</td>
                                     <td>{reserve.useDate}</td>
                                     <td>{reserve.useTime}</td>
-                                    <td>{reserve.paymentState}</td>
+                                    <td>{reserve.paymentStatus}</td>
                                     <td>
-                                        {reserve.paymentState === '취소신청' ? 
+                                        {reserve.paymentStatus === '취소신청' ? 
                                             (<span>취소신청완료</span>) : 
                                             (<button onClick={() => {handleCancelClick(reserve)}}>
                                                 취소하기

@@ -29,9 +29,10 @@ public class Tema {
 			)
 	@GeneratedValue(generator = "temaseq")
 	@Column(name = "tema_no")
-
 	private Long temaNo;		//테마번호
 	
+	private String memberId;	//등록한 멤버아이디
+
 	@NonNull
 	@Column(name = "tema_name")
 	private String temaName; 	//테마이름

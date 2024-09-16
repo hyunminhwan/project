@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [loginType, setLoginType] = useState(1); // 1: 일반, 2: 관계자, 3: 관리자
-    const [showLinks, setShowLinks] = useState(true); // 링크를 숨기거나 보여줄 상태
     let dispatch = useDispatch();
     const navigate = useNavigate();
     // 로그인 처리 로직
@@ -34,9 +33,7 @@ function Login() {
                 // 서버 응답이 성공적일 때 처리
                 if (response.status === 200) {
                    // 로그인 성공 시
-                const memberData = response.data; // 서버에서 받은 사용자 정보
-                sessionStorage.setItem("memberId",memberData);
-                
+                const memberData = response.data; // 서버에서 받은 사용자 정보           
                 dispatch(login(memberData)); // 리덕스에 사용자 정보 저장
                 navigate("/");
                 } else {
@@ -100,13 +97,12 @@ function Login() {
                     </table>
                         
 
-                    {/* 관리자 로그인이 아닐 때만 링크 표시 */}
-                    {showLinks && (
+
                         <div>
-                            <a href="아이디찾기_링크" target="_blank" rel="noopener noreferrer">아이디/비밀번호 찾기</a> &emsp;
-                            <a href="회원가입_링크" target="_blank" rel="noopener noreferrer">회원가입</a>
+                            <a href="/signup" target="_blank" rel="noopener noreferrer">회원가입</a>&emsp;&emsp;
+                            <a href="아이디찾기_링크" target="_blank" rel="noopener noreferrer">아이디/비밀번호 찾기</a> 
+                            
                         </div>
-                    )}
                 </form>
             </div>
         </>

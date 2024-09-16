@@ -18,6 +18,7 @@ public class AnnouncementService {
 	@Autowired
 	AnnouncementRepository announcementRepository;
 	
+	//모든 공지사항 정보 가져오기
 	public List<Announcement> write() {
 		return announcementRepository.findAll();
 	}
@@ -30,6 +31,7 @@ public class AnnouncementService {
         return announcementRepository.findAll(pageable);
     }
 
+    //공지사항 조회수 증가
 	public Optional<Announcement> findById(Long boardNo) {
         Optional<Announcement> announcement = announcementRepository.findById(boardNo);
 
@@ -42,14 +44,16 @@ public class AnnouncementService {
 
         return announcement;
     }
+	//공지사항 수정
 	public Announcement retouch(Announcement announcement) {
 		return announcementRepository.save(announcement);
 	}
 
+	//공지사항 삭제
 	public void delete(Long boardNo) {
 		announcementRepository.deleteById(boardNo);
 	}
-
+	//공지사항 등록
 	public void write2(Announcement announcement) {
 		announcementRepository.save(announcement);
 	}
