@@ -17,23 +17,49 @@ html, body {
 }
 
 #a {
-  font-family: 'Song Myung', serif;
   font-size: 60px;
-  background-image: linear-gradient(to right, #715d5d, #c54242, #9b1313); /* 그라데이션 */
+  background-image: linear-gradient(to right, #a39393, #edc0c0, #6b6464);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8); /* 그림자 추가 */
+  opacity: 0; /* 처음엔 투명하게 시작 */
+  animation: fadeIn 3s forwards; /* 3초 동안 서서히 나타나는 효과 */
+}
+
+/* 서서히 나타나는 효과 */
+@keyframes fadeIn {
+  0% {
+    opacity: 0; /* 처음엔 투명 */
+    transform: translateY(20px); /* 아래에서부터 나타나는 느낌 */
+  }
+  100% {
+    opacity: 1; /* 최종적으로 완전히 보이게 */
+    transform: translateY(0); /* 제자리로 이동 */
+  }
 }
 
 #b {
   font-size: 20px;
-  font-family: 'Song Myung', serif;
   background-image: linear-gradient(to right, #a98787, #a16565, #918181); /* 그라데이션 */
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8); /* 그림자 추가 */
+  opacity: 0; /* 처음엔 투명하게 시작 */
+  animation: fadeInB 3s forwards; /* 3초 동안 서서히 나타나는 효과 */
+}
+
+/* 서서히 나타나는 효과 */
+@keyframes fadeInB {
+  0% {
+    opacity: 0; /* 처음엔 투명 */
+    transform: translateY(20px); /* 아래에서 위로 */
+  }
+  100% {
+    opacity: 1; /* 최종적으로 완전히 보이게 */
+    transform: translateY(0); /* 제자리로 */
+  }
 }
 
 /* 섹션을 전체 화면 높이로 설정 */

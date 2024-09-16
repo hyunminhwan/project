@@ -6,6 +6,7 @@
     height: 100vh; /* 세로로 가운데 정렬하기 위해 전체 높이 사용 */
   }
   
+
   table {
     border-collapse: separate;
     border-spacing: 10px; /* 입력 필드 간의 간격을 넓히기 위해 테이블 셀 간의 간격을 설정 */
@@ -48,4 +49,3 @@
     justify-content: center;
     gap: 10px;
   }
-  

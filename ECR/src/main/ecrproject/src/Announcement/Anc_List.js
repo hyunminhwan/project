@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './ListCss.css'; // Anc_List.css 파일을 임포트
 
 function Anc_List() {
     const [manager, setManager] = useState('');
@@ -23,13 +24,13 @@ function Anc_List() {
     };
 
     return (
-        <div>
-            <h1>공지사항 작성</h1>
+        <div className="Anc_List">
+            <h1>Write</h1>
             <form onSubmit={Anc_Submit}>
                 <table className="form-table">
                     <tbody>
                         <tr>
-                            <td id="a">작성자</td>
+                            <td id>작성자</td>
                             <td><input type="text" value={manager} onChange={(e) => setManager(e.target.value)} /></td>
                         </tr>
                         <tr>

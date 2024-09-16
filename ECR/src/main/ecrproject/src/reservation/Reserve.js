@@ -9,7 +9,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 function Reserve() {
-    
 const navigate = useNavigate();
 const location = useLocation();
 const { menus } = location.state;                                    // 테마 정보
@@ -44,7 +43,7 @@ const handleReserve = () => {
     axios.post('/res/addReserve', {
         userId: 1,                                                  // 예시! 임의 값 사용
         temaNo: menus.temaNo,
-        paymentStatus: 'N',
+        paymentStatus: '결제대기',
         reservationDate: new Date().toISOString().split('T')[0],    // 오늘 날짜 0000-00-00 형식
         useDate: startDate.toISOString().split('T')[0],             // 선택한 날짜 0000-00-00 형식
         useTime: useTime

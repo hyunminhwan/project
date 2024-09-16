@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import AvgRating from "./avgRating";
 import StarRatings from "react-star-ratings";
 // import {  useNavigate } from "react-router-dom";
 
@@ -22,7 +21,6 @@ function TemaList() {
 
 
 
-    //모든메뉴가져오기
     useEffect(() => {
         axios.get('/api/menu')
             .then((result) => {
@@ -34,7 +32,7 @@ function TemaList() {
     }, [])
 
     useEffect(() => {
-        // 필터 적용 하기
+        // 필터 적용 로직
         let filtered = menuList.filter(menu =>
             (!filters.genre || menu.genre === filters.genre) &&
             (!filters.location || menu.location === filters.location) &&
@@ -45,7 +43,7 @@ function TemaList() {
     }, [filters, menuList]);
 
     const loadMore = () => {
-        setMenuCount(p => p + 9); //9개씩 추가로 보여주기
+        setMenuCount(p => p + 9); //10개씩 추가로 보여주기
     }
 
     const FilterChange = (e) => {
