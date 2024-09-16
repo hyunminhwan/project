@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 
-function ClientList({ data, refreshData }) {                               // memberType이 1일 때 표시할 컴포넌트
+function ClientList({ data, refreshData }) {                               // loginType이 1인 데이터를 표시할 컴포넌트
 
     // 회원삭제 클릭 시 호출된 메서드
     const deleteMember = (memberId) => {

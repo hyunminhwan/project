@@ -3,19 +3,21 @@ import axios from 'axios';
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import StarRatings from "react-star-ratings";
+import "./temaList.css";
 // import {  useNavigate } from "react-router-dom";
 
 function TemaList() {
     let [menuList, setMenuList] = useState([]); //bd에 있는 모든테마를 담을 변수 선언
     let [menuCount, setMenuCount] = useState(9); //  9개씩 보여주는 초기값 설정
-    let [filteredMenuList, setFilterMenuList] = useState([]); // 필터링된 테마 리스트
-    let [filters, setFilters] = useState({
+    let [filterMenuList, setFilterMenuList] = useState([]); // 필터링된 테마 리스트
+    let [filter, setfilter] = useState({
         genre: '',
         location: '',
         difficulty: '',
         personnel: ''
     });             //카테고리 설정
 
+    let [search, setSearch] = useState("");
 
     const navigate = useNavigate();
 
@@ -32,24 +34,27 @@ function TemaList() {
     }, [])
 
     useEffect(() => {
-        // 필터 적용 로직
-        let filtered = menuList.filter(menu =>
-            (!filters.genre || menu.genre === filters.genre) &&
-            (!filters.location || menu.location === filters.location) &&
-            (!filters.difficulty || menu.difficulty === parseInt(filters.difficulty)) &&
-            (!filters.personnel || menu.personnel === parseInt(filters.personnel))
+        // 필터 적용
+        let filters = menuList.filter(menu =>
+            (!filter.genre || menu.genre === filter.genre) &&
+            (!filter.location || menu.location === filter.location) &&
+            (!filter.difficulty || menu.difficulty === parseInt(filter.difficulty)) &&
+            (!filter.personnel || menu.personnel === parseInt(filter.personnel)) &&
+            (menu.temaName.includes(search))
         );
-        setFilterMenuList(filtered);
-    }, [filters, menuList]);
+        setFilterMenuList(filters);
+    }, [filter, menuList, search]);
 
+    //9개씩 추가로 보여주기
     const loadMore = () => {
-        setMenuCount(p => p + 9); //10개씩 추가로 보여주기
+        setMenuCount(p => p + 9);
     }
+
 
     const FilterChange = (e) => {
         const { name, value } = e.target;
-        setFilters({
-            ...filters,
+        setfilter({
+            ...filter,
             [name]: value
         });
     };
@@ -70,8 +75,14 @@ function TemaList() {
             <Container>
                 <Row>
                     <h4>카테고리</h4>
+
                     <Form>
                         <Row>
+                            <h4>검색 :</h4>
+                            <input type="text"
+                                placeholder="테마 이름을 검색해 주세요"
+                                value={search}
+                                onChange={(c) => setSearch(c.target.value)} />
                             <Col md={3} >
                                 <Form.Group controlId="genre">
                                     <Form.Label>장르</Form.Label>
@@ -116,6 +127,8 @@ function TemaList() {
                                     <Form.Label>인원수</Form.Label>
                                     <Form.Select name="personnel" onChange={FilterChange}>
                                         <option value="">전체</option>
+                                        <option value={2}>2명</option>
+                                        <option value={3}>3명</option>
                                         <option value={4}>4명</option>
                                         <option value={5}>5명</option>
                                         <option value={6}>6명</option>
@@ -127,7 +140,7 @@ function TemaList() {
                 </Row>
                 <Row>
                     {
-                        filteredMenuList.slice(0, menuCount).map((menu, i) => (
+                        filterMenuList.slice(0, menuCount).map((menu, i) => (
 
                             <Col lg={4} onClick={() => { temaCount(menu) }} style={{ cursor: 'pointer' }} >
                                 <div className="tema">
@@ -146,7 +159,7 @@ function TemaList() {
                                     <div>등록일 : {menu.temaCreatedDate.slice(0, 10)}</div>
                                     <br />
                                     <div>
-                                           <h4> 평점</h4>
+                                        <h4> 평점</h4>
                                         <StarRatings
                                             rating={menu.rating}
                                             starRatedColor="gold"
@@ -155,7 +168,7 @@ function TemaList() {
                                             starSpacing="2px"
                                         />
                                     </div>
-                                    
+
                                     {/* <AvgRating temaNo={menu.temaNo} /> */}
                                 </div>
 
@@ -167,7 +180,7 @@ function TemaList() {
                 </Row>
                 {menuCount < menuList.length && ( // 모든 항목을 다 보여준 상태가 아니라면 버튼을 보여줍니다.
                     <div className="text-center">
-                        <Button size="lg" onClick={loadMore} variant="primary">더보기  {Math.min(menuCount, filteredMenuList.length)}/{filteredMenuList.length}</Button>
+                        <Button size="lg" onClick={loadMore} variant="primary">더보기  {Math.min(menuCount, filterMenuList.length)}/{filterMenuList.length}</Button>
                     </div>
                 )}
             </Container>

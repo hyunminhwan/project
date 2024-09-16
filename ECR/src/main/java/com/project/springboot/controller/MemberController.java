@@ -42,6 +42,7 @@ public class MemberController {
 		if (loginMember.isPresent()) {
 			Member log = loginMember.get();
 			if (passwordEncoder.matches(member.getMemberPwd(),log.getMemberPwd())) {
+				
 				 session.setAttribute("member", log);
 				  return ResponseEntity.ok(log); // 로그인 성공, 사용자 정보 반환
 	        } else {
@@ -60,6 +61,7 @@ public class MemberController {
 	}
 
 
+	//멤버 회원가입
 	@PostMapping("/insert")
 	public void memberInsert(@RequestBody Member member) {
 		String enPass = passwordEncoder.encode(member.getMemberPwd());
@@ -67,6 +69,7 @@ public class MemberController {
 		memberService.memberInsert(member);
 	}
 	
+	//타입별로 회원가져오기
 	@GetMapping("/members")
 	public List<Member> getLoginByType(@RequestParam("loginType") Long loginType) {
 		return memberService.getLoginByType(loginType);
