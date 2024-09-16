@@ -25,7 +25,9 @@ function Anc_List() {
 
     return (
         <div className="Anc_List">
+            <br/><br/>
             <h1>Write</h1>
+            <br/>
             <form onSubmit={Anc_Submit}>
                 <table className="form-table">
                     <tbody>
