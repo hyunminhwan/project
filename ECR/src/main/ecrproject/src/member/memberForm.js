@@ -16,12 +16,19 @@ function MemberForm() {
         shopAddress: '',
         shopPhone: '',
         loginType: 1, // 기본 로그인 타입은 일반 사용자
+        birthDate: '', // 생년월일 추가
+        gender: '', // 성별 추가
     });
+
+    // 아이디 중복 체크 상태 관리
+    const [isUsernameAvailable, setIsUsernameAvailable] = useState(null);
+
+    // 비밀번호 일치 여부 상태 관리
+    const [isPasswordMatch, setIsPasswordMatch] = useState(null);
 
     // 정규식 패턴
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 패턴
     const idPattern = /^[a-zA-Z0-9]{5,}$/; // 아이디 패턴: 5자 이상, 영문자와 숫자
-    // const pwdPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/; // 비밀번호 패턴: 최소 8자, 영문자, 숫자, 특수문자 포함
     const phonePattern = /^\d{10,11}$/; // 핸드폰 번호 패턴: 숫자만 10~11자
 
     // 폼 데이터 변경 처리
@@ -30,30 +37,58 @@ function MemberForm() {
 
         setInsertMem({
             ...insertMem,
-            [name]: value,
+            [name]: name === 'loginType' ? parseInt(value) : value, // loginType을 숫자로 변환
         });
+
+        // 아이디 중복 체크를 위해 아이디가 변경될 때마다 상태 초기화
+        if (name === "memberId") {
+            setIsUsernameAvailable(null);
+        }
+
+        // 비밀번호 일치 여부 체크
+        if (name === "memberPwd" || name === "memberPwdCheck") {
+            setIsPasswordMatch(
+                name === "memberPwd" 
+                ? value === insertMem.memberPwdCheck 
+                : value === insertMem.memberPwd
+            );
+        }
     };
 
-    // 폼 제출 처리 및 유효성 검사
-    const insertSubmit = async (e) => {
-        e.preventDefault(); // 페이지 새로고침 방지
-
-        // 유효성 검사
+    const checkUsernameAvailability = () => {
         if (!idPattern.test(insertMem.memberId)) {
             alert('아이디는 5자 이상이어야 하며, 영문자와 숫자만 사용할 수 있습니다.');
             return;
         }
+    
+        // POST 요청을 통해 서버로 memberId 전송
+        axios.post('/api/check-username', { memberId: insertMem.memberId }) // memberId를 JSON 객체로 전송
+        .then(response => {
+            // 서버에서 반환된 데이터로 상태 업데이트
+            setIsUsernameAvailable(response.data); // response.data가 true이면 사용 가능, false이면 사용 중
+        })
+        .catch(error => {
+            console.error("아이디 중복 체크 중 오류 발생", error);
+        });
+    };
+    
+    // 폼 제출 처리 및 유효성 검사
+    const insertSubmit = async (e) => {
+        e.preventDefault(); // 페이지 새로고침 방지
 
-        // if (!pwdPattern.test(insertMem.memberPwd)) {
-        //     alert('비밀번호는 최소 8자이며, 영문자, 숫자, 특수문자를 포함해야 합니다.');
-        //     return;
-        // }
-
-        if (insertMem.memberPwd !== insertMem.memberPwdCheck) {
-            alert('비밀번호와 비밀번호확인이 일치하지 않습니다');
+        // 아이디 중복 여부 확인
+        if (isUsernameAvailable === false) {
+            alert('이미 사용 중인 아이디입니다.');
             return;
         }
 
+        // 비밀번호 일치 여부 확인
+        if (!isPasswordMatch) {
+            alert('비밀번호가 일치하지 않습니다.');
+            return;
+        }
+
+        // 나머지 유효성 검사
         if (!phonePattern.test(insertMem.memberPhone)) {
             alert('핸드폰 번호는 10~11자의 숫자만 입력해야 합니다.');
             return;
@@ -68,7 +103,12 @@ function MemberForm() {
             await axios.post('/api/insert', insertMem);
             alert('회원가입이 완료되었습니다.');
         } catch (error) {
-            alert('회원가입 중 오류가 발생했습니다.');
+            // 서버에서 반환한 에러 메시지를 받아서 처리
+            if (error.response && error.response.status === 400) {
+                alert(error.response.data); // 서버에서 보내온 메시지 사용
+            } else {
+                alert('회원가입 중 오류가 발생했습니다.');
+            }
         }
     };
 
@@ -82,7 +122,6 @@ function MemberForm() {
                 <select name="loginType" value={insertMem.loginType} onChange={insertform}>
                     <option value={1}>일반 사용자</option>
                     <option value={2}>관계자</option>
-                    <option value={3}>관리자</option>
                 </select>
 
                 <label>아이디:</label>
@@ -91,8 +130,14 @@ function MemberForm() {
                     name="memberId"
                     value={insertMem.memberId}
                     onChange={insertform}
+                    onBlur={checkUsernameAvailability} // 입력란을 벗어날 때 중복 체크
                     required
                 />
+                {isUsernameAvailable !== null && (
+                    <p style={{ color: isUsernameAvailable ? 'green' : 'red' }}>
+                        {isUsernameAvailable ? '사용 가능한 아이디입니다.' : '이미 사용 중인 아이디입니다.'}
+                    </p>
+                )}
 
                 <label>비밀번호:</label>
                 <input
@@ -111,6 +156,11 @@ function MemberForm() {
                     onChange={insertform}
                     required
                 />
+                {isPasswordMatch !== null && (
+                    <p style={{ color: isPasswordMatch ? 'green' : 'red' }}>
+                        {isPasswordMatch ? '비밀번호가 같습니다.' : '비밀번호가 일치하지 않습니다.'}
+                    </p>
+                )}
 
                 <label>이름:</label>
                 <input
@@ -120,6 +170,22 @@ function MemberForm() {
                     onChange={insertform}
                     required
                 />
+
+                <label>생년월일:</label>
+                <input
+                    type="date" // 날짜 선택을 위한 입력 필드
+                    name="birthDate"
+                    value={insertMem.birthDate}
+                    onChange={insertform}
+                    required
+                />
+
+                <label>성별:</label>
+                <select name="gender" value={insertMem.gender} onChange={insertform} required>
+                    <option value="">성별 선택</option>
+                    <option value="male">남성</option>
+                    <option value="female">여성</option>
+                </select>
 
                 <label>핸드폰 번호:</label>
                 <input
@@ -139,35 +205,39 @@ function MemberForm() {
                     required
                 />
 
-                <label>가게 이름:</label>
-                <input
-                    type="text"
-                    name="shopName"
-                    value={insertMem.shopName}
-                    onChange={insertform}
-                />
+                {/* 로그인 타입이 관계자(2)일 때만 아래 입력란들을 보여줍니다 */}
+                {insertMem.loginType === 2 && (
+                    <>
+                        <label>가게 이름:</label>
+                        <input
+                            type="text"
+                            name="shopName"
+                            value={insertMem.shopName}
+                            onChange={insertform}
+                        />
 
-                <label>가게 주소:</label>
-                <input
-                    type="text"
-                    name="shopAddress"
-                    value={insertMem.shopAddress}
-                    onChange={insertform}
-                />
+                        <label>가게 주소:</label>
+                        <input
+                            type="text"
+                            name="shopAddress"
+                            value={insertMem.shopAddress}
+                            onChange={insertform}
+                        />
 
-                <label>가게 연락처:</label>
-                <input
-                    type="text"
-                    name="shopPhone"
-                    value={insertMem.shopPhone}
-                    onChange={insertform}
-                />
+                        <label>가게 연락처:</label>
+                        <input
+                            type="text"
+                            name="shopPhone"
+                            value={insertMem.shopPhone}
+                            onChange={insertform}
+                        />
+                    </>
+                )}
 
                 <button type="submit">회원가입</button>
             </form>
         </div>
     );
-
 }
 
 export default MemberForm;

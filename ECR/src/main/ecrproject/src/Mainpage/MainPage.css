@@ -1,105 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
+/* font-family: 'Gasoek One', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Song+Myung&display=swap');
+
 /* 전체 페이지 */
-.main-page {
-  font-family: 'Arial', sans-serif;
-  background-color: #111; /* 어두운 배경 */
-  color: #f5f5f5; /* 밝은 글자색 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-image: url('https://media.giphy.com/media/l0MYz1H6iNT9oDfKU/giphy.gif'); /* 배경 이미지 URL */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #f5f5f5;
+  font-family: 'Song Myung', serif;
+}
+
+#a {
+  font-family: 'Song Myung', serif;
+  font-size: 60px;
+  background-image: linear-gradient(to right, #715d5d, #c54242, #9b1313); /* 그라데이션 */
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8); /* 그림자 추가 */
+}
+
+#b {
+  font-size: 20px;
+  font-family: 'Song Myung', serif;
+  background-image: linear-gradient(to right, #a98787, #a16565, #918181); /* 그라데이션 */
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* 섹션을 전체 화면 높이로 설정 */
+header, .theme-cards, .notice-event {
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 /* 헤더 */
 header {
+  background-color: rgba(0, 0, 0, 0.5); /* 배경을 약간 투명하게 설정 */
+  color: #ff0000;
   text-align: center;
   padding: 50px;
-  background-color: #222; /* 더 어두운 배경 */
-  color: #ff0000; /* 붉은 글자색 */
-  text-transform: uppercase; /* 무서운 분위기를 위해 대문자 */
-  letter-spacing: 2px; /* 글자 간격을 넓혀서 음산한 느낌 */
-  box-shadow: 0 0 20px #ff0000; /* 붉은 빛이 나는 그림자 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-/* 테마 카드 섹션 */
+
+/* 테마 가운데로  */
 .theme-cards {
   display: flex;
-  justify-content: space-around;
-  padding: 20px;
-  background-color: #111;
+  flex-direction: column; /* 요소들을 세로로 나열 */
+  align-items: center; /* 모든 항목을 가로 중앙 정렬 */
+  gap: 20px; /* h2와 테마 카드 사이에 간격 추가 */
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.5); /* 배경을 약간 투명하게 설정 */
 }
 
+.theme-cards .theme-h2 {
+  text-align: center; /* h2 내부 텍스트 가운데 정렬 */
+  font-size: 60px; /* 글자 크기 설정 */
+  color: #fff; /* 텍스트 색상 */
+  margin-bottom: 150px; /* 아래 여백 추가 */
+  background-image: linear-gradient(to right, #530909, #552222, #161515);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
+}
+
+.theme-cards-container {
+  display: flex;
+  justify-content: space-between; /* 카드 사이를 동일하게 배치 */
+  align-items: center; /* 수직 중앙 정렬 */
+  gap: 20px; /* 카드 사이 간격 */
+  width: 100%; /* 전체 너비 사용 */
+  max-width: 2000px; /* 최대 너비 설정 */
+}
+
+/* 테마 카드 */
 .theme-card {
-  width: 200px;
+  flex: 1 1 ; /* 5개가 한 줄에 들어가도록 카드의 너비를 18%로 설정 */
   text-align: center;
-  border: 2px solid #ff0000; /* 붉은 테두리 */
   border-radius: 10px;
   padding: 20px;
-  background-color: #222; /* 어두운 배경 */
+  background-color: transparent;
   color: #f5f5f5;
-  transition: transform 0.3s, box-shadow 0.3s; /* 호버 효과 */
-}
-
-.theme-card:hover {
-  transform: scale(1.05); /* 카드가 커지는 효과 */
-  box-shadow: 0 0 15px #ff0000; /* 붉은 그림자 */
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .theme-card img {
   border-radius: 5px;
   margin-bottom: 10px;
+
+  height: auto; /* 이미지의 비율을 유지 */
 }
 
-/* 공지사항과 이벤트 섹션 */
-.notice-event {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  gap: 20px;
-  background-color: #111;
-}
-
-/* 공지사항과 이벤트 각각 */
-.notice, .event {
-  border: 2px solid #ff0000;
-  width: 48%;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: #222;
-  color: #f5f5f5;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.notice:hover, .event:hover {
-  transform: scale(1.02);
+.theme-card:hover {
+  transform: scale(1.05);
   box-shadow: 0 0 15px #ff0000;
 }
 
-/* 공지사항과 이벤트 제목 */
-.notice h2, .event h2 {
+.notice {
   text-align: center;
-  border-bottom: 2px solid #ff0000;
-  margin-bottom: 20px;
-  color: #ff0000;
-  text-transform: uppercase;
-  letter-spacing: 2px;
 }
 
-/* 리스트 스타일 */
-.notice ul, .event ul {
-  list-style: none;
-  padding: 0;
+.notice img {
+  width: 100px; /* 이미지 크기를 적절히 조정 */
+  height: auto;
+  margin: 0 100px; /* 이미지 사이에 간격 추가 */
 }
 
-.notice li, .event li {
-  margin: 10px 0;
-  border-bottom: 1px solid #ff0000;
-  padding: 10px 0;
-  text-align: center;
+.notice-icons {
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+  gap: 30px; /* 아이콘 간의 간격 */
+}
+
+.icon-item {
+  display: flex;
+  flex-direction: column; /* 아이콘과 텍스트를 세로 정렬 */
+  align-items: center; /* 가운데 정렬 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  width: 350px; /* 각 아이콘 아이템의 너비 조정 */
+}
+
+.icon-item img {
+  width: 85px; /* 아이콘 크기 조정 */
+  height: auto;
+  margin-bottom: 20px; /* 아이콘과 텍스트 사이에 여백 추가 */
+}
+
+.icon-item p {
+  margin: 15px 0; /* 텍스트 사이 간격 */
+  font-size: 20px; /* 텍스트 크기 조정 */
+  color: black;
+}
+
+#NoticeText {
+  color: black;
+  font-size: 50px;
+}
+
+#NoticeText1 {
+  color: black;
+  font-size: 20px;
+  background-image: linear-gradient(to right, #000000, #000000); /* 원하는 그라데이션 색상 */
+  background-clip: text;
+}
+
+#FONT {font-family: 'Gasoek One', sans-serif;}
+
+.FONT_P {
+  background-image: linear-gradient(to right, #000000, #000000); /* 원하는 그라데이션 색상 */
+  background-clip: text;
 }
 
 /* 푸터 */
 footer {
   text-align: center;
   padding: 10px;
-  background-color: #111;
+  background-color: rgba(0, 0, 0, 0.5);
   color: #ff0000;
-  border-top: 2px solid #ff0000;
+  
 }

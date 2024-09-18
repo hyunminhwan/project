@@ -11,6 +11,8 @@ import com.project.springboot.domain.Tema;
 public interface TemaRepository extends JpaRepository<Tema, Long>{
 
 	List<Tema> findAllByOrderByTemaNoAsc();
+	List<Tema> findAllByCafeName(String cafeName);
+	List<Tema> findByOrderByRatingDesc();
 
 
 }

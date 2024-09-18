@@ -1,5 +1,6 @@
 package com.project.springboot.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -27,10 +28,6 @@ public class Member {
 	@NonNull
 	@Column(name = "member_pwd")
 	private String memberPwd; // 비밀번호
-	
-	@NonNull
-	@Column(name = "member_pwd_check")
-	private String memberPwdCheck; // 비밀번호
 	
 	@NonNull
 	@Column(name = "member_name")
@@ -64,7 +61,26 @@ public class Member {
 	@Column(name="loginType") // 로그인타입 : 일반(1), 관계자(2), 관리자(3) 구분
 	private int loginType;
 	
-	
-	
+    // 생년월일과 성별 추가
+    private LocalDate birthDate;
+    private String gender;
+
+    // Getters and Setters
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
 	
 }

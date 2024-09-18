@@ -3,13 +3,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import'./test.css';
+import { useSelector } from 'react-redux';
 function Anc_Board() {
     const navigate = useNavigate();
     const [write, setWrite] = useState([]);
     const [Nowpage, setPage] = useState(0); // 현재 페이지 번호
     const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수
     const [totalElements, setTotalElements] = useState(0); // 전체 글 갯수
-    
+    const loginToMember = useSelector((state) => state.loginMember);
 
     useEffect(() => {
         PageList(Nowpage); // 페이지 변경 시 데이터 요청
@@ -55,7 +56,11 @@ function Anc_Board() {
             <h1>공지 사항</h1>
             <br/>
             {/* ListClick 함수 씀 */}
-            <button type="button" onClick={() => ListClick()}>글쓰기</button>
+            {loginToMember.member?.loginType ===3 &&(
+                <button type="button" onClick={() => ListClick()}>글쓰기</button>
+            )
+            }
+           
             <br/>
             <br/>
             <table className="anc-board-table">

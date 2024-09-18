@@ -1,12 +1,14 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import {useLocation, useNavigate } from "react-router-dom";
 import Location from "./location";
 import Review from "./review";
 import AvgRating from "./avgRating";
+import { useSelector } from "react-redux";
 function Detail() {
     const location = useLocation();
     const { menus } = location.state;
-    
+    const navigate = useNavigate();
+    const loginToMember = useSelector((state) => state.loginMember);
     return (
         <>
         
@@ -33,7 +35,15 @@ function Detail() {
                         <div>등록일 : {menus.temaCreatedDate.slice(0, 10)}</div>
                         <AvgRating temaNo={menus.temaNo}/>
                         <br />
-                        <Button>예약하기</Button>
+                        {loginToMember?.member ? (
+                          <Button onClick={()=>{
+                            navigate('/reserve', { state: { menus } });
+                        }}>예약하기</Button> 
+                    ):(
+                        <h2>로그인후 예약해주세요</h2>
+                    )
+                        }
+                        
                     </Col>
                 </Row>
                 <Location latitude={menus.latitude} longitude={menus.longitude}/>

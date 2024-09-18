@@ -62,7 +62,6 @@ const SignupForm = () => {
         else if (calculateAge(birthday) > 19) formErrors.birthday = '가입 가능한 나이 입니다.';
         else if (calculateAge(birthday) < 19) formErrors.birthday = '19세 이상만 가입할 수 있습니다.';
         if (!phone) formErrors.phone = '전화번호를 입력하세요.';
-        // 이메일 정규식
         if (!email) formErrors.email = '이메일을 입력하세요.';
         else if (!/\S+@\S+\.\S+/.test(email)) formErrors.email = '유효한 이메일을 입력하세요.';
 

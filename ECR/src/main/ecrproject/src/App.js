@@ -12,12 +12,15 @@ import Anc_DetailForm from './Announcement/Anc_DetailForm';
 import Anc_EditForm from './Announcement/Anc_EditForm';
 import Anc_List from './Announcement/Anc_List';
 import MainPage from './Mainpage/MainPage';
-import Mypage from './mypage/mypage';
 
 import Navbar from './Navbar'; // 새로 만든 네비게이션 바 컴포넌트
 import SignupForm from './member/joinform';
 import Login from './login/login';
 import MemberForm from './member/memberForm';
+import MembershipManagement from './Admin/MembershipManagement';
+import Reserve from './reservation/Reserve';
+import EditTema from './tema/EditTema';
+import Mypage from './mypage/mypage';
 
 function App() {
 
@@ -37,10 +40,13 @@ function App() {
         <Route path='/Anc_EditForm' element={<Anc_EditForm />} />
         <Route path='/Anc_List' element={<Anc_List />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<MemberForm />} />
-        SignupForm
+        <Route path='/signup' element={< MemberForm />} />
+        <Route path='/manage-members' element={< MembershipManagement />} />\
+        <Route path='/reserve' element={<Reserve />} />
+        <Route path='/edit-theme' element={<EditTema />} />
+        <Route path='/mypage' element={< Mypage/>} />
+        
         <Route path='*' element={<div>없는 페이지 입니다.</div>} />
-        <Route path='/mypage' element={<Mypage />} />
       </Routes>
 
     </div>

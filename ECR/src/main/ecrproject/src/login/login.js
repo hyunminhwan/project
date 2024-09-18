@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./login.css";
-// import ToggleButton from 'react-bootstrap/ToggleButton';
-// import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import { useDispatch } from "react-redux";
+import { login } from "../store/loginStore";
+import { useNavigate } from "react-router-dom";
 
-function Login({ onLoginSuccess }) {
+function Login() {
     const [loginType, setLoginType] = useState(1); // 1: 일반, 2: 관계자, 3: 관리자
     const [showLinks, setShowLinks] = useState(true); // 링크를 숨기거나 보여줄 상태
-    
+    let dispatch = useDispatch();
+    const navigate = useNavigate();
     // 로그인 처리 로직
     const loginOn = (e) => {
         e.preventDefault();
@@ -21,19 +25,20 @@ function Login({ onLoginSuccess }) {
             return; // 빈 값일 경우 서버 요청 중단
         }
 
-        // 선택된 URL로 POST 요청을 보냅니다. (로그인 폼 데이터를 같이 전송)
-        axios.post(`/api/userlogin/${loginType}`, {
-            memberId: memberId,
-            memberPwd: memberPwd,
+       
+        axios.post(`/api/memberLogin/${loginType}`, {
+                memberId: memberId,
+                memberPwd: memberPwd,
         })
-            .then(result => {
-                console.log(result.data); // 서버 응답을 확인
-
-                // 로그인 성공 여부를 result.data에서 바로 확인
-                if (result.data.memberId) {
-                    alert('로그인 성공!');
-                    const userName = result.data.memberName || memberId;
-                      // 로그인 성공 시 사용자 이름 전달
+            .then(response => {
+                // 서버 응답이 성공적일 때 처리
+                if (response.status === 200) {
+                   // 로그인 성공 시
+                const memberData = response.data; // 서버에서 받은 사용자 정보
+                sessionStorage.setItem("memberId",memberData);
+                
+                dispatch(login(memberData)); // 리덕스에 사용자 정보 저장
+                navigate("/");
                 } else {
                     alert("로그인 실패");
                 }
@@ -63,8 +68,10 @@ function Login({ onLoginSuccess }) {
                             <td>비밀번호</td>
                             <td><input type="password" name="memberPwd" /></td>
                         </tr>
-                        {/* <tr>
+                        <tr>
                             <td colSpan={3}>
+
+
                                 <ToggleButtonGroup
                                     className="toggle-button-group"
                                     type="radio"
@@ -82,18 +89,22 @@ function Login({ onLoginSuccess }) {
                                         관리자로그인
                                     </ToggleButton>
                                 </ToggleButtonGroup>
+
+
                             </td>
-                        </tr> */}
-                        <tr>
-                            <td colSpan={3}><button type="submit">로그인</button></td>
+                        </tr>
+                        <tr>      
+                          <td colSpan={3}><button type="submit">로그인</button></td>
+                        
                         </tr>
                     </table>
+                        
 
                     {/* 관리자 로그인이 아닐 때만 링크 표시 */}
                     {showLinks && (
                         <div>
                             <a href="아이디찾기_링크" target="_blank" rel="noopener noreferrer">아이디/비밀번호 찾기</a> &emsp;
-                            <a href="/signup" target="_blank" rel="noopener noreferrer">회원가입</a>
+                            <a href="회원가입_링크" target="_blank" rel="noopener noreferrer">회원가입</a>
                         </div>
                     )}
                 </form>
