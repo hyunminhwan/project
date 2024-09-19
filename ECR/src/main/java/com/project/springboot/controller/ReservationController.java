@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +42,8 @@ public class ReservationController {
 		return ResponseEntity.ok(savedReservation);
 	}
 	
+	
+	
 	// 일반회원: 특정날짜 범위의 예약 조회(예약내역 조회)
 	@GetMapping("/findDate")
 	public ResponseEntity<List<Reservation>> getReservationsByDate(
@@ -64,6 +69,14 @@ public class ReservationController {
 		return ResponseEntity.ok("취소신청 완료");
 	}
 	
+	// 일반회원: 마이페이지 예약확인에서 예약내역 전체 조회(예약내역 조회)
+		@GetMapping("/findUserReserveAll")
+		public List<Reservation> findUserReserveAll(
+				@RequestParam(name = "userId") String userId,
+				@RequestParam(name = "page") int page,
+				@RequestParam(name = "size") int size) {
+		    return reservationService.findUserReservations(userId, page, size);
+		}
 	
     // 관리자: 전체 조회 (페이징 지원)
     @GetMapping("/adminFindAll")

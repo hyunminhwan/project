@@ -1,5 +1,6 @@
 package com.project.springboot.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -48,17 +49,13 @@ public class Member {
 	@Column(name="member_update_date")
 	private LocalDateTime memberUpdateDate; // 비밀번호변경일자
 	
-	@Column(name="shop_name")
-	private String shopName; // 가게이름
-	
-	@Column(name="shop_address")
-	private String shopAddress; // 가게주소
-	
-	@Column(name="shop_phone")
-	private Long shopPhone; // 가게연락처
 	
 	@Column(name="loginType") // 로그인타입 : 일반(1), 관계자(2), 관리자(3) 구분
 	private int loginType;
 	
 	
+	// 생년월일과 성별 추가
+	@Column(name="birth_date")
+    private LocalDate birthDate;
+    private String gender;
 }

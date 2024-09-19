@@ -31,6 +31,8 @@ public class Tema {
 	@Column(name = "tema_no")
 	private Long temaNo;		//테마번호
 	
+	private String memberId;	//등록한 멤버아이디
+
 	@NonNull
 	@Column(name = "tema_name")
 	private String temaName; 	//테마이름
@@ -38,6 +40,8 @@ public class Tema {
 	@Column(name = "cafe_name")
 	private String cafeName;	//카페이름
 	
+	@Column(name="cafe_phone")
+	private Long  cafePhone ;	//카페전화번호
 	@NonNull
 	private String genre;		//장르
 	private String location;	//지역

@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.project.springboot.domain.Reservation;
@@ -32,7 +35,9 @@ public class ReservationService {
 	public Reservation saveReservation(Reservation reservation) {
 		return reservationRepository.save(reservation);
 	}
-
+	
+	
+	
 	// 일반회원: 기간 내 특정 테마의 예약 조회
 	public List<Reservation> getReservationsByDateRange(String userId, LocalDate startDate, LocalDate endDate) {
 		return reservationRepository.findByUserIdAndUseDateBetween(userId, startDate, endDate);
@@ -54,8 +59,12 @@ public class ReservationService {
 		return null;	// 예약이 없을 경우 null 반환
 	}
 	
-	
-	
+	// 일반회원: 마이페이지 예약확인에서 예약내역 전체 조회(예약내역 조회)
+	public List<Reservation> findUserReservations(String userId, int page, int size) {
+		PageRequest pageRequest = PageRequest.of(page - 1, size);  // 페이지는 0부터 시작	
+	    return reservationRepository.findByUserId(userId, pageRequest).getContent();
+		}
+		
 	// 관리자: 전체 조회 (페이징)
     public List<Reservation> getAllReservations(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page - 1, size);  // 페이지는 0부터 시작
@@ -93,5 +102,11 @@ public class ReservationService {
 		}
 		return null;
 	}
+
+
+
+
+	
+
 
 }

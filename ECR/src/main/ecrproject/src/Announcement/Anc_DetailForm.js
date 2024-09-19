@@ -2,19 +2,20 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
+import './DetailFormCss.css'; 
 
 function Anc_DetailForm() {
     const [announcement, setAnnouncement] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
-    const { boardNo } = location.state || {}; // boardNo를 location.state에서 가져옵니다.
+    const { boardNo } = location.state || {}; 
     const loginToMember = useSelector((state) => state.loginMember);
 
     const formatDate = (date) => {
         if (!date) return '';
-        return date.replace(' ', 'T').substring(0, 16); // e.g. '2024-08-05 10:00:00' -> '2024-08-05T10:00'
+        return date.replace(' ', '').substring(0, 16);
     };
-
+    
     useEffect(() => {
         if (boardNo) {
             axios.get(`/board/form/${boardNo}`)
@@ -29,32 +30,29 @@ function Anc_DetailForm() {
 
     if (!announcement) return <p>로딩 중...</p>;
 
-    // 수정하기를 위한 함수
     const handleEditClick = (boardNo) => {
-        navigate(`/Anc_EditForm`,{state:{boardNo}});
+        navigate(`/Anc_EditForm`, { state: { boardNo } });
     };
 
     return (
-        <>
-            <br/><br/>
-            <h1>게시판 상세조회</h1>
-            <br/><br/><br/><br/>
+        <div className="Noticeboard_form">
+            <br/><br/><br/>
+            <h1>Notice Board</h1>
+            <br/>
             <form>
-                <table align='center'>
+                <table>
                     <tbody>
                         <tr>
-                            <td>제목</td>
-                            <td>
+                            <td className="Title_td">제목</td>
+                            <td className="Title_td">
                                 <input
                                     name="boardTitle"
                                     value={announcement.boardTitle}
                                     readOnly
                                 />
                             </td>
-                        </tr>
-                        <tr>
-                            <td>작성자</td>
-                            <td>
+                            <td className="Title_td">작성자</td>
+                            <td className="Title_td">
                                 <input
                                     name="managerId"
                                     value={announcement.managerId}
@@ -63,8 +61,8 @@ function Anc_DetailForm() {
                             </td>
                         </tr>
                         <tr>
-                            <td>작성일</td>
-                            <td>
+                            <td className="Title_td">작성일</td>
+                            <td className="Title_td">
                                 <input
                                     type="datetime-local"
                                     name="date"
@@ -72,10 +70,8 @@ function Anc_DetailForm() {
                                     readOnly
                                 />
                             </td>
-                        </tr>
-                        <tr>
-                            <td>수정일</td>
-                            <td>
+                            <td className="Title_td">수정일</td>
+                            <td className="Title_td">
                                 <input
                                     type="datetime-local"
                                     name="updateDate"
@@ -85,8 +81,8 @@ function Anc_DetailForm() {
                             </td>
                         </tr>
                         <tr>
-                            <td>내용</td>
-                            <td>
+                            <td className="Title_td">내용</td>
+                            <td className="Title_td" colSpan="3">
                                 <textarea
                                     name="boardContent"
                                     value={announcement.boardContent}
@@ -96,13 +92,12 @@ function Anc_DetailForm() {
                         </tr>
                     </tbody>
                 </table>
-                <br/>
-                {/* 함수 사용 */}
-                {loginToMember.member?.loginType ===3 &&(
-                <button type="button" onClick={()=>{handleEditClick(announcement.boardNo)}}>수정하기</button>
+                <br/><br/>
+                {loginToMember.member?.loginType === 3 && (
+                    <button id="button_a"type="button" onClick={() => handleEditClick(announcement.boardNo)}>수정하기</button>
                 )}
             </form>
-        </>
+        </div>
     );
 }
 

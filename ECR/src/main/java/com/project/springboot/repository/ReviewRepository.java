@@ -11,9 +11,15 @@ import com.project.springboot.domain.Reviews;
 public interface ReviewRepository extends JpaRepository<Reviews, Long>{
 
 
+	//해당테마에있는 리뷰를 내림차순으로 가져오기
 	List<Reviews> findAllByTemaNoOrderByReviewNoDesc(Long temaNo);
 
+	//해당 테마에있는 리뷰 평균을내서 가져오기
 	@Query("SELECT AVG(r.reviewRating) FROM Reviews r WHERE r.temaNo = :temaNo")
 	Double findAvgRatingByTemaNo(@Param("temaNo") Long temaNo);
+
+
+	//해당 테마에대한 모든리뷰 삭제
+	void deleteByTemaNo(Long temaNo);
 
 }

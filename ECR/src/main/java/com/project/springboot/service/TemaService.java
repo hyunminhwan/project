@@ -1,6 +1,7 @@
 package com.project.springboot.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class TemaService {
 	
 	//모든메뉴를 테마번호 오름차순으로 정렬해서 가지고오기
 	public List<Tema> menu() {
-		return temaRepository.findAllByOrderByTemaNoAsc();
+		return temaRepository.findAllByOrderByTemaNoDesc();
 	}
 	
 	//모든테마관련 저장 서비스
@@ -47,21 +48,22 @@ public class TemaService {
         return tema;
 	}
 
+	//별점 평균 내기
 	public Double avgRating(Long temaNo) {
 		 Double avgRating = reviewRepository.findAvgRatingByTemaNo(temaNo);
 	        
 	        // 테마를 조회하고 평균 평점을 저장
-	        Tema tema = temaRepository.findById(temaNo)
-	                       .orElseThrow(() -> new RuntimeException("테마를 찾을 수 없습니다."));
+	        Tema tema = temaRepository.findById(temaNo).get();
+	        // null일 경우 0으로 설정
 	        
-	        tema.setRating(avgRating != null ? Math.round(avgRating) : 0L); // null일 경우 0으로 설정
+	        tema.setRating(avgRating != null ? Math.round(avgRating) : 0L); 
 	        temaRepository.save(tema);
 	        return avgRating != null ? avgRating:0.0;
 	}
 
-	//카페이름으로 모든 테마 가져오기
-	public List<Tema> edittema(String cafeName) {
-		return temaRepository.findAllByCafeName(cafeName);
+	//아이디로 모든 테마 가져오기
+	public List<Tema> edittema(String memberId) {
+		return temaRepository.findAllByMemberId(memberId);
 		
 	}
 	
@@ -70,5 +72,16 @@ public class TemaService {
 		return temaRepository.findByOrderByRatingDesc();
 	}
 
+	//temano 으로 해당하는 테마 가져오기(테마삭제를 위해 값이 있는지 확인)
+	public Optional<Tema> findById(Long temaNo) {
+		return temaRepository.findById(temaNo);
+	}
+
+	// 해당 테마 삭제하기
+	public void delete(Long temaNo) {
+		temaRepository.deleteById(temaNo);
+	}
+	
+	
 	
 }

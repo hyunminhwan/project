@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 
 //주소 api
 function KakaoMap() {
-    
     const script = document.createElement('script');
     script.src = 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
     script.async = true;
@@ -34,10 +33,11 @@ function Coordinates(address) {
 }
 
 function InsertTema() {
-    const loginToMember = useSelector((state) => state.loginMember);
-    const shopName = loginToMember?.member?.shopName;
+    const loginToMember = useSelector((state) => state.loginMember);    //리덕스에 저장된 member 데이터 불러오기
+    const memberId = loginToMember.member.memberId;                     //memberId 뽑아오기
     const [temaInsert, settemaInsert] = useState({
-        cafeName: shopName,
+        memberId:memberId,
+        cafeName: '',
         temaName: '',
         price: '',
         timetaken: '',
@@ -47,7 +47,8 @@ function InsertTema() {
         difficulty: 1,
         location: '서울',
         genre: '미스터리',
-        imgUrl:null,
+        imgUrl:null
+
     });
 
     const TemaSubmit = (event) => {
@@ -58,6 +59,7 @@ function InsertTema() {
             if (coordinates) {
                 //이미지를 같이 넣어서 보내주려면  FormData 함수를 사용해야함
                 const formData = new FormData();
+                formData.append('memberId',temaInsert.memberId);        //아이디
                 formData.append('imgUrl', temaInsert.imgUrl);             // 이미지
                 formData.append('cafeName', temaInsert.cafeName);       //카페이름
                 formData.append('temaName', temaInsert.temaName);       //테마이름
@@ -71,7 +73,7 @@ function InsertTema() {
                 formData.append('genre', temaInsert.genre);             //장르
                 formData.append('latitude', coordinates.latitude);      //좌표
                 formData.append('longitude', coordinates.longitude);    //좌표
-
+                
                 // 서버에 데이터값 보내주기
                 axios.post("/api/tema", formData,{
                     headers: {
@@ -90,6 +92,7 @@ function InsertTema() {
         });
     };
     
+    //이미지넣기
     const InsertImg = (e) => {
         settemaInsert({
             ...temaInsert,
@@ -97,6 +100,7 @@ function InsertTema() {
         });
     };
 
+    
     const TemaData = (e) => {
         settemaInsert({
             ...temaInsert,
@@ -105,7 +109,7 @@ function InsertTema() {
     };
     
 
-
+    //주소 카카오 api 사용
     const AddressClick = () => {
         new window.daum.Postcode({
             oncomplete: function (data) {
@@ -128,8 +132,11 @@ function InsertTema() {
         <div className="create">
             <h2>테마등록</h2>
             <form onSubmit={TemaSubmit}>
+                <label>아이디:</label> 
+                <input name="memberId" type='text' value={temaInsert.memberId} onChange={TemaData} readOnly/> <br />
+
                 <label>카페이름:</label>
-                <input name="cafeName" type="text" value={temaInsert.cafeName} onChange={TemaData}  readOnly/> <br />
+                <input name="cafeName" type="text" value={temaInsert.cafeName} onChange={TemaData}  required/> <br />
 
                 <label>테마이름:</label>
                 <input name="temaName" type="text" value={temaInsert.temaName} onChange={TemaData} required/><br />

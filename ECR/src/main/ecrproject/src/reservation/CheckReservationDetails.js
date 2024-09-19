@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
+// react-DatePicker api
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import './Reservation.css';
-
-import axios from "axios";
-import { useSelector } from "react-redux";
 
 
 // react DatePicker 사용하기
@@ -14,17 +14,58 @@ import { useSelector } from "react-redux";
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 
-
 function CheckReservationDetails() {
+    // 날짜로 조회 변수
     const [dateRange, setDateRange] = useState([null, null]);       // 날짜 범위
     const [startDate, endDate] = dateRange;                         // startDate, endDate 가져오기
-    
+    // 예약코드로 조회 변수
     const [reservationCode, setReservationCode] = useState("");     // 입력한 예약번호
     const [reservations, setReservations] = useState([]);           // 조회한 예약 리스트
-
+    // 전체조회 페이지 처리
+    const [page, setPage] = useState(1);                    // 페이지 번호(더 보기 기능)
+    const [hasMore, setHasMore] = useState(true);           // 더 불러올 데이터 여부
 
     // Redux에서 로그인된 사용자 정보 가져오기
     const userInfo = useSelector(state => state.loginMember.member);
+
+    // 로그인 유저의 전체 예약 데이터 가져오기
+    const userReservationAll = (isLoadMore = false) => {
+        axios.get('/res/findUserReserveAll', {
+            params: {
+                userId: userInfo.memberId,
+                page,
+                size: 20,                                   // 20개씩 불러오기
+            }
+        })
+        .then(response => {
+            // 데이터를 배열로 변환 (예기치 않게 단일 객체로 올 경우 대비)
+            const formattedData = Array.isArray(response.data) ? response.data : [response.data];
+            console.log(formattedData);
+            if (isLoadMore) {
+                // 기존 데이터에 추가
+                setReservations(prev => [...prev, ...formattedData]); // 기존 데이터에 추가
+            } else {
+                // 새 조회 결과 덮어쓰기
+                setReservations(formattedData);                       // 새 데이터로 덮어쓰기
+            }
+                setHasMore(formattedData.length >= 20);                                             
+                console.log(formattedData); 
+            })
+        .catch(error => {
+            console.error('전체 조회 오류: ', error);
+        });
+    };
+
+    // 컴포넌트 로드시 전체 예약 조회
+    useEffect(() => {
+        userReservationAll();  // 페이지 로드 시 첫 페이지 전체 조회
+    }, []);  // 빈 배열을 사용해 컴포넌트가 처음 로드될 때만 실행
+
+    // 페이지 번호가 변경될 때 추가 예약 조회
+    useEffect(() => {
+        if(page === 1) return;
+        userReservationAll(true);
+    }, [page]);
 
     // 날짜를 통한 예약 조회
     const searchByDate = () => {
@@ -40,6 +81,10 @@ function CheckReservationDetails() {
         console.log('요청한 시작날짜: ', startDate);    // 디버그용 로그
         console.log('요청한 끝날짜: ', adjustedEndDate);
 
+        setReservations([]);
+        setPage(1);
+        setHasMore(false);
+
         axios.get('/res/findDate', {
             params : {
                 startDate : startDate.toISOString().split('T')[0],  // toISOString()는 YYYY-MM-ddTHH:mm:ss...로 반환됨 
@@ -48,7 +93,10 @@ function CheckReservationDetails() {
             }
         })
         .then(response => {
-            setReservations(response.data);                         // 예약 정보 설정
+            // 데이터를 배열로 변환 (예기치 않게 단일 객체로 올 경우 대비)
+            const formattedData = Array.isArray(response.data) ? response.data : [response.data];
+            setReservations(formattedData);                         // 예약 정보 설정
+            setHasMore(formattedData.length >= 20);
         })
         .catch(error => {
             console.log('날짜별 조회 error: ', error)
@@ -64,13 +112,14 @@ function CheckReservationDetails() {
         }
         axios.get('/res/findCode', { params : { reservationCode } })
             .then(response => {
-                const data = response.data;
+                // 데이터를 배열로 변환 (예기치 않게 단일 객체로 올 경우 대비)
+                const formattedData = Array.isArray(response.data) ? response.data : [response.data];
 
                 // 데이터가 배열이 아니면 배열로 변환(searchByCode로 인해 배열로 출력하도록 코드를 짜서 배열로 만드는 부분임)
-                if(Array.isArray(data)) {
-                    setReservations(data);  // 배열이면 그대로 설정
+                if(Array.isArray(formattedData)) {
+                    setReservations(formattedData);  // 배열이면 그대로 설정
                 } else {
-                    setReservations([data]);    // 단일 객체이면 배열로 감싸서 설정
+                    setReservations([formattedData]);    // 단일 객체이면 배열로 감싸서 설정
                 }
             })
             .catch(error => {
@@ -110,13 +159,20 @@ function CheckReservationDetails() {
 
             <article>
                 <div>
-                    <table className="CheckReservationDetails">
+                    <table className="findCheckReservations">
                         <tbody>
                             <tr>
+                                {/* 예약 전체 조회 버튼 */}
+                                <td>
+                                    <p>🧾전체조회</p>
+                                    <button onClick={() => userReservationAll(false)}>조회</button>
+                                </td>
+
+                                {/*https://reactdatepicker.com/->Date Range with Portal*/}
+                                {/* 날짜지정 컴포넌트 */}
                                 <td>
                                     <p>📅날짜로 찾기</p>
-                                    {/*https://reactdatepicker.com/->Date Range with Portal*/}
-                                    {/* 날짜지정 컴포넌트 */}
+                                    
                                     <DatePicker 
                                         selectsRange={true}
                                         startDate={startDate}
@@ -130,6 +186,8 @@ function CheckReservationDetails() {
                                     />
                                     <button onClick={ searchByDate }>검색</button>
                                 </td>
+                                
+                                {/* 예약번호로 조회 */}
                                 <td>
                                     <p>🖊️예약번호로 찾기</p>
                                     <input 
@@ -142,6 +200,7 @@ function CheckReservationDetails() {
                                     />
                                     <button onClick={ searchByCode }>검색</button>
                                 </td>
+
                             </tr>
                         </tbody>
                     </table>
@@ -155,6 +214,7 @@ function CheckReservationDetails() {
                     <thead>
                         <tr>
                             <th>번호</th>
+                            <th>예약번호</th>
                             <th>지점</th>
                             <th>테마명</th>
                             <th>날짜</th>
@@ -172,14 +232,17 @@ function CheckReservationDetails() {
                             reservations.map((reserve, index) => (
                                 <tr key={reserve.reservationCode}>
                                     <td>{index + 1}</td>
-                                    <td>{reserve.tema.cafeName}</td>
-                                    <td>{reserve.tema.temaName}</td>
+                                    <td>{reserve.reservationCode}</td>
+                                    <td>{reserve.tema?.cafeName}</td>
+                                    <td>{reserve.tema?.temaName}</td>
                                     <td>{reserve.useDate}</td>
                                     <td>{reserve.useTime}</td>
                                     <td>{reserve.paymentStatus}</td>
                                     <td>
                                         {reserve.paymentStatus === '취소신청' ? 
                                             (<span>취소신청완료</span>) : 
+                                            reserve.paymentStatus === '취소완료' ?
+                                            (<button disabled>취소하기</button>) :
                                             (<button onClick={() => {handleCancelClick(reserve)}}>
                                                 취소하기
                                             </button>)}
@@ -190,6 +253,10 @@ function CheckReservationDetails() {
                         )}
                     </tbody>
                 </table>
+                {/* '더 보기' 버튼 */}
+                {hasMore && (
+                    <button onClick={() => setPage(prevPage => prevPage + 1)}>more</button>
+                )}
             </article>
         </>
     )
