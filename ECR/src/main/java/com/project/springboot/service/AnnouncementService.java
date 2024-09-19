@@ -57,5 +57,5 @@ public class AnnouncementService {
 	public void write2(Announcement announcement) {
 		announcementRepository.save(announcement);
 	}
-
+	
 }

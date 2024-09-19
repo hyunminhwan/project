@@ -1,5 +1,6 @@
 package com.project.springboot.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -61,5 +62,8 @@ public class Member {
 	private int loginType;
 	
 	
-	
+	// 생년월일과 성별 추가
+	@Column(name="birth_date")
+    private LocalDate birthDate;
+    private String gender;
 }

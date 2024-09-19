@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 
 
 function TemaManagement() {
-    const navigate = useNavigate();
     const [temaList, setTemaList] = useState([]);
+    const [temaCount,setTemaCount]=useState(10);
 
+    const loadMore = () => {
+        setTemaCount(p => p + 10);
+    };
     //카페이름과 같은 모든 테마들 가져오기
     useEffect(() => {
         axios.get(`/api/menu`)
@@ -65,7 +67,7 @@ function TemaManagement() {
                 </tr>
 
                 {
-                    temaList.map((tema) => {
+                    temaList.slice(0,temaCount).map((tema) => {
                         return (
                             <tr>
                                 <td>{tema.memberId}</td>
@@ -91,6 +93,10 @@ function TemaManagement() {
                     })
                 }
             </table>
+            {temaCount<temaList.length &&(
+                <button type="button" onClick={loadMore}>더보기&emsp;{Math.min(temaCount,temaList.length)}/{temaList.length} </button>
+            )}
+            
         </>
     )
 

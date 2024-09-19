@@ -17,6 +17,9 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 	//로그인타입별로 정보 가져오기
 	List<Member> findByLoginType(Long loginType);
 
+	// 아이디 중복체크
+    boolean existsByMemberId(String memberId);
+	
 }
 
 

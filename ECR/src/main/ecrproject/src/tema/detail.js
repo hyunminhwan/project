@@ -4,6 +4,7 @@ import Location from "./location";
 import Review from "./review";
 import AvgRating from "./avgRating";
 import { useSelector } from "react-redux";
+
 function Detail() {
     const location = useLocation();
     const { menus } = location.state || {};
@@ -15,7 +16,6 @@ function Detail() {
             <Container>
                 <Row>
                     <Col>
-                        <img id="a" src={`${process.env.PUBLIC_URL}/img/room${menus.temaNo}.jpg`} alt="테마 이미지" />
                         <img src={menus.imgUrl} alt="테마 이미지" />
                         
                         <div>테마번호 : {menus.temaNo}</div>
