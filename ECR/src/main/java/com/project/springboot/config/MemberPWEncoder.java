@@ -12,6 +12,7 @@ public class MemberPWEncoder {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	//암호화 config
 	
 	
 }

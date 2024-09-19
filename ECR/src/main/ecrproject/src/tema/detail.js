@@ -6,9 +6,9 @@ import AvgRating from "./avgRating";
 import { useSelector } from "react-redux";
 function Detail() {
     const location = useLocation();
-    const { menus } = location.state;
+    const { menus } = location.state || {};
     const navigate = useNavigate();
-    const loginToMember = useSelector((state) => state.loginMember);
+    const loginToMember = useSelector((state) => state.loginMember)||null;
     return (
         <>
         

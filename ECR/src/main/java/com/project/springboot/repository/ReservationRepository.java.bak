@@ -6,8 +6,6 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.project.springboot.domain.Reservation;
@@ -17,6 +15,10 @@ import jakarta.transaction.Transactional;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
+
+	// 일반회원이 예약하기 폼에서 사용날짜를 선택했을 때 해당 날짜에 예약된 시간들을 반환하는 메서드
+	List<Reservation> findByTemaAndUseDate(Tema tema, LocalDate useDate);
+
 	// 일반회원이 마이페이지->예약내역 조회 폼에서 날짜를 선택해서 기간 내 예약된 예약정보 조회
 	List<Reservation> findByTemaAndUseDateBetween(Tema tema, LocalDate startDate, LocalDate endDate);
 
@@ -31,11 +33,4 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Transactional  // 트랜잭션 설정 추가
 	void deleteByUserId(String memberId);
-
-    // 일반회원: 회원아이디와 기간별 예약조회 <- 이거임
-    @Query("SELECT r FROM Reservation r JOIN FETCH r.tema WHERE r.userId = :userId AND r.useDate BETWEEN :startDate AND :endDate")
-	List<Reservation> findByUserIdAndUseDateBetween(@Param("userId") String userId, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
-
-	// 특정테마와 날짜로 예약정보 조회
-	List<Reservation> findByTemaAndUseDate(Tema tema, LocalDate useDate);
 }

@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import './Reservation.css';
+import { useSelector } from 'react-redux';
 
 function Payment() {
     const navigate = useNavigate();
@@ -7,6 +8,8 @@ function Payment() {
 
     // location.state에서 menu와 reservation의 저보를 가져옴
     const { menu, reservation } = location.state;
+
+    const userInfo = useSelector(state => state.loginMember.member);
 
     return(
         <>
@@ -17,7 +20,7 @@ function Payment() {
                         <tr>
                             <th>예약번호</th>
                             <td>
-                                {reservation.reervationCode}                        {/* 예약테이블에서 가져온 예약번호 */}
+                                {reservation.reservationCode}                        {/* 예약테이블에서 가져온 예약번호 */}
                             </td>
                         </tr>
                         <tr>
@@ -33,16 +36,16 @@ function Payment() {
                         <tr>
                             <th>이용시간</th>
                             <td>
-                                {reservation.useTime}&ensp;{reservation.useTime}    {/* 예약된 날짜 및 시간 */}
+                                {`${reservation.useTime} ~ ${parseInt(reservation.useTime)+2}:00:00`}    {/* 예약된 날짜 및 시간 */}
                             </td>                             
                         </tr>
                         <tr>
                             <th>예약자 명</th>
-                            <td>{ reservation.userName }</td>                       {/* 예약자 이름 */}
+                            <td>{ userInfo.memberId }</td>                       {/* 예약자 이름 */}
                         </tr>
                         <tr>
                             <th>연락처</th>
-                            <td>{ reservation.userPhone }</td>                      {/* 예약자 번호 */}
+                            <td>{ userInfo.memberPhone }</td>                      {/* 예약자 번호 */}
                         </tr>
                         <tr>
                             <th>이용요금</th>
