@@ -2,7 +2,7 @@ import './App.css';
 import './Navbar.css'; // 새롭게 추가한 무서운 테마의 네비게이션 스타일
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 
 import TemaList from './tema/temaList';
 import Detail from './tema/detail';
@@ -13,8 +13,7 @@ import Anc_EditForm from './Announcement/Anc_EditForm';
 import Anc_List from './Announcement/Anc_List';
 import MainPage from './Mainpage/MainPage';
 
-import Navbar from './Navbar'; // 새로 만든 네비게이션 바 컴포넌트
-import SignupForm from './member/joinform';
+import Navbar from './Navbar'; 
 import Login from './login/login';
 import MemberForm from './member/memberForm';
 import MembershipManagement from './Admin/MembershipManagement';
@@ -26,6 +25,8 @@ import ReservationList from './Admin/Component/ReservationList';
 import CompanyManagement from './Admin/CompanyManagement';
 import Payment from './reservation/Payment';
 import CheckReservationDetails from './reservation/CheckReservationDetails';
+import FindId from './login/FindId';
+import FindPwd from './login/FindPwd';
 
 function App() {
 
@@ -45,6 +46,9 @@ function App() {
         <Route path='/Anc_EditForm' element={<Anc_EditForm />} />  {/* 고지사항수정 */}
         <Route path='/Anc_List' element={<Anc_List />} />  {/* 고지사항 쓰기 */}
         <Route path='/login' element={<Login />} />  {/* 로그인 */}
+        <Route path='/findid' element={<FindId />}/>
+        <Route path='/findpwd' element={<FindPwd />}/>
+        
      
         <Route path='/signup' element={< MemberForm />} />  {/* 회원가입으로 이동 */}               
         <Route path='/manage-members' element={< MembershipManagement />} />   {/* 회원 관리 */}

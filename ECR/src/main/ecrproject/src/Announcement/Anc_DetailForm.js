@@ -13,7 +13,7 @@ function Anc_DetailForm() {
 
     const formatDate = (date) => {
         if (!date) return '';
-        return date.replace(' ', 'T').substring(0, 16);
+        return date.replace(' ', '').substring(0, 16);
     };
     
     useEffect(() => {

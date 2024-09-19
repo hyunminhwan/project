@@ -31,6 +31,12 @@ function Review({ temaNo }) {
     //리뷰 등록
     const reviewinsert = (e) => {
         e.preventDefault();
+
+        const ReviewCheck= reviewList.find((review)=>review.userId===userId);
+        if(ReviewCheck){
+            alert("이미 리뷰를 등록하셨습니다.");
+            return;
+        }
         axios.post("/review", {
             temaNo: temaNo,
             reviewContent: reviewContent,

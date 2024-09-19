@@ -52,4 +52,9 @@ public class MemberService {
 		}
 
 	}
+	
+	public boolean isMemberIdAvailable(String memberId) {
+        boolean exists = memberRepository.existsByMemberId(memberId);
+        return !exists; // 사용 가능한 경우 true 반환, 중복인 경우 false 반환
+    }
 }

@@ -6,6 +6,7 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import { useDispatch } from "react-redux";
 import { login } from "../store/loginStore";
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 function Login() {
     const [loginType, setLoginType] = useState(1); // 1: 일반, 2: 관계자, 3: 관리자
@@ -24,18 +25,18 @@ function Login() {
             return; // 빈 값일 경우 서버 요청 중단
         }
 
-       
+
         axios.post(`/api/memberLogin/${loginType}`, {
-                memberId: memberId,
-                memberPwd: memberPwd,
+            memberId: memberId,
+            memberPwd: memberPwd,
         })
             .then(response => {
                 // 서버 응답이 성공적일 때 처리
                 if (response.status === 200) {
-                   // 로그인 성공 시
-                const memberData = response.data; // 서버에서 받은 사용자 정보           
-                dispatch(login(memberData)); // 리덕스에 사용자 정보 저장
-                navigate("/");
+                    // 로그인 성공 시
+                    const memberData = response.data; // 서버에서 받은 사용자 정보           
+                    dispatch(login(memberData)); // 리덕스에 사용자 정보 저장
+                    navigate("/");
                 } else {
                     alert("로그인 실패");
                 }
@@ -60,6 +61,9 @@ function Login() {
                         <tr>
                             <td>아이디</td>
                             <td><input name="memberId" /></td>
+                            <td rowSpan={2} >
+                                <button type="submit">로그인</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>비밀번호</td>
@@ -67,8 +71,6 @@ function Login() {
                         </tr>
                         <tr>
                             <td colSpan={3}>
-
-
                                 <ToggleButtonGroup
                                     className="toggle-button-group"
                                     type="radio"
@@ -86,23 +88,18 @@ function Login() {
                                         관리자로그인
                                     </ToggleButton>
                                 </ToggleButtonGroup>
-
-
                             </td>
                         </tr>
-                        <tr>      
-                          <td colSpan={3}><button type="submit">로그인</button></td>
-                        
-                        </tr>
+
                     </table>
-                        
+                    <br />
 
 
-                        <div>
-                            <a href="/signup" target="_blank" rel="noopener noreferrer">회원가입</a>&emsp;&emsp;
-                            <a href="아이디찾기_링크" target="_blank" rel="noopener noreferrer">아이디/비밀번호 찾기</a> 
-                            
-                        </div>
+                    <div>
+                        <Button type="button" onClick={() => navigate("/signup")}>회원가입&emsp;&emsp;</Button>
+                        <Button type="button" onClick={() => navigate("/findid")}>아이디 찾기</Button>
+                        <Button type="button" onClick={() => navigate("/findpwd")}>비밀번호 찾기</Button>
+                    </div>
                 </form>
             </div>
         </>
