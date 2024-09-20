@@ -28,7 +28,7 @@ function MemberForm() {
     // 정규식 패턴
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 패턴
     const idPattern = /^[a-zA-Z0-9]{5,}$/; // 아이디 패턴: 5자 이상, 영문자와 숫자
-    const phonePattern = /^\d{10,11}$/; // 핸드폰 번호 패턴: 숫자만 10~11자 
+    const phonePattern = /^\d{10,11}$/; // 핸드폰 번호 패턴: 숫자만 10~11자  
 
     // 폼 데이터 변경 처리
     const insertform = (e) => {
