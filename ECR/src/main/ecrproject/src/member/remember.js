@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import './remember.css';
 
 
 function Remember() {
@@ -123,70 +124,106 @@ function Remember() {
 
     return (
 
-        <div className="signup-container">
-            <h2>회원 정보 수정</h2>
-            <form onSubmit={handleSubmit}>
+<div className="signup-container">
+    <h2>회원 정보 수정</h2>
+    <form onSubmit={handleSubmit}>
+        <div className="form-columns">
+            <div className="left-column">
+                <div className="field">
+                    <label>아이디</label>
+                    <input
+                        value={loginToMember.member.memberId}
+                        readOnly
+                    />
+                </div>
 
-                <label>아이디</label>
-                <div>{loginToMember.member.memberId}</div> {/* 아이디는 읽기 전용으로 표시 */}
-                
-                <label>이름</label>
-                <div>{loginToMember.member.memberName}</div> {/* 이름은 읽기 전용으로 표시 */}
+                <div className="field">
+                    <label>이름</label>
+                    <input 
+                        value={loginToMember.member.memberName}
+                        readOnly
+                    />
+                </div>
 
-                <label>생년월일</label>
-                <div>{loginToMember.member.birthDate}</div> {/* 읽기 전용 생년월일 */}
+                <div className="field">
+                    <label>생년월일</label>
+                    <input 
+                        value={loginToMember.member.birthDate}
+                        readOnly
+                    />
+                </div>
 
-                <label>성별</label>
-                <div>{loginToMember.member.gender}</div> {/* 읽기 전용 성별 */}
+                <div className="field">
+                    <label>성별</label>
+                    <input 
+                        type="gender"
+                        name="gender"
+                        value={loginToMember.member.gender}
+                        readOnly
+                    />
+                </div>
+            </div>
 
-                <label>비밀번호</label>
-                <input
-                    type="password"
-                    name="memberPwd"
-                    value={memberData.memberPwd}
-                    onChange={handleChange}
-                    placeholder="새 비밀번호를 입력하세요."
-                    required
-                />
+            <div className="right-column">
+                <div className="field">
+                    <label>비밀번호</label>
+                    <input
+                        type="password"
+                        name="memberPwd"
+                        value={memberData.memberPwd}
+                        onChange={handleChange}
+                        placeholder="새 비밀번호를 입력하세요."
+                        required
+                    />
+                </div>
 
-                <label>비밀번호 확인</label>
-                <input
-                    type="password"
-                    name="memberPwdCheck"
-                    value={memberData.memberPwdCheck}
-                    onChange={handleChange}
-                    placeholder="비밀번호를 다시 입력하세요."
-                    required
-                />
-                {isPwdMatch !== null && (
-                    <p style={{ color: isPwdMatch ? 'black' : 'black' }}>
-                        {isPwdMatch ? '비밀번호 확인과 일치합니다.' : '비밀번호 확인과 일치하지 않습니다.'}
-                    </p>
-                )}
+                <div className="field">
+                    <label>비밀번호 확인</label>
+                    <input
+                        type="password"
+                        name="memberPwdCheck"
+                        value={memberData.memberPwdCheck}
+                        onChange={handleChange}
+                        placeholder="비밀번호를 다시 입력하세요."
+                        required
+                    />
+                    {isPwdMatch !== null && (
+                        <p style={{ color: isPwdMatch ? 'black' : 'black' }}>
+                            {isPwdMatch ? '비밀번호 확인과 일치합니다.' : '비밀번호 확인과 일치하지 않습니다.'}
+                        </p>
+                    )}
+                </div>
 
-                <label>핸드폰 번호</label>
-                <input
-                    type="text"
-                    name="memberPhone"
-                    value={memberData.memberPhone}
-                    onChange={handleChange}
-                    required
-                />
+                <div className="field">
+                    <label>핸드폰 번호</label>
+                    <input
+                        type="text"
+                        name="memberPhone"
+                        value={memberData.memberPhone}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
 
-                <label>이메일</label>
-                <input
-                    type="email"
-                    name="memberEmail"
-                    value={memberData.memberEmail}
-                    onChange={handleChange}
-                    required
-                />
-
-                <button type="submit">수정하기</button>
-                <br></br>
-                <button onClick={() =>{deleteMember(loginToMember.member.memberId)}}>회원탈퇴</button>
-            </form>
+                <div className="field">
+                    <label>이메일</label>
+                    <input
+                        type="email"
+                        name="memberEmail"
+                        value={memberData.memberEmail}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+            </div>
         </div>
+
+        <button type="submit">수정하기</button>
+        <br></br>
+        <button onClick={() => { deleteMember(loginToMember.member.memberId) }}>회원탈퇴</button>
+    </form>
+</div>
+
     );
 
 };

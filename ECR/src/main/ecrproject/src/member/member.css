@@ -2,7 +2,7 @@
   background-color: rgba(0, 0, 0, 0.7); /* 반투명 검은 배경을 설정하여 어두운 느낌 연출 */
   color: white; /* 글자 색상은 흰색으로 설정 */
   padding: 40px; /* 컨테이너 내부에 여백을 주어 내용이 너무 빽빽하지 않도록 설정 */
-  width: 400px; /* 컨테이너 너비를 고정 */
+  width: 600px; /* 컨테이너 너비를 넓혀 좌우에 나눠진 내용이 더 잘 보이도록 설정 */
   margin: 100px auto; /* 상단에서 100px 떨어뜨리고 중앙에 배치 */
   border-radius: 15px; /* 모서리를 둥글게 처리 */
   box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7); /* 붉은색 그림자 효과 */
@@ -18,8 +18,15 @@ h2 {
 
 form {
   display: flex; /* 폼 안의 요소들을 플렉스 박스로 처리 */
-  flex-direction: column; /* 폼의 요소들이 수직으로 배치되도록 설정 */
-  align-items: center; /* 폼 내부 요소를 중앙에 정렬 */
+  justify-content: space-between; /* 좌우로 공간을 나눔 */
+  flex-wrap: wrap; /* 요소들이 화면을 넘어가면 줄바꿈 처리 */
+}
+
+.left-column, .right-column {
+  width: 48%; /* 각 열이 48%를 차지하여 좌우로 나란히 배치 */
+  display: flex;
+  flex-direction: column; /* 필드를 세로로 정렬 */
+  align-items: flex-start; /* 왼쪽 정렬 */
 }
 
 label {
@@ -51,6 +58,8 @@ button {
   font-size: 18px; /* 버튼 텍스트 크기 설정 */
   cursor: pointer; /* 버튼 위에 마우스를 올리면 커서가 포인터 모양으로 변경 */
   transition: background-color 0.3s ease; /* 호버 시 배경색이 부드럽게 전환되도록 설정 */
+  width: 100%; /* 버튼이 두 열을 가로질러 전체 너비를 차지하도록 설정 */
+  margin-top: 20px; /* 버튼과 위의 입력 필드 간격 설정 */
 }
 
 button:hover {

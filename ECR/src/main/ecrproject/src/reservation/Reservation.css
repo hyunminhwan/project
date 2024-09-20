@@ -1,26 +1,117 @@
-.reserveForm {
-    border: 2px solid;
-    text-align: center;
+/* Reservation.css */
+
+body {
+    font-family: 'Jeju Gothic', sans-serif;
+    background-color: #1a1a1a;
+    color: #e6e6e6;
+    margin: 0;
+    padding: 0;
+}
+
+article {
+    width: 80%;
     margin: 0 auto;
-    margin-top: 200px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.2);
 }
-.reserveForm th,td {
-    height: 50px;
-}
-.reservationDetailForm {
-    width: 1000px;
-    margin: 0 auto;
-}
-.reservationDetailForm input {
-    width: 700px;
-}
+
 .CheckReservationDetails {
-    width: 60%;
-    margin: 0 auto;
-    margin-top: 100px;
+    width: 100%;
+    margin-bottom: 20px;
+    border-spacing: 10px;
+    color: #e6e6e6;
 }
+
+.CheckReservationDetails td {
+    padding: 12px;  /* 패딩을 약간 증가시켜 글씨가 중앙에 가까워지도록 조정 */
+    background-color: #2b2b2b;
+    border-radius: 10px;
+    vertical-align: middle; /* 글씨가 세로 중앙에 위치하도록 설정 */
+}
+
+.CheckReservationDetails p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-top: 10px;  /* 위쪽 마진을 추가하여 첫 글씨가 너무 위로 가지 않도록 조정 */
+    color: #ff3333;
+    font-weight: bold;
+}
+
+input, .react-datepicker-wrapper {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    background-color: #333;
+    color: #e6e6e6;
+    border: none;
+    border-radius: 5px;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+button {
+    background-color: #ff3333;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #cc0000;
+}
+
 .ResultList {
-    width: 60%;
-    margin: 0 auto;
-    margin-top: 40px;
+    width: 100%;
+    border-collapse: collapse;
+    color: #e6e6e6;
+    margin-top: 20px;
+}
+
+.ResultList th, .ResultList td {
+    padding: 12px;
+    text-align: center;
+    background-color: #2b2b2b;
+    border: 1px solid #ff3333;
+}
+
+.ResultList th {
+    background-color: #333;
+    font-size: 14px;
+}
+
+.ResultList td {
+    font-size: 12px;
+}
+
+.ResultList button {
+    background-color: #ff6666;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.ResultList button:hover {
+    background-color: #cc0000;
+}
+
+.ResultList span {
+    color: #66ff66;
+    font-weight: bold;
+}
+
+.ResultList td[colspan='7'] {
+    text-align: center;
+    color: #ff3333;
+    font-weight: bold;
 }

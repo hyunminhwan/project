@@ -27,7 +27,7 @@ import Payment from './reservation/Payment';
 import CheckReservationDetails from './reservation/CheckReservationDetails';
 import FindId from './login/FindId';
 import FindPwd from './login/FindPwd';
-import Remember from './mypage/remember';
+import Remember from './member/remember';
 
 
 
