@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 function Login() {
-    const [loginType, setLoginType] = useState(1); // 1: 일반, 2: 관계자, 3: 관리자
+    const [loginType, setLoginType] = useState(3); // 1: 일반, 2: 관계자, 3: 관리자
     let dispatch = useDispatch();
     const navigate = useNavigate();
     // 로그인 처리 로직
@@ -83,9 +83,6 @@ function Login() {
                                     </ToggleButton>
                                     <ToggleButton id="manager" value={2} className="toggle-button-custom">
                                         관계자로그인
-                                    </ToggleButton>
-                                    <ToggleButton id="master" value={3} className="toggle-button-custom">
-                                        관리자로그인
                                     </ToggleButton>
                                 </ToggleButtonGroup>
                             </td>

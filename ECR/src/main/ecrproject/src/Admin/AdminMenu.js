@@ -1,7 +1,0 @@
-function AdminMenu() {
-    return(
-        <>
-        
-        </>
-    )
-}
