@@ -4,6 +4,7 @@ import React from 'react';
 import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import StarRatings from 'react-star-ratings';
+import './reviewCss.css';
 
 function Review({ temaNo }) {
     const [reviewList, setReviewList] = useState([]);
@@ -11,7 +12,7 @@ function Review({ temaNo }) {
     const [rating, setRating] = useState(0);
     const [reviewCount, setReviewCount] = useState(3);
     const loginToMember = useSelector((state) => state.loginMember);
-    const userId = loginToMember.member?.memberId ||null;
+    const userId = loginToMember.member?.memberId || null;
 
     // 수정 
     const [editMode, setEditMode] = useState(null); // 현재 수정 중인 리뷰 번호
@@ -38,7 +39,7 @@ function Review({ temaNo }) {
             userId: userId
         })
             .then((r) => {
-                alert("리뷰등록를 등록하였습니다.")
+                alert("리뷰를 등록하였습니다.")
                 axios.get(`/review/tema/${temaNo}`)
                     .then((result) => {
                         setReviewList(result.data);
@@ -50,7 +51,7 @@ function Review({ temaNo }) {
                 setRating(0);          // 리뷰 평점 초기화
             })
             .catch(() => {
-                console.log("리뷰를 등록이 실패했습니다.");
+                console.log("리뷰 등록에 실패했습니다.");
             });
     };
 
@@ -63,7 +64,7 @@ function Review({ temaNo }) {
     const reviewDelete = (reviewNo) => {
         axios.delete(`/review/delete/${reviewNo}`)
             .then(() => {
-                if (window.confirm("리뷰를 삭제하시겠습니다?")) {
+                if (window.confirm("리뷰를 삭제하시겠습니까?")) {
                     alert("리뷰를 삭제하였습니다.");
                     axios.get(`/review/tema/${temaNo}`)
                         .then((result) => {
@@ -73,12 +74,11 @@ function Review({ temaNo }) {
                             console.log("리뷰를 가지고 오는데 실패했습니다.")
                         })
                 } else {
-                    alert("리뷰를 삭제를 취소하였습니다");
+                    alert("리뷰 삭제를 취소하였습니다.");
                 }
-
             })
             .catch(() => {
-                alert("리뷰삭제에 실패했습니다.")
+                alert("리뷰 삭제에 실패했습니다.");
             });
     };
 
@@ -113,12 +113,10 @@ function Review({ temaNo }) {
 
     return (
         <>
-            <hr />
             {loginToMember?.member ? (
-                <div>
-                    <h3>후기 작성</h3>
+                <div className="review-form-container">
                     <form onSubmit={reviewinsert}>
-                        <div>
+                        <div className="review-stars">
                             <StarRatings
                                 rating={rating}
                                 starRatedColor="gold"
@@ -128,7 +126,7 @@ function Review({ temaNo }) {
                                 changeRating={(newRating) => setRating(newRating)}
                             />
                         </div>
-                        <div>
+                        <div className="review-textarea">
                             <textarea
                                 value={reviewContent}
                                 onChange={(e) => setReviewContent(e.target.value)}
@@ -137,7 +135,8 @@ function Review({ temaNo }) {
                                 cols="50"
                             />
                         </div>
-                        <button type="submit">리뷰 등록</button>
+                        <br />
+                        <button type="submit" className="submit-button">리뷰 등록</button>
                     </form>
                 </div>
             ) : (
@@ -147,14 +146,13 @@ function Review({ temaNo }) {
             {
                 reviewList.slice(0, reviewCount).map((review) => {
                     return (
-                        <div key={review.reviewNo}>
-                            <div>
+                        <div key={review.reviewNo} className="review-item">
+                            <div className="review-header">
                                 <span>{review.userId}</span>
                                 <StarRating rating={review.reviewRating} />
                             </div>
-                            {/* 수정 모드일 때와 아닐 때를 구분하여 렌더링 */}
                             {editMode === review.reviewNo ? (
-                                <div>
+                                <div className="review-edit-mode">
                                     <StarRatings
                                         rating={editRating}
                                         starRatedColor="gold"
@@ -173,13 +171,14 @@ function Review({ temaNo }) {
                                     <Button variant="outline-secondary" onClick={() => setEditMode(0)}>취소</Button>
                                 </div>
                             ) : (
-                                <div>
+                                <div className="review-content">
                                     <p>{review.reviewContent}</p>
-                                    <div>
-                                        <span>작성일: {review.reviewCreatedDate.slice(0, 10)}</span>
+                                    <div className="review-footer">
+                                        <span id="CD"> 작성일 {review.reviewCreatedDate.slice(0, 10)}</span>
+                                        <br/><br/>
                                         {loginToMember.member?.memberId === review.userId && (
-                                            <div>
-                                                <Button variant="outline-secondary" onClick={() => EditModeOn(review)}>수정하기</Button>
+                                            <div className="review-buttons">
+                                                <Button variant="outline-secondary" onClick={() => EditModeOn(review)}>수정하기</Button> &emsp;
                                                 <Button variant="outline-danger" onClick={() => reviewDelete(review.reviewNo)}>삭제</Button>
                                             </div>
                                         )}
@@ -190,6 +189,7 @@ function Review({ temaNo }) {
                     );
                 })
             }
+            <br /><br />
             <Button onClick={loadMore} size="lg" variant="primary">더보기 {Math.min(reviewList.length, reviewCount)}/{reviewList.length}</Button>
         </>
     );
@@ -198,12 +198,12 @@ function Review({ temaNo }) {
 const StarRating = ({ rating }) => {
     return (
         <StarRatings
-            rating={rating}                     
-            starRatedColor="gold"               
-            numberOfStars={5}                   
-            name="rating"                       
-            starDimension="24px"                
-            starSpacing="2px"                   
+            rating={rating}
+            starRatedColor="gold"
+            numberOfStars={5}
+            name="rating"
+            starDimension="24px"
+            starSpacing="2px"
         />
     );
 };

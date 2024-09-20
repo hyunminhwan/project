@@ -144,7 +144,7 @@ function TemaList() {
 
                             <Col lg={4} onClick={() => { temaCount(menu) }} style={{ cursor: 'pointer' }} >
                                 <div className="tema">
-                                    <img src={menu.imgUrl} alt="테마 이미지" />
+                                    {/* <img src={menu.imgUrl} alt="테마 이미지" /> */}
                                     <img src={`${process.env.PUBLIC_URL}/img/room${menu.temaNo}.jpg`} alt="테마 이미지" />
                                     <div>테마번호 : {menu.temaNo}</div>
                                     <h2>테마이름 : {menu.temaName}</h2><h4>조회수 : {menu.temaCount}</h4>

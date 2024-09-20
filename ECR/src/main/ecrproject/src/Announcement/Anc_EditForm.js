@@ -75,14 +75,13 @@ function Anc_EditForm() {
 
     return (
         <>
-            <div className="Anc_EditForm"> {/* 컨테이너 클래스 추가 */}
+            <div className="Anc_EditForm">
                 <br/><br/><br/>
                 <h1>Rewrite</h1>
                 <br/><br/>
                 <form onSubmit={Anc_Submit}>
                     <table align='center'>
                         <tbody>
-                            {/* 제목과 작성자를 같은 줄에 표시 */}
                             <tr>
                                 <td>제목</td>
                                 <td>

@@ -1,60 +1,72 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
-import {useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Location from "./location";
 import Review from "./review";
 import AvgRating from "./avgRating";
 import { useSelector } from "react-redux";
+import './detailCss.css';
+
 function Detail() {
     const location = useLocation();
     const { menus } = location.state || {};
     const navigate = useNavigate();
-    const loginToMember = useSelector((state) => state.loginMember)||null;
+    const loginToMember = useSelector((state) => state.loginMember) || null;
+
     return (
         <>
-        
-            <Container>
-                <Row>
-                    <Col>
+            <Container className="Detail_Con">
+                <br/><br/>
+                <Row className="Detail_Top">
+                    {/* 테마 이미지 */}
+                    <Col md={7} className="Tema_Image">
                         <img id="a" src={`${process.env.PUBLIC_URL}/img/room${menus.temaNo}.jpg`} alt="테마 이미지" />
-                        <img src={menus.imgUrl} alt="테마 이미지" />
-                        
-                        <div>테마번호 : {menus.temaNo}</div>
-                        <div>조회수 : {menus.temaCount}</div>
-                        <h2>테마이름 : {menus.temaName}</h2>
-                        <div>카페이름 : {menus.cafeName}</div>
-
-                        <div>장르 : {menus.genre}</div>
-                        <div>지역 : {menus.location}</div>
-                        <div>주소 : {menus.address}</div>
-                        <div>난이도 : {menus.difficulty}</div>
-                        <div>내용 : {menus.temaContent}</div>
-                        <div>평점 : {menus.rating}</div>
-                        <div>소요시간 : {menus.timetaken}분</div>
-                        <div>가격 : {menus.price} 원</div>
-                        <div>인원수 : {menus.personnel}</div>
-                        <div>등록일 : {menus.temaCreatedDate.slice(0, 10)}</div>
-                        <AvgRating temaNo={menus.temaNo}/>
-                        <br />
-                        {loginToMember?.member ? (
-                          <Button onClick={()=>{
-                            navigate('/reserve', { state: { menus } });
-                        }}>예약하기</Button> 
-                    ):(
-                        <h2>로그인후 예약해주세요</h2>
-                    )
-                        }
-                        
+                        <br/><br/>
+                        {/* 지도 */}
+                        <div className="MAP">
+                            <Location latitude={menus.latitude} longitude={menus.longitude} />
+                        </div>
+                    </Col>
+                    {/* 정보 섹션 및 댓글 */}
+                    <Col md={5}>
+                        <div className="DIV">
+                            <div className="info-section">
+                                <h2>{menus.temaName}</h2>
+                                <div id="content">{menus.temaContent}</div>
+                                <br/>
+                                <div id="content">장르 &emsp; {menus.genre}</div>
+                                <div id="content">난이도 &emsp; {menus.difficulty}</div>
+                                <div id="content">인원수 &emsp; {menus.personnel}</div>
+                                <div id="content">가격 {menus.price}원</div>
+                                <br/>
+                                <AvgRating temaNo={menus.temaNo} />
+                            </div>
+                            
+                            {/* 댓글 */}
+                            <div className="Comment">
+                                <Review temaNo={menus.temaNo} />
+                            </div>
+                        </div>
                     </Col>
                 </Row>
-                <Location latitude={menus.latitude} longitude={menus.longitude}/>
-                <Review temaNo={menus.temaNo}/>
-            </Container >
-           
-            
+                
+                {/* 후기 작성 */}
+                <Row className="Review">
+                    <Col md={8}>
+                    <br/><br/>
+                        {loginToMember?.member ? (
+                            <Button id="button_a" onClick={() => {
+                                navigate('/reserve', { state: { menus } });
+                            }}>예약하기</Button>
+                        ) : (
+                            <h2>로그인후 예약해주세요</h2>
+                        )}
+                    </Col>
+                </Row>
+
+                <div>등록일: {menus.temaCreatedDate.slice(0, 10)}</div>
+            </Container>
         </>
-    )
-
-
+    );
 }
 
 export default Detail;
