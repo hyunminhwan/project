@@ -51,7 +51,7 @@ function Navbar() {
           <>
             <li>{loginToMember.member.memberId}</li>
             <li className="dropdown">
-              <Link to="/mypage">My Page</Link>
+              <Link >My Page</Link>
               <ul className="dropdown-content">
                 <li><Link to="/checkReserve">Reservation confirmation</Link></li>
               </ul>

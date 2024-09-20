@@ -1,0 +1,160 @@
+/* 조회 컨테이너 스타일링 */
+.findCheckReservations {
+    text-align: center;
+    border-radius: 10px;
+    border: 1px black;
+    background: rgba(0, 0, 0, 0.8);
+    color: #f0f0f0;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(255, 0, 0, 0.7);
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+/* 조회 테이블 스타일링 */
+.findTable {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    color: #f0f0f0;
+    text-align: center;
+}
+
+/* 조회 테이블 tr,td에 width 분배해서 가운데 정렬 */
+.findTable th {
+    font-size: 1.5em;
+    letter-spacing: 5px;
+    width: 33%;
+}
+
+/* 조회 버튼 스타일 */
+.findTable td button {
+    background-color: #660000;
+    color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+    transition: background-color 0.3s, transform 0.3s;
+    letter-spacing: 5px;
+    font-size: 1.2em;
+}
+
+/* 버튼 hover 및 active 상태 */
+.findTable td button:hover {
+    background-color: #ff0000;
+    transform: scale(1.05);
+}
+.findTable td button:active {
+    background-color: #cc0000;
+    transform: scale(0.98);
+}
+
+/* 날짜 선택 칸, 입력 필드 크기 조정 */
+.findTable td input, .findTable td .react-datepicker-wrapper {
+    width: 100%;
+    max-width: 300px; /* 예약번호 입력 칸 크기 조정 */
+    height: 45px;
+    padding: 10px;
+    font-size: 1.2em;
+    background-color: #f0f0f0;
+    color: rgb(131, 131, 131);
+}
+
+/* --------------------------------------------------------- */
+
+/* 예약리스트 컨테이너 스타일링 */
+.resultListdiv {
+    text-align: center;
+    border-radius: 10px;
+    border: 1px black;
+    background: rgba(0, 0, 0, 0.8);
+    color: #f0f0f0;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(255, 0, 0, 0.7);
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+/* 조회 테이블 스타일링 */
+.resultListTable {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;   
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-collapse: collapse;
+}
+
+/* 테이블 th, td 스타일링 */
+.resultListTable th, .resultListTable td {
+    padding: 15px;
+    color: #f0f0f0;
+    font-size: 1.2em;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.4);
+    box-shadow: 0 2px 5px rgba(255, 0, 0, 0.6);
+}
+
+/* 테이블 th 스타일링 */
+.resultListTable th {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+/* 취소신청 button 스타일링 */
+.resultListTable button {
+    width: 100%;
+    background-color: #660000;
+    color: #f0f0f0;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* 취소신청 button 효과 */
+.resultListTable button:hover {
+    background-color: #ff0000;
+    transform: scale(1.05);
+}
+.resultListTable button:active {
+    background-color: #cc0000;
+    transform: scale(0.98);
+}
+
+/* 더보기 버튼 스타일링 */
+.moreButton {
+    width: 100px;
+    background-color: #660000;
+    color: #f0f0f0;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.4em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* 더보기 버튼 효과 */
+.moreButton:hover {
+    background-color: #ff0000;
+    transform: scale(1.05);
+}
+.moreButton:active {
+    background-color: #cc0000;
+    transform: scale(0.98);
+}

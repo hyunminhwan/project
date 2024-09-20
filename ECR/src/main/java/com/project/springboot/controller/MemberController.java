@@ -83,6 +83,7 @@ public class MemberController {
 		return ResponseEntity.noContent().build();
 	}
 
+	//id중복체크
 	@PostMapping("/check-username")
 	public ResponseEntity<Boolean> checkUsernameAvailability(@RequestBody Map<String, String> payload) {
 		String memberId = payload.get("memberId");
@@ -97,13 +98,59 @@ public class MemberController {
 		return ResponseEntity.ok(isAvailable);
 	}
 	
-	// 관리자: 회원 전체조회
-	@GetMapping("/findClientAll")
-	public List<Member> getAllClients(
-			@RequestParam(name = "loginType") int loginType,
-			@RequestParam(name = "page") int page,
-			@RequestParam(name = "size") int size) {
-		return memberService.getAllClients(loginType, page, size);
+	//아이디찾기
+	@PostMapping("/findid")
+	public String findId(@RequestParam("memberName") String memberName,
+						 @RequestParam("memberPhone") Long memberPhone,
+						 @RequestParam("memberEmail") String memberEmail,
+						 @RequestParam("loginType") int loginType) {
+		 Optional<Member> member=memberService.findId(memberName,memberPhone,memberEmail,loginType);
+		if(member.isPresent()) {
+			return member.get().getMemberId();
+		}else {
+			return null;
+		}
 	}
+	
+	//비밀번호 찾기 및 비밀번호 변경
+	@PostMapping("/findpwd")
+	public String findpwd(@RequestParam("memberId") String memberId,
+						  @RequestParam("memberPhone") Long memberPhone,
+						  @RequestParam("memberEmail") String memberEmail,
+						  @RequestParam("loginType") int loginType) {
+		 Optional<Member> member=memberService.findpwd(memberId,memberPhone,memberEmail,loginType);
+		if(member.isPresent()) {
+			return member.get().getMemberId();
+		}else {
+			return "";
+		}
+		
+	}
+	
+	//비밀번호 변경
+	@PostMapping("/changepwd")
+	public boolean changepwd(@RequestParam("memberId") String memberId,
+			  				@RequestParam("memberPwd") String memberPwd) {
+		Optional<Member> member=memberService.findById(memberId);
+		if(member.isPresent()) {
+			Member m=member.get();
+			String enPass = passwordEncoder.encode(memberPwd);
+			m.setMemberPwd(enPass);
+			memberService.memberInsert(m);
+			return true;
+		}
+		return false;
+	}
+	
+	// 관리자: 회원 전체조회
+		@GetMapping("/findClientAll")
+		public List<Member> getAllClients(
+				@RequestParam(name = "loginType") int loginType,
+				@RequestParam(name = "page") int page,
+				@RequestParam(name = "size") int size) {
+			return memberService.getAllClients(loginType, page, size);
+		}
+	
+	
 
 }

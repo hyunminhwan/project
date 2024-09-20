@@ -54,15 +54,30 @@ public class MemberService {
 
 	}
 	
+	//아이디중복체크
 	public boolean isMemberIdAvailable(String memberId) {
         boolean exists = memberRepository.existsByMemberId(memberId);
         return !exists; // 사용 가능한 경우 true 반환, 중복인 경우 false 반환
     }
 
-	// 관리자: 일반회원 전체조회
-	public List<Member> getAllClients(int loginType, int page, int size) {
-		PageRequest pageRequest = PageRequest.of(page - 1, size);
-		return memberRepository.findByLoginTypeOrderByMemberIdAsc(loginType, pageRequest).getContent();
+	//아이디찾기
+	public Optional<Member> findId(String memberName, Long memberPhone, String memberEmail, int loginType) {
+		return memberRepository.findByMemberNameAndMemberPhoneAndMemberEmailAndLoginType(memberName,memberPhone,memberEmail,loginType);
 	}
 
+	//비밀번호찾기
+	public Optional<Member> findpwd(String memberId, Long memberPhone, String memberEmail,int loginType) {
+		return memberRepository.findByMemberIdAndMemberPhoneAndMemberEmailAndLoginType(memberId,memberPhone,memberEmail,loginType);
+	}
+
+
+	public Optional<Member> findById(String memberId) {
+		return memberRepository.findById(memberId);
+	}
+	
+	// 관리자: 일반회원 전체조회
+		public List<Member> getAllClients(int loginType, int page, int size) {
+			PageRequest pageRequest = PageRequest.of(page - 1, size);
+			return memberRepository.findByLoginTypeOrderByMemberIdAsc(loginType, pageRequest).getContent();
+		}
 }

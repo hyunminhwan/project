@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import './Reservation.css';
+import './css/CheckReservationDetails.css';
 
 
 // react DatePicker 사용하기
@@ -158,21 +158,25 @@ function CheckReservationDetails() {
         <>
 
             <article>
-                <div>
-                    <table className="findCheckReservations">
+                <div className="findCheckReservations">
+                    <table className="findTable">
+                        <thead>
+                            <tr>
+                                <th>🧾전체조회</th>
+                                <th colSpan={2}>📅날짜별 조회</th>
+                                <th colSpan={2}>🖊️예약번호로 조회</th>
+                            </tr>
+                        </thead>
+
                         <tbody>
                             <tr>
-                                {/* 예약 전체 조회 버튼 */}
-                                <td>
-                                    <p>🧾전체조회</p>
-                                    <button onClick={() => userReservationAll(false)}>조회</button>
+                                <td> {/* 예약 전체 조회 버튼 */}
+                                    <button type="button" onClick={() => userReservationAll(false)}>조회</button>
                                 </td>
 
                                 {/*https://reactdatepicker.com/->Date Range with Portal*/}
                                 {/* 날짜지정 컴포넌트 */}
                                 <td>
-                                    <p>📅날짜로 찾기</p>
-                                    
                                     <DatePicker 
                                         selectsRange={true}
                                         startDate={startDate}
@@ -184,12 +188,13 @@ function CheckReservationDetails() {
                                         dateFormat="yyyy-MM-dd"                     // 날짜 형식
                                         placeholderText="날짜를 지정하세요"
                                     />
-                                    <button onClick={ searchByDate }>검색</button>
+                                </td>
+                                <td>
+                                    <button type="button" onClick={ searchByDate }>조회</button>
                                 </td>
                                 
                                 {/* 예약번호로 조회 */}
                                 <td>
-                                    <p>🖊️예약번호로 찾기</p>
                                     <input 
                                         name='reservationCode' 
                                         value={ reservationCode } 
@@ -198,64 +203,66 @@ function CheckReservationDetails() {
                                         }}
                                         placeholder='예약번호 입력'
                                     />
-                                    <button onClick={ searchByCode }>검색</button>
                                 </td>
-
+                                <td>
+                                    <button type="button" onClick={ searchByCode }>조회</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </article>
+            
             
             <br/>
 
-            <article>
-                <table className="ResultList">
-                    <thead>
-                        <tr>
-                            <th>번호</th>
-                            <th>예약번호</th>
-                            <th>지점</th>
-                            <th>테마명</th>
-                            <th>날짜</th>
-                            <th>시간</th>
-                            <th>상태</th>
-                            <th>취소신청</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        { reservations.length === 0 ? (
+                <div className="resultListdiv">
+                    <table className="resultListTable">
+                        <thead>
                             <tr>
-                                <td colSpan='7'>조회된 내역이 없습니다</td>
+                                <th>번호</th>
+                                <th>예약번호</th>
+                                <th>지점</th>
+                                <th>테마명</th>
+                                <th>날짜</th>
+                                <th>시간</th>
+                                <th>상태</th>
+                                <th>취소신청</th>
                             </tr>
-                        ) : (
-                            reservations.map((reserve, index) => (
-                                <tr key={reserve.reservationCode}>
-                                    <td>{index + 1}</td>
-                                    <td>{reserve.reservationCode}</td>
-                                    <td>{reserve.tema?.cafeName}</td>
-                                    <td>{reserve.tema?.temaName}</td>
-                                    <td>{reserve.useDate}</td>
-                                    <td>{reserve.useTime}</td>
-                                    <td>{reserve.paymentStatus}</td>
-                                    <td>
-                                        {reserve.paymentStatus === '취소신청' ? 
-                                            (<span>취소신청완료</span>) : 
-                                            reserve.paymentStatus === '취소완료' ?
-                                            (<button disabled>취소하기</button>) :
-                                            (<button onClick={() => {handleCancelClick(reserve)}}>
-                                                취소하기
-                                            </button>)}
-                                        
-                                    </td>
+                        </thead>
+                        <tbody>
+                            { reservations.length === 0 ? (
+                                <tr>
+                                    <td colSpan='7'>조회된 내역이 없습니다</td>
                                 </tr>
-                            ))
-                        )}
-                    </tbody>
-                </table>
+                            ) : (
+                                reservations.map((reserve, index) => (
+                                    <tr key={reserve.reservationCode}>
+                                        <td>{index + 1}</td>
+                                        <td>{reserve.reservationCode}</td>
+                                        <td>{reserve.tema?.cafeName}</td>
+                                        <td>{reserve.tema?.temaName}</td>
+                                        <td>{reserve.useDate}</td>
+                                        <td>{reserve.useTime}</td>
+                                        <td>{reserve.paymentStatus}</td>
+                                        <td>
+                                            {reserve.paymentStatus === '취소신청' ? 
+                                                (<span>취소신청완료</span>) : 
+                                                reserve.paymentStatus === '취소완료' ?
+                                                (<button disabled>취소하기</button>) :
+                                                (<button onClick={() => {handleCancelClick(reserve)}}>
+                                                    취소하기
+                                                </button>)}
+                                            
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </div>
                 {/* '더 보기' 버튼 */}
                 {hasMore && (
-                    <button onClick={() => setPage(prevPage => prevPage + 1)}>more</button>
+                    <button className="moreButton" onClick={() => setPage(prevPage => prevPage + 1)}>more</button>
                 )}
             </article>
         </>

@@ -1,0 +1,112 @@
+/* 전체 컨테이너 스타일링 */
+.reserve-container {
+    background: rgba(0, 0, 0, 0.8);
+    color: #f0f0f0;
+    padding: 40px; /* 패딩을 조금 더 크게 */
+    min-height: 70vh; /* 높이 조정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(255, 0, 0, 0.7);
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* 제목 스타일링 */
+.reserve-container h1 {
+    text-align: center;
+    color: #ff0000;
+    text-shadow: 0 0 15px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
+    font-size: 3em; /* 폰트 크기 키움 */
+    font-weight: bold;
+    letter-spacing: 4px;
+    margin-bottom: 40px;
+}
+
+/* 폼 스타일링 */
+.reserveForm {
+    width: 100%;
+    max-width: 700px;
+    min-width: 700px;
+    background-color: rgba(0, 0, 0, 0.7); /* 배경색을 더 어둡게 */
+    padding: 30px; /* 패딩을 더 크게 */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-collapse: collapse; /* 테이블 경계선이 끊기지 않도록 */
+}
+
+.reserveForm th, .reserveForm td {
+    padding: 15px; /* 더 넓은 여백 */
+    color: #f0f0f0;
+    font-size: 1.4em; /* 폰트 크기 키움 */
+    border-bottom: 1px solid rgba(255, 0, 0, 0.4); /* 더 투명한 붉은 경계선 */
+    box-shadow: 0 5px 10px rgba(255, 0, 0, 0.6); /* 더 크고 잘 보이는 붉은색 그림자 */
+}
+
+/* 입력 필드 스타일 */
+.reserveForm input[type="text"], .reserveForm input[type="number"], .reserveForm input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f0f0f0;
+    font-size: 1.4em; /* 폰트 크기 키움 */
+    margin-bottom: 20px;
+}
+
+/* 버튼 스타일 */
+.reserveForm input[type="submit"], .reserveForm input[type="button"] {
+    width: 100%;
+    background-color: #660000;
+    color: #f0f0f0;
+    padding: 15px; /* 버튼 크기 확대 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.4em; /* 버튼 텍스트 크기 키움 */
+    letter-spacing: 2px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+    margin-top: 30px; /* 버튼 위아래 간격 */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.reserveForm input[type="submit"]:hover, .reserveForm input[type="button"]:hover {
+    background-color: #ff0000;
+    transform: scale(1.05);
+}
+
+.reserveForm input[type="submit"]:active, .reserveForm input[type="button"]:active {
+    background-color: #cc0000;
+    transform: scale(0.98);
+}
+
+/* 테이블 헤더 스타일 */
+.reserveForm th {
+    text-align: left;
+    font-weight: bold;
+}
+
+/* 버튼 크기 조정 */
+.react-datepicker__input-container input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.3em; /* 날짜 입력 필드 폰트 크기 확대 */
+    text-align: center;
+}
+
+/* 시간 버튼 스타일 */
+.custom-button {
+    width: 150%;
+    height: 50px; /* 높이 설정 */
+    font-size: 1.4em;
+    margin: 10px 0;
+}
+/* 붉은색 경계선 및 그림자 효과 */
+.reserveForm th, .reserveForm td {
+    border-bottom: 1px solid rgba(255, 0, 0, 0.4); /* 더 투명한 붉은 경계선 */
+    box-shadow: 0 5px 10px rgba(255, 0, 0, 0.6); /* 더 크고 잘 보이는 붉은 그림자 */
+}
