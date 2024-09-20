@@ -1,0 +1,100 @@
+/* 전체 컨테이너 스타일 */
+.Anc_EditForm {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 20px;
+    min-height: 100vh;
+    color: #f0f0f0;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 제목 스타일 */
+.Anc_EditForm h1 {
+    color: #b12a2a;
+    font-size: 3em;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(212, 28, 28, 0.7), 0 0 20px rgba(212, 28, 28, 0.5), 0 0 30px #ff0000, 0 0 40px #ff0000;
+    margin-bottom: 50px;
+    letter-spacing: 5px;
+    transition: color 0.3s ease;
+    animation: flicker 2.5s infinite;
+    text-align: center; /* 제목을 중앙 정렬 */
+}
+
+/* 테이블 스타일 */
+.Anc_EditForm table {
+    margin: 0 auto;
+    width: 70%; /* 테이블 너비 조정 */
+    border-collapse: collapse;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0, 0, 0, 0.5);
+    color: #f0f0f0;
+    text-align: left; /* 테이블의 텍스트 왼쪽 정렬 */
+}
+
+/* 테이블 데이터 및 헤더 */
+.Anc_EditForm td, .Anc_EditForm th {
+    padding: 15px;
+    border: 1px solid #444;
+    color: #f0f0f0;
+    font-size: 0.9em;
+    width: 25%;
+}
+
+/* input 및 textarea 스타일 */
+.Anc_EditForm input, 
+.Anc_EditForm textarea {
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #660000;
+    color: #f0f0f0;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+/* textarea 스타일 수정 */
+.Anc_EditForm textarea {
+    height: 300px;
+    resize: none;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/* 버튼 컨테이너 스타일 */
+.button-container {
+    text-align: center; /* 버튼들을 중앙 정렬 */
+    margin-top: 20px; /* 위쪽에 여백 추가 */
+}
+
+/* 버튼 스타일 */
+#edit_button {
+    background-color: rgba(0, 0, 0, 0.7); 
+    color: #f0f0f0; 
+    border: 1px solid #660000;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    margin: 10px;
+}
+
+#edit_button:hover {
+    background-color: #550000; 
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ff0000;
+}
+
+#edit_button:active {
+    background-color: #c92020;
+    transform: scale(1.05);
+}

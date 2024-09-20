@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 import './member.css';
+import { useNavigate } from "react-router-dom";
+
 
 function MemberForm() {
-
+    const navigate = useNavigate()
     // 회원가입 폼 데이터 상태 관리
     const [insertMem, setInsertMem] = useState({
         memberId: '',
@@ -12,9 +14,6 @@ function MemberForm() {
         memberName: '',
         memberPhone: '',
         memberEmail: '',
-        shopName: '',
-        shopAddress: '',
-        shopPhone: '',
         loginType: 1, // 기본 로그인 타입은 일반 사용자
         birthDate: '', // 생년월일 추가
         gender: '', // 성별 추가
@@ -29,7 +28,7 @@ function MemberForm() {
     // 정규식 패턴
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 패턴
     const idPattern = /^[a-zA-Z0-9]{5,}$/; // 아이디 패턴: 5자 이상, 영문자와 숫자
-    const phonePattern = /^\d{10,11}$/; // 핸드폰 번호 패턴: 숫자만 10~11자
+    const phonePattern = /^\d{10,11}$/; // 핸드폰 번호 패턴: 숫자만 10~11자 
 
     // 폼 데이터 변경 처리
     const insertform = (e) => {
@@ -102,6 +101,7 @@ function MemberForm() {
         try {
             await axios.post('/api/insert', insertMem);
             alert('회원가입이 완료되었습니다.');
+            navigate("/");
         } catch (error) {
             // 서버에서 반환한 에러 메시지를 받아서 처리
             if (error.response && error.response.status === 400) {
@@ -120,11 +120,11 @@ function MemberForm() {
 
                 <label>로그인 타입:</label>
                 <select name="loginType" value={insertMem.loginType} onChange={insertform}>
-                    <option value={1}>일반 사용자</option>
+                    <option value={1}>사용자</option>
                     <option value={2}>관계자</option>
                 </select>
 
-                <label>아이디:</label>
+                <label>아이디</label>
                 <input
                     type="text"
                     name="memberId"
@@ -134,12 +134,12 @@ function MemberForm() {
                     required
                 />
                 {isUsernameAvailable !== null && (
-                    <p style={{ color: isUsernameAvailable ? 'green' : 'red' }}>
+                    <p style={{ color: isUsernameAvailable ? 'black' : 'black' }}>
                         {isUsernameAvailable ? '사용 가능한 아이디입니다.' : '이미 사용 중인 아이디입니다.'}
                     </p>
                 )}
 
-                <label>비밀번호:</label>
+                <label>비밀번호</label>
                 <input
                     type="password"
                     name="memberPwd"
@@ -148,7 +148,7 @@ function MemberForm() {
                     required
                 />
 
-                <label>비밀번호 확인:</label>
+                <label>비밀번호 확인</label>
                 <input
                     type="password"
                     name="memberPwdCheck"
@@ -162,7 +162,7 @@ function MemberForm() {
                     </p>
                 )}
 
-                <label>이름:</label>
+                <label>이름</label>
                 <input
                     type="text"
                     name="memberName"
@@ -171,7 +171,7 @@ function MemberForm() {
                     required
                 />
 
-                <label>생년월일:</label>
+                <label>생년월일</label>
                 <input
                     type="date" // 날짜 선택을 위한 입력 필드
                     name="birthDate"
@@ -180,14 +180,14 @@ function MemberForm() {
                     required
                 />
 
-                <label>성별:</label>
+                <label>성별</label>
                 <select name="gender" value={insertMem.gender} onChange={insertform} required>
                     <option value="">성별 선택</option>
                     <option value="male">남성</option>
                     <option value="female">여성</option>
                 </select>
 
-                <label>핸드폰 번호:</label>
+                <label>핸드폰 번호</label>
                 <input
                     type="text"
                     name="memberPhone"
@@ -196,7 +196,7 @@ function MemberForm() {
                     required
                 />
 
-                <label>이메일:</label>
+                <label>이메일</label>
                 <input
                     type="email"
                     name="memberEmail"
@@ -205,36 +205,8 @@ function MemberForm() {
                     required
                 />
 
-                {/* 로그인 타입이 관계자(2)일 때만 아래 입력란들을 보여줍니다 */}
-                {insertMem.loginType === 2 && (
-                    <>
-                        <label>가게 이름:</label>
-                        <input
-                            type="text"
-                            name="shopName"
-                            value={insertMem.shopName}
-                            onChange={insertform}
-                        />
 
-                        <label>가게 주소:</label>
-                        <input
-                            type="text"
-                            name="shopAddress"
-                            value={insertMem.shopAddress}
-                            onChange={insertform}
-                        />
-
-                        <label>가게 연락처:</label>
-                        <input
-                            type="text"
-                            name="shopPhone"
-                            value={insertMem.shopPhone}
-                            onChange={insertform}
-                        />
-                    </>
-                )}
-
-                <button type="submit">회원가입</button>
+                <button type="submit" >회원가입</button>
             </form>
         </div>
     );

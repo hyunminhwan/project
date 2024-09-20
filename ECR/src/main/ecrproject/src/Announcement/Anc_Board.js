@@ -1,8 +1,7 @@
-import './Announcement.css';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import'./test.css';
+import'./BoardCss.css';
 import { useSelector } from 'react-redux';
 function Anc_Board() {
     const navigate = useNavigate();
@@ -11,7 +10,7 @@ function Anc_Board() {
     const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수
     const [totalElements, setTotalElements] = useState(0); // 전체 글 갯수
     const loginToMember = useSelector((state) => state.loginMember);
-
+   
     useEffect(() => {
         PageList(Nowpage); // 페이지 변경 시 데이터 요청
     }, [Nowpage]);
@@ -51,13 +50,15 @@ function Anc_Board() {
             setPage(Nowpage - 1);
         }
     };
+
     return (
         <div className="anc-board-container">
-            <h1>공지 사항</h1>
+            <br /><br /><br /><br /><br /><br />
+            <h1>Announcement</h1>
             <br/>
             {/* ListClick 함수 씀 */}
             {loginToMember.member?.loginType ===3 &&(
-                <button type="button" onClick={() => ListClick()}>글쓰기</button>
+                <button id="button_a" type="button" onClick={() => ListClick()}>글쓰기</button>
             )
             }
            
@@ -66,11 +67,11 @@ function Anc_Board() {
             <table className="anc-board-table">
                 <thead>
                     <tr>
-                        <th>글 번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>조회수</th>
-                        <th>작성일</th>
+                        <th id="A">글 번호</th>
+                        <th id="A">제목</th>
+                        <th id="A">작성자</th>
+                        <th id="A">조회수</th>
+                        <th id="A">작성일</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,15 +82,16 @@ function Anc_Board() {
                             <td>{p.boardTitle}</td>
                             <td>{p.managerId}</td>
                             <td>{p.boardCount}</td>
-                            <td>{p.boardCreateDate}</td>
+                            <td>{p.boardCreateDate.slice(0,10)}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
             <div className="pagination-controls">
-                <button onClick={prevPage} disabled={Nowpage === 0}>이전 페이지</button>
-                <span>Page {Nowpage + 1} of {totalPages}</span>
-                <button onClick={nextPage} disabled={Nowpage === totalPages - 1}>다음 페이지</button>
+                < br/>< br/>
+                <button id="button_a" onClick={prevPage} disabled={Nowpage === 0}>Before</button>&emsp;
+                <span> {Nowpage + 1} / {totalPages}</span> &emsp;
+                <button id="button_a" onClick={nextPage} disabled={Nowpage === totalPages - 1}>Next</button>
             </div>
         </div>
     );

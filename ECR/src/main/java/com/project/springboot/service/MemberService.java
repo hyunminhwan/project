@@ -12,54 +12,63 @@ import com.project.springboot.repository.ReservationRepository;
 
 import jakarta.transaction.Transactional;
 
+
 @Service
 public class MemberService {
-    
-    @Autowired
-    MemberRepository memberRepository;
-    
-    @Autowired
-    ReservationRepository reservationRepository;
 
-    public Optional<Member> Member(int loginType, String memberId) {
-        return memberRepository.findMemberByLoginTypeAndMemberId(loginType, memberId);
-    }
+	@Autowired
+	MemberRepository memberRepository;
 
-    // ...
+	@Autowired
+	ReservationRepository reservationRepository;
 
-    public void memberInsert(Member member) {
-        // 중복 아이디 체크를 서비스 레벨에서도 진행 (보안 강화를 위해)
-        if (memberRepository.existsByMemberId(member.getMemberId())) {
-            throw new IllegalArgumentException("중복된 아이디입니다..");
-        }
-        memberRepository.save(member);
-    }
-
-    // ...
+	//로그인시 타입과 아이디를 비교해서 일반회원,관계자,관리자 비교
+	public Optional<Member> Member(int loginType , String memberId) {
+		return memberRepository.findMemberByLoginTypeAndMemberId(loginType,memberId);
+	}
 
 
-    
-    public List<Member> getLoginByType(Long loginType) {
-        return memberRepository.findByLoginType(loginType);
-    }
+	//회원가입
+	public void memberInsert(Member member) {
+		memberRepository.save(member);
 
-    // 관리자: 회원삭제
-    @Transactional
-    public void deleteMemberAndReservations(String memberId) {
-        if (memberRepository.existsById(memberId)) {
-            reservationRepository.deleteByUserId(memberId);
-            memberRepository.deleteById(memberId);
-        } else {
-            throw new IllegalArgumentException("해당 회원을 찾을 수 없습니다");
-        }
-    }
+	}
+
+	//로그인 타입에 해당하는 모든 회원 가져오기
+	public List<Member> getLoginByType(Long loginType) {
+		return memberRepository.findByLoginType(loginType);
 
 
+	}
+
+	// 관리자: 회원삭제
+	@Transactional  // 트랜잭션 설정 추가
+	public void deleteMemberAndReservations(String memberId) {
+		if(memberRepository.existsById(memberId)) {
+			reservationRepository.deleteByUserId(memberId);
+			memberRepository.deleteById(memberId);
+		} else {
+			throw new IllegalArgumentException("해당 회원을 찾을 수 없습니다");
+		}
+
+	}
 	
-    public boolean isMemberIdAvailable(String memberId) {
+	public boolean isMemberIdAvailable(String memberId) {
         boolean exists = memberRepository.existsByMemberId(memberId);
         return !exists; // 사용 가능한 경우 true 반환, 중복인 경우 false 반환
     }
+	
+	
+    // 회원 정보 가져오기
+    public Optional<Member> getMemberById(String memberId) {
+        return memberRepository.findById(memberId);
+    }
+
+    // 회원 정보 수정
+    public void updateMember(Member updatedMember) throws Exception {
+        // 데이터베이스에서 기존 회원 정보 가져오기
+        
     
-    
+}
+
 }

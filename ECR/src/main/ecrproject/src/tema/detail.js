@@ -4,18 +4,18 @@ import Location from "./location";
 import Review from "./review";
 import AvgRating from "./avgRating";
 import { useSelector } from "react-redux";
+
 function Detail() {
     const location = useLocation();
-    const { menus } = location.state;
+    const { menus } = location.state || {};
     const navigate = useNavigate();
-    const loginToMember = useSelector((state) => state.loginMember);
+    const loginToMember = useSelector((state) => state.loginMember)||null;
     return (
         <>
         
             <Container>
                 <Row>
                     <Col>
-                        <img id="a" src={`${process.env.PUBLIC_URL}/img/room${menus.temaNo}.jpg`} alt="테마 이미지" />
                         <img src={menus.imgUrl} alt="테마 이미지" />
                         
                         <div>테마번호 : {menus.temaNo}</div>
