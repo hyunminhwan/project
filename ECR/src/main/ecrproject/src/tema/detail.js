@@ -19,7 +19,8 @@ function Detail() {
                 <Row className="Detail_Top">
                     {/* 테마 이미지 */}
                     <Col md={7} className="Tema_Image">
-                        <img id="a" src={`${process.env.PUBLIC_URL}/img/room${menus.temaNo}.jpg`} alt="테마 이미지" />
+                        {/* <img id="a" src={`${process.env.PUBLIC_URL}/img/room${menus.temaNo}.jpg`} alt="테마 이미지" /> */}
+                        <img src={menus.imgUrl} alt="테마 이미지" />
                         <br/><br/>
                         {/* 지도 */}
                         <div className="MAP">

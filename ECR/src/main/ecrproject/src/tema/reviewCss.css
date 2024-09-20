@@ -1,3 +1,4 @@
+/* reviewCss.css */
 
 /* 리뷰 작성 폼 컨테이너 */
 .review-form-container {
@@ -70,7 +71,10 @@
 .review-footer {
     margin-top: 10px;
 }
-
+/* 리뷰 작성일 */
+.review-footer>span{
+    font-size:10px;
+} 
 /* 리뷰 버튼들 */
 .review-buttons .edit-button {
     margin-top: 10px;

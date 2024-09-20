@@ -103,7 +103,7 @@ const handleReserve = () => {
                     <tr>
                         <th>선택사항</th>
                         <td>
-                            지점 : {menus.cafeName}&ensp; 난이도 : {menus.difficulty}&ensp;인원수 : {menus.personnel}
+                            장르:#{menus.genre}&ensp;지점:#{menus.cafeName}&ensp;난이도:#{menus.difficulty}&ensp;인원수:#{menus.personnel}
                         </td>
                     </tr>
                     <tr>

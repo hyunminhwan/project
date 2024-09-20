@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
-import './EditFormCss.css'; // CSS 파일 임포트
+import './EditFormCss.css';
 
 function Anc_EditForm() {
     const location = useLocation();
@@ -101,7 +101,6 @@ function Anc_EditForm() {
                                     />
                                 </td>
                             </tr>
-                            {/* 작성일과 수정일을 같은 줄에 표시 */}
                             <tr>
                                 <td>작성일</td>
                                 <td>
@@ -123,7 +122,6 @@ function Anc_EditForm() {
                                     />
                                 </td>
                             </tr>
-                            {/* 내용은 한 줄로 표시 */}
                             <tr>
                                 <td>내용</td>
                                 <td colSpan="3">

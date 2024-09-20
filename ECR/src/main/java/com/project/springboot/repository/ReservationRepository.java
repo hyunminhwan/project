@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -32,10 +34,15 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Transactional  // 트랜잭션 설정 추가
 	void deleteByUserId(String memberId);
 
+    
     // 일반회원: 회원아이디와 기간별 예약조회 <- 이거임
     @Query("SELECT r FROM Reservation r JOIN FETCH r.tema WHERE r.userId = :userId AND r.useDate BETWEEN :startDate AND :endDate")
 	List<Reservation> findByUserIdAndUseDateBetween(@Param("userId") String userId, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
 	// 특정테마와 날짜로 예약정보 조회
 	List<Reservation> findByTemaAndUseDate(Tema tema, LocalDate useDate);
+
+	// 일반회원: 마이페이지 예약확인에서 예약내역 전체 조회(예약내역 조회)
+	Page<Reservation> findByUserId(String userId, PageRequest pageRequest);
+	
 }
