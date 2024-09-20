@@ -134,7 +134,7 @@ function MemberForm() {
                     required
                 />
                 {isUsernameAvailable !== null && (
-                    <p style={{ color: isUsernameAvailable ? 'black' : 'black' }}>
+                    <p style={{ color: isUsernameAvailable ? 'white' : 'white' }}>
                         {isUsernameAvailable ? '사용 가능한 아이디입니다.' : '이미 사용 중인 아이디입니다.'}
                     </p>
                 )}
