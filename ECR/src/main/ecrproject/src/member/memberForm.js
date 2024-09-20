@@ -157,7 +157,7 @@ function MemberForm() {
                     required
                 />
                 {isPasswordMatch !== null && (
-                    <p style={{ color: isPasswordMatch ? 'green' : 'red' }}>
+                    <p style={{ color: isPasswordMatch ? 'white' : 'white' }}>
                         {isPasswordMatch ? '비밀번호가 같습니다.' : '비밀번호가 일치하지 않습니다.'}
                     </p>
                 )}
