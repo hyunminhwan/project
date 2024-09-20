@@ -136,17 +136,10 @@ function TemaList() {
                        <Col lg={4} key={i} onClick={() => temaCount(menu)} style={{ cursor: 'pointer' }}>
                        <div className="tema-card">
                            <img src={menu.imgUrl} alt="테마 이미지" />
-                           <h2>{menu.temaName}</h2>
-                           <div>카페이름  {menu.cafeName}</div>
-                           <div>장르  {menu.genre}</div>
-                           <div>난이도  {menu.difficulty}</div>
-                           <div>내용  {menu.temaContent}</div>
-                           <div>소요시간  {menu.timetaken}분</div>
-                           <div>가격 {menu.price} 원</div>
-                           <div>최대 인원 {menu.personnel}</div>
+                           <div> {menu.cafeName}</div>
                            <StarRatings
-                               rating={menu.rating}
-                               starRatedColor="gold"
+                               rating={menu.difficulty}
+                               starRatedColor="red"
                                numberOfStars={5}
                                starDimension="24px"
                                starSpacing="2px"

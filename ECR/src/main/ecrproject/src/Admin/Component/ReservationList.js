@@ -13,6 +13,11 @@ function ReservationList() {
     const [page, setPage] = useState(1);                    // 페이지 번호(더 보기 기능)
     const [hasMore, setHasMore] = useState(true);           // 더 불러올 데이터 여부
 
+    // 페이지가 처음 로드될 때 전체 예약 데이터를 불러오는 useEffect
+    useEffect(() => {
+        fetchReservations();  // 페이지 로드 시 첫 페이지 전체 조회
+    }, []);  // 빈 배열을 사용해 컴포넌트가 처음 로드될 때만 실행
+
     // 전체 예약 데이터를 불러오는 함수
     const fetchReservations = (isLoadMore = false) => {
         axios.get('/res/adminFindAll', {
@@ -30,13 +35,7 @@ function ReservationList() {
                 // 새 조회 결과 덮어쓰기
                 setReservations(fetchedData);                       // 새 데이터로 덮어쓰기
             }
-
-            // 불러온 데이터가 20개 미만일 경우 더 불러올 데이터가 없다고 판단
-            if (fetchedData.length < 20) {
-                setHasMore(false);                                  // 더 이상 불러올 데이터가 없을 때
-            } else {
-                setHasMore(true);
-            }
+                setHasMore(fetchedData.length >= 20);                                                       
         })
         .catch(error => {
             console.error('전체 조회 오류: ', error);
@@ -54,6 +53,11 @@ function ReservationList() {
         const adjustedEndDate = new Date(endDate);
         adjustedEndDate.setDate(adjustedEndDate.getDate() + 1);
 
+        // 조회시 기존 reservations, page 상태를 초기화
+        setReservations([]);    // 기존 데이터 초기화
+        setPage(1);             // 페이지 초기화
+        setHasMore(false);      // 더보기 버튼 비활성화
+
         axios.get('/res/adminFindDate', {
             params : {
                 startDate : startDate.toISOString().split('T')[0],  // toISOString()는 YYYY-MM-ddTHH:mm:ss...로 반환됨 
@@ -61,10 +65,11 @@ function ReservationList() {
             }
         })
         .then(response => {
-            setReservations(response.data);                         // 예약 정보 설정
-            // 검색 후 데이터가 20개 이상일 경우 more 버튼 활성화
-            setHasMore(response.data.length >= 20);                 // 검색 시 더 보기 버튼 비활성화
-            setPage(1);                                             // 조회 후 페이지 번호 초기화
+            setReservations(response.data);                         // 조회한 예약정보 덮어쓰기
+            setHasMore(response.data.length >= 20);                 // 검색 후 데이터가 20개 이상일 경우 more 버튼 활성화
+            
+            console.log('response.data: ',response.data);
+            console.log('reservations: ', reservations);
         })
         .catch(() => {
             alert('날짜를 다시 선택하세요');
@@ -82,8 +87,7 @@ function ReservationList() {
         })
         .then(response => {
             setReservations(response.data);
-            // 검색 후 데이터가 20개 이상일 경우 more 버튼 활성화
-            setHasMore(response.data.length >= 20);
+            setHasMore(response.data.length >= 20);                 // 검색 후 데이터가 20개 이상일 경우 more 버튼 활성화
             setPage(1);                                             // 조회 후 페이지 번호 초기화
         })
         .catch(() => {
@@ -127,8 +131,9 @@ function ReservationList() {
             });
     };
 
-    // 페이지가 로드될 때 전체 예약 데이터를 20개 가져옴
+    // 페이지 번호가 변경될 때 추가 예약 조회
     useEffect(() => {
+        if(page === 1) return;
         fetchReservations(true);
     }, [page]);
 
@@ -139,7 +144,7 @@ function ReservationList() {
 
             <article>
                 <div>
-                    <table className="CheckReser">
+                    <table className="adminCheckReserve">
                         <tbody>
                             <tr>
                                 {/* 예약 전체 조회 버튼 */}
@@ -241,7 +246,7 @@ function ReservationList() {
 
             {/* '더 보기' 버튼 */}
             {hasMore && (
-                <button onClick={() => setPage((prevPage) => prevPage + 1)}>more</button>
+                <button onClick={() => setPage(prevPage => prevPage + 1)}>more</button>
             )}
         </>
     )
