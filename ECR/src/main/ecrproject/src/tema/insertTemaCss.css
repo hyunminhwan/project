@@ -1,5 +1,5 @@
 /* 전체 폼 컨테이너 */
-.insert-tema-form {
+.Inserttema_Form {
     background: rgba(0, 0, 0, 0.7);
     padding: 15px;
     border-radius: 8px;
@@ -11,7 +11,7 @@
 }
 
 /* 폼 제목 */
-.form-title {
+.Inserttema_Title {
     font-size: 1.5em;
     text-align: center;
     margin-bottom: 15px;
@@ -20,7 +20,7 @@
 }
 
 /* 폼 레이블 */
-.form-label {
+.Inserttema_Label {
     font-size: 0.9em;
     margin-bottom: 8px;
     display: block;
@@ -28,7 +28,7 @@
 }
 
 /* 폼 입력 필드 스타일 */
-.form-input, .form-select, .form-textarea, .form-input-file {
+.form-input, .Inserttema_Select, .form-textarea-center, .form-input-file {
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
@@ -40,7 +40,7 @@
 }
 
 /* 중앙 정렬을 위한 입력 필드들 */
-.form-group-center {
+.Inserttema_One {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,7 +48,7 @@
     margin: 0 auto 15px auto;
 }
 
-.form-input-center, .form-textarea-center, .form-select-center {
+.Inserttema_Center, .form-textarea-center, .Inserttema_Select-center {
     width: 50%; /* 중앙에 맞게 너비 설정 */
     padding: 8px;
     margin-bottom: 15px;
@@ -66,13 +66,13 @@
 }
 
 /* 두 개짜리 필드: Flex 적용 */
-.form-row {
+.Inserttema_Two {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
 }
 
-.form-group {
+.Inserttema_Group {
     width: 48%; /* 두 개의 필드를 나란히 배치 */
 }
 

@@ -1,17 +1,15 @@
-/* reviewCss.css */
-
 /* 리뷰 작성 폼 컨테이너 */
-.review-form-container {
+.Review_container {
     margin-bottom: 20px;
 }
 
 /* 별점 스타일 */
-.review-stars {
+.Review_Stars {
     margin-bottom: 10px;
 }
 
 /* 리뷰 텍스트 영역 스타일 */
-.review-textarea textarea {
+.Review-Textarea textarea {
     background-color: #2c2c2c; /* 어두운 배경색 */
     color: #e0e0e0; /* 밝은 텍스트 색상 */
     border: 1px solid #555; /* 테두리 색상 */
@@ -22,7 +20,7 @@
 }
 
 /* 텍스트 영역 포커스 효과 */
-.review-textarea textarea:focus {
+.Review-Textarea textarea:focus {
     outline: none; /* 기본 포커스 효과 제거 */
     border-color: #8b0000; /* 포커스 시 테두리 색상 변경 */
     box-shadow: 0 0 5px #8b0000; /* 포커스 시 그림자 효과 */
@@ -45,7 +43,7 @@
 }
 
 /* 리뷰 아이템 */
-.review-item {
+.Rreview_Item {
     background-color: #1c1c1c;
     padding: 15px;
     margin-bottom: 20px;
@@ -55,7 +53,7 @@
 }
 
 /* 리뷰 헤더 */
-.review-header {
+.Rreview_Header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -63,20 +61,22 @@
 }
 
 /* 리뷰 내용 */
-.review-content p {
+.Review_Content p {
     color: #e0e0e0;
 }
 
 /* 리뷰 푸터 */
-.review-footer {
+.Review_Footer {
     margin-top: 10px;
 }
+
 /* 리뷰 작성일 */
-.review-footer>span{
+.Review_Footer>span{
     font-size:10px;
 } 
+
 /* 리뷰 버튼들 */
-.review-buttons .edit-button {
+.Review_Buttons .edit-button {
     margin-top: 10px;
     background-color: #4CAF50; /* 수정하기 버튼은 초록색 */
     color: white;
@@ -87,12 +87,12 @@
     border-radius: 5px;
 }
 
-.review-buttons .edit-button:hover {
+.Review_Buttons .edit-button:hover {
     background-color: #45a049;
     transform: scale(1.05); /* 약간 커지는 효과 */
 }
 
-.review-buttons .delete-button {
+.Review_Buttons .delete-button {
     margin-top: 10px;
     background-color: #d32f2f; /* 삭제 버튼은 빨간색 */
     color: white;
@@ -103,13 +103,12 @@
     border-radius: 5px;
 }
 
-.review-buttons .delete-button:hover {
+.Review_Buttons .delete-button:hover {
     background-color: #c62828;
     transform: scale(1.05); /* 약간 커지는 효과 */
 }
 
 /* 리뷰 편집 모드 */
-.review-edit-mode {
+.Review_Eedit {
     margin-top: 15px;
 }
-

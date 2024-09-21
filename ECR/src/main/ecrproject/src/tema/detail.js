@@ -18,32 +18,32 @@ function Detail() {
                 <br/><br/>
                 <Row className="Detail_Top">
                     {/* 테마 이미지 */}
-                    <Col md={7} className="Tema_Image">
+                    <Col md={7} className="Detail_Tema_Image">
                         {/* <img id="a" src={`${process.env.PUBLIC_URL}/img/room${menus.temaNo}.jpg`} alt="테마 이미지" /> */}
                         <img src={menus.imgUrl} alt="테마 이미지" />
                         <br/><br/>
                         {/* 지도 */}
-                        <div className="MAP">
+                        <div className="Detail_MAP">
                             <Location latitude={menus.latitude} longitude={menus.longitude} />
                         </div>
                     </Col>
                     {/* 정보 섹션 및 댓글 */}
                     <Col md={5}>
                         <div className="DIV">
-                            <div className="info-section">
+                            <div className="Detail_Section">
                                 <h2>{menus.temaName}</h2>
-                                <div id="content">{menus.temaContent}</div>
+                                <div id="Detail_Content">{menus.temaContent}</div>
                                 <br/>
-                                <div id="content">장르 &emsp; {menus.genre}</div>
-                                <div id="content">난이도 &emsp; {menus.difficulty}</div>
-                                <div id="content">인원수 &emsp; {menus.personnel}</div>
-                                <div id="content">가격 {menus.price}원</div>
+                                <div id="Detail_Content">장르 &emsp; {menus.genre}</div>
+                                <div id="Detail_Content">난이도 &emsp; {menus.difficulty}</div>
+                                <div id="Detail_Content">인원수 &emsp; {menus.personnel}</div>
+                                <div id="Detail_Content">가격 {menus.price}원</div>
                                 <br/>
                                 <AvgRating temaNo={menus.temaNo} />
                             </div>
                             
                             {/* 댓글 */}
-                            <div className="Comment">
+                            <div className="Detail_Comment">
                                 <Review temaNo={menus.temaNo} />
                             </div>
                         </div>
@@ -51,11 +51,11 @@ function Detail() {
                 </Row>
                 
                 {/* 후기 작성 */}
-                <Row className="Review">
+                <Row className="Detail_Review">
                     <Col md={8}>
                     <br/><br/>
                         {loginToMember?.member ? (
-                            <Button id="button_a" onClick={() => {
+                            <Button id="Detail_button" onClick={() => {
                                 navigate('/reserve', { state: { menus } });
                             }}>예약하기</Button>
                         ) : (

@@ -1,16 +1,16 @@
 /* 테마 이미지 섹션 */
-.Tema_Image {
+.Detail_Tema_Image {
     flex: 2;
 }
 
-.Tema_Image img {
+.Detail_Tema_Image img {
     width: 100%;
     height: 500px; /* 이미지 높이 */
     border-radius: 10px; 
 }
 
 /* 지도 섹션 */
-.MAP {
+.Detail_MAP {
     width: 100%; /* 너비를 부모 요소에 맞추기 */
     height: 200px; /* 지도 높이 */
     border-radius: 10px;
@@ -18,14 +18,14 @@
 }
 
 /* 리뷰 작성 및 댓글 영역 스타일 */
-.Review {
+.Detail_Review {
     display: flex;
     justify-content: center; /* 가로 가운데 정렬 */
     margin-bottom: 20px;
 }
 
 /* 댓글 섹션 */
-.Comment {
+.Detail_Comment {
     margin-top: 20px; /* 정보 섹션과 댓글 사이의 간격 조정 */
     padding: 20px;
     background: rgba(0, 0, 0, 0.7); /* 배경색 조정 */
@@ -48,7 +48,7 @@
     height: 726px;
 }
 
-.info-section h2 {
+.Detail_Section h2 {
     color: #b12a2a; /* 강렬한 붉은색 */
     font-size: 2em; /* 제목 크기 */
     font-weight: bold;
@@ -58,8 +58,23 @@
     transition: color 0.3s ease; /* 마우스 오버 시 부드러운 색상 전환을 위한 트랜지션 */
 }
 
-#content {
+#Detail_Content {
     color: #b12a2a; /* 강렬한 붉은색 */
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(27, 25, 25, 0.5), 0 0 30px #ff0000, 0 0 40px #ff0000; /* 글자 주위에 붉은 빛 발광 효과 */
     font-size: 17px;
+}
+
+/* 예약 버튼 스타일 */
+#Detail_button {
+    background-color: #8b0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+#Detail_button:hover {
+    background-color: #a00000;
 }

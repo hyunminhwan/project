@@ -114,9 +114,9 @@ function Review({ temaNo }) {
     return (
         <>
             {loginToMember?.member ? (
-                <div className="review-form-container">
+                <div className="Review_container">
                     <form onSubmit={reviewinsert}>
-                        <div className="review-stars">
+                        <div className="Review_Stars">
                             <StarRatings
                                 rating={rating}
                                 starRatedColor="gold"
@@ -126,7 +126,7 @@ function Review({ temaNo }) {
                                 changeRating={(newRating) => setRating(newRating)}
                             />
                         </div>
-                        <div className="review-textarea">
+                        <div className="Review-Textarea">
                             <textarea
                                 value={reviewContent}
                                 onChange={(e) => setReviewContent(e.target.value)}
@@ -146,13 +146,13 @@ function Review({ temaNo }) {
             {
                 reviewList.slice(0, reviewCount).map((review) => {
                     return (
-                        <div key={review.reviewNo} className="review-item">
-                            <div className="review-header">
+                        <div key={review.reviewNo} className="Rreview_Item">
+                            <div className="Rreview_Header">
                                 <span>{review.userId}</span>
                                 <StarRating rating={review.reviewRating} />
                             </div>
                             {editMode === review.reviewNo ? (
-                                <div className="review-edit-mode">
+                                <div className="Review_Eedit">
                                     <StarRatings
                                         rating={editRating}
                                         starRatedColor="gold"
@@ -171,13 +171,13 @@ function Review({ temaNo }) {
                                     <Button variant="outline-secondary" onClick={() => setEditMode(0)}>취소</Button>
                                 </div>
                             ) : (
-                                <div className="review-content">
+                                <div className="Review_Content">
                                     <p>{review.reviewContent}</p>
-                                    <div className="review-footer">
+                                    <div className="Review_Footer">
                                         <span id="CD"> 작성일 {review.reviewCreatedDate.slice(0, 10)}</span>
                                         <br/><br/>
                                         {loginToMember.member?.memberId === review.userId && (
-                                            <div className="review-buttons">
+                                            <div className="Review_Buttons">
                                                 <Button variant="outline-secondary" onClick={() => EditModeOn(review)}>수정하기</Button> &emsp;
                                                 <Button variant="outline-danger" onClick={() => reviewDelete(review.reviewNo)}>삭제</Button>
                                             </div>

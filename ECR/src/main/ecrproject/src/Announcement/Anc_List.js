@@ -34,7 +34,7 @@ function Anc_List() {
             <h1>Write</h1>
             <br/>
             <form onSubmit={Anc_Submit}>
-                <table className="form-table">
+                <table className="Anc_List_Table">
                     <tbody>
                         <tr>
                             <td >작성자</td>

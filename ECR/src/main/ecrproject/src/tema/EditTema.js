@@ -46,9 +46,9 @@ function EditTema() {
     };
 
     return (
-        <div className="edit-tema-container">
+        <div className="Eedit_Container">
             <h1>테마 수정 관리</h1>
-            <table className="edit-tema-table">
+            <table className="Edit_Table">
                 <thead>
                     <tr>
                         <th>테마번호</th>
@@ -68,7 +68,7 @@ function EditTema() {
                     {temaList.map((tema) => (
                         <tr key={tema.temaNo}>
                             <td>{tema.temaNo}</td>
-                            <td><img src={tema.imgUrl} alt="테마이미지" className="tema-image" /></td>
+                            <td><img src={tema.imgUrl} alt="테마이미지" className="Tema_Image" /></td>
                             <td>{tema.cafeName}</td>
                             <td>{tema.temaName}</td>
                             <td>{tema.price}</td>
@@ -78,11 +78,11 @@ function EditTema() {
                             <td>{tema.difficulty}</td>
                             <td>{tema.genre}</td>
                             <td>
-                                <Button className="edit-button" onClick={() => navigate("/Modify", { state: { tema } })}>
+                                <Button className="Edit_Button" onClick={() => navigate("/Modify", { state: { tema } })}>
                                     수정하기
                                 </Button>
                                 &emsp;
-                                <Button className="edit-button" onClick={() => temaDelete(tema.temaNo, tema.imgUrl)}>
+                                <Button className="Edit_Button" onClick={() => temaDelete(tema.temaNo, tema.imgUrl)}>
                                     삭제하기
                                 </Button>
                             </td>

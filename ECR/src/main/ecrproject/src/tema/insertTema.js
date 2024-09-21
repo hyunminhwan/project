@@ -114,46 +114,47 @@ function InsertTema() {
     React.useEffect(() => {
         KakaoMap();
     }, []);
+
     return (
-        <div className="insert-tema-form">
-            <h2 className="form-title">테마 등록</h2>
-            <form onSubmit={TemaSubmit} className="tema-form">
+        <div className="Inserttema_Form">
+            <h2 className="Inserttema_Title">테마 등록</h2>
+            <form onSubmit={TemaSubmit} className="Inserttema_Submit">
                 
-                <div className="form-group-center">
-                    <label className="form-label">아이디</label>
-                    <input name="memberId" type='text' value={temaInsert.memberId} onChange={TemaData} readOnly className="form-input-center" />
+                <div className="Inserttema_One">
+                    <label className="Inserttema_Label">아이디</label>
+                    <input name="memberId" type='text' value={temaInsert.memberId} onChange={TemaData} readOnly className="Inserttema_Center" />
                 </div>
     
-                <div className="form-row">
-                    <div className="form-group">
-                        <label className="form-label">카페이름</label>
+                <div className="Inserttema_Two">
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">카페이름</label>
                         <input name="cafeName" type="text" value={temaInsert.cafeName} onChange={TemaData} required className="form-input" />
                     </div>
-                    <div className="form-group">
-                        <label className="form-label">테마이름</label>
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">테마이름</label>
                         <input name="temaName" type="text" value={temaInsert.temaName} onChange={TemaData} required className="form-input" />
                     </div>
                 </div>
     
-                <div className="form-row">
-                    <div className="form-group">
-                        <label className="form-label">소요시간</label>
+                <div className="Inserttema_Two">
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">소요시간</label>
                         <input name="timetaken" type="text" value={temaInsert.timetaken} onChange={TemaData} required className="form-input" />
                     </div>
-                    <div className="form-group">
-                        <label className="form-label">가격</label>
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">가격</label>
                         <input name="price" type="text" value={temaInsert.price} onChange={TemaData} required className="form-input" />
                     </div>
                 </div>
     
-                <div className="form-group-center">
-                    <label className="form-label">테마설명</label>
+                <div className="Inserttema_One">
+                    <label className="Inserttema_Label">테마설명</label>
                     <textarea name="temaContent" value={temaInsert.temaContent} onChange={TemaData} required className="form-textarea-center"></textarea>
                 </div>
     
-                <div className="form-group-center">
-                    <label className="form-label">지역</label>
-                    <select name="location" value={temaInsert.location} onChange={TemaData} className="form-select-center">
+                <div className="Inserttema_One">
+                    <label className="Inserttema_Label">지역</label>
+                    <select name="location" value={temaInsert.location} onChange={TemaData} className="Inserttema_Select-center">
                         <option value="서울">서울</option>
                         <option value="부산">부산</option>
                         <option value="대구">대구</option>
@@ -161,16 +162,16 @@ function InsertTema() {
                     </select>
                 </div>
     
-                <div className="form-group-center">
-                    <label className="form-label">주소:</label>
-                    <input name="address" type="text" value={temaInsert.address} onChange={TemaData} readOnly required className="form-input-center" />
+                <div className="Inserttema_One">
+                    <label className="Inserttema_Label">주소:</label>
+                    <input name="address" type="text" value={temaInsert.address} onChange={TemaData} readOnly required className="Inserttema_Center" />
                     <button type="button" onClick={AddressClick} className="form-button">주소 검색</button>
                 </div>
     
-                <div className="form-row">
-                    <div className="form-group">
-                        <label className="form-label">인원수</label>
-                        <select name="personnel" value={temaInsert.personnel} onChange={TemaData} className="form-select">
+                <div className="Inserttema_Two">
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">인원수</label>
+                        <select name="personnel" value={temaInsert.personnel} onChange={TemaData} className="Inserttema_Select">
                             <option value={2}>2명</option>
                             <option value={3}>3명</option>
                             <option value={4}>4명</option>
@@ -178,9 +179,9 @@ function InsertTema() {
                             <option value={6}>6명</option>
                         </select>
                     </div>
-                    <div className="form-group">
-                        <label className="form-label">난이도</label>
-                        <select name="difficulty" value={temaInsert.difficulty} onChange={TemaData} className="form-select">
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">난이도</label>
+                        <select name="difficulty" value={temaInsert.difficulty} onChange={TemaData} className="Inserttema_Select">
                             <option value={1}>1</option>
                             <option value={2}>2</option>
                             <option value={3}>3</option>
@@ -190,10 +191,10 @@ function InsertTema() {
                     </div>
                 </div>
     
-                <div className="form-row">
-                    <div className="form-group">
-                        <label className="form-label">장르</label>
-                        <select name="genre" value={temaInsert.genre} onChange={TemaData} className="form-select">
+                <div className="Inserttema_Two">
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">장르</label>
+                        <select name="genre" value={temaInsert.genre} onChange={TemaData} className="Inserttema_Select">
                             <option value="미스터리">미스터리</option>
                             <option value="호러">호러</option>
                             <option value="SF">SF</option>
@@ -202,8 +203,8 @@ function InsertTema() {
                             <option value="어드벤처">어드벤처</option>
                         </select>
                     </div>
-                    <div className="form-group">
-                        <label className="form-label">이미지 업로드</label>
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">이미지 업로드</label>
                         <input type="file" accept='image/*' onChange={InsertImg} required className="form-input-file" />
                     </div>
                 </div>
