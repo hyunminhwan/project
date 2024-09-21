@@ -1,4 +1,4 @@
-.login-form {
+.Login_Form {
     display: flex;
     flex-direction: column;
     align-items: center; /* 폼을 가운데 정렬 */
@@ -20,30 +20,30 @@
     border-radius: 5px;
   }
   
-  .toggle-button-group {
+  .Login_Toggle_Button_Group {
     margin-top: 10px;
   }
   
-  .toggle-button-custom {
+  .Login_Toggle_Button {
     color: red;
     border: 2px solid black;
     border-radius: 5px;
     background-color: white;
   }
   
-  .toggle-button-custom.active {
+  .Login_Toggle_Button.active {
     background-color: black !important; /* 활성화 시 배경을 검정색으로 변경 */
     border-color: black !important;
     color: white !important;
   }
   
-  .toggle-button-custom:focus, 
-  .toggle-button-custom:hover {
+  .Login_Toggle_Button:focus, 
+  .Login_Toggle_Button:hover {
     outline: none !important;
     box-shadow: none !important;
   }
   
-  .toggle-button-group {
+  .Login_Toggle_Button_Group {
     display: flex;
     justify-content: center;
     gap: 10px;

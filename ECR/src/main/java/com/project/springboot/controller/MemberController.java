@@ -77,14 +77,12 @@ public class MemberController {
 		return memberService.getLoginByType(loginType);
 	}
 
-	//--------------------------------------
 	// 관리자: 회원관리, 업체관리에서 회원삭제 클릭 시 회원삭제
 	@DeleteMapping("/members/{memberId}")
 	public ResponseEntity<Void> deleteMember(@PathVariable("memberId") String memberId) {
 		memberService.deleteMemberAndReservations(memberId);	// 회원 및 회원의 예약정보 삭제 호출
 		return ResponseEntity.noContent().build();
 	}
-	//--------------------------------------
 
 	@PostMapping("/check-username")
 	public ResponseEntity<Boolean> checkUsernameAvailability(@RequestBody Map<String, String> payload) {
