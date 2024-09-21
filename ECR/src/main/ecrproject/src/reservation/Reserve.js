@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import './Reservation.css';
+import './css/Reserve.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 //react-bootstrap
@@ -94,101 +94,101 @@ const handleReserve = () => {
 
     return(
         <>
-            <form onSubmit={e => { e.preventDefault() }}>           {/* 날짜 선택시 랜더링 방지 */}
-                <table className="reserveForm">
-                    <tr>
-                        <th>선택 테마</th>
-                        <td>{menus.temaName}</td>
-                    </tr>
-                    <tr>
-                        <th>선택사항</th>
-                        <td>
-                            장르:#{menus.genre}&ensp;지점:#{menus.cafeName}&ensp;난이도:#{menus.difficulty}&ensp;인원수:#{menus.personnel}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>사용 날짜</th>
-                        <td>
-                            <DatePicker
-                                showIcon
-                                selected={startDate}
-                                onChange={date => setStartDate(date)}   // 날짜 선택 시 상태 업데이트
-                                dateFormat="yyyy-MM-dd"                 // 날짜형식 0000-00-00으로 포매팅
-                                placeholder='날짜를 선택하세요'
-                                minDate={new Date()}                    // 오늘날짜부터 선택가능
-                            />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>사용 시간</th>
-                        <td>
-                            <p>
-                            <Button 
-                                variant="dark"
-                                disabled={isTimeReserved('09:00:00')}                              // 예약된 시간은 버튼 비활성화
-                                onClick={() => { setUseTime('09:00:00'); }}           // 선택한 시간으로 값 설정
-                                style={{ background: isSelected('09:00:00') ? 'red' : isTimeReserved('09:00:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
-                            >09:00 ~ 11:00</Button>&ensp;
-                            <Button 
-                                variant="dark"
-                                disabled={isTimeReserved('11:00:00')}                              // 예약된 시간은 버튼 비활성화
-                                onClick={() => { setUseTime('11:00:00'); }}                        // 선택한 시간으로 값 설정
-                                style={{ background: isSelected('11:00:00') ? 'red' : isTimeReserved('11:00:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
-                            >11:00 ~ 13:00</Button>
-                            </p>
-                            <p>
-                            <Button 
-                                variant="dark"
-                                disabled={isTimeReserved('13:00:00')}                              // 예약된 시간은 버튼 비활성화
-                                onClick={() => { setUseTime('13:00:00'); }}                        // 선택한 시간으로 값 설정
-                                style={{ background: isSelected('13:00:00') ? 'red' : isTimeReserved('13:00:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
-                            >13:00 ~ 15:00</Button>&ensp;
-                            <Button 
-                                variant="dark"
-                                disabled={isTimeReserved('15:00:00')}                              // 예약된 시간은 버튼 비활성화
-                                onClick={() => { setUseTime('15:00:00'); }}                        // 선택한 시간으로 값 설정
-                                style={{ background: isSelected('15:00:00') ? 'red' : isTimeReserved('15:00:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
-                            >15:00 ~ 17:00</Button>
-                            </p> 
-                            <p>
-                            <Button 
-                                variant="dark"
-                                disabled={isTimeReserved('17:00:00')}                              // 예약된 시간은 버튼 비활성화
-                                onClick={() => { setUseTime('17:00:00'); }}                        // 선택한 시간으로 값 설정
-                                style={{ background: isSelected('17:00:00') ? 'red' : isTimeReserved('17:00:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
-                            >17:00 ~ 19:00</Button>&ensp;
-                            <Button 
-                                variant="dark"
-                                disabled={isTimeReserved('19:00:00')}                              // 예약된 시간은 버튼 비활성화
-                                onClick={() => { setUseTime('19:00:00'); }}                        // 선택한 시간으로 값 설정
-                                style={{ background: isSelected('19:00:00') ? 'red' : isTimeReserved('19:00:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
-                            >19:00 ~ 21:00</Button>
-                            </p>     
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>이름*</th>
-                        <td>{userInfo.memberId}</td>
-                    </tr>
-                    <tr>
-                        <th>이용요금</th>
-                        <td>
-                            {menus.price}원 <b>※ 예약금 {menus.price*0.5}원 국민은행 00000000000 / 예금주:OOO</b>
-                        </td>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th>연락처*</th>
-                        <td>0{userInfo.memberPhone}</td>
-                    </tr>
-                    <tr>
-                        <td colSpan='2'>
-                            <input type="submit" value='예약하기' onClick={ handleReserve }/>&emsp;
-                            <input type="button" value='취소하기' onClick={() => { navigate('/') }} />
-                        </td>
-                    </tr>
-                </table>
-            </form>
+            <div className='Reserve-Container_Div'>
+                <form onSubmit={e => { e.preventDefault() }}>   {/* 날짜 선택시 랜더링 방지 */}
+                    <h1>Reserve</h1>
+         
+                    <table className="Reserve_Form_Table">
+                        <tr>
+                            <th>선택 테마</th>
+                            <td>{menus.temaName}</td>
+                        </tr>
+                        <tr>
+                            <th>선택사항</th>
+                            <td>
+                                <p>장르: #{menus.genre}&ensp;지점: #{menus.cafeName}</p><p>난이도: #{menus.difficulty}&ensp;인원수: #{menus.personnel}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>사용 날짜</th>
+                            <td>
+                                <DatePicker
+                                    selected={startDate}
+                                    onChange={date => setStartDate(date)}   // 날짜 선택 시 상태 업데이트
+                                    dateFormat="yyyy-MM-dd"                 // 날짜형식 0000-00-00으로 포매팅
+                                    placeholderText='날짜를 선택하세요'
+                                    minDate={new Date()}                    // 오늘날짜부터 선택가능
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>사용 시간</th>
+                            <td>
+                                <p>
+                                <Button
+                                    size="lg" 
+                                    variant="dark"
+                                    disabled={isTimeReserved('09:00:00')}                              // 예약된 시간은 버튼 비활성화
+                                    onClick={() => { setUseTime('09:00:00'); }}           // 선택한 시간으로 값 설정
+                                    style={{ background: isSelected('09:00:00') ? 'red' : isTimeReserved('09:00:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
+                                >09:00 ~ 11:00</Button>&emsp;
+                                <Button
+                                    size="lg"  
+                                    variant="dark"
+                                    disabled={isTimeReserved('11:00:00')}                              // 예약된 시간은 버튼 비활성화
+                                    onClick={() => { setUseTime('11:00:00'); }}                        // 선택한 시간으로 값 설정
+                                    style={{ background: isSelected('11:00:00') ? 'red' : isTimeReserved('11:00:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
+                                >11:00 ~ 13:00</Button>
+                                </p>
+                                <p>
+                                <Button
+                                    size="lg" 
+                                    variant="dark"
+                                    disabled={isTimeReserved('13:00:00')}                              // 예약된 시간은 버튼 비활성화
+                                    onClick={() => { setUseTime('13:00:00'); }}                        // 선택한 시간으로 값 설정
+                                    style={{ background: isSelected('13:00:00') ? 'red' : isTimeReserved('13:00:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
+                                >13:00 ~ 15:00</Button>&emsp;
+                                <Button
+                                    size="lg"
+                                    variant="dark"
+                                    disabled={isTimeReserved('15:00:00')}                              // 예약된 시간은 버튼 비활성화
+                                    onClick={() => { setUseTime('15:00:00'); }}                        // 선택한 시간으로 값 설정
+                                    style={{ background: isSelected('15:00:00') ? 'red' : isTimeReserved('15:00:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
+                                >15:00 ~ 17:00</Button>
+                                </p> 
+                                <p>
+                                <Button
+                                    size='lg'  
+                                    variant="dark"
+                                    disabled={isTimeReserved('17:00:00')}                              // 예약된 시간은 버튼 비활성화
+                                    onClick={() => { setUseTime('17:00:00'); }}                        // 선택한 시간으로 값 설정
+                                    style={{ background: isSelected('17:00:00') ? 'red' : isTimeReserved('17:00:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
+                                >17:00 ~ 19:00</Button>&emsp;
+                                <Button
+                                    size='lg' 
+                                    variant="dark"
+                                    disabled={isTimeReserved('19:00:00')}                              // 예약된 시간은 버튼 비활성화
+                                    onClick={() => { setUseTime('19:00:00'); }}                        // 선택한 시간으로 값 설정
+                                    style={{ background: isSelected('19:00:00') ? 'red' : isTimeReserved('19:00:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
+                                >19:00 ~ 21:00</Button>
+                                </p>     
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>이용요금</th>
+                                <td>
+                                    <b>총 {menus.price}원 ※ 예약금 {menus.price*0.5}원</b>
+                                </td>
+                        </tr>
+                        <tr>
+                            <td colSpan='2'>
+                                <p><input type="submit" value='예약하기' onClick={ handleReserve }/></p>
+                                <p><input type="button" value='취소하기' onClick={() => { navigate('/') }} /></p>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
         </>
     )
 }

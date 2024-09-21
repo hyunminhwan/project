@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './insertTema.css';
+import './insertTemaCss.css';
 import { useSelector } from 'react-redux';
 
 //주소 api
@@ -33,10 +33,10 @@ function Coordinates(address) {
 }
 
 function InsertTema() {
-    const loginToMember = useSelector((state) => state.loginMember);    //리덕스에 저장된 member 데이터 불러오기
-    const memberId = loginToMember.member.memberId;                     //memberId 뽑아오기
-    const [temaInsert, settemaInsert] = useState({
-        memberId:memberId,
+    const loginToMember = useSelector((state) => state.loginMember);
+    const memberId = loginToMember.member.memberId;
+    const [temaInsert, setTemaInsert] = useState({
+        memberId: memberId,
         cafeName: '',
         temaName: '',
         price: '',
@@ -47,74 +47,63 @@ function InsertTema() {
         difficulty: 1,
         location: '서울',
         genre: '미스터리',
-        imgUrl:null
-
+        imgUrl: null
     });
 
     const TemaSubmit = (event) => {
         event.preventDefault();
 
-        // 주소로 좌표 가져오기 & 모든 내용 저장하기
         Coordinates(temaInsert.address).then((coordinates) => {
             if (coordinates) {
-                //이미지를 같이 넣어서 보내주려면  FormData 함수를 사용해야함
                 const formData = new FormData();
-                formData.append('memberId',temaInsert.memberId);        //아이디
-                formData.append('imgUrl', temaInsert.imgUrl);             // 이미지
-                formData.append('cafeName', temaInsert.cafeName);       //카페이름
-                formData.append('temaName', temaInsert.temaName);       //테마이름
-                formData.append('price', temaInsert.price);             //가격
-                formData.append('timetaken', temaInsert.timetaken);     //소요시간
-                formData.append('temaContent', temaInsert.temaContent); //조회수
-                formData.append('address', temaInsert.address);         //주소
-                formData.append('personnel', temaInsert.personnel);     //인원수
-                formData.append('difficulty', temaInsert.difficulty);   //난이도
-                formData.append('location', temaInsert.location);       //지역
-                formData.append('genre', temaInsert.genre);             //장르
-                formData.append('latitude', coordinates.latitude);      //좌표
-                formData.append('longitude', coordinates.longitude);    //좌표
-                
-                // 서버에 데이터값 보내주기
-                axios.post("/api/tema", formData,{
+                formData.append('memberId', temaInsert.memberId);
+                formData.append('imgUrl', temaInsert.imgUrl);
+                formData.append('cafeName', temaInsert.cafeName);
+                formData.append('temaName', temaInsert.temaName);
+                formData.append('price', temaInsert.price);
+                formData.append('timetaken', temaInsert.timetaken);
+                formData.append('temaContent', temaInsert.temaContent);
+                formData.append('address', temaInsert.address);
+                formData.append('personnel', temaInsert.personnel);
+                formData.append('difficulty', temaInsert.difficulty);
+                formData.append('location', temaInsert.location);
+                formData.append('genre', temaInsert.genre);
+                formData.append('latitude', coordinates.latitude);
+                formData.append('longitude', coordinates.longitude);
+
+                axios.post("/api/tema", formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
-                    } 
+                    }
                 })
                     .then((response) => {
-                        console.log("완료:", response.data);
-                        alert("등록이 완료 되었습니다");
-
+                        alert("등록이 완료되었습니다.");
                     })
                     .catch((error) => {
-                        console.error(" 실패:", error);
+                        console.error("실패:", error);
                     });
             }
         });
     };
-    
-    //이미지넣기
+
     const InsertImg = (e) => {
-        settemaInsert({
+        setTemaInsert({
             ...temaInsert,
-            imgUrl: e.target.files[0],  // 파일 선택
+            imgUrl: e.target.files[0],
         });
     };
 
-    
     const TemaData = (e) => {
-        settemaInsert({
+        setTemaInsert({
             ...temaInsert,
             [e.target.name]: e.target.value
         });
     };
-    
 
-    //주소 카카오 api 사용
     const AddressClick = () => {
         new window.daum.Postcode({
             oncomplete: function (data) {
-                // 주소가 선택되면, 그 주소를 폼 데이터에 설정
-                settemaInsert({
+                setTemaInsert({
                     ...temaInsert,
                     address: data.address
                 });
@@ -122,80 +111,109 @@ function InsertTema() {
         }).open();
     };
 
-    // 처음 컴포넌트가 마운트될 때 카카오 주소 API 로드
     React.useEffect(() => {
         KakaoMap();
     }, []);
 
-
     return (
-        <div className="create">
-            <h2>테마등록</h2>
-            <form onSubmit={TemaSubmit}>
-                <label>아이디:</label> 
-                <input name="memberId" type='text' value={temaInsert.memberId} onChange={TemaData} readOnly/> <br />
-
-                <label>카페이름:</label>
-                <input name="cafeName" type="text" value={temaInsert.cafeName} onChange={TemaData}  required/> <br />
-
-                <label>테마이름:</label>
-                <input name="temaName" type="text" value={temaInsert.temaName} onChange={TemaData} required/><br />
-
-                <label>가격:</label>
-                <input name="price" type="text" value={temaInsert.price} onChange={TemaData} required /><br />
-
-                <label>소요시간:</label>
-                <input name="timetaken" type="text" value={temaInsert.timetaken} onChange={TemaData} required /><br />
-
-                <label>테마설명:</label>
-                <textarea name="temaContent" value={temaInsert.temaContent} onChange={TemaData} required></textarea><br />
-
-                <label>지역:</label>
-                <select name="location" value={temaInsert.location} onChange={TemaData}>
-                    <option value="서울">서울</option>
-                    <option value="부산">부산</option>
-                    <option value="대구">대구</option>
-                    <option value="인천">인천</option>
-                </select>
-
-
-                <label>주소:</label>
-                <input name="address" type="text" value={temaInsert.address} onChange={TemaData} readOnly required />
-                <button type="button" onClick={AddressClick}>주소 검색</button><br />
-
-                <label>인원수:</label>
-                <select name="personnel" value={temaInsert.personnel} onChange={TemaData}>
-                    <option value={2}>2명</option>
-                    <option value={3}>3명</option>
-                    <option value={4}>4명</option>
-                    <option value={5}>5명</option>
-                    <option value={6}>6명</option>
-                </select><br />
-
-                <label>난이도:</label>
-                <select name="difficulty" value={temaInsert.difficulty} onChange={TemaData}>
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                    <option value={4}>4</option>
-                    <option value={5}>5</option>
-                </select><br />
-
-                <label>장르:</label>
-                <select name="genre" value={temaInsert.genre} onChange={TemaData}>
-                    <option value="미스터리">미스터리</option>
-                    <option value="호러">호러</option>
-                    <option value="SF">SF</option>
-                    <option value="추리">추리</option>
-                    <option value="판타지">판타지</option>
-                    <option value="어드벤처">어드벤처</option>
-                </select><br />
+        <div className="Inserttema_Form">
+            <h2 className="Inserttema_Title">테마 등록</h2>
+            <form onSubmit={TemaSubmit} className="Inserttema_Submit">
                 
-                <input type="file" accept='image/*' onChange={InsertImg} required></input>
-                <button type="submit">등록</button>
+                <div className="Inserttema_One">
+                    <label className="Inserttema_Label">아이디</label>
+                    <input name="memberId" type='text' value={temaInsert.memberId} onChange={TemaData} readOnly className="Inserttema_Center" />
+                </div>
+    
+                <div className="Inserttema_Two">
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">카페이름</label>
+                        <input name="cafeName" type="text" value={temaInsert.cafeName} onChange={TemaData} required className="form-input" />
+                    </div>
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">테마이름</label>
+                        <input name="temaName" type="text" value={temaInsert.temaName} onChange={TemaData} required className="form-input" />
+                    </div>
+                </div>
+    
+                <div className="Inserttema_Two">
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">소요시간</label>
+                        <input name="timetaken" type="text" value={temaInsert.timetaken} onChange={TemaData} required className="form-input" />
+                    </div>
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">가격</label>
+                        <input name="price" type="text" value={temaInsert.price} onChange={TemaData} required className="form-input" />
+                    </div>
+                </div>
+    
+                <div className="Inserttema_One">
+                    <label className="Inserttema_Label">테마설명</label>
+                    <textarea name="temaContent" value={temaInsert.temaContent} onChange={TemaData} required className="form-textarea-center"></textarea>
+                </div>
+    
+                <div className="Inserttema_One">
+                    <label className="Inserttema_Label">지역</label>
+                    <select name="location" value={temaInsert.location} onChange={TemaData} className="Inserttema_Select-center">
+                        <option value="서울">서울</option>
+                        <option value="부산">부산</option>
+                        <option value="대구">대구</option>
+                        <option value="인천">인천</option>
+                    </select>
+                </div>
+    
+                <div className="Inserttema_One">
+                    <label className="Inserttema_Label">주소:</label>
+                    <input name="address" type="text" value={temaInsert.address} onChange={TemaData} readOnly required className="Inserttema_Center" />
+                    <button type="button" onClick={AddressClick} className="form-button">주소 검색</button>
+                </div>
+    
+                <div className="Inserttema_Two">
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">인원수</label>
+                        <select name="personnel" value={temaInsert.personnel} onChange={TemaData} className="Inserttema_Select">
+                            <option value={2}>2명</option>
+                            <option value={3}>3명</option>
+                            <option value={4}>4명</option>
+                            <option value={5}>5명</option>
+                            <option value={6}>6명</option>
+                        </select>
+                    </div>
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">난이도</label>
+                        <select name="difficulty" value={temaInsert.difficulty} onChange={TemaData} className="Inserttema_Select">
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <div className="Inserttema_Two">
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">장르</label>
+                        <select name="genre" value={temaInsert.genre} onChange={TemaData} className="Inserttema_Select">
+                            <option value="미스터리">미스터리</option>
+                            <option value="호러">호러</option>
+                            <option value="SF">SF</option>
+                            <option value="추리">추리</option>
+                            <option value="판타지">판타지</option>
+                            <option value="어드벤처">어드벤처</option>
+                        </select>
+                    </div>
+                    <div className="Inserttema_Group">
+                        <label className="Inserttema_Label">이미지 업로드</label>
+                        <input type="file" accept='image/*' onChange={InsertImg} required className="form-input-file" />
+                    </div>
+                </div>
+                <button type="submit" className="form-submit-button">등록</button>
             </form>
         </div>
     );
+    
+    
 }
-
 export default InsertTema;
+

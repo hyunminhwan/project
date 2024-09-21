@@ -12,6 +12,7 @@ function Login() {
     const [loginType, setLoginType] = useState(3); // 1: 일반, 2: 관계자, 3: 관리자
     let dispatch = useDispatch();
     const navigate = useNavigate();
+
     // 로그인 처리 로직
     const loginOn = (e) => {
         e.preventDefault();
@@ -19,30 +20,25 @@ function Login() {
         const memberId = e.target.memberId.value.trim();
         const memberPwd = e.target.memberPwd.value.trim();
 
-        // 유효성 검사: 아이디와 비밀번호가 입력되었는지 확인
         if (!memberId || !memberPwd) {
             alert("아이디와 비밀번호를 입력해주세요.");
-            return; // 빈 값일 경우 서버 요청 중단
+            return;
         }
-
 
         axios.post(`/api/memberLogin/${loginType}`, {
             memberId: memberId,
             memberPwd: memberPwd,
         })
             .then(response => {
-                // 서버 응답이 성공적일 때 처리
                 if (response.status === 200) {
-                    // 로그인 성공 시
-                    const memberData = response.data; // 서버에서 받은 사용자 정보           
-                    dispatch(login(memberData)); // 리덕스에 사용자 정보 저장
+                    const memberData = response.data;
+                    dispatch(login(memberData));
                     navigate("/");
                 } else {
                     alert("로그인 실패");
                 }
             })
             .catch(error => {
-                // 서버에서 오류가 발생했을 때 에러 처리
                 if (error.response && error.response.status === 401) {
                     alert("비밀번호가 틀렸습니다.");
                 } else if (error.response && error.response.status === 404) {
@@ -54,52 +50,37 @@ function Login() {
     };
 
     return (
-        <>
-            <div className="login-form">
-                <form onSubmit={loginOn}>
-                    <table>
-                        <tr>
-                            <td>아이디</td>
-                            <td><input name="memberId" /></td>
-                            <td rowSpan={2} >
-                                <button type="submit">로그인</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>비밀번호</td>
-                            <td><input type="password" name="memberPwd" /></td>
-                        </tr>
-                        <tr>
-                            <td colSpan={3}>
-                                <ToggleButtonGroup
-                                    className="toggle-button-group"
-                                    type="radio"
-                                    name="loginType"
-                                    value={loginType}
-                                    onChange={(val) => setLoginType(val)}
-                                >
-                                    <ToggleButton id="user" value={1} className="toggle-button-custom">
-                                        일반로그인
-                                    </ToggleButton>
-                                    <ToggleButton id="manager" value={2} className="toggle-button-custom">
-                                        관계자로그인
-                                    </ToggleButton>
-                                </ToggleButtonGroup>
-                            </td>
-                        </tr>
+        <div className="login-form">
+            <h1>Login</h1>
+            <form onSubmit={loginOn}>
+                <input name="memberId" placeholder="아이디" />
+                <input type="password" name="memberPwd" placeholder="비밀번호" />
+                
+                <ToggleButtonGroup
+                    className="toggle-button-group"
+                    type="radio"
+                    name="loginType"
+                    value={loginType}
+                    variant="outline-primary"
+                    onChange={(val) => setLoginType(val)}
+                >
+                    <ToggleButton id="user" value={1} className="toggle-button-custom">
+                        일반로그인
+                    </ToggleButton>
+                    <ToggleButton id="manager" value={2} className="toggle-button-custom">
+                        관계자로그인
+                    </ToggleButton>
+                </ToggleButtonGroup>
 
-                    </table>
-                    <br />
+                <button type="submit">로그인</button>
 
-
-                    <div>
-                        <Button type="button" onClick={() => navigate("/signup")}>회원가입&emsp;&emsp;</Button>
-                        <Button type="button" onClick={() => navigate("/findid")}>아이디 찾기</Button>
-                        <Button type="button" onClick={() => navigate("/findpwd")}>비밀번호 찾기</Button>
-                    </div>
-                </form>
-            </div>
-        </>
+                <div>
+                    <Button type="button" onClick={() => navigate("/signup")}>회원가입</Button>
+                    <Button type="button" onClick={() => navigate("/findid")}>아이디 찾기</Button>
+                    <Button type="button" onClick={() => navigate("/findpwd")}>비밀번호 찾기</Button>
+                </div>
+            </form>
+        </div>
     );
 }
 

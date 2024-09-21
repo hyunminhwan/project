@@ -114,9 +114,9 @@ function Review({ temaNo }) {
     return (
         <>
             {loginToMember?.member ? (
-                <div className="review-form-container">
+                <div className="Review_Insert">
                     <form onSubmit={reviewinsert}>
-                        <div className="review-stars">
+                        <div className="Review_Ratings">
                             <StarRatings
                                 rating={rating}
                                 starRatedColor="gold"
@@ -126,7 +126,7 @@ function Review({ temaNo }) {
                                 changeRating={(newRating) => setRating(newRating)}
                             />
                         </div>
-                        <div className="review-textarea">
+                        <div className="Review_Textarea">
                             <textarea
                                 value={reviewContent}
                                 onChange={(e) => setReviewContent(e.target.value)}
@@ -136,7 +136,7 @@ function Review({ temaNo }) {
                             />
                         </div>
                         <br />
-                        <button type="submit" className="submit-button">리뷰 등록</button>
+                        <button type="submit" className="Review_Submit">리뷰 등록</button>
                     </form>
                 </div>
             ) : (
@@ -146,18 +146,18 @@ function Review({ temaNo }) {
             {
                 reviewList.slice(0, reviewCount).map((review) => {
                     return (
-                        <div key={review.reviewNo} className="review-item">
-                            <div className="review-header">
+                        <div key={review.reviewNo} className="Review_List">
+                            <div className="Review_Header">
                                 <span>{review.userId}</span>
                                 <StarRating rating={review.reviewRating} />
                             </div>
                             {editMode === review.reviewNo ? (
-                                <div className="review-edit-mode">
+                                <div className="Review_Edit">
                                     <StarRatings
                                         rating={editRating}
                                         starRatedColor="gold"
                                         numberOfStars={5}
-                                        starDimension="50px"
+                                        starDimension="40px"
                                         starSpacing="3px"
                                         changeRating={(newRating) => setEditRating(newRating)}
                                     />
@@ -165,20 +165,22 @@ function Review({ temaNo }) {
                                         value={editContent}
                                         onChange={(e) => setEditContent(e.target.value)}
                                         rows="5"
-                                        cols="50"
+                                        cols="40"
                                     />
+                                    <div className="Review_Button">
                                     <Button variant="outline-primary" onClick={() => reviewEdit(review.reviewNo)}>저장</Button>
                                     <Button variant="outline-secondary" onClick={() => setEditMode(0)}>취소</Button>
+                                    </div>
                                 </div>
                             ) : (
-                                <div className="review-content">
+                                <div className="Review_Content">
                                     <p>{review.reviewContent}</p>
-                                    <div className="review-footer">
-                                        <span id="CD"> 작성일 {review.reviewCreatedDate.slice(0, 10)}</span>
+                                    <div className="Review_Footer">
+                                        <span > 작성일 {review.reviewCreatedDate.slice(0, 10)}</span>
                                         <br/><br/>
                                         {loginToMember.member?.memberId === review.userId && (
-                                            <div className="review-buttons">
-                                                <Button variant="outline-secondary" onClick={() => EditModeOn(review)}>수정하기</Button> &emsp;
+                                            <div className="Review_Button">
+                                                <Button variant="outline-secondary" onClick={() => EditModeOn(review)}>수정하기</Button>
                                                 <Button variant="outline-danger" onClick={() => reviewDelete(review.reviewNo)}>삭제</Button>
                                             </div>
                                         )}
