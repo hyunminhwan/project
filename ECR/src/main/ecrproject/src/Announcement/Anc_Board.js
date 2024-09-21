@@ -52,26 +52,26 @@ function Anc_Board() {
     };
 
     return (
-        <div className="anc-board-container">
+        <div className="Anc_Container">
             <br /><br /><br /><br /><br /><br />
             <h1>Announcement</h1>
             <br/>
             {/* ListClick 함수 씀 */}
             {loginToMember.member?.loginType ===3 &&(
-                <button id="button_a" type="button" onClick={() => ListClick()}>글쓰기</button>
+                <button id="Write_button" type="button" onClick={() => ListClick()}>글쓰기</button>
             )
             }
            
             <br/>
             <br/>
-            <table className="anc-board-table">
+            <table className="Anc_Table">
                 <thead>
                     <tr>
-                        <th id="A">글 번호</th>
-                        <th id="A">제목</th>
-                        <th id="A">작성자</th>
-                        <th id="A">조회수</th>
-                        <th id="A">작성일</th>
+                        <th id="Anc">글 번호</th>
+                        <th id="Anc">제목</th>
+                        <th id="Anc">작성자</th>
+                        <th id="Anc">조회수</th>
+                        <th id="Anc">작성일</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -87,11 +87,11 @@ function Anc_Board() {
                     ))}
                 </tbody>
             </table>
-            <div className="pagination-controls">
-                < br/>< br/>
-                <button id="button_a" onClick={prevPage} disabled={Nowpage === 0}>Before</button>&emsp;
+            <div className="Anc_pagination">
+                < br/>< br/>< br/>< br/>
+                <button id="Anc_Before_button" onClick={prevPage} disabled={Nowpage === 0}>Before</button>&emsp;
                 <span> {Nowpage + 1} / {totalPages}</span> &emsp;
-                <button id="button_a" onClick={nextPage} disabled={Nowpage === totalPages - 1}>Next</button>
+                <button id="Anc_Next_button" onClick={nextPage} disabled={Nowpage === totalPages - 1}>Next</button>
             </div>
         </div>
     );

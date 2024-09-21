@@ -1,5 +1,5 @@
 /* 전체 컨테이너 스타일링 */
-.anc-board-container {
+.Anc_Container {
     background-size: cover;
     color: #f0f0f0;
     padding: 20px;
@@ -10,7 +10,7 @@
 }
 
 /* 제목 스타일링 */
-.anc-board-container h1 {
+.Anc_Container h1 {
     text-align: center;
     color: #b12a2a;
     text-shadow: 0 0 10px rgba(212, 28, 28, 0.7), 0 0 20px rgba(212, 28, 28, 0.5), 0 0 30px #ff0000, 0 0 40px #ff0000;
@@ -22,11 +22,11 @@
     animation: ghost 5s infinite;
 }
 
-#A {
+#Anc {
     text-align: center;
 }
 
-.anc-board-container h1:hover {
+.Anc_Container h1:hover {
     color: #9a0707;
 }
 
@@ -47,7 +47,7 @@
 }
 
 /* 테이블 스타일링 */
-.anc-board-table {
+.Anc_Table {
     width: 70%; 
     margin: 0 auto;
     border-collapse: collapse;
@@ -61,7 +61,7 @@
 }
 
 /* 테이블 셀 스타일링 */
-.anc-board-table th, .anc-board-table td {
+.Anc_Table th, .Anc_Table td {
     background: rgba(0, 0, 0, 0.7);
     color: #f0f0f0;
     padding: 15px;
@@ -69,7 +69,7 @@
 }
 
 /* 테이블 헤더 스타일링 */
-.anc-board-table th {
+.Anc_Table th {
     border-bottom: 1px solid #444;
     text-align: left;
     color: #f2f2f2;
@@ -78,26 +78,26 @@
 }
 
 /* 테이블 본문 셀 스타일링 */
-.anc-board-table td {
+.Anc_Table td {
     padding: 12px;
     border-bottom: 1px solid #444;
     color: #e0e0e0;
 }
 
 /* 테이블 행 호버 스타일 */
-.anc-board-table tr:hover {
+.Anc_Table tr:hover {
     background: #550000;
     transform: scale(1.02);
 }
 
 /* 전체 페이지 중앙 정렬 */
-.anc-board-container {
+.Anc_Container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#button_a {
+#Write_button {
     background-color: rgba(0, 0, 0, 0.7); 
     color: #f0f0f0; 
     border: 1px solid #660000;
@@ -111,13 +111,44 @@
     cursor: pointer;
 }
 
-#button_a:hover {
+#Write_button:hover {
     background-color: #550000; 
     transform: scale(1.1); /* 살짝 확대되는 효과 */
     box-shadow: 0 0 20px #ff0000;
 }
 
-#button_a:active {
+#Write_button:active {
+    background-color: #c92020; /* 클릭 시 더 진한 붉은색 */
+    transform: scale(1.05); /* 클릭 시 약간 줄어드는 효과 */
+}
+
+.Anc_pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#Anc_Before_button, #Anc_Next_button {
+    background-color: rgba(0, 0, 0, 0.7); 
+    color: #f0f0f0; 
+    border: 1px solid #660000;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+#Anc_Before_button:hover, #Anc_Next_button:hover {
+    background-color: #550000; 
+    transform: scale(1.1); /* 살짝 확대되는 효과 */
+    box-shadow: 0 0 20px #ff0000;
+}
+
+#Anc_Before_button:active, #Anc_Next_button:active {
     background-color: #c92020; /* 클릭 시 더 진한 붉은색 */
     transform: scale(1.05); /* 클릭 시 약간 줄어드는 효과 */
 }

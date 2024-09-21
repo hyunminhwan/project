@@ -16,7 +16,7 @@ html, body {
   font-family: 'Song Myung', serif;
 }
 
-#a {
+#MainPage_a {
   font-family: 'Song Myung', serif;
   font-size: 60px;
   background-image: linear-gradient(to right, #715d5d, #c54242, #9b1313); /* 그라데이션 */
@@ -26,7 +26,7 @@ html, body {
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8); /* 그림자 추가 */
 }
 
-#b {
+#MainPage_b {
   font-size: 20px;
   font-family: 'Song Myung', serif;
   background-image: linear-gradient(to right, #a98787, #a16565, #918181); /* 그라데이션 */
@@ -37,7 +37,7 @@ html, body {
 }
 
 /* 섹션을 전체 화면 높이로 설정 */
-header, .theme-cards, .notice-event {
+header, .MainPage_Caution {
   min-height: 100vh;
   padding: 20px;
   box-sizing: border-box;
@@ -57,7 +57,7 @@ header {
 
 
 /* 테마 가운데로  */
-.theme-cards {
+.MainPage_Tema_Card {
   display: flex;
   flex-direction: column; /* 요소들을 세로로 나열 */
   align-items: center; /* 모든 항목을 가로 중앙 정렬 */
@@ -66,7 +66,7 @@ header {
   background-color: rgba(0, 0, 0, 0.5); /* 배경을 약간 투명하게 설정 */
 }
 
-.theme-cards .theme-h2 {
+.MainPage_Tema_Card .MainPage_Tema_h2 {
   text-align: center; /* h2 내부 텍스트 가운데 정렬 */
   font-size: 60px; /* 글자 크기 설정 */
   color: #fff; /* 텍스트 색상 */
@@ -78,7 +78,7 @@ header {
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
 }
 
-.theme-cards-container {
+.MainPage_TemaList {
   display: flex;
   justify-content: space-between; /* 카드 사이를 동일하게 배치 */
   align-items: center; /* 수직 중앙 정렬 */
@@ -88,7 +88,7 @@ header {
 }
 
 /* 테마 카드 */
-.theme-card {
+.MainPage_Tema {
   flex: 1 1 ; /* 5개가 한 줄에 들어가도록 카드의 너비를 18%로 설정 */
   text-align: center;
   border-radius: 10px;
@@ -98,36 +98,36 @@ header {
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.theme-card img {
+.MainPage_Tema img {
   border-radius: 5px;
   margin-bottom: 10px;
   width: 100%;
   height: 350px; 
 }
 
-.theme-card:hover {
+.MainPage_Tema:hover {
   transform: scale(1.05);
   box-shadow: 0 0 15px #ff0000;
 }
 
-.notice {
+.Caution {
   text-align: center;
 }
 
-.notice img {
+.Caution img {
   width: 100px; /* 이미지 크기를 적절히 조정 */
   height: auto;
   margin: 0 100px; /* 이미지 사이에 간격 추가 */
 }
 
-.notice-icons {
+.Caution_Icons {
   display: flex;
   justify-content: center; /* 가운데 정렬 */
   align-items: center; /* 수직 가운데 정렬 */
   gap: 30px; /* 아이콘 간의 간격 */
 }
 
-.icon-item {
+.Caution_Icons_Item {
   display: flex;
   flex-direction: column; /* 아이콘과 텍스트를 세로 정렬 */
   align-items: center; /* 가운데 정렬 */
@@ -135,33 +135,33 @@ header {
   width: 350px; /* 각 아이콘 아이템의 너비 조정 */
 }
 
-.icon-item img {
+.Caution_Icons_Item img {
   width: 85px; /* 아이콘 크기 조정 */
   height: auto;
   margin-bottom: 20px; /* 아이콘과 텍스트 사이에 여백 추가 */
 }
 
-.icon-item p {
+.Caution_Icons_Item p {
   margin: 15px 0; /* 텍스트 사이 간격 */
   font-size: 20px; /* 텍스트 크기 조정 */
   color: black;
 }
 
-#NoticeText {
+.Caution_Text {
   color: black;
   font-size: 50px;
 }
 
-#NoticeText1 {
+.Caution_Text2 {
   color: black;
   font-size: 20px;
   background-image: linear-gradient(to right, #000000, #000000); /* 원하는 그라데이션 색상 */
   background-clip: text;
 }
 
-#FONT {font-family: 'Gasoek One', sans-serif;}
+.Caution_Font {font-family: 'Gasoek One', sans-serif;}
 
-.FONT_P {
+.Caution_Font2 {
   background-image: linear-gradient(to right, #000000, #000000); /* 원하는 그라데이션 색상 */
   background-clip: text;
 }
