@@ -1,5 +1,5 @@
 /* 전체 컨테이너 스타일링 */
-.reserve-container {
+.Reserve-Container_Div {
     background: rgba(0, 0, 0, 0.8);
     color: #f0f0f0;
     padding: 40px; /* 패딩을 조금 더 크게 */
@@ -16,7 +16,7 @@
 }
 
 /* 제목 스타일링 */
-.reserve-container h1 {
+.Reserve-Container_Div h1 {
     text-align: center;
     color: #ff0000;
     text-shadow: 0 0 15px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
@@ -38,7 +38,7 @@
     border-collapse: collapse; /* 테이블 경계선이 끊기지 않도록 */
 }
 
-.reserveForm th, .reserveForm td {
+.Reserve_Form_Table th, .Reserve_Form_Table td {
     padding: 15px; /* 더 넓은 여백 */
     color: #f0f0f0;
     font-size: 1.4em; /* 폰트 크기 키움 */
@@ -47,7 +47,7 @@
 }
 
 /* 입력 필드 스타일 */
-.reserveForm input[type="text"], .reserveForm input[type="number"], .reserveForm input[type="date"] {
+.Reserve_Form_Table input[type="text"], .Reserve_Form_Table input[type="number"], .reserveForm input[type="date"] {
     width: 100%;
     padding: 12px;
     border: 1px solid #555;
@@ -59,7 +59,7 @@
 }
 
 /* 버튼 스타일 */
-.reserveForm input[type="submit"], .reserveForm input[type="button"] {
+.Reserve_Form_Table input[type="submit"], .Reserve_Form_Table input[type="button"] {
     width: 100%;
     background-color: #660000;
     color: #f0f0f0;
@@ -74,18 +74,18 @@
     transition: background-color 0.3s, transform 0.3s;
 }
 
-.reserveForm input[type="submit"]:hover, .reserveForm input[type="button"]:hover {
+.Reserve_Form_Table input[type="submit"]:hover, .Reserve_Form_Table input[type="button"]:hover {
     background-color: #ff0000;
     transform: scale(1.05);
 }
 
-.reserveForm input[type="submit"]:active, .reserveForm input[type="button"]:active {
+.Reserve_Form_Table input[type="submit"]:active, .Reserve_Form_Table input[type="button"]:active {
     background-color: #cc0000;
     transform: scale(0.98);
 }
 
 /* 테이블 헤더 스타일 */
-.reserveForm th {
+.Reserve_Form_Table th {
     text-align: left;
     font-weight: bold;
 }
@@ -106,7 +106,7 @@
     margin: 10px 0;
 }
 /* 붉은색 경계선 및 그림자 효과 */
-.reserveForm th, .reserveForm td {
+.Reserve_Form_Table th, .Reserve_Form_Table td {
     border-bottom: 1px solid rgba(255, 0, 0, 0.4); /* 더 투명한 붉은 경계선 */
     box-shadow: 0 5px 10px rgba(255, 0, 0, 0.6); /* 더 크고 잘 보이는 붉은 그림자 */
 }

@@ -13,11 +13,11 @@ function Payment() {
 
     return(
         <>
-            <div className='payment-container'>
+            <div className='Payment-Container_Div'>
                 <form>
                     <h1>예약내역</h1>
 
-                    <table className="reservationDetailForm">
+                    <table className="Payment_Table">
                         <tbody>
                             <tr>
                                 <th>예약번호</th>

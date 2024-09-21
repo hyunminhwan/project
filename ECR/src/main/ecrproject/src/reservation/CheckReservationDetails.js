@@ -158,8 +158,8 @@ function CheckReservationDetails() {
         <>
 
             <article>
-                <div className="findCheckReservations">
-                    <table className="findTable">
+                <div className="CRD_Find_Div">
+                    <table className="CRD_Find_Table">
                         <thead>
                             <tr>
                                 <th>🧾전체조회</th>
@@ -215,8 +215,8 @@ function CheckReservationDetails() {
             
             <br/>
 
-                <div className="resultListdiv">
-                    <table className="resultListTable">
+                <div className="CRD_ResultList_Div">
+                    <table className="CRD_ResultList_Table">
                         <thead>
                             <tr>
                                 <th>번호</th>
@@ -262,7 +262,7 @@ function CheckReservationDetails() {
                 </div>
                 {/* '더 보기' 버튼 */}
                 {hasMore && (
-                    <button className="moreButton" onClick={() => setPage(prevPage => prevPage + 1)}>more</button>
+                    <button className="CRD_MoreButton" onClick={() => setPage(prevPage => prevPage + 1)}>more</button>
                 )}
             </article>
         </>

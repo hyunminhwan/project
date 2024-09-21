@@ -1,5 +1,5 @@
 /* 조회 컨테이너 스타일링 */
-.findCheckReservations {
+.CRD_Find_Div {
     text-align: center;
     border-radius: 10px;
     border: 1px black;
@@ -13,7 +13,7 @@
 }
 
 /* 조회 테이블 스타일링 */
-.findTable {
+.CRD_Find_Table {
     width: 100%;
     max-width: 1300px;
     margin: 0 auto;
@@ -22,14 +22,14 @@
 }
 
 /* 조회 테이블 tr,td에 width 분배해서 가운데 정렬 */
-.findTable th {
+.CRD_Find_Table th {
     font-size: 1.5em;
     letter-spacing: 5px;
     width: 33%;
 }
 
 /* 조회 버튼 스타일 */
-.findTable td button {
+.CRD_Find_Table td button {
     background-color: #660000;
     color: #f0f0f0;
     border: none;
@@ -42,17 +42,17 @@
 }
 
 /* 버튼 hover 및 active 상태 */
-.findTable td button:hover {
+.CRD_Find_Table td button:hover {
     background-color: #ff0000;
     transform: scale(1.05);
 }
-.findTable td button:active {
+.CRD_Find_Table td button:active {
     background-color: #cc0000;
     transform: scale(0.98);
 }
 
 /* 날짜 선택 칸, 입력 필드 크기 조정 */
-.findTable td input, .findTable td .react-datepicker-wrapper {
+.CRD_Find_Table td input, .CRD_Find_Table td .react-datepicker-wrapper {
     width: 100%;
     max-width: 300px; /* 예약번호 입력 칸 크기 조정 */
     height: 45px;
@@ -65,7 +65,7 @@
 /* --------------------------------------------------------- */
 
 /* 예약리스트 컨테이너 스타일링 */
-.resultListdiv {
+.CRD_ResultList_Div {
     text-align: center;
     border-radius: 10px;
     border: 1px black;
@@ -79,7 +79,7 @@
 }
 
 /* 조회 테이블 스타일링 */
-.resultListTable {
+.CRD_ResultList_Table {
     width: 100%;
     max-width: 1300px;
     margin: 0 auto;   
@@ -91,7 +91,7 @@
 }
 
 /* 테이블 th, td 스타일링 */
-.resultListTable th, .resultListTable td {
+.CRD_ResultList_Table th, .CRD_ResultList_Table td {
     padding: 15px;
     color: #f0f0f0;
     font-size: 1.2em;
@@ -100,14 +100,14 @@
 }
 
 /* 테이블 th 스타일링 */
-.resultListTable th {
+.CRD_ResultList_Table th {
     text-align: center;
     font-weight: bold;
     font-size: 1.4em;
 }
 
 /* 취소신청 button 스타일링 */
-.resultListTable button {
+.CRD_ResultList_Table button {
     width: 100%;
     background-color: #660000;
     color: #f0f0f0;
@@ -122,17 +122,17 @@
 }
 
 /* 취소신청 button 효과 */
-.resultListTable button:hover {
+.CRD_ResultList_Table button:hover {
     background-color: #ff0000;
     transform: scale(1.05);
 }
-.resultListTable button:active {
+.CRD_ResultList_Table button:active {
     background-color: #cc0000;
     transform: scale(0.98);
 }
 
 /* 더보기 버튼 스타일링 */
-.moreButton {
+.CRD_MoreButton {
     width: 100px;
     background-color: #660000;
     color: #f0f0f0;
@@ -150,11 +150,11 @@
 }
 
 /* 더보기 버튼 효과 */
-.moreButton:hover {
+.CRD_MoreButton:hover {
     background-color: #ff0000;
     transform: scale(1.05);
 }
-.moreButton:active {
+.CRD_MoreButton:active {
     background-color: #cc0000;
     transform: scale(0.98);
 }
