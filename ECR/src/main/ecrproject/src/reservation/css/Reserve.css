@@ -23,11 +23,11 @@
     font-size: 3em; /* 폰트 크기 키움 */
     font-weight: bold;
     letter-spacing: 4px;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 }
 
 /* 폼 스타일링 */
-.reserveForm {
+.Reserve_Form_Table {
     width: 100%;
     max-width: 700px;
     min-width: 700px;
@@ -44,9 +44,10 @@
     font-size: 1.4em; /* 폰트 크기 키움 */
     border-bottom: 1px solid rgba(255, 0, 0, 0.4); /* 더 투명한 붉은 경계선 */
     box-shadow: 0 5px 10px rgba(255, 0, 0, 0.6); /* 더 크고 잘 보이는 붉은색 그림자 */
+    letter-spacing: 3px;
 }
 
-/* 입력 필드 스타일 */
+/* DatePiceker 스타일 */
 .Reserve_Form_Table input[type="text"], .Reserve_Form_Table input[type="number"], .reserveForm input[type="date"] {
     width: 100%;
     padding: 12px;
@@ -56,9 +57,10 @@
     color: #f0f0f0;
     font-size: 1.4em; /* 폰트 크기 키움 */
     margin-bottom: 20px;
+    text-align: center;
 }
 
-/* 버튼 스타일 */
+/* "예약하기", "취소하기" 버튼 스타일 */
 .Reserve_Form_Table input[type="submit"], .Reserve_Form_Table input[type="button"] {
     width: 100%;
     background-color: #660000;
@@ -67,46 +69,48 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1.4em; /* 버튼 텍스트 크기 키움 */
-    letter-spacing: 2px;
+    font-size: 1.6em; /* 버튼 텍스트 크기 키움 */
+    letter-spacing: 4px;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
     margin-top: 30px; /* 버튼 위아래 간격 */
     transition: background-color 0.3s, transform 0.3s;
 }
-
 .Reserve_Form_Table input[type="submit"]:hover, .Reserve_Form_Table input[type="button"]:hover {
     background-color: #ff0000;
     transform: scale(1.05);
 }
-
 .Reserve_Form_Table input[type="submit"]:active, .Reserve_Form_Table input[type="button"]:active {
     background-color: #cc0000;
     transform: scale(0.98);
 }
 
+
 /* 테이블 헤더 스타일 */
 .Reserve_Form_Table th {
-    text-align: left;
+    text-align: center;
     font-weight: bold;
 }
-
-/* 버튼 크기 조정 */
-.react-datepicker__input-container input {
-    width: 100%;
-    padding: 12px;
-    font-size: 1.3em; /* 날짜 입력 필드 폰트 크기 확대 */
-    text-align: center;
+.Reserve_Form_Table td {
+    padding-top: 30px;
 }
 
 /* 시간 버튼 스타일 */
-.custom-button {
-    width: 150%;
+#Reserve_Custom_Button {
+    width: 40%;
     height: 50px; /* 높이 설정 */
-    font-size: 1.4em;
+    font-size: 1.6em;
     margin: 10px 0;
+    line-height: 20px;
 }
 /* 붉은색 경계선 및 그림자 효과 */
 .Reserve_Form_Table th, .Reserve_Form_Table td {
     border-bottom: 1px solid rgba(255, 0, 0, 0.4); /* 더 투명한 붉은 경계선 */
     box-shadow: 0 5px 10px rgba(255, 0, 0, 0.6); /* 더 크고 잘 보이는 붉은 그림자 */
+}
+
+#Reserve_Table_Tema_Details {
+    font-size: 1.4em; /* 글자 크기를 키움 */
+    line-height: 1.1em; /* 줄 간격을 넓게 설정 */
+    color: #f0f0f0;
+    text-align: center; /* 왼쪽 정렬 */
 }

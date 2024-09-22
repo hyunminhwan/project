@@ -35,7 +35,7 @@
 }
 
 /* 테이블 스타일 */
-.Anc_List .form-table {
+.Anc_List .Anc_List_Table {
     margin: 0 auto;
     width: 50%;
     border-collapse: collapse;

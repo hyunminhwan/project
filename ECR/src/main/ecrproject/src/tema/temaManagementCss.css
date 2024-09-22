@@ -1,0 +1,75 @@
+/* 테마 관리 테이블 컨테이너 */
+.TemaManagement_Table_Container {
+    text-align: center;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #f0f0f0;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(255, 0, 0, 0.7);
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+/* 테마 관리 테이블 스타일 */
+.TemaManagement_Table {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-collapse: collapse;
+}
+
+/* 테이블 헤더와 셀 스타일 */
+.TemaManagement_Table th, .TemaManagement_Table td {
+    padding: 15px;
+    color: #f0f0f0;
+    font-size: 1.2em;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.4);
+    box-shadow: 0 2px 5px rgba(255, 0, 0, 0.6);
+}
+
+.TemaManagement_Table th {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+/* 이미지 스타일 */
+.TemaManagement_Img {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+}
+
+/* 더보기 버튼 스타일 */
+.TemaManagement_Button {
+    width: 150px;
+    background-color: #660000;
+    color: #f0f0f0;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.4em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 30px;
+}
+
+/* 버튼 hover 및 active 상태 */
+.TemaManagement_Button:hover {
+    background-color: #ff0000;
+    transform: scale(1.05);
+}
+
+.TemaManagement_Button:active {
+    background-color: #cc0000;
+    transform: scale(0.98);
+}

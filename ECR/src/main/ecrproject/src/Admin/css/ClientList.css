@@ -1,0 +1,102 @@
+/* 제목 div 스타일 */
+.ClientList_Title_Div {
+    text-align: center;     /* 텍스트 가운데 정렬 */
+    vertical-align: center; /* 세로 가운데 정렬 */
+    border: 1px black;    /* 선 */
+    border-radius: 10px;    /* 선 둥근모서리 */
+    background: rgba(0, 0, 0, 0.8); /* 배경색 */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(255, 0, 0, 0.7);   /* 박스 스타일 */
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 30px;
+}
+/* 제목 스타일 */
+.ClientList_Title_Div h1 {
+    color: #b12a2a;
+    text-shadow: 0 0 10px rgba(212, 28, 28, 0.7), 0 0 20px rgba(212, 28, 28, 0.5), 0 0 30px #ff0000, 0 0 40px #ff0000;
+    font-size: 3em;
+    font-weight: bold;
+    letter-spacing: 5px;
+    animation: ghost 3s infinite;
+    transition: color 0.1s ease;
+}
+/* 리스트 div 스타일 */
+.ClientList_List_Div {
+    text-align: center;     /* 텍스트 가운데 정렬 */
+    vertical-align: center; /* 세로 가운데 정렬 */
+    border: 1px black;    /* 선 */
+    border-radius: 10px;    /* 선 둥근모서리 */
+    background: rgba(0, 0, 0, 0.8); /* 배경색 */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(255, 0, 0, 0.7);   /* 박스 스타일 */
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 30px;
+}
+/* 리스트 테이블 스타일 */
+.ClientList_List_Table {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+    border-collapse: collapse;
+}
+/* 리스트 헤더 스타일 */
+.ClientList_List_Table th {
+    padding: 15px;
+    color: #f0f0f0;
+    font-size: 1.4em;
+    box-shadow: 0 2px 0 rgba(255, 0, 0, 0.6);
+}
+/* 리스트 셀 스타일 */
+.ClientList_List_Table td {
+    padding: 15px;
+    color: #f0f0f0;
+    font-size: 1.3em;
+    box-shadow: 0 2px 0 rgba(255, 0, 0, 0.6);
+}
+/* 회원삭제 button 스타일 */
+.ClientList_List_Table button {
+    width: 100%;
+    background-color: #660000;
+    color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+    font-weight: bold;
+}
+.ClientList_List_Table button:hover {
+    background-color: #ff0000;
+    transform: scale(1.05);
+}
+.ClientList_List_Table button:active {
+    background-color: #cc0000;
+    transform: scale(0.98);
+}
+/* 더보기 버튼 스타일 */
+.ClientList_MoreButton {
+    width: 100px;
+    background-color: #660000;
+    color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.ClientList_MoreButton button:hover {
+    background-color: #ff0000;
+    transform: scale(1.05);
+}
+.ClientList_MoreButton button:active {
+    background-color: #cc0000;
+    transform: scale(0.98);
+}

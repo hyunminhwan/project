@@ -153,6 +153,11 @@ function CheckReservationDetails() {
             })
     }
 
+    // {reservation.useTime} 이용시간 포맷 함수
+    const formatStartUseTime = (time) => {
+        return time.slice(0,5);
+    }
+
 
     return(
         <>
@@ -242,7 +247,7 @@ function CheckReservationDetails() {
                                         <td>{reserve.tema?.cafeName}</td>
                                         <td>{reserve.tema?.temaName}</td>
                                         <td>{reserve.useDate}</td>
-                                        <td>{reserve.useTime}</td>
+                                        <td>{`${formatStartUseTime(reserve.useTime)} ~ ${parseInt(reserve.useTime)+2}:00`}</td>
                                         <td>{reserve.paymentStatus}</td>
                                         <td>
                                             {reserve.paymentStatus === '취소신청' ? 

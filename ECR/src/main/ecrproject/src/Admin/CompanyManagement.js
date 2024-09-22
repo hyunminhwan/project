@@ -1,5 +1,3 @@
-import './Admin.css';
-
 // 각 회원정보 컴포넌트
 import CompanyList from './Component/CompanyList';              // 업체회원 컴포넌트
 

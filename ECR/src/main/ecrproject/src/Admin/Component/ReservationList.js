@@ -2,10 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "../css/ReservationList.css";
 
 function ReservationList() {
-    const [startDate, setStartDate] = useState(new Date()); // 시작날짜 설정
-    const [endDate, setEndDate] = useState(new Date());     // 종료날짜 설정
+    // 날짜로 조회 변수
+    const [dateRange, setDateRange] = useState([null, null]);       // 날짜 범위
+    const [startDate, endDate] = dateRange;                         // startDate, endDate 가져오기
 
     const [paymentStatus, setPaymentStatus] = useState(""); // 결제 상태
 
@@ -136,118 +138,133 @@ function ReservationList() {
         if(page === 1) return;
         fetchReservations(true);
     }, [page]);
+    
+    // 날짜 포맷 함수
+    const formatDate = (date) => {
+        return date.slice(0,10);
+    }
+    // 이용시간 포맷 함수
+    const formatUseTime = (time) => {
+        return time.slice(0,5);
+    }
 
     return(
         <>
-            <h2>예약관리</h2>
-            <hr />
+        <article>
+            <div className="ReservationList_Find_Div">
+                <h1>예약관리</h1>            
+                <table className="ReservationList_Title_Find_Table">
+                    <thead>
+                        <tr>
+                            <th>🧾전체조회</th>
+                            <th colSpan={2}>📅날짜로 찾기</th>
+                            <th colSpan={2}>🖊️결제상태로 찾기</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {/* 예약 전체 조회 버튼 */}
+                            <td>
+                                <button onClick={() => fetchReservations(false)}>조회</button>
+                            </td>
 
-            <article>
-                <div>
-                    <table className="adminCheckReserve">
-                        <tbody>
-                            <tr>
-                                {/* 예약 전체 조회 버튼 */}
-                                <td>
-                                    <p>🧾전체조회</p>
-                                    <button onClick={() => fetchReservations(false)}>조회</button>
-                                </td>
-
-                                {/* 날짜별 조회 */}
-                                <td>
-                                    <p>📅날짜로 찾기</p>
-                                    {/*https://reactdatepicker.com/->Default*/}
-                                    <DatePicker
-                                    selected={startDate}
-                                    onChange={(date) => setStartDate(date)}
-                                    dateFormat="yyyy-MM-dd"                     // 날짜 형식
-                                    placeholderText="시작 날짜"
+                            {/* 날짜별 조회 */}
+                            <td>
+                                {/*https://reactdatepicker.com/->Default*/}
+                                <DatePicker
+                                        className="ReservationList_DatePiceker" 
+                                        selectsRange={true}
+                                        startDate={startDate}
+                                        endDate={endDate}
+                                        onChange={update => {
+                                            setDateRange(update);                   // 지정날짜 상태 수정
+                                        }}
+                                        withPortal
+                                        dateFormat="yyyy-MM-dd"                     // 날짜 형식
+                                        placeholderText="날짜를 지정하세요"
                                     />
-                                    ~
-                                    <DatePicker
-                                    selected={endDate}
-                                    onChange={(date) => setEndDate(date)}
-                                    dateFormat="yyyy-MM-dd"                     // 날짜 형식
-                                    placeholderText="종료 날짜"
-                                    minDate={startDate}                         // endDate는 startDate 이후만 선택하도록
-                                    />
-                                    <button onClick={searchByDate}>조회</button>
-                                </td>
+                            </td>
+                            <td>
+                                <button onClick={searchByDate}>조회</button>
+                            </td>
 
-                                {/* 결제 상태별 조회 */}
-                                <td>
-                                    <p>🖊️결제상태로 찾기</p>
-                                    <select value={paymentStatus} onChange={e => {
-                                        setPaymentStatus(e.target.value)
-                                    }} >
-                                        <option value=''>결제상태 선택</option>
-                                        <option value='예약확정'>예약확정</option>
-                                        <option value='결제대기'>결제대기</option>
-                                        <option value='취소신청'>취소신청</option>
-                                        <option value='취소완료'>취소완료</option>
-                                    </select>
-                                    <button onClick={searchByStatus}>조회</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </article>
-
-            {/* 예약 목록 테이블 */}
-            <table>
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>예약날짜</th>
-                        <th>예약번호</th>
-                        <th>지역</th>
-                        <th>지점명</th>
-                        <th>테마이름</th>
-                        <th>아이디</th>
-                        <th>사용날짜</th>
-                        <th>사용시간</th>
-                        <th>가격</th>
-                        <th>결제상태</th>
-                        <th>취소승인</th>
-                        <th>예약승인</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {reservations.map((reservation, index) => (
-                    <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{reservation.reservationDate}</td>
-                        <td>{reservation.reservationCode}</td>
-                        <td>{reservation.tema?.location || 'N/A'}</td>   {/* tema가 null일 수 있으므로 안전하게 접근 */}
-                        <td>{reservation.tema?.cafeName || 'N/A'}</td>   {/* Optional chaining 사용 */}
-                        <td>{reservation.tema?.temaName || 'N/A'}</td>   {/* tema 정보 없을 시 'N/A' 표시 */}
-                        <td>{reservation.userId}</td>
-                        <td>{reservation.useDate}</td>
-                        <td>{reservation.useTime}</td>
-                        <td>{reservation.tema?.price || 'N/A'}</td>
-                        <td>{reservation.paymentStatus}</td>
-                        <td>
-                            {reservation.paymentStatus === '취소신청' ? 
-                                ( <button onClick={() => approveCancellation(reservation.reservationCode)}>승인</button> ) : 
-                                ( <button disabled>승인</button> )
-                            }
-                        </td>
-                        <td>
-                            {reservation.paymentStatus === '결제대기' ? 
-                                ( <button onClick={() => approveReservation(reservation.reservationCode)}>승인</button> ) : 
-                                ( <button disabled>승인</button> )
-                            }
-                        </td>
-                    </tr>
-                    ))}
-                </tbody>
-            </table>
+                            {/* 결제 상태별 조회 */}
+                            <td>
+                                <select value={paymentStatus} onChange={e => {
+                                    setPaymentStatus(e.target.value)
+                                }} >
+                                    <option value=''>결제상태 선택</option>
+                                    <option value='예약확정'>예약확정</option>
+                                    <option value='결제대기'>결제대기</option>
+                                    <option value='취소신청'>취소신청</option>
+                                    <option value='취소완료'>취소완료</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button onClick={searchByStatus}>조회</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div className="ReservationList_List_Div">
+                {/* 예약 목록 테이블 */}
+                <table className="ReservationList_List_Table">
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>예약날짜</th>
+                            <th>예약번호</th>
+                            <th>지역</th>
+                            <th>지점명</th>
+                            <th>테마이름</th>
+                            <th>아이디</th>
+                            <th>사용날짜</th>
+                            <th>사용시간</th>
+                            <th>가격</th>
+                            <th>결제상태</th>
+                            <th>취소승인</th>
+                            <th>예약승인</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {reservations.map((reservation, index) => (
+                        <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{formatDate(reservation.reservationDate)}</td>
+                            <td>{reservation.reservationCode}</td>
+                            <td>{reservation.tema?.location || 'N/A'}</td>   {/* tema가 null일 수 있으므로 안전하게 접근 */}
+                            <td>{reservation.tema?.cafeName || 'N/A'}</td>   {/* Optional chaining 사용 */}
+                            <td>{reservation.tema?.temaName || 'N/A'}</td>   {/* tema 정보 없을 시 'N/A' 표시 */}
+                            <td>{reservation.userId}</td>
+                            <td>{reservation.useDate}</td>
+                            <td>{`${formatUseTime(reservation.useTime)} ~ ${parseInt(reservation.useTime)+2}:00`}</td>
+                            <td>{reservation.tema?.price || 'N/A'}</td>
+                            <td>{reservation.paymentStatus}</td>
+                            <td>
+                                {reservation.paymentStatus === '취소신청' ? 
+                                    ( <button onClick={() => approveCancellation(reservation.reservationCode)}>승인</button> ) : 
+                                    ( <button disabled>승인</button> )
+                                }
+                            </td>
+                            <td>
+                                {reservation.paymentStatus === '결제대기' ? 
+                                    ( <button onClick={() => approveReservation(reservation.reservationCode)}>승인</button> ) : 
+                                    ( <button disabled>승인</button> )
+                                }
+                            </td>
+                        </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
 
             {/* '더 보기' 버튼 */}
             {hasMore && (
-                <button onClick={() => setPage(prevPage => prevPage + 1)}>more</button>
+                <button className="ReservationList_MoreButton" onClick={() => setPage(prevPage => prevPage + 1)}>more</button>
             )}
+            </article>
         </>
     )
 }

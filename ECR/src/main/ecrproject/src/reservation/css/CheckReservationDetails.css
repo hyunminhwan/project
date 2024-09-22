@@ -29,14 +29,14 @@
 }
 
 /* 조회 버튼 스타일 */
-.CRD_Find_Table td button {
+.CRD_Find_Table button {
+    width: 100px;
     background-color: #660000;
     color: #f0f0f0;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
-    transition: background-color 0.3s, transform 0.3s;
     letter-spacing: 5px;
     font-size: 1.2em;
 }
@@ -53,13 +53,20 @@
 
 /* 날짜 선택 칸, 입력 필드 크기 조정 */
 .CRD_Find_Table td input, .CRD_Find_Table td .react-datepicker-wrapper {
-    width: 100%;
+    width: 250px;
     max-width: 300px; /* 예약번호 입력 칸 크기 조정 */
-    height: 45px;
+    height: 60px;
     padding: 10px;
-    font-size: 1.2em;
-    background-color: #f0f0f0;
-    color: rgb(131, 131, 131);
+    font-size: 1.3em;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f0f0f0;
+    margin-top: 30px;
+    text-align: center;
+}
+.CRD_Find_Table input::placeholder {
+    color: #f0f0f0;
 }
 
 /* --------------------------------------------------------- */

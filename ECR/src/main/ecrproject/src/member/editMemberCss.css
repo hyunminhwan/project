@@ -1,0 +1,89 @@
+.signup-container {
+    background-color: rgba(0, 0, 0, 0.7); /* 반투명 검은 배경 */
+    color: white;
+    padding: 40px;
+    width: 600px; /* 폼을 넓혀 좌우로 필드를 배치할 수 있게 설정 */
+    margin: 100px auto;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7);
+    text-align: center;
+}
+
+h2 {
+    color: #b12a2a;
+    font-size: 3em;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(122, 72, 72, 0.7), 0 0 20px rgba(36, 15, 15, 0.5), 0 0 30px #f51b1b, 0 0 40px #ff0000;
+    margin-bottom: 50px;
+    letter-spacing: 5px;
+    transition: color 0.3s ease;
+}
+
+.form-columns {
+    display: flex; /* 좌우로 나누기 위한 플렉스 박스 */
+    justify-content: space-between; /* 좌우 열 사이에 공간 유지 */
+    gap: 20px; /* 좌우 열 사이의 간격 설정 */
+}
+
+.left-column, .right-column {
+    width: 48%; /* 각 열이 전체 폼의 48%를 차지하도록 설정 */
+    display: flex;
+    flex-direction: column; /* 필드를 세로로 나열 */
+}
+
+/* 라벨 스타일 */
+label {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #f0f0f0;
+    letter-spacing: 1px;
+}
+
+/* 인풋 필드 및 셀렉트 박스 스타일 */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #660000; /* 기존 붉은색 테두리와 유사하게 */
+    background-color: rgba(0, 0, 0, 0.5); /* 어두운 배경색 */
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+input::placeholder {
+    color: #aaa; /* 플레이스홀더 텍스트 색상 */
+}
+
+/* 버튼 스타일 */
+button {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #f0f0f0;
+    border: 1px solid #660000;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #550000;
+    transform: scale(1.05); /* 마우스를 올렸을 때 살짝 커지는 효과 */
+}
+
+button:active {
+    background-color: #c92020; /* 클릭 시 더 진한 붉은색 */
+    transform: scale(1); /* 클릭 시 원래 크기로 */
+}
+
+/* 안내 메시지 스타일 */
+p {
+    margin-top: -15px;
+    font-size: 14px;
+    color: #f0f0f0;
+}

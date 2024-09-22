@@ -94,7 +94,7 @@ function Anc_DetailForm() {
                 </table>
                 <br/><br/>
                 {loginToMember.member?.loginType === 3 && (
-                    <button id="button_a"type="button" onClick={() => handleEditClick(announcement.boardNo)}>수정하기</button>
+                    <button id="Anc_Detail_button"type="button" onClick={() => handleEditClick(announcement.boardNo)}>수정하기</button>
                 )}
             </form>
         </div>

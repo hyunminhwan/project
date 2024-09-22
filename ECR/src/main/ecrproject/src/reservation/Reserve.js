@@ -19,11 +19,12 @@ const location = useLocation();
 const { menus } = location.state;                                    // 테마 정보
 
 const [startDate, setStartDate] = useState(null);                   // 예약날짜
-const [useTime, setUseTime] = useState();                           // 선택한 이용 시간
+const [useTime, setUseTime] = useState(null);                           // 선택한 이용 시간
 const [reservedTimes, setReservedTimes] = useState([]);             // 예약된 시간대
 
 // 사용자가 날짜를 선택하면 해당 날짜의 예약된 시간 정보를 서버로부터 받아옴
 useEffect(() => {
+    setUseTime(null);
     if(startDate && menus.temaNo) {
         // startDate에 하루를 더함
         const nextDay = new Date(startDate);
@@ -68,6 +69,15 @@ const userInfo = useSelector(state => state.loginMember.member);
 
 // 예약 요청을 처리하는 함수
 const handleReserve = () => {
+    // 날짜와 시간을 선택했는지 확인
+    if(!startDate) {
+        alert('날짜를 선택하세요');
+        return;
+    }
+    if(!useTime) {
+        alert('시간을 선택하세요');
+        return;
+    }
     // 날짜를 로컬 타임존으로 변환하여 YYYY-MM-DD 형식으로 전달
     const useDateFormatted = `${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, '0')}-${String(startDate.getDate()).padStart(2, '0')}`;
     
@@ -76,7 +86,7 @@ const handleReserve = () => {
         tema: { temaNo: menus.temaNo },
         paymentStatus: '결제대기',
         reservationDate: new Date().toISOString(),                  // 오늘 날짜 0000-00-00 형식
-        useDate: useDateFormatted,             // 선택한 날짜 0000-00-00 형식
+        useDate: useDateFormatted,                                  // 선택한 날짜 0000-00-00 형식
         useTime: useTime                                            // HH:mm:ss 형식
     };
 
@@ -97,16 +107,19 @@ const handleReserve = () => {
             <div className='Reserve-Container_Div'>
                 <form onSubmit={e => { e.preventDefault() }}>   {/* 날짜 선택시 랜더링 방지 */}
                     <h1>Reserve</h1>
-         
                     <table className="Reserve_Form_Table">
                         <tr>
                             <th>선택 테마</th>
                             <td>{menus.temaName}</td>
                         </tr>
                         <tr>
+                            <th>지 점</th>
+                            <td>{menus.cafeName}</td>
+                        </tr>
+                        <tr>
                             <th>선택사항</th>
-                            <td>
-                                <p>장르: #{menus.genre}&ensp;지점: #{menus.cafeName}</p><p>난이도: #{menus.difficulty}&ensp;인원수: #{menus.personnel}</p>
+                            <td id='Reserve_Table_Tema_Details'>
+                                장르: #{menus.genre}&emsp;난이도: #⭐×{menus.difficulty}&emsp;인원수: #🙋‍♂️×{menus.personnel}
                             </td>
                         </tr>
                         <tr>
@@ -126,13 +139,15 @@ const handleReserve = () => {
                             <td>
                                 <p>
                                 <Button
+                                    id="Reserve_Custom_Button"
                                     size="lg" 
                                     variant="dark"
                                     disabled={isTimeReserved('09:00:00')}                              // 예약된 시간은 버튼 비활성화
                                     onClick={() => { setUseTime('09:00:00'); }}           // 선택한 시간으로 값 설정
                                     style={{ background: isSelected('09:00:00') ? 'red' : isTimeReserved('09:00:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
-                                >09:00 ~ 11:00</Button>&emsp;
+                                >09:00 ~ 11:00</Button>&emsp;&emsp;
                                 <Button
+                                    id="Reserve_Custom_Button"
                                     size="lg"  
                                     variant="dark"
                                     disabled={isTimeReserved('11:00:00')}                              // 예약된 시간은 버튼 비활성화
@@ -142,13 +157,15 @@ const handleReserve = () => {
                                 </p>
                                 <p>
                                 <Button
+                                    id="Reserve_Custom_Button"
                                     size="lg" 
                                     variant="dark"
                                     disabled={isTimeReserved('13:00:00')}                              // 예약된 시간은 버튼 비활성화
                                     onClick={() => { setUseTime('13:00:00'); }}                        // 선택한 시간으로 값 설정
                                     style={{ background: isSelected('13:00:00') ? 'red' : isTimeReserved('13:00:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
-                                >13:00 ~ 15:00</Button>&emsp;
+                                >13:00 ~ 15:00</Button>&emsp;&emsp;
                                 <Button
+                                    id="Reserve_Custom_Button"
                                     size="lg"
                                     variant="dark"
                                     disabled={isTimeReserved('15:00:00')}                              // 예약된 시간은 버튼 비활성화
@@ -158,13 +175,15 @@ const handleReserve = () => {
                                 </p> 
                                 <p>
                                 <Button
+                                    id="Reserve_Custom_Button"
                                     size='lg'  
                                     variant="dark"
                                     disabled={isTimeReserved('17:00:00')}                              // 예약된 시간은 버튼 비활성화
                                     onClick={() => { setUseTime('17:00:00'); }}                        // 선택한 시간으로 값 설정
                                     style={{ background: isSelected('17:00:00') ? 'red' : isTimeReserved('17:00:00') ? 'gray' : '' }}  // 선택된 시간일 때는 빨간색, 예약된 시간일 때는 회색
-                                >17:00 ~ 19:00</Button>&emsp;
+                                >17:00 ~ 19:00</Button>&emsp;&emsp;
                                 <Button
+                                    id="Reserve_Custom_Button"
                                     size='lg' 
                                     variant="dark"
                                     disabled={isTimeReserved('19:00:00')}                              // 예약된 시간은 버튼 비활성화

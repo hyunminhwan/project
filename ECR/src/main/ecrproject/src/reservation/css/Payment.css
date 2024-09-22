@@ -29,8 +29,8 @@
 /* 폼 스타일링 */
 .Payment_Table {
     width: 100%;
-    max-width: 800px;
-    min-width: 750px;
+    max-width: 700px;
+    min-width: 700px;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 30px;
     border-radius: 10px;

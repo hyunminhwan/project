@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import StarRatings from "react-star-ratings";
-import "./temaList.css";
+import "./temaListCss.css";
 
 function TemaList() {
     let [menuList, setMenuList] = useState([]);
@@ -66,7 +66,7 @@ function TemaList() {
     return (
         <div>
             <Container>
-                <Row className="filter-container">
+                <Row className="TemaList_Filter">
                     <Form>
                         <Row>
                             <h4>검색 </h4>
@@ -134,7 +134,7 @@ function TemaList() {
                 <Row>
                     {filterMenuList.slice(0, menuCount).map((menu, i) => (
                        <Col lg={4} key={i} onClick={() => temaCount(menu)} style={{ cursor: 'pointer' }}>
-                       <div className="tema-card">
+                       <div className="TemaList_Card">
                            <img src={menu.imgUrl} alt="테마 이미지" />
                            <div> {menu.cafeName}</div>
                            <StarRatings
@@ -149,7 +149,7 @@ function TemaList() {
                     ))}
                 </Row>
                 {menuCount < menuList.length && (
-                    <div className="text-center">
+                    <div className="TemaList_Text">
                         <Button size="lg" onClick={loadMore} variant="primary">
                             더보기 {Math.min(menuCount, filterMenuList.length)}/{filterMenuList.length}
                         </Button>
