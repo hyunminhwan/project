@@ -168,8 +168,8 @@ function Review({ temaNo }) {
                                         cols="40"
                                     />
                                     <div className="Review_Button">
-                                    <Button variant="outline-primary" onClick={() => reviewEdit(review.reviewNo)}>저장</Button>
-                                    <Button variant="outline-secondary" onClick={() => setEditMode(0)}>취소</Button>
+                                    <Button variant="outline-secondary" onClick={() => reviewEdit(review.reviewNo)}>저장</Button>
+                                    <Button variant="outline-danger" onClick={() => setEditMode(0)}>취소</Button>
                                     </div>
                                 </div>
                             ) : (

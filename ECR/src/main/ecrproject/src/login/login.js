@@ -50,24 +50,24 @@ function Login() {
     };
 
     return (
-        <div className="login-form">
+        <div className="Login_Form">
             <h1>Login</h1>
             <form onSubmit={loginOn}>
                 <input name="memberId" placeholder="아이디" />
                 <input type="password" name="memberPwd" placeholder="비밀번호" />
                 
                 <ToggleButtonGroup
-                    className="toggle-button-group"
+                    className="Login_Toggle_Button_Group"
                     type="radio"
                     name="loginType"
                     value={loginType}
                     variant="outline-primary"
                     onChange={(val) => setLoginType(val)}
                 >
-                    <ToggleButton id="user" value={1} className="toggle-button-custom">
+                    <ToggleButton id="user" value={1} className="Login_Toggle_Button">
                         일반로그인
                     </ToggleButton>
-                    <ToggleButton id="manager" value={2} className="toggle-button-custom">
+                    <ToggleButton id="manager" value={2} className="Login_Toggle_Button">
                         관계자로그인
                     </ToggleButton>
                 </ToggleButtonGroup>

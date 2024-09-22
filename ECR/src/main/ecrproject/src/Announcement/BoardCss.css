@@ -101,6 +101,7 @@
     background-color: rgba(0, 0, 0, 0.7); 
     color: #f0f0f0; 
     border: 1px solid #660000;
+    width: 10%;
     padding: 10px 20px;
     font-size: 14px;
     text-transform: uppercase;
