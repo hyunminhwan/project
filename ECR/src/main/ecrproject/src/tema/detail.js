@@ -55,7 +55,7 @@ function Detail() {
                     <Col md={8}>
                     <br/><br/>
                         {loginToMember?.member ? (
-                            <Button id="button_a" onClick={() => {
+                            <Button  id="button_a" onClick={() => {
                                 navigate('/reserve', { state: { menus } });
                             }}>예약하기</Button>
                         ) : (

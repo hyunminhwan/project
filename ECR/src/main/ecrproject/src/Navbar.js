@@ -19,9 +19,9 @@ function Navbar() {
   return (
     <div className="navbar">
       <ul className="nav-links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/list">TEMA</Link></li>
-        <li><Link to="/Anc_Board">Announcement</Link></li>
+        <li><Link to="/">Home</Link></li> {/* 메인페이지 */}
+        <li><Link to="/list">TEMA</Link></li> {/* 테마리스트 */}
+        <li><Link to="/Anc_Board">Announcement</Link></li> {/* 공지사항 */}
         {loginToMember.member?.loginType === 2 && (
           <li className="dropdown">
             <Link to="/">Manager</Link>
@@ -51,18 +51,18 @@ function Navbar() {
             <li>{loginToMember.member.memberId}</li>
             {loginToMember.member.loginType === 2 ? ( // 관계자 로그인일 때 'change information'만 보이게 처리
               <li className="dropdown">
-                <Link to="/mypage">My Page</Link>
+                <Link >My Page</Link>
                 <ul className="dropdown-content">
-                  <li><Link to="/editMember">change information</Link></li> {/* 관계자에게만 보임 */}
+                  <li><Link to="/editMember">change information</Link></li> {/* 관계자에게만 보임 */} {/* 관계자 개인정보수정 */}
                 </ul>
               </li>
             ) : (
               loginToMember.member.loginType === 1 && ( // 일반 사용자 로그인일 때 My Page 전체 메뉴 보이기
                 <li className="dropdown">
-                  <Link to="/mypage">My Page</Link>
+                  <Link>My Page</Link>
                   <ul className="dropdown-content">
-                    <li><Link to="/checkReserve">Reservation confirmation</Link></li>
-                    <li><Link to="/editMember">change information</Link></li>
+                    <li><Link to="/checkReserve">Reservation confirmation</Link></li> {/* 개인회원 예약확인*/}
+                    <li><Link to="/editMember">change information</Link></li> {/* 개인회원 개인정보수정 */}
                   </ul>
                 </li>
               )
@@ -74,10 +74,10 @@ function Navbar() {
         ) : (
           <>
             <li>
-              <Link to="/login">sign in</Link>
+              <Link to="/login">sign in</Link> {/* 로그인 */}
             </li>
             <li>
-              <Link to="/signup">sign up</Link>
+              <Link to="/signup">sign up</Link> {/* 회원가입 */}
             </li>
           </>
         )}

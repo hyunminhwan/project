@@ -98,6 +98,7 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     cursor: pointer;
+    width: 10%;
 }
 
 #Anc_Detail_button:hover {
