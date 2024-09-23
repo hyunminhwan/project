@@ -27,6 +27,8 @@ import Payment from './reservation/Payment';
 import CheckReservationDetails from './reservation/CheckReservationDetails';
 import FindId from './login/FindId';
 import FindPwd from './login/FindPwd';
+import EditMember from './member/editMember';
+
 
 function App() {
 
@@ -46,10 +48,9 @@ function App() {
         <Route path='/Anc_EditForm' element={<Anc_EditForm />} />  {/* 고지사항수정 */}
         <Route path='/Anc_List' element={<Anc_List />} />  {/* 고지사항 쓰기 */}
         <Route path='/login' element={<Login />} />  {/* 로그인 */}
-        <Route path='/findid' element={<FindId />} />
-        <Route path='/findpwd' element={<FindPwd />} />
-
-
+        <Route path='/findid' element={<FindId />} /> {/* 아이디찾기 */}
+        <Route path='/findpwd' element={<FindPwd />} />  {/* 비밀번호찾기(변경) */}
+        <Route path='/editMember' element={<EditMember />} />  {/* 회원정보수정 */}
         <Route path='/signup' element={< MemberForm />} />  {/* 회원가입으로 이동 */}
         <Route path='/manage-members' element={< MembershipManagement />} />   {/* 회원 관리 */}
         <Route path='/reserve' element={<Reserve />} />   {/* 예약하기 */}
@@ -61,6 +62,7 @@ function App() {
         <Route path='/payment' element={<Payment />} />   {/* 예약완료 */}
         <Route path='/checkReserve' element={<CheckReservationDetails />} />   {/* 마이페이지 예약확인 */}
         <Route path='*' element={<div>없는 페이지 입니다.</div>} />
+
       </Routes>
 
     </div>

@@ -1,0 +1,65 @@
+/* 공통 컨테이너 스타일 */
+.find-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 8px;
+    width: 400px;
+    margin: 100px auto;
+    color: #f0f0f0;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+/* 제목 스타일 */
+.find-container h2 {
+    text-align: center;
+    color: #ff0000;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.7), 0 0 20px rgba(255, 0, 0, 0.5);
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+/* input 스타일 */
+.find-container input, .find-container select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: #f0f0f0;
+    font-size: 16px;
+}
+
+/* 버튼 스타일 */
+.find-container button {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #f0f0f0;
+    border: 1px solid #660000;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+    margin: 5px 0;
+}
+
+/* 버튼 호버 효과 */
+.find-container button:hover {
+    background-color: #550000;
+    transform: scale(1.1);
+}
+
+/* 테이블 스타일 */
+.find-container table {
+    width: 100%;
+}
+
+/* 아이디/비밀번호 찾기 메시지 스타일 */
+.find-container p {
+    text-align: center;
+    color: green;
+    margin-top: 20px;
+    font-size: 1.2em;
+}

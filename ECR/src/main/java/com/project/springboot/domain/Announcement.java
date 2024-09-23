@@ -14,8 +14,6 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,36 +23,37 @@ import lombok.NoArgsConstructor;
 @EntityListeners(AuditingEntityListener.class)
 public class Announcement {
 
-	@Id
-	@SequenceGenerator(
-			name="boardseq",
-			sequenceName = "board_no_seq",
-			allocationSize = 1
-			)
-	@GeneratedValue(generator = "boardseq")
-	@Column(name="board_no")
-	private Long boardNo; // 공지사항 번호
-	@Column( name = "board_title")
-	private String boardTitle; // 공지사항의 제목
-	@Column ( name = "board_content")
-	private String boardContent;  // 공지사항의 내용
-	
-	private String managerId; // 관리자아이디
-	
-	@ColumnDefault("0")
-	private Long boardCount = 0L; // 조회수 초기값 설정
-	
-	@CreatedDate
-	@Column(name = "board_create_date")
-	private LocalDateTime boardCreateDate; // 공지사항의 생성일자
-	
+    @Id
+    @SequenceGenerator(
+            name = "boardseq",
+            sequenceName = "board_no_seq",
+            allocationSize = 1
+    )
+    @GeneratedValue(generator = "boardseq")
+    @Column(name = "board_no")
+    private Long boardNo; // 공지사항 번호
 
-	@LastModifiedDate
-	@Column(name="board_update_date")
-	private LocalDateTime boardUpdateDate; // 공지사항의 수정일자
+    @Column(name = "board_title")
+    private String boardTitle; // 공지사항의 제목
 
-	// 조회수를 증가시키는 메서드
-		public void increaseViewCount() {
-			this.boardCount++;
-		}
+    @Column(name = "board_content")
+    private String boardContent; // 공지사항의 내용
+
+    private String managerId; // 관리자 아이디
+
+    @ColumnDefault("0")
+    private Long boardCount = 0L; // 조회수 초기값 설정
+
+    @CreatedDate
+    @Column(name = "board_create_date")
+    private LocalDateTime boardCreateDate; // 공지사항의 생성일자
+
+    @LastModifiedDate
+    @Column(name = "board_update_date")
+    private LocalDateTime boardUpdateDate; // 공지사항의 수정일자
+
+    // 조회수를 증가시키는 메서드
+    public void increaseViewCount() {
+        this.boardCount++;
+    }
 }
