@@ -61,13 +61,12 @@ function Login() {
                     type="radio"
                     name="loginType"
                     value={loginType}
-                    variant="outline-primary"
                     onChange={(val) => setLoginType(val)}
                 >
-                    <ToggleButton id="user" value={1} className="Login_Toggle_Button">
+                    <ToggleButton variant="outline-danger" id="user" value={1} className="Login_Toggle_Button">
                         일반로그인
                     </ToggleButton>
-                    <ToggleButton id="manager" value={2} className="Login_Toggle_Button">
+                    <ToggleButton variant="outline-danger" id="manager" value={2} className="Login_Toggle_Button">
                         관계자로그인
                     </ToggleButton>
                 </ToggleButtonGroup>
@@ -75,9 +74,9 @@ function Login() {
                 <button type="submit">로그인</button>
 
                 <div>
-                    <Button type="button" onClick={() => navigate("/signup")}>회원가입</Button>
-                    <Button type="button" onClick={() => navigate("/findid")}>아이디 찾기</Button>
-                    <Button type="button" onClick={() => navigate("/findpwd")}>비밀번호 찾기</Button>
+                    <Button type="button" variant="outline-danger" onClick={() => navigate("/signup")}>회원가입</Button>
+                    <Button type="button" variant="outline-danger" onClick={() => navigate("/findid")}>아이디 찾기</Button>
+                    <Button type="button" variant="outline-danger" onClick={() => navigate("/findpwd")}>비밀번호 찾기</Button>
                 </div>
             </form>
         </div>

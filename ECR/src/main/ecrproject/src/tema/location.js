@@ -6,7 +6,7 @@ function Location ({ latitude, longitude }) {
     const initMap = () => {
       const mapOptions = {
         center: new window.naver.maps.LatLng(latitude, longitude),
-        zoom: 15,
+        zoom: 18,
       };
 
       const map = new window.naver.maps.Map("map", mapOptions);
