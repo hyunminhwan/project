@@ -57,6 +57,10 @@
     color: #f0f0f0;
     font-size: 1.3em;
     box-shadow: 0 2px 0 rgba(255, 0, 0, 0.6);
+    /* 긴 텍스트가 한 줄로 유지되도록 설정 */
+    white-space: nowrap;      /* 줄바꿈 방지 */
+    overflow: hidden;         /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis;  /* 넘치는 부분은 "..."로 표시 */
 }
 /* 회원삭제 button 스타일 */
 .ClientList_List_Table button {
@@ -69,6 +73,7 @@
     letter-spacing: 2px;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
     font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
 }
 .ClientList_List_Table button:hover {
     background-color: #ff0000;
@@ -91,6 +96,7 @@
     font-weight: bold;
     margin-top: 30px;
     margin-bottom: 30px;
+    transition: background-color 0.3s, transform 0.3s;
 }
 .ClientList_MoreButton button:hover {
     background-color: #ff0000;

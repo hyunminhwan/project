@@ -17,13 +17,13 @@
 
 /* 제목 스타일링 */
 .Reserve-Container_Div h1 {
-    text-align: center;
-    color: #ff0000;
-    text-shadow: 0 0 15px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
-    font-size: 3em; /* 폰트 크기 키움 */
+    color: #b12a2a;
+    text-shadow: 0 0 10px rgba(212, 28, 28, 0.7), 0 0 20px rgba(212, 28, 28, 0.5), 0 0 30px #ff0000, 0 0 40px #ff0000;
+    font-size: 3em;
     font-weight: bold;
-    letter-spacing: 4px;
-    margin-bottom: 25px;
+    letter-spacing: 5px;
+    animation: ghost 3s infinite;
+    transition: color 0.1s ease;
 }
 
 /* 폼 스타일링 */
@@ -31,20 +31,31 @@
     width: 100%;
     max-width: 700px;
     min-width: 700px;
-    background-color: rgba(0, 0, 0, 0.7); /* 배경색을 더 어둡게 */
-    padding: 30px; /* 패딩을 더 크게 */
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    border-collapse: collapse; /* 테이블 경계선이 끊기지 않도록 */
+    margin: 0 auto;
+    text-align: center;
+    border-collapse: collapse;
+    /* 긴 텍스트가 한 줄로 유지되도록 설정 */
+    white-space: nowrap;      /* 줄바꿈 방지 */
+    overflow: hidden;         /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis;  /* 넘치는 부분은 "..."로 표시 */
 }
 
 .Reserve_Form_Table th, .Reserve_Form_Table td {
     padding: 15px; /* 더 넓은 여백 */
     color: #f0f0f0;
     font-size: 1.4em; /* 폰트 크기 키움 */
-    border-bottom: 1px solid rgba(255, 0, 0, 0.4); /* 더 투명한 붉은 경계선 */
     box-shadow: 0 5px 10px rgba(255, 0, 0, 0.6); /* 더 크고 잘 보이는 붉은색 그림자 */
     letter-spacing: 3px;
+    text-align: center;
+}
+
+/* 테이블 헤더 별도 스타일 */
+.Reserve_Form_Table th {
+    font-weight: bold;
+}
+/* 테이블 셀 별도 스타일 */
+.Reserve_Form_Table td {
+    padding-top: 30px;
 }
 
 /* DatePiceker 스타일 */
@@ -60,16 +71,27 @@
     text-align: center;
 }
 
+
+/* 시간 버튼 스타일 */
+#Reserve_Custom_Button {
+    width: 40%;
+    height: 50px; /* 높이 설정 */
+    font-size: 1.6em;
+    margin: 10px 0;
+    line-height: 20px;
+}
+
+
 /* "예약하기", "취소하기" 버튼 스타일 */
 .Reserve_Form_Table input[type="submit"], .Reserve_Form_Table input[type="button"] {
     width: 100%;
     background-color: #660000;
     color: #f0f0f0;
-    padding: 15px; /* 버튼 크기 확대 */
+    padding: 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1.6em; /* 버튼 텍스트 크기 키움 */
+    font-size: 1.6em;
     letter-spacing: 4px;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
     margin-top: 30px; /* 버튼 위아래 간격 */
@@ -82,35 +104,4 @@
 .Reserve_Form_Table input[type="submit"]:active, .Reserve_Form_Table input[type="button"]:active {
     background-color: #cc0000;
     transform: scale(0.98);
-}
-
-
-/* 테이블 헤더 스타일 */
-.Reserve_Form_Table th {
-    text-align: center;
-    font-weight: bold;
-}
-.Reserve_Form_Table td {
-    padding-top: 30px;
-}
-
-/* 시간 버튼 스타일 */
-#Reserve_Custom_Button {
-    width: 40%;
-    height: 50px; /* 높이 설정 */
-    font-size: 1.6em;
-    margin: 10px 0;
-    line-height: 20px;
-}
-/* 붉은색 경계선 및 그림자 효과 */
-.Reserve_Form_Table th, .Reserve_Form_Table td {
-    border-bottom: 1px solid rgba(255, 0, 0, 0.4); /* 더 투명한 붉은 경계선 */
-    box-shadow: 0 5px 10px rgba(255, 0, 0, 0.6); /* 더 크고 잘 보이는 붉은 그림자 */
-}
-
-#Reserve_Table_Tema_Details {
-    font-size: 1.4em; /* 글자 크기를 키움 */
-    line-height: 1.1em; /* 줄 간격을 넓게 설정 */
-    color: #f0f0f0;
-    text-align: center; /* 왼쪽 정렬 */
 }
