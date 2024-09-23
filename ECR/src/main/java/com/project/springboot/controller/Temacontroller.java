@@ -96,10 +96,10 @@ public class Temacontroller {
 			temaService.Allsave(tema);
 
 
-			File newFile = new File(temaImg);
-			if (!newFile.exists()) {
-				newFile.mkdirs();  
-			}
+//			File newFile = new File(temaImg);
+//			if (!newFile.exists()) {
+//				newFile.mkdirs();  
+//			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -167,10 +167,7 @@ public class Temacontroller {
 				temaService.Allsave(tema);
 
 
-				File newFile = new File(temaImg);
-				if (!newFile.exists()) {
-					newFile.mkdirs();  
-				}
+			
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

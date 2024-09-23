@@ -1,6 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
+// css import
+import '../css/ClientList.css';
+
 function ClientList({ refreshData }) {                               // loginType이 1인 데이터를 표시할 컴포넌트
     const [members, setMembers] = useState([]);   // 조회한 예약 리스트
     const [page, setPage] = useState(1);                    // 페이지 번호(더 보기 기능)
@@ -63,49 +66,61 @@ function ClientList({ refreshData }) {                               // loginTyp
                 });
         }
     };
+    // {userInfo.memberPhone} 연락처 형식으로 변환
+    const formatPhoneNumber = (phoneNumeber) => {
+        const str = '0' + phoneNumeber;
+        return `${str.slice(0,3)}-${str.slice(3,7)}-${str.slice(7)}`;
+    }
+    // member###Date 형식포맷 함수
+    const formatDate = (date) => {
+        return date.slice(0,10);
+    }
 
     return(
         <article>
-            <h1>일반회원 관리</h1>
-            <hr />
-            <table className='clientList'>
-                <thead>
-                    <tr>
-                    <th>번호</th>
-                        <th>업체아이디</th>
-                        <th>이름</th>
-                        <th>성별</th>
-                        <th>생년월일</th>
-                        <th>전화번호</th>
-                        <th>이메일</th>
-                        <th>가입일</th>
-                        <th>비밀번호 변경 날짜</th>
-                        <th>회원삭제</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {members.map ((member,index) => (
-                        <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{member.memberId}</td>
-                            <td>{member.memberName}</td>
-                            <td>{member.gender}</td>
-                            <td>{member.birthDate}</td>
-                            <td>0{member.memberPhone}</td>
-                            <td>{member.memberEmail}</td>
-                            <td>{member.memberCreateDate}</td>
-                            <td>{member.memberUpdateDate}</td>
-                            <td>
-                                <button onClick={() => deleteMember(member.memberId)}>회원삭제</button>
-                            </td>
+            <div className='ClientList_Title_Div'>
+                <h1>일반회원 관리</h1>
+            </div>
+            <div className='ClientList_List_Div'>
+                <table className='ClientList_List_Table'>
+                    <thead>
+                        <tr>
+                        <th>번호</th>
+                            <th>아이디</th>
+                            <th>이름</th>
+                            <th>성별</th>
+                            <th>생년월일</th>
+                            <th>전화번호</th>
+                            <th>이메일</th>
+                            <th>가입일</th>
+                            <th>비밀번호 변경 날짜</th>
+                            <th>회원삭제</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-            {/* '더 보기' 버튼 */}
-            {hasMore && !isRefreshing && (
-                <button onClick={() => setPage(prevPage => prevPage + 1)}>more</button>
-            )}
+                    </thead>
+                    <tbody>
+                        {members.map ((member,index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{member.memberId}</td>
+                                <td>{member.memberName}</td>
+                                <td>{member.gender}</td>
+                                <td>{member.birthDate}</td>
+                                <td>{formatPhoneNumber(member.memberPhone)}</td>
+                                <td>{member.memberEmail}</td>
+                                <td>{formatDate(member.memberCreateDate)}</td>
+                                <td>{formatDate(member.memberUpdateDate)}</td>
+                                <td>
+                                    <button onClick={() => deleteMember(member.memberId)}>회원삭제</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                {/* '더 보기' 버튼 */}
+                {hasMore && !isRefreshing && (
+                    <button className='ClientList_MoreButton' onClick={() => setPage(prevPage => prevPage + 1)}>more</button>
+                )}
+            </div>
         </article>
     );
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './insertTemaCss.css';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 //주소 api
 function KakaoMap() {
@@ -33,6 +34,8 @@ function Coordinates(address) {
 }
 
 function InsertTema() {
+
+    const navigate=useNavigate();
     const loginToMember = useSelector((state) => state.loginMember);
     const memberId = loginToMember.member.memberId;
     const [temaInsert, setTemaInsert] = useState({
@@ -76,8 +79,9 @@ function InsertTema() {
                         'Content-Type': 'multipart/form-data'
                     }
                 })
-                    .then((response) => {
+                    .then(() => {
                         alert("등록이 완료되었습니다.");
+                        navigate("/edit-theme")
                     })
                     .catch((error) => {
                         console.error("실패:", error);

@@ -1,4 +1,4 @@
-.signup-container {
+.Remember_Signup_Container {
     background-color: rgba(0, 0, 0, 0.7); /* 반투명 검은 배경 */
     color: white;
     padding: 40px;
@@ -19,13 +19,13 @@ h2 {
     transition: color 0.3s ease;
 }
 
-.form-columns {
+.Remember_Form_Columns {
     display: flex; /* 좌우로 나누기 위한 플렉스 박스 */
     justify-content: space-between; /* 좌우 열 사이에 공간 유지 */
     gap: 20px; /* 좌우 열 사이의 간격 설정 */
 }
 
-.left-column, .right-column {
+.Remember_Left_Column, .Remebember_Right_Column {
     width: 48%; /* 각 열이 전체 폼의 48%를 차지하도록 설정 */
     display: flex;
     flex-direction: column; /* 필드를 세로로 나열 */
