@@ -47,9 +47,9 @@ function MemberForm() {
         // 비밀번호 일치 여부 체크
         if (name === "memberPwd" || name === "memberPwdCheck") {
             setIsPasswordMatch(
-                name === "memberPwd" 
-                ? value === insertMem.memberPwdCheck 
-                : value === insertMem.memberPwd
+                name === "memberPwd"
+                    ? value === insertMem.memberPwdCheck
+                    : value === insertMem.memberPwd
             );
         }
     };
@@ -59,18 +59,18 @@ function MemberForm() {
             alert('아이디는 5자 이상이어야 하며, 영문자와 숫자만 사용할 수 있습니다.');
             return;
         }
-    
+
         // POST 요청을 통해 서버로 memberId 전송
         axios.post('/api/check-username', { memberId: insertMem.memberId }) // memberId를 JSON 객체로 전송
-        .then(response => {
-            // 서버에서 반환된 데이터로 상태 업데이트
-            setIsUsernameAvailable(response.data); // response.data가 true이면 사용 가능, false이면 사용 중
-        })
-        .catch(error => {
-            console.error("아이디 중복 체크 중 오류 발생", error);
-        });
+            .then(response => {
+                // 서버에서 반환된 데이터로 상태 업데이트
+                setIsUsernameAvailable(response.data); // response.data가 true이면 사용 가능, false이면 사용 중
+            })
+            .catch(error => {
+                console.error("아이디 중복 체크 중 오류 발생", error);
+            });
     };
-    
+
     // 폼 제출 처리 및 유효성 검사
     const insertSubmit = async (e) => {
         e.preventDefault(); // 페이지 새로고침 방지
@@ -117,123 +117,137 @@ function MemberForm() {
             <h2>회원가입</h2>
 
             <form onSubmit={insertSubmit}>
-    <div className="MemberForm_Field_Container full-width">
-        <div className="MemberForm_Field">
-            <label>로그인 타입:</label>
-            <select name="loginType" value={insertMem.loginType} onChange={insertform}>
-                <option value={1}>사용자</option>
-                <option value={2}>관계자</option>
-            </select>
-        </div>
-    </div>
+                <div className="MemberForm_Field_Container full-width">
+                    <div className="MemberForm_Field">
+                        <label>로그인 타입:</label>
+                        <select name="loginType" value={insertMem.loginType} onChange={insertform}>
+                            <option value={1}>사용자</option>
+                            <option value={2}>관계자</option>
+                        </select>
+                    </div>
+                </div>
 
-    <div className="MemberForm_Field_Container">
-        <div className="MemberForm_Field">
-            <label>이름</label>
-            <input
-                type="text"
-                name="memberName"
-                value={insertMem.memberName}
-                onChange={insertform}
-                required
-            />
-        </div>
+                <div className="MemberForm_Field_Container">
 
-        <div className="MemberForm_Field">
-            <label>아이디</label>
-            <input
-                type="text"
-                name="memberId"
-                value={insertMem.memberId}
-                onChange={insertform}
-                onBlur={checkUsernameAvailability}
-                required
-            />
-            {isUsernameAvailable !== null && (
-                <p style={{ color: isUsernameAvailable ? 'white' : 'white' }}>
-                    {isUsernameAvailable ? '사용 가능한 아이디입니다.' : '이미 사용 중인 아이디입니다.'}
-                </p>
-            )}
-        </div>
-    </div>
+                    <div className="MemberForm_Field">
+                        <label>아이디</label>
+                        <input
+                            type="text"
+                            name="memberId"
+                            value={insertMem.memberId}
+                            onChange={insertform}
+                            onBlur={checkUsernameAvailability}
+                            required
+                        />
+                        {isUsernameAvailable !== null && (
+                            <p style={{ color: isUsernameAvailable ? 'white' : 'white' }}>
+                                {isUsernameAvailable ? '사용 가능한 아이디입니다.' : '이미 사용 중인 아이디입니다.'}
+                            </p>
+                        )}
+                    </div>
 
-    <div className="MemberForm_Field_Container">
-        <div className="MemberForm_Field">
-            <label>비밀번호</label>
-            <input
-                type="password"
-                name="memberPwd"
-                value={insertMem.memberPwd}
-                onChange={insertform}
-                required
-            />
-        </div>
+                    <div className="MemberForm_Field">
+                        <label>비밀번호</label>
+                        <input
+                            type="password"
+                            name="memberPwd"
+                            value={insertMem.memberPwd}
+                            onChange={insertform}
+                            required
+                        />
+                    </div>
 
-        <div className="MemberForm_Field">
-            <label>비밀번호 확인</label>
-            <input
-                type="password"
-                name="memberPwdCheck"
-                value={insertMem.memberPwdCheck}
-                onChange={insertform}
-                required
-            />
-            {isPasswordMatch !== null && (
-                <p style={{ color: isPasswordMatch ? 'white' : 'white' }}>
-                    {isPasswordMatch ? '비밀번호가 같습니다.' : '비밀번호가 일치하지 않습니다.'}
-                </p>
-            )}
-        </div>
-    </div>
 
-    <div className="MemberForm_Field_Container">
-        <div className="MemberForm_Field">
-            <label>이메일</label>
-            <input
-                type="email"
-                name="memberEmail"
-                value={insertMem.memberEmail}
-                onChange={insertform}
-                required
-            />
-        </div>
 
-        <div className="MemberForm_Field">
-            <label>핸드폰 번호</label>
-            <input
-                type="text"
-                name="memberPhone"
-                value={insertMem.memberPhone}
-                onChange={insertform}
-                required
-            />
-        </div>
-    </div>
 
-    <div className="MemberForm_Field_Container">
-        <div className="MemberForm_Field">
-            <label>생년월일</label>
-            <input
-                type="date"
-                name="birthDate"
-                value={insertMem.birthDate}
-                onChange={insertform}
-                required
-            />
-        </div>
 
-        <div className="MemberForm_Field">
-            <label>성별</label>
-            <select name="gender" value={insertMem.gender} onChange={insertform} required>
-                <option value="">성별 선택</option>
-                <option value="male">남성</option>
-                <option value="female">여성</option>
-            </select>
-        </div>
-    </div>
+                </div>
 
-    <button type="submit">회원가입</button>
-</form>
+                <div className="MemberForm_Field_Container">
+                    <div className="MemberForm_Field">
+                        <label>이름</label>
+                        <input
+                            type="text"
+                            name="memberName"
+                            value={insertMem.memberName}
+                            onChange={insertform}
+                            required
+                        />
+                    </div>
+
+                    <div className="MemberForm_Field">
+                        <label>비밀번호 확인</label>
+                        <input
+                            type="password"
+                            name="memberPwdCheck"
+                            value={insertMem.memberPwdCheck}
+                            onChange={insertform}
+                            required
+                        />
+                        {isPasswordMatch !== null && (
+                            <p style={{ color: isPasswordMatch ? 'white' : 'white' }}>
+                                {isPasswordMatch ? '비밀번호가 같습니다.' : '비밀번호가 일치하지 않습니다.'}
+                            </p>
+                        )}
+                    </div>
+                </div>
+
+                <div className="MemberForm_Field_Container">
+
+                    <div className="MemberForm_Field">
+                        <label>생년월일</label>
+                        <input
+                            type="date"
+                            name="birthDate"
+                            value={insertMem.birthDate}
+                            onChange={insertform}
+                            required
+                        />
+                    </div>
+
+
+
+
+                    <div className="MemberForm_Field">
+                        <label>핸드폰 번호</label>
+                        <input
+                            type="text"
+                            name="memberPhone"
+                            value={insertMem.memberPhone}
+                            onChange={insertform}
+                            required
+                        />
+                    </div>
+                </div>
+
+                <div className="MemberForm_Field_Container">
+
+                    <div className="MemberForm_Field">
+                        <label>성별</label>
+                        <select name="gender" value={insertMem.gender} onChange={insertform} required>
+                            <option value="">성별 선택</option>
+                            <option value="male">남성</option>
+                            <option value="female">여성</option>
+                        </select>
+                    </div>
+
+
+                    <div className="MemberForm_Field">
+                        <label>이메일</label>
+                        <input
+                            type="email"
+                            name="memberEmail"
+                            value={insertMem.memberEmail}
+                            onChange={insertform}
+                            required
+                        />
+                    </div>
+
+
+                </div>
+
+                <button type="submit">회원가입</button>
+            </form>
 
 
         </div>
