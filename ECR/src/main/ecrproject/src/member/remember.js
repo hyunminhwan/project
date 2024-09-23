@@ -124,12 +124,12 @@ function Remember() {
 
     return (
 
-<div className="signup-container">
+<div className="Remember_Signup_Container">
     <h2>회원 정보 수정</h2>
     <form onSubmit={handleSubmit}>
-        <div className="form-columns">
-            <div className="left-column">
-                <div className="field">
+        <div className="Remember_Form_Columns">
+            <div className="Remember_Left_Column">
+                <div className="Remember_Field">
                     <label>아이디</label>
                     <input
                         value={loginToMember.member.memberId}
@@ -137,7 +137,7 @@ function Remember() {
                     />
                 </div>
 
-                <div className="field">
+                <div className="Remember_Field">
                     <label>이름</label>
                     <input 
                         value={loginToMember.member.memberName}
@@ -145,7 +145,7 @@ function Remember() {
                     />
                 </div>
 
-                <div className="field">
+                <div className="Remember_Field">
                     <label>생년월일</label>
                     <input 
                         value={loginToMember.member.birthDate}
@@ -153,7 +153,7 @@ function Remember() {
                     />
                 </div>
 
-                <div className="field">
+                <div className="Remember_Field">
                     <label>성별</label>
                     <input 
                         type="gender"
@@ -164,8 +164,8 @@ function Remember() {
                 </div>
             </div>
 
-            <div className="right-column">
-                <div className="field">
+            <div className="Remebember_Right_Column">
+                <div className="Remember_Field">
                     <label>비밀번호</label>
                     <input
                         type="password"
@@ -177,7 +177,7 @@ function Remember() {
                     />
                 </div>
 
-                <div className="field">
+                <div className="Remember_Field">
                     <label>비밀번호 확인</label>
                     <input
                         type="password"
@@ -194,7 +194,7 @@ function Remember() {
                     )}
                 </div>
 
-                <div className="field">
+                <div className="Remember_Field">
                     <label>핸드폰 번호</label>
                     <input
                         type="text"
@@ -205,7 +205,7 @@ function Remember() {
                     />
                 </div>
 
-                <div className="field">
+                <div className="Remember_Field">
                     <label>이메일</label>
                     <input
                         type="email"
