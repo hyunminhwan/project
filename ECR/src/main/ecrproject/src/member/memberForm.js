@@ -226,8 +226,8 @@ function MemberForm() {
                         <label>성별</label>
                         <select name="gender" value={insertMem.gender} onChange={insertform} required>
                             <option value="">성별 선택</option>
-                            <option value="male">남성</option>
-                            <option value="female">여성</option>
+                            <option value="남">남성</option>
+                            <option value="여">여성</option>
                         </select>
                     </div>
 

@@ -31,7 +31,7 @@ function Detail() {
                     <Col md={5}>
                         <div className="Detail_Div">
                             <div className="Detail_Info">
-                                <h2>{menus.temaName}</h2>
+                                <h2>src={`${process.env.REACT_APP_API_BASE_URL}${menus.temaName}`}</h2>
                                 <div id="Detail_Content">{menus.temaContent}</div>
                                 <br/>
                                 <div id="Detail_Content">장르 &emsp; {menus.genre}</div>
@@ -53,9 +53,9 @@ function Detail() {
                 {/* 예약하기 */}
                 <Row className="Detail_Reserve">
                     <Col md={8}>
-                    <br/><br/>
+                    <br/>
                         {loginToMember?.member ? (
-                            <Button  id="button_a" onClick={() => {
+                            <Button  id="Detail_Button" onClick={() => {
                                 navigate('/reserve', { state: { menus } });
                             }}>예약하기</Button>
                         ) : (
@@ -63,7 +63,7 @@ function Detail() {
                         )}
                     </Col>
                 </Row>
-
+                <br />
                 <div>등록일: {menus.temaCreatedDate.slice(0, 10)}</div>
             </Container>
         </>

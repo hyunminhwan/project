@@ -74,6 +74,12 @@ public class Temacontroller {
 		try {
 			String imgName = System.currentTimeMillis() + "_" +StringUtils.cleanPath(imgUrl.getOriginalFilename());
 			String imgPath = temaImg + File.separator + imgName;
+			
+			// 경로가 없다면 디렉토리 생성
+			File dir = new File(temaImg);
+			if (!dir.exists()) {
+			    dir.mkdirs();  
+			}
 			Files.copy(imgUrl.getInputStream(), Paths.get(imgPath));
 
 			Tema tema = new Tema();
@@ -167,7 +173,10 @@ public class Temacontroller {
 				temaService.Allsave(tema);
 
 
-			
+				File newFile = new File(temaImg);
+				if (!newFile.exists()) {
+					newFile.mkdirs();  
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

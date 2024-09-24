@@ -15,7 +15,7 @@ public interface TemaRepository extends JpaRepository<Tema, Long>{
 	//
 	List<Tema> findByOrderByRatingDesc();
 	//
-	List<Tema> findAllByMemberId(String memberId);
+	List<Tema> findAllByMemberIdOrderByTemaNoDesc(String memberId);
 
 
 }

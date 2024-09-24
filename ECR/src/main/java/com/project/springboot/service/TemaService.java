@@ -63,7 +63,7 @@ public class TemaService {
 
 	//아이디로 모든 테마 가져오기
 	public List<Tema> edittema(String memberId) {
-		return temaRepository.findAllByMemberId(memberId);
+		return temaRepository.findAllByMemberIdOrderByTemaNoDesc(memberId);
 		
 	}
 	

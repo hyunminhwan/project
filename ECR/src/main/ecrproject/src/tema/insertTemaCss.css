@@ -21,7 +21,7 @@
 
 /* 폼 레이블 */
 .Inserttema_Label {
-    font-size: 0.9em;
+    font-size: 1.5em;
     margin-bottom: 8px;
     display: block;
     color: #ffdddd;
@@ -36,7 +36,7 @@
     border: 1px solid #660000;
     color: #f0f0f0;
     border-radius: 5px;
-    font-size: 0.9em;
+    font-size: 2em;
 }
 
 /* 중앙 정렬을 위한 입력 필드들 */
@@ -63,6 +63,7 @@
 .form-textarea-center {
     resize: none;
     height: 120px;
+    font-size: 1.5em;
 }
 
 /* 두 개짜리 필드: Flex 적용 */

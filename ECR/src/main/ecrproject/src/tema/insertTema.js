@@ -132,7 +132,7 @@ function InsertTema() {
                 <div className="Inserttema_Two">
                     <div className="Inserttema_Group">
                         <label className="Inserttema_Label">카페이름</label>
-                        <input name="cafeName" type="text" value={temaInsert.cafeName} onChange={TemaData} required className="form-input" />
+                        <input name="cafeName" type="text" value={temaInsert.cafeName} onChange={TemaData} required className="form-input" placeholder=''/>
                     </div>
                     <div className="Inserttema_Group">
                         <label className="Inserttema_Label">테마이름</label>
@@ -143,11 +143,11 @@ function InsertTema() {
                 <div className="Inserttema_Two">
                     <div className="Inserttema_Group">
                         <label className="Inserttema_Label">소요시간</label>
-                        <input name="timetaken" type="text" value={temaInsert.timetaken} onChange={TemaData} required className="form-input" />
+                        <input name="timetaken" type="number" value={temaInsert.timetaken} onChange={TemaData} required className="form-input" />
                     </div>
                     <div className="Inserttema_Group">
                         <label className="Inserttema_Label">가격</label>
-                        <input name="price" type="text" value={temaInsert.price} onChange={TemaData} required className="form-input" />
+                        <input name="price" type="number" value={temaInsert.price} onChange={TemaData} required className="form-input" />
                     </div>
                 </div>
     
