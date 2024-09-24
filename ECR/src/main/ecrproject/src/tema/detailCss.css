@@ -63,3 +63,29 @@
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(27, 25, 25, 0.5), 0 0 30px #ff0000, 0 0 40px #ff0000; /* 글자 주위에 붉은 빛 발광 효과 */
     font-size: 17px;
 }
+
+#Detail_Button {
+    background-color: rgba(0, 0, 0, 0.7); 
+    color: #f0f0f0; 
+    border: 1px solid #660000;
+    padding: 10px 20px;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    width: 15%;
+}
+
+#Detail_Button:hover {
+    background-color: #550000; 
+    transform: scale(1.1); /* 살짝 확대되는 효과 */
+    box-shadow: 0 0 20px #ff0000;
+}
+
+#Detail_Button:active {
+    background-color: #c92020; /* 클릭 시 더 진한 붉은색 */
+    transform: scale(1.05); /* 클릭 시 약간 줄어드는 효과 */
+}
