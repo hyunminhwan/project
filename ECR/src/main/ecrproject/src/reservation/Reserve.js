@@ -106,7 +106,7 @@ const handleReserve = () => {
         <>
             <div className='Reserve-Container_Div'>
                 <form onSubmit={e => { e.preventDefault() }}>   {/* 날짜 선택시 랜더링 방지 */}
-                    <h1>Reserve</h1>
+                    <h1>예약하기</h1>
                     <table className="Reserve_Form_Table">
                         <tr>
                             <th>선택 테마</th>

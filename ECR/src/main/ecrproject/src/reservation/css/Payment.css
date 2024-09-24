@@ -17,53 +17,48 @@
 
 /* 제목 스타일링 */
 .Payment-Container_Div h1 {
-    text-align: center;
-    color: #ff0000;
-    text-shadow: 0 0 15px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
-    font-size: 3em; /* 폰트 크기 키움 */
-    font-weight: bold;
-    letter-spacing: 4px;
-    margin-bottom: 40px;
+    color: #c30404;
+    text-shadow: 0 0 10px rgba(212, 28, 28, 0.7), 0 0 20px rgba(212, 28, 28, 0.5), 0 0 30px #ff0000, 0 0 40px #ff0000;
+    font-size: 3em;
+    letter-spacing: 5px;
+    animation: ghost 3s infinite;
+    transition: color 0.1s ease;
 }
 
 /* 폼 스타일링 */
 .Payment_Table {
     width: 100%;
-    max-width: 800px;
-    min-width: 750px;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    border-collapse: collapse; /* 테이블 경계선이 끊기지 않도록 */
+    max-width: 700px;
+    min-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    border-collapse: collapse;
+    /* 긴 텍스트가 한 줄로 유지되도록 설정 */
+    white-space: nowrap;      /* 줄바꿈 방지 */
+    overflow: hidden;         /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis;  /* 넘치는 부분은 "..."로 표시 */
 }
 
-/* 테이블 셀 스타일 */
+/* 테이블 헤더, 셀 스타일 */
 .Payment_Table th, .Payment_Table td {
     padding: 15px;
     color: #f0f0f0;
     font-size: 1.4em;
-    border-bottom: 1px solid rgba(255, 0, 0, 0.4); /* 더 투명한 붉은 경계선 */
     box-shadow: 0 5px 10px rgba(255, 0, 0, 0.6); /* 더 크고 잘 보이는 붉은색 그림자 */
-}
-
-/* 테이블 행 구분 */
-.Payment_Table th {
+    letter-spacing: 3px;
     text-align: center;
+}
+/* 테이블 헤더 별도 스타일 */
+.Payment_Table th {
     font-weight: bold;
     width: 150px; /* th의 고정 너비 설정 */
 }
-
+/* 테이블 셀 별도 스타일 */
 .Payment_Table td {
     width: calc(100% - 150px); /* td는 남은 공간을 차지 */
 }
 
-/* 붉은색 경계선 및 그림자 효과 */
-.Payment_Table th, .Payment_Table td {
-    border-bottom: 1px solid rgba(255, 0, 0, 0.4); /* 더 투명한 붉은 경계선 */
-    box-shadow: 0 5px 10px rgba(255, 0, 0, 0.6); /* 더 크고 잘 보이는 붉은 그림자 */
-}
-
+/* "확인하기" 버튼 스타일 */
 .Payment_Table button {
     width: 100%;
     background-color: #660000;
@@ -72,18 +67,16 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1.4em;
-    letter-spacing: 2px;
+    font-size: 1.6em;
+    letter-spacing: 4px;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
     margin-top: 30px;
     transition: background-color 0.3s, transform 0.3s;
 }
-
 .Payment_Table button:hover {
     background-color: #ff0000;
     transform: scale(1.05);
 }
-
 .Payment_Table button:active {
     background-color: #cc0000;
     transform: scale(0.98);

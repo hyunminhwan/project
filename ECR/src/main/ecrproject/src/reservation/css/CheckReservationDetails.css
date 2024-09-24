@@ -29,14 +29,14 @@
 }
 
 /* 조회 버튼 스타일 */
-.CRD_Find_Table td button {
+.CRD_Find_Table button {
+    width: 100px;
     background-color: #660000;
     color: #f0f0f0;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
-    transition: background-color 0.3s, transform 0.3s;
     letter-spacing: 5px;
     font-size: 1.2em;
 }
@@ -53,13 +53,20 @@
 
 /* 날짜 선택 칸, 입력 필드 크기 조정 */
 .CRD_Find_Table td input, .CRD_Find_Table td .react-datepicker-wrapper {
-    width: 100%;
+    width: 250px;
     max-width: 300px; /* 예약번호 입력 칸 크기 조정 */
-    height: 45px;
+    height: 60px;
     padding: 10px;
-    font-size: 1.2em;
-    background-color: #f0f0f0;
-    color: rgb(131, 131, 131);
+    font-size: 1.3em;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f0f0f0;
+    margin-top: 30px;
+    text-align: center;
+}
+.CRD_Find_Table input::placeholder {
+    color: #f0f0f0;
 }
 
 /* --------------------------------------------------------- */
@@ -77,33 +84,31 @@
     margin: 0 auto;
     padding: 30px;
 }
-
-/* 조회 테이블 스타일링 */
+/* 리스트 테이블 스타일 */
 .CRD_ResultList_Table {
     width: 100%;
-    max-width: 1300px;
-    margin: 0 auto;   
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
     border-collapse: collapse;
 }
-
-/* 테이블 th, td 스타일링 */
-.CRD_ResultList_Table th, .CRD_ResultList_Table td {
+/* 리스트 헤더 스타일 */
+.CRD_ResultList_Table th {
     padding: 15px;
     color: #f0f0f0;
-    font-size: 1.2em;
-    border-bottom: 1px solid rgba(255, 0, 0, 0.4);
-    box-shadow: 0 2px 5px rgba(255, 0, 0, 0.6);
-}
-
-/* 테이블 th 스타일링 */
-.CRD_ResultList_Table th {
-    text-align: center;
-    font-weight: bold;
     font-size: 1.4em;
+    box-shadow: 0 2px 0 rgba(255, 0, 0, 0.6);
+}
+/* 리스트 셀 스타일 */
+.CRD_ResultList_Table td {
+    padding: 15px;
+    color: #f0f0f0;
+    font-size: 1.3em;
+    box-shadow: 0 2px 0 rgba(255, 0, 0, 0.6);
+    /* 긴 텍스트가 한 줄로 유지되도록 설정 */
+    white-space: nowrap;      /* 줄바꿈 방지 */
+    overflow: hidden;         /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis;  /* 넘치는 부분은 "..."로 표시 */
 }
 
 /* 취소신청 button 스타일링 */
@@ -111,22 +116,35 @@
     width: 100%;
     background-color: #660000;
     color: #f0f0f0;
-    padding: 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1.2em;
     letter-spacing: 2px;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+    font-weight: bold;
     transition: background-color 0.3s, transform 0.3s;
 }
 
+/* 비활성화 일때 버튼 스타일 */
+.CRD_ResultList_Table button:disabled {
+    width: 100%;
+    background-color: #885f5f;
+    color: #dcdcdc;
+    border: none;
+    border-radius: 5px;
+    cursor: not-allowed;
+    letter-spacing: 2px;
+    box-shadow: 0 0 20px rgba(128, 128, 128, 0.7);
+    opacity: 0.4; /* 투명도 적용 */
+    transform: none; /* 버튼 크기 변화 제거 */
+}
+
 /* 취소신청 button 효과 */
-.CRD_ResultList_Table button:hover {
+.CRD_ResultList_Table button:not(:disabled):hover {
     background-color: #ff0000;
     transform: scale(1.05);
 }
-.CRD_ResultList_Table button:active {
+.CRD_ResultList_Table button:not(:disabled):active {
     background-color: #cc0000;
     transform: scale(0.98);
 }
