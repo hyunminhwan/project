@@ -6,10 +6,19 @@ function Payment() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // location.state에서 menu와 reservation의 저보를 가져옴
+    // location.state에서 menu와 reservation의 정보를 가져오기
     const { menu, reservation } = location.state;
-
+    // Redux 로그인 유저 정보 가져오기
     const userInfo = useSelector(state => state.loginMember.member);
+    // {userInfo.memberPhone} 연락처 형식으로 변환
+    const formatPhoneNumber = (phoneNumeber) => {
+        const str = '0' + phoneNumeber;
+        return `${str.slice(0,3)}-${str.slice(3,7)}-${str.slice(7)}`;
+    }
+    // {reservation.useTime} 이용시간 포맷 함수
+    const formatStartUseTime = (time) => {
+        return time.slice(0,5);
+    }
 
     return(
         <>
@@ -30,15 +39,19 @@ function Payment() {
                                 <td>{menu.temaName}</td>                                {/* 선택한 테마 이름 */}
                             </tr>
                             <tr>
+                                <th>지 점</th>
+                                <td>{menu.cafeName}</td>
+                            </tr>
+                            <tr>
                                 <th>선택사항</th>
                                 <td>
-                                    장르: #{menu.genre}&emsp;&emsp;지점: #{menu.cafeName}<br /> 난이도: #{menu.difficulty}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;인원수: #{menu.personnel} {/* 해당 테마에 테마테이블에 들어가 있는 정보 */}
+                                장르: #{menu.genre}&emsp;난이도: #⭐×{menu.difficulty}&emsp;인원수: #🙋‍♂️×{menu.personnel} {/* 해당 테마에 테마테이블에 들어가 있는 정보 */}
                                 </td>
                             </tr>
                             <tr>
                                 <th>이용시간</th>
                                 <td>
-                                    {`${reservation.useTime} ~ ${parseInt(reservation.useTime)+2}:00:00`}    {/* 예약된 날짜 및 시간 */}
+                                    {`${reservation.useDate}  ${formatStartUseTime(reservation.useTime)} ~ ${parseInt(reservation.useTime)+2}:00`}    {/* 예약된 날짜 및 시간 */}
                                 </td>                             
                             </tr>
                             <tr>
@@ -47,7 +60,7 @@ function Payment() {
                             </tr>
                             <tr>
                                 <th>연락처</th>
-                                <td>{ userInfo.memberPhone }</td>                      {/* 예약자 번호 */}
+                                <td>{ formatPhoneNumber(userInfo.memberPhone) }</td>                      {/* 예약자 번호 */}
                             </tr>
                             <tr>
                                 <th>이용요금</th>

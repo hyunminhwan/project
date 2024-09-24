@@ -14,10 +14,9 @@
 }
 /* 제목 스타일 */
 .CompanyList_Title_Div h1 {
-    color: #b12a2a;
+    color: #c30404;
     text-shadow: 0 0 10px rgba(212, 28, 28, 0.7), 0 0 20px rgba(212, 28, 28, 0.5), 0 0 30px #ff0000, 0 0 40px #ff0000;
     font-size: 3em;
-    font-weight: bold;
     letter-spacing: 5px;
     animation: ghost 3s infinite;
     transition: color 0.1s ease;
@@ -57,6 +56,10 @@
     color: #f0f0f0;
     font-size: 1.3em;
     box-shadow: 0 2px 0 rgba(255, 0, 0, 0.6);
+    /* 긴 텍스트가 한 줄로 유지되도록 설정 */
+    white-space: nowrap;      /* 줄바꿈 방지 */
+    overflow: hidden;         /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis;  /* 넘치는 부분은 "..."로 표시 */
 }
 /* 회원삭제 button 스타일 */
 .CompanyList_List_Table button {
@@ -69,6 +72,7 @@
     letter-spacing: 2px;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
     font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
 }
 .CompanyList_List_Table button:hover {
     background-color: #ff0000;
@@ -90,6 +94,7 @@
     font-weight: bold;
     margin-top: 30px;
     margin-bottom: 30px;
+    transition: background-color 0.3s, transform 0.3s;
 }
 .CompanyList_MoreButton button:hover {
     background-color: #ff0000;
