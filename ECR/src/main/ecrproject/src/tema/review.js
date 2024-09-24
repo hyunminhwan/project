@@ -32,29 +32,33 @@ function Review({ temaNo }) {
     //리뷰 등록
     const reviewinsert = (e) => {
         e.preventDefault();
-        axios.post("/review", {
-            temaNo: temaNo,
-            reviewContent: reviewContent,
-            reviewRating: rating,
-            userId: userId
-        })
-            .then((r) => {
-                alert("리뷰를 등록하였습니다.")
-                axios.get(`/review/tema/${temaNo}`)
-                    .then((result) => {
-                        setReviewList(result.data);
-                    })
-                    .catch(() => {
-                        console.log("리뷰를 가지고 오는데 실패했습니다.")
-                    })
-                setReviewContent('');  // 리뷰 내용 초기화
-                setRating(0);          // 리뷰 평점 초기화
-            })
-            .catch(() => {
-                console.log("리뷰 등록에 실패했습니다.");
-            });
-    };
 
+        if (e.target.exists) {
+            alert("이미 리뷰를 작성하셨습니다")
+        } else {
+            axios.post("/review", {
+                temaNo: temaNo,
+                reviewContent: reviewContent,
+                reviewRating: rating,
+                userId: userId
+            })
+                .then((r) => {
+                    alert("리뷰를 등록하였습니다.")
+                    axios.get(`/review/tema/${temaNo}`)
+                        .then((result) => {
+                            setReviewList(result.data);
+                        })
+                        .catch(() => {
+                            console.log("리뷰를 가지고 오는데 실패했습니다.")
+                        })
+                    setReviewContent('');  // 리뷰 내용 초기화
+                    setRating(0);          // 리뷰 평점 초기화
+                })
+                .catch(() => {
+                    console.log("리뷰 등록에 실패했습니다.");
+                });
+        }
+    };
     //리뷰 더보기
     const loadMore = () => {
         setReviewCount(e => e + 3);
@@ -168,8 +172,8 @@ function Review({ temaNo }) {
                                         cols="40"
                                     />
                                     <div className="Review_Button">
-                                    <Button variant="outline-primary" onClick={() => reviewEdit(review.reviewNo)}>저장</Button>
-                                    <Button variant="outline-secondary" onClick={() => setEditMode(0)}>취소</Button>
+                                        <Button variant="outline-secondary" onClick={() => reviewEdit(review.reviewNo)}>저장</Button>
+                                        <Button variant="outline-danger" onClick={() => setEditMode(0)}>취소</Button>
                                     </div>
                                 </div>
                             ) : (
@@ -177,7 +181,7 @@ function Review({ temaNo }) {
                                     <p>{review.reviewContent}</p>
                                     <div className="Review_Footer">
                                         <span > 작성일 {review.reviewCreatedDate.slice(0, 10)}</span>
-                                        <br/><br/>
+                                        <br /><br />
                                         {loginToMember.member?.memberId === review.userId && (
                                             <div className="Review_Button">
                                                 <Button variant="outline-secondary" onClick={() => EditModeOn(review)}>수정하기</Button>

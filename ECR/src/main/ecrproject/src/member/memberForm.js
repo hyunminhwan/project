@@ -113,20 +113,23 @@ function MemberForm() {
     };
 
     return (
-        <div className="signup-container">
+        <div className="MemberForm_Signup_Container">
             <h2>회원가입</h2>
 
             <form onSubmit={insertSubmit}>
-                <div className="top-row">
-                    <div className="field">
+                <div className="MemberForm_Field_Container full-width">
+                    <div className="MemberForm_Field">
                         <label>로그인 타입:</label>
                         <select name="loginType" value={insertMem.loginType} onChange={insertform}>
                             <option value={1}>사용자</option>
                             <option value={2}>관계자</option>
                         </select>
                     </div>
+                </div>
 
-                    <div className="field">
+                <div className="MemberForm_Field_Container">
+
+                    <div className="MemberForm_Field">
                         <label>아이디</label>
                         <input
                             type="text"
@@ -142,43 +145,8 @@ function MemberForm() {
                             </p>
                         )}
                     </div>
-                </div>
 
-                <div className="left-column">
-                    <div className="field">
-                        <label>이름</label>
-                        <input
-                            type="text"
-                            name="memberName"
-                            value={insertMem.memberName}
-                            onChange={insertform}
-                            required
-                        />
-                    </div>
-
-                    <div className="field">
-                        <label>생년월일</label>
-                        <input
-                            type="date"
-                            name="birthDate"
-                            value={insertMem.birthDate}
-                            onChange={insertform}
-                            required
-                        />
-                    </div>
-
-                    <div className="field">
-                        <label>성별</label>
-                        <select name="gender" value={insertMem.gender} onChange={insertform} required>
-                            <option value="">성별 선택</option>
-                            <option value="male">남성</option>
-                            <option value="female">여성</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div className="right-column">
-                    <div className="field">
+                    <div className="MemberForm_Field">
                         <label>비밀번호</label>
                         <input
                             type="password"
@@ -189,7 +157,25 @@ function MemberForm() {
                         />
                     </div>
 
-                    <div className="field">
+
+
+
+
+                </div>
+
+                <div className="MemberForm_Field_Container">
+                    <div className="MemberForm_Field">
+                        <label>이름</label>
+                        <input
+                            type="text"
+                            name="memberName"
+                            value={insertMem.memberName}
+                            onChange={insertform}
+                            required
+                        />
+                    </div>
+
+                    <div className="MemberForm_Field">
                         <label>비밀번호 확인</label>
                         <input
                             type="password"
@@ -204,8 +190,25 @@ function MemberForm() {
                             </p>
                         )}
                     </div>
+                </div>
 
-                    <div className="field">
+                <div className="MemberForm_Field_Container">
+
+                    <div className="MemberForm_Field">
+                        <label>생년월일</label>
+                        <input
+                            type="date"
+                            name="birthDate"
+                            value={insertMem.birthDate}
+                            onChange={insertform}
+                            required
+                        />
+                    </div>
+
+
+
+
+                    <div className="MemberForm_Field">
                         <label>핸드폰 번호</label>
                         <input
                             type="text"
@@ -215,8 +218,21 @@ function MemberForm() {
                             required
                         />
                     </div>
+                </div>
 
-                    <div className="field">
+                <div className="MemberForm_Field_Container">
+
+                    <div className="MemberForm_Field">
+                        <label>성별</label>
+                        <select name="gender" value={insertMem.gender} onChange={insertform} required>
+                            <option value="">성별 선택</option>
+                            <option value="male">남성</option>
+                            <option value="female">여성</option>
+                        </select>
+                    </div>
+
+
+                    <div className="MemberForm_Field">
                         <label>이메일</label>
                         <input
                             type="email"
@@ -226,6 +242,8 @@ function MemberForm() {
                             required
                         />
                     </div>
+
+
                 </div>
 
                 <button type="submit">회원가입</button>

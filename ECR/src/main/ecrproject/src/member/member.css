@@ -1,82 +1,86 @@
-.signup-container {
-  background-color: rgba(0, 0, 0, 0.7); 
-  color: white;
-  padding: 40px;
-  width: 600px;
-  margin: 100px auto;
-  border-radius: 15px;
-  box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7);
-  text-align: center;
+.MemberForm_Signup_Container {
+  background-color: rgba(0, 0, 0, 0.7); /* 반투명 검은 배경 설정 */
+  color: white; /* 글자 색상을 흰색으로 설정 */
+  padding: 40px; /* 내부 여백을 설정하여 내용이 여유롭게 보이도록 설정 */
+  width: 600px; /* 컨테이너 너비를 600px로 고정 */
+  margin: 100px auto; /* 상단에서 100px 떨어지고, 좌우로 중앙에 배치 */
+  border-radius: 15px; /* 모서리를 둥글게 처리 */
+  box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7); /* 붉은색 그림자 효과로 컨테이너를 강조 */
+  text-align: center; /* 텍스트 및 요소들을 가운데 정렬 */
 }
 
 h2 {
-  font-size: 28px;
-  font-family: 'Jeju Gothic', sans-serif;
-  color: red;
-  text-shadow: 2px 2px 5px black;
+  font-size: 28px; /* 제목 글자 크기를 설정 */
+  font-family: 'Jeju Gothic', sans-serif; /* 제주 고딕 폰트 적용 */
+  color: red; /* 제목 글자 색상을 붉은색으로 설정 */
+  text-shadow: 2px 2px 5px black; /* 검은색 그림자를 추가하여 텍스트 강조 */
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: flex; /* 플렉스 박스 레이아웃 사용 */
+  flex-direction: column; /* 폼 요소들을 세로로 나열 */
+  gap: 20px; /* 각 항목 간 간격 설정 */
 }
 
-.top-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
+.MemberForm_Field_Container {
+  display: flex; /* 각 입력 필드를 좌우로 배치하기 위해 플렉스 박스 사용 */
+  justify-content: space-between; /* 양쪽 끝에 배치하여 공간을 균등하게 나눔 */
+  gap: 20px; /* 좌우 필드 간 간격을 20px로 설정 */
+  flex-wrap: wrap; /* 화면 크기가 작을 때 줄바꿈이 가능하도록 설정 */
 }
 
-.left-column, .right-column {
-  width: 48%;
-  display: flex;
-  flex-direction: column;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.MemberForm_Field {
+  width: 48%; /* 각 필드의 너비를 48%로 설정하여 좌우로 나란히 배치 */
 }
 
 label {
-  margin-bottom: 10px;
-  font-size: 18px;
+  margin: 10px 0; /* 라벨과 입력 필드 간 간격 설정 */
+  font-size: 18px; /* 라벨 글자 크기를 설정 */
 }
 
 input, select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #222;
-  color: white;
-  font-size: 16px;
+  width: 100%; /* 입력 필드와 선택 필드가 전체 너비를 차지하도록 설정 */
+  padding: 10px; /* 입력 필드 내부에 여백을 설정하여 사용자가 편하게 입력할 수 있게 함 */
+  margin-bottom: 20px; /* 각 입력 필드 간 간격을 주어 시각적으로 정리된 느낌을 줌 */
+  border: none; /* 기본 테두리를 제거 */
+  border-radius: 5px; /* 입력 필드의 모서리를 둥글게 설정 */
+  background-color: #222; /* 어두운 배경색을 설정하여 테마에 맞게 디자인 */
+  color: white; /* 텍스트 색상을 흰색으로 설정 */
+  font-size: 16px; /* 입력 필드 내부의 텍스트 크기를 설정 */
 }
 
 input::placeholder {
-  color: #aaa;
+  color: #aaa; /* 플레이스홀더 텍스트 색상을 회색으로 설정 */
 }
 
 button {
-  background-color: #900;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 18px;
-  cursor: pointer;
-  width: 100%;
-  margin-top: 20px;
+  background-color: #900; /* 버튼 배경을 붉은색으로 설정하여 강조 */
+  color: white; /* 버튼 텍스트 색상은 흰색으로 설정 */
+  padding: 10px 20px; /* 버튼 내부에 충분한 여백을 주어 버튼이 명확히 보이게 설정 */
+  border: none; /* 버튼의 기본 테두리를 제거 */
+  border-radius: 5px; /* 버튼의 모서리를 둥글게 처리 */
+  font-size: 18px; /* 버튼 텍스트 크기 설정 */
+  cursor: pointer; /* 버튼 위에 마우스를 올리면 커서가 포인터 모양으로 변경 */
+  transition: background-color 0.3s ease; /* 호버 시 배경색이 부드럽게 전환되도록 설정 */
+  width: 100%; /* 버튼이 좌우 열을 가로질러 전체 너비를 차지하도록 설정 */
+  margin-top: 20px; /* 버튼과 위의 입력 필드 간 간격 설정 */
 }
 
 button:hover {
-  background-color: #c00;
+  background-color: #c00; /* 버튼에 마우스를 올렸을 때 더 밝은 붉은색으로 변경 */
 }
 
 p {
-  margin-top: -15px;
-  font-size: 14px;
+  margin-top: -15px; /* 메시지와 입력 필드 간의 간격을 줄여 공간을 절약 */
+  font-size: 14px; /* 안내 메시지의 글자 크기를 작게 설정 */
+}
+
+.MemberForm_Field_Container.full-width {
+  flex-direction: column; /* 로그인 타입 필드를 한 줄에 중앙에 배치하기 위해 세로 정렬 */
+  align-items: center; /* 로그인 타입 필드를 가운데 정렬 */
+}
+
+.field.full-width {
+  width: 50%; /* 로그인 타입 필드를 50% 너비로 설정하여 중앙에 배치 */
+  text-align: center; /* 필드 안의 텍스트와 선택 박스를 중앙 정렬 */
 }

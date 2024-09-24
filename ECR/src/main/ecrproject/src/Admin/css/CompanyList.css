@@ -14,10 +14,9 @@
 }
 /* 제목 스타일 */
 .CompanyList_Title_Div h1 {
-    color: #b12a2a;
+    color: #c30404;
     text-shadow: 0 0 10px rgba(212, 28, 28, 0.7), 0 0 20px rgba(212, 28, 28, 0.5), 0 0 30px #ff0000, 0 0 40px #ff0000;
     font-size: 3em;
-    font-weight: bold;
     letter-spacing: 5px;
     animation: ghost 3s infinite;
     transition: color 0.1s ease;
