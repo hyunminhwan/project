@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react';
 // css import
 import '../css/ClientList.css';
 
-function ClientList({ refreshData }) {                               // loginType이 1인 데이터를 표시할 컴포넌트
-    const [members, setMembers] = useState([]);   // 조회한 예약 리스트
+function ClientList({ refreshData }) {                      // loginType이 1인 데이터를 표시할 컴포넌트
+    const [members, setMembers] = useState([]);             // 조회한 예약 리스트
     const [page, setPage] = useState(1);                    // 페이지 번호(더 보기 기능)
     const [hasMore, setHasMore] = useState(true);           // 더 불러올 데이터 여부
     const [isRefreshing, setIsRefreshing] = useState(false);// 데이터 리렌더링 여부 확인
@@ -56,9 +56,9 @@ function ClientList({ refreshData }) {                               // loginTyp
             axios.delete(`/api/members/${memberId}`)
                 .then(() => {
                     alert('회원이 삭제되었습니다');
-                    setPage(1);     // 삭제 후 페이지 초기화
-                    setIsRefreshing(true);  // 데이터 리렌더링 시작
-                    fetchMembers(); // 삭제 후 새로고침을 통해 최신 데이터 불러오기
+                    setPage(1);                 // 삭제 후 페이지 초기화
+                    setIsRefreshing(true);      // 데이터 리렌더링 시작
+                    fetchMembers();             // 삭제 후 새로고침을 통해 최신 데이터 불러오기
                 })
                 .catch(error => {
                     alert('회원 삭제 중 오류가 발생했습니다');
