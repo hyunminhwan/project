@@ -12,14 +12,14 @@
 /* 제목 스타일링 */
 .Anc_Container h1 {
     text-align: center;
-    color: #b12a2a;
+    color: #5c1313;
     text-shadow: 0 0 10px rgba(212, 28, 28, 0.7), 0 0 20px rgba(212, 28, 28, 0.5), 0 0 30px #ff0000, 0 0 40px #ff0000;
     margin-bottom: 30px;
-    font-size: 3em;
+    font-size: 4.2em;
     font-weight: bold;
     letter-spacing: 5px;
     transition: color 0.3s ease;
-    animation: ghost 5s infinite;
+    animation: slow-blur 4s infinite;
 }
 
 #Anc {
@@ -30,21 +30,24 @@
     color: #9a0707;
 }
 
-/* 유령처럼 천천히 나타나고 사라지는 효과 */
-@keyframes ghost {
+@keyframes slow-blur {
     0% {
-        opacity: 0;
-        transform: translateX(-10px);
+        opacity: 1;
+        filter: blur(0);
+        transform: scale(1) skew(0deg, 0deg);
     }
     50% {
-        opacity: 1;
-        transform: translateX(0);
+        opacity: 0.5;
+        filter: blur(5px);
+        transform: scale(1.05) skew(3deg, 3deg);
     }
     100% {
-        opacity: 0;
-        transform: translateX(10px);
+        opacity: 1;
+        filter: blur(0);
+        transform: scale(1) skew(0deg, 0deg);
     }
 }
+
 
 /* 테이블 스타일링 */
 .Anc_Table {
@@ -96,6 +99,7 @@
     flex-direction: column;
     align-items: center;
 }
+
 
 #Write_button {
     background-color: rgba(0, 0, 0, 0.7); 
@@ -152,4 +156,8 @@
 #Anc_Before_button:active, #Anc_Next_button:active {
     background-color: #c92020; /* 클릭 시 더 진한 붉은색 */
     transform: scale(1.05); /* 클릭 시 약간 줄어드는 효과 */
+}
+
+.Anc_Board_Page{
+    width: 10%;
 }

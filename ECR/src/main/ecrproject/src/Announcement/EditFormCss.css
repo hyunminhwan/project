@@ -66,12 +66,6 @@
     white-space: pre-wrap;
 }
 
-/* 버튼 컨테이너 스타일 */
-.button-container {
-    text-align: center; /* 버튼들을 중앙 정렬 */
-    margin-top: 20px; /* 위쪽에 여백 추가 */
-}
-
 /* 버튼 스타일 */
 #edit_button {
     background-color: rgba(0, 0, 0, 0.7); 
@@ -86,19 +80,7 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     cursor: pointer;
     margin: 10px;
-}
-#edit_button {
-    background-color: rgba(0, 0, 0, 0.7); 
-    color: #f0f0f0; 
-    border: 1px solid #660000;
-    padding: 10px 20px;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
+    width: 10%;
 }
 
 #edit_button:hover {

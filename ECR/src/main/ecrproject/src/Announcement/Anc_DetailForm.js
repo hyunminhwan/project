@@ -92,10 +92,11 @@ function Anc_DetailForm() {
                         </tr>
                     </tbody>
                 </table>
-                <br/><br/>
+                <div className='DetailForm_Button'>
                 {loginToMember.member?.loginType === 3 && (
                     <button id="Anc_Detail_button"type="button" onClick={() => handleEditClick(announcement.boardNo)}>수정하기</button>
                 )}
+                </div>
             </form>
         </div>
     );
