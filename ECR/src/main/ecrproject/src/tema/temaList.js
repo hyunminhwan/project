@@ -83,7 +83,7 @@ function TemaList() {
                                         <option value="">전체</option>
                                         <option value="미스터리">미스터리</option>
                                         <option value="호러">호러</option>
-                                        <option value="SF">SF</option>
+                                        <option value="스릴러">스릴러</option>
                                         <option value="추리">추리</option>
                                         <option value="판타지">판타지</option>
                                         <option value="어드벤처">어드벤처</option>
@@ -96,9 +96,10 @@ function TemaList() {
                                     <Form.Select name="location" onChange={FilterChange}>
                                         <option value="">전체</option>
                                         <option value="서울">서울</option>
-                                        <option value="부산">부산</option>
-                                        <option value="대구">대구</option>
+                                        <option value="경기">경기</option>
                                         <option value="인천">인천</option>
+                                        <option value="대구">대구</option>
+                                        <option value="부산">부산</option>
                                     </Form.Select>
                                 </Form.Group>
                             </Col>

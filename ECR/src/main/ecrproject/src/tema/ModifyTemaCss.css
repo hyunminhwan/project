@@ -1,0 +1,107 @@
+/* 전체 폼 컨테이너 */
+.Modifytema_Form {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 8px;
+    width: 50%;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #f0f0f0;
+    font-size: 0.9em;
+}
+
+/* 폼 제목 */
+.Modifytema_Title {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #ff0000;
+    text-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+}
+
+/* 폼 레이블 */
+.Modifytema_Label {
+    font-size: 1.5em;
+    margin-bottom: 8px;
+    display: block;
+    color: #ffdddd;
+}
+
+/* 폼 입력 필드 스타일 */
+.Modifytema_Input, .Modifytema_Select, .Modifytema_Textarea, .Modifytema_Input_File {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    background: rgba(0, 0, 0, 0.5); /* 배경색 수정 */
+    border: 1px solid #660000;
+    color: #f0f0f0;
+    border-radius: 5px;
+    font-size: 2em;
+}
+
+/* 중앙 정렬을 위한 입력 필드들 */
+.Modifytema_One {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto 15px auto;
+}
+
+.Modifytema_Center, .Modifytema_Select_Center {
+    width: 50%;
+    padding: 8px;
+    margin-bottom: 15px;
+    background: rgba(0, 0, 0, 0.5); /* 배경색 수정 */
+    border: 1px solid #660000;
+    color: #f0f0f0;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+/* 텍스트 영역 */
+.Modifytema_Textarea {
+    resize: none;
+    height: 120px;
+    font-size: 1.5em;
+}
+
+/* 두 개짜리 필드: Flex 적용 */
+.Modifytema_Two {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.Modifytema_Group {
+    width: 48%;
+}
+
+/* 주소 검색 버튼 및 등록 버튼 */
+.form-button, .form-submit-button {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #f0f0f0;
+    border: 1px solid #660000;
+    padding: 8px 15px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    display: block;
+    width: 50%; 
+    margin: 0 auto;
+}
+
+
+.form-button:hover, .form-submit-button:hover {
+    background-color: #550000;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #ff0000;
+}
+
+.form-button:active, .form-submit-button:active {
+    background-color: #c92020;
+    transform: scale(1.03);
+}

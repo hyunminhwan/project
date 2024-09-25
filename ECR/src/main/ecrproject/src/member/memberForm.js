@@ -123,6 +123,7 @@ function MemberForm() {
                         <select name="loginType" value={insertMem.loginType} onChange={insertform}>
                             <option value={1}>사용자</option>
                             <option value={2}>관계자</option>
+                            {/* <option value={3}>관리자</option> */}
                         </select>
                     </div>
                 </div>
