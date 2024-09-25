@@ -13,7 +13,7 @@ function MemberForm() {
         memberPwdCheck: '',
         memberName: '',
         memberPhone: '',
-        memberEmail: '',
+        memberEmail: '', 
         loginType: 1, // 기본 로그인 타입은 일반 사용자
         birthDate: '', // 생년월일 추가
         gender: '', // 성별 추가
@@ -29,6 +29,9 @@ function MemberForm() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 패턴
     const idPattern = /^[a-zA-Z0-9]{5,}$/; // 아이디 패턴: 5자 이상, 영문자와 숫자
     const phonePattern = /^\d{10,11}$/; // 핸드폰 번호 패턴: 숫자만 10~11자  
+    // 비밀번호 정규식 영문 + 숫자 + 특수문자 + 최소9자리
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{9,}$/;
+
 
     // 폼 데이터 변경 처리
     const insertform = (e) => {
@@ -84,6 +87,12 @@ function MemberForm() {
         // 비밀번호 일치 여부 확인
         if (!isPasswordMatch) {
             alert('비밀번호가 일치하지 않습니다.');
+            return;
+        }
+
+        // 비밀번호 유효성검사
+        if (!passwordPattern.test(insertMem.memberPwd)) {
+            alert('비밀번호는 9자리 이상, 영문자, 숫자, 특수문자를 포함해야 합니다.');
             return;
         }
 
@@ -226,8 +235,8 @@ function MemberForm() {
                         <label>성별</label>
                         <select name="gender" value={insertMem.gender} onChange={insertform} required>
                             <option value="">성별 선택</option>
-                            <option value="남">남성</option>
-                            <option value="여">여성</option>
+                            <option value="male">남성</option>
+                            <option value="female">여성</option>
                         </select>
                     </div>
 

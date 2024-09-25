@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import './editMemberCss.css';
+
+
 function EditMember() {
     const loginToMember = useSelector((state) => state.loginMember) || null; // Redux에서 상태를 가져옴
     const memberId = loginToMember.member.memberId;
@@ -73,6 +75,9 @@ function EditMember() {
         // 나머지 유효성 검사
         const phonePattern = /^\d{10,11}$/; // 핸드폰 번호 패턴
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 패턴
+        // 비밀번호 정규식 영문 + 숫자 + 특수문자 + 최소9자리
+        const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{9,}$/;
+
 
         if (!phonePattern.test(memberData.memberPhone)) {
             alert('핸드폰 번호는 10~11자의 숫자만 입력해야 합니다.');
@@ -81,6 +86,11 @@ function EditMember() {
 
         if (!emailPattern.test(memberData.memberEmail)) {
             alert('유효하지 않은 이메일 주소입니다.');
+            return;
+        }
+
+        if (!passwordPattern.test(memberData.memberPwd)) {
+            alert('비밀번호는 9자리 이상, 영문자, 숫자, 특수문자를 포함해야 합니다.');
             return;
         }
 
