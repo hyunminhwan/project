@@ -53,7 +53,7 @@ function Anc_Board() {
 
     return (
         <div className="Anc_Container">
-            <br /><br /><br /><br /><br /><br />
+            <br /><br /><br /><br />
             <h1>Announcement</h1>
             <br/>
             {/* ListClick 함수 씀 */}
@@ -63,7 +63,7 @@ function Anc_Board() {
             }
            
             <br/>
-            <br/>
+            <br/><br/>
             <table className="Anc_Table">
                 <thead>
                     <tr>
@@ -90,7 +90,7 @@ function Anc_Board() {
             <div className="Anc_pagination">
                 < br/>< br/>< br/>< br/>
                 <button id="Anc_Before_button" onClick={prevPage} disabled={Nowpage === 0}>Before</button>&emsp;
-                <span> {Nowpage + 1} / {totalPages}</span> &emsp;
+                <span className="Anc_Board_Page">{Nowpage + 1} / {totalPages}</span> &emsp;
                 <button id="Anc_Next_button" onClick={nextPage} disabled={Nowpage === totalPages - 1}>Next</button>
             </div>
         </div>

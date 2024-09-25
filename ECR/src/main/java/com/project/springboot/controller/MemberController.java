@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -80,7 +79,7 @@ public class MemberController {
 	// 관리자: 회원관리, 업체관리에서 회원삭제 클릭 시 회원삭제
 	@DeleteMapping("/members/{memberId}")
 	public ResponseEntity<Void> deleteMember(@PathVariable("memberId") String memberId) {
-		memberService.deleteMemberAndReservations(memberId);	// 회원 및 회원의 예약정보 삭제 호출
+		memberService.deleteMemberAndReservationsAndReviewsAndTemas(memberId);	// 회원의 모든정보 삭제 호출
 		return ResponseEntity.noContent().build();
 	}
 
@@ -98,40 +97,40 @@ public class MemberController {
 		// 사용 가능하면 true, 이미 사용 중이면 false 반환
 		return ResponseEntity.ok(isAvailable);
 	}
-
+	
 	//아이디찾기
 	@PostMapping("/findid")
 	public String findId(@RequestParam("memberName") String memberName,
-			@RequestParam("memberPhone") Long memberPhone,
-			@RequestParam("memberEmail") String memberEmail,
-			@RequestParam("loginType") int loginType) {
-		Optional<Member> member=memberService.findId(memberName,memberPhone,memberEmail,loginType);
+						 @RequestParam("memberPhone") Long memberPhone,
+						 @RequestParam("memberEmail") String memberEmail,
+						 @RequestParam("loginType") int loginType) {
+		 Optional<Member> member=memberService.findId(memberName,memberPhone,memberEmail,loginType);
 		if(member.isPresent()) {
 			return member.get().getMemberId();
 		}else {
 			return null;
 		}
 	}
-
+	
 	//비밀번호 찾기 및 비밀번호 변경
 	@PostMapping("/findpwd")
 	public String findpwd(@RequestParam("memberId") String memberId,
-			@RequestParam("memberPhone") Long memberPhone,
-			@RequestParam("memberEmail") String memberEmail,
-			@RequestParam("loginType") int loginType) {
-		Optional<Member> member=memberService.findpwd(memberId,memberPhone,memberEmail,loginType);
+						  @RequestParam("memberPhone") Long memberPhone,
+						  @RequestParam("memberEmail") String memberEmail,
+						  @RequestParam("loginType") int loginType) {
+		 Optional<Member> member=memberService.findpwd(memberId,memberPhone,memberEmail,loginType);
 		if(member.isPresent()) {
 			return member.get().getMemberId();
 		}else {
 			return "";
 		}
-
+		
 	}
-
+	
 	//비밀번호 변경
 	@PostMapping("/changepwd")
 	public boolean changepwd(@RequestParam("memberId") String memberId,
-			@RequestParam("memberPwd") String memberPwd) {
+			  				@RequestParam("memberPwd") String memberPwd) {
 		Optional<Member> member=memberService.findById(memberId);
 		if(member.isPresent()) {
 			Member m=member.get();
@@ -142,46 +141,16 @@ public class MemberController {
 		}
 		return false;
 	}
-
-	// 회원 정보 수정
-	@PutMapping("/update")
-	public boolean updateMember(@RequestBody Member updatedMember) {
-
-		Optional<Member> member = memberService.findById(updatedMember.getMemberId());
-		String enPass = passwordEncoder.encode(updatedMember.getMemberPwd());
-		if (member.isPresent()) {
-			Member m = member.get();
-
-			m.setMemberPwd(enPass); // 비밀번호 암호화후 업데이트
-			m.setMemberPhone(updatedMember.getMemberPhone()); // 전화번호 업데이트
-			m.setMemberEmail(updatedMember.getMemberEmail()); // 이메일 업데이트
-
-			memberService.memberInsert(m);	
-			return true;
-		} 
-		return false;
-	}
-
-	@GetMapping("/current/{memberId}")
-	public Member getMemberById(@PathVariable(name="memberId")  String memberId) {
-
-		// MemberService를 통해 회원 정보를 가져옵니다.
-		Optional<Member> member = memberService.findById(memberId);
-
-		return member.get();
-	}
-
-
-
+	
 	// 관리자: 회원 전체조회
-	@GetMapping("/findClientAll")
-	public List<Member> getAllClients(
-			@RequestParam(name = "loginType") int loginType,
-			@RequestParam(name = "page") int page,
-			@RequestParam(name = "size") int size) {
-		return memberService.getAllClients(loginType, page, size);
-	}
-
-
+		@GetMapping("/findClientAll")
+		public List<Member> getAllClients(
+				@RequestParam(name = "loginType") int loginType,
+				@RequestParam(name = "page") int page,
+				@RequestParam(name = "size") int size) {
+			return memberService.getAllClients(loginType, page, size);
+		}
+	
+	
 
 }

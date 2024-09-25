@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.project.springboot.domain.Member;
 import com.project.springboot.repository.MemberRepository;
 import com.project.springboot.repository.ReservationRepository;
+import com.project.springboot.repository.ReviewRepository;
+import com.project.springboot.repository.TemaRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -22,6 +24,12 @@ public class MemberService {
 
 	@Autowired
 	ReservationRepository reservationRepository;
+	
+	@Autowired
+	ReviewRepository reviewRepository;
+	
+	@Autowired
+	TemaRepository temaRepository; 
 
 	//로그인시 타입과 아이디를 비교해서 일반회원,관계자,관리자 비교
 	public Optional<Member> Member(int loginType , String memberId) {
@@ -44,8 +52,10 @@ public class MemberService {
 
 	// 관리자: 회원삭제
 	@Transactional  // 트랜잭션 설정 추가
-	public void deleteMemberAndReservations(String memberId) {
+	public void deleteMemberAndReservationsAndReviewsAndTemas(String memberId) {
 		if(memberRepository.existsById(memberId)) {
+			temaRepository.deleteByMemberId(memberId);
+			reviewRepository.deleteByUserId(memberId);
 			reservationRepository.deleteByUserId(memberId);
 			memberRepository.deleteById(memberId);
 		} else {

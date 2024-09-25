@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.project.springboot.domain.Reviews;
 
+import jakarta.transaction.Transactional;
+
 public interface ReviewRepository extends JpaRepository<Reviews, Long>{
 
 
@@ -21,5 +23,8 @@ public interface ReviewRepository extends JpaRepository<Reviews, Long>{
 
 	//해당 테마에대한 모든리뷰 삭제
 	void deleteByTemaNo(Long temaNo);
+
+	@Transactional  // 트랜잭션 설정 추가
+	void deleteByUserId(String memberId);
 
 }
