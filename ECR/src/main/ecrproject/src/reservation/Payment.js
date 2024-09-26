@@ -79,7 +79,7 @@ function Payment() {
                             </tr>
                             <tr>
                                 <td colSpan='2'>
-                                    <button type='button' onClick={() => { navigate('/') }}>확인하기</button>  {/* 클릭시 루트페이지('/')로 이동 */}
+                                    <button type='button' onClick={() => { navigate('/checkReserve') }}>확인하기</button>  {/* 클릭시 루트페이지('/')로 이동 */}
                                 </td>
                             </tr>
                         </tbody>

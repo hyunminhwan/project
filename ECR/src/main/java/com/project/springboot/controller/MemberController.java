@@ -97,40 +97,40 @@ public class MemberController {
 		// 사용 가능하면 true, 이미 사용 중이면 false 반환
 		return ResponseEntity.ok(isAvailable);
 	}
-	
+
 	//아이디찾기
 	@PostMapping("/findid")
 	public String findId(@RequestParam("memberName") String memberName,
-						 @RequestParam("memberPhone") Long memberPhone,
-						 @RequestParam("memberEmail") String memberEmail,
-						 @RequestParam("loginType") int loginType) {
-		 Optional<Member> member=memberService.findId(memberName,memberPhone,memberEmail,loginType);
+			@RequestParam("memberPhone") Long memberPhone,
+			@RequestParam("memberEmail") String memberEmail,
+			@RequestParam("loginType") int loginType) {
+		Optional<Member> member=memberService.findId(memberName,memberPhone,memberEmail,loginType);
 		if(member.isPresent()) {
 			return member.get().getMemberId();
 		}else {
 			return null;
 		}
 	}
-	
+
 	//비밀번호 찾기 및 비밀번호 변경
 	@PostMapping("/findpwd")
 	public String findpwd(@RequestParam("memberId") String memberId,
-						  @RequestParam("memberPhone") Long memberPhone,
-						  @RequestParam("memberEmail") String memberEmail,
-						  @RequestParam("loginType") int loginType) {
-		 Optional<Member> member=memberService.findpwd(memberId,memberPhone,memberEmail,loginType);
+			@RequestParam("memberPhone") Long memberPhone,
+			@RequestParam("memberEmail") String memberEmail,
+			@RequestParam("loginType") int loginType) {
+		Optional<Member> member=memberService.findpwd(memberId,memberPhone,memberEmail,loginType);
 		if(member.isPresent()) {
 			return member.get().getMemberId();
 		}else {
 			return "";
 		}
-		
+
 	}
-	
+
 	//비밀번호 변경
 	@PostMapping("/changepwd")
 	public boolean changepwd(@RequestParam("memberId") String memberId,
-			  				@RequestParam("memberPwd") String memberPwd) {
+			@RequestParam("memberPwd") String memberPwd) {
 		Optional<Member> member=memberService.findById(memberId);
 		if(member.isPresent()) {
 			Member m=member.get();
@@ -141,16 +141,30 @@ public class MemberController {
 		}
 		return false;
 	}
-	
+
 	// 관리자: 회원 전체조회
-		@GetMapping("/findClientAll")
-		public List<Member> getAllClients(
-				@RequestParam(name = "loginType") int loginType,
-				@RequestParam(name = "page") int page,
-				@RequestParam(name = "size") int size) {
-			return memberService.getAllClients(loginType, page, size);
+	@GetMapping("/findClientAll")
+	public List<Member> getAllClients(
+			@RequestParam(name = "loginType") int loginType,
+			@RequestParam(name = "page") int page,
+			@RequestParam(name = "size") int size) {
+		return memberService.getAllClients(loginType, page, size);
+	}
+
+	// 회원정보 수정 전 비밀번호 확인
+	@PostMapping("/checkpassword/{memberId}")
+	public ResponseEntity<?> checkPassword(@RequestBody Map<String, String> requestData,@PathVariable(name="memberId") String memberId) {
+		String memberPwd = requestData.get("memberPwd");
+
+		// 서비스에서 비밀번호 확인
+		boolean isPasswordCorrect = memberService.checkPassword(memberId, memberPwd);
+
+		if (isPasswordCorrect) {
+			return ResponseEntity.ok().build(); // 비밀번호 일치
+		} else {
+			return ResponseEntity.status(401).build(); // 비밀번호 불일치
 		}
-	
-	
+	}	
+
 
 }
