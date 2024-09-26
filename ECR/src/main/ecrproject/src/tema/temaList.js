@@ -67,7 +67,7 @@ function TemaList() {
         <div>
             <Container>
                 <Row className="TemaList_Filter">
-                    <Form>
+                    <Form onSubmit={(e) => e.preventDefault()}>
                         <Row>
                             <h4>검색 </h4>
                             <input
@@ -83,7 +83,7 @@ function TemaList() {
                                         <option value="">전체</option>
                                         <option value="미스터리">미스터리</option>
                                         <option value="호러">호러</option>
-                                        <option value="SF">SF</option>
+                                        <option value="스릴러">스릴러</option>
                                         <option value="추리">추리</option>
                                         <option value="판타지">판타지</option>
                                         <option value="어드벤처">어드벤처</option>
@@ -96,9 +96,10 @@ function TemaList() {
                                     <Form.Select name="location" onChange={FilterChange}>
                                         <option value="">전체</option>
                                         <option value="서울">서울</option>
-                                        <option value="부산">부산</option>
-                                        <option value="대구">대구</option>
+                                        <option value="경기">경기</option>
                                         <option value="인천">인천</option>
+                                        <option value="대구">대구</option>
+                                        <option value="부산">부산</option>
                                     </Form.Select>
                                 </Form.Group>
                             </Col>
@@ -133,19 +134,19 @@ function TemaList() {
                 </Row>
                 <Row>
                     {filterMenuList.slice(0, menuCount).map((menu, i) => (
-                       <Col lg={4} key={i} onClick={() => temaCount(menu)} style={{ cursor: 'pointer' }}>
-                       <div className="TemaList_Card">
-                           <img src={menu.imgUrl} alt="테마 이미지" />
-                           <div> {menu.cafeName}</div>
-                           <StarRatings
-                               rating={menu.difficulty}
-                               starRatedColor="red"
-                               numberOfStars={5}
-                               starDimension="24px"
-                               starSpacing="2px"
-                           />
-                       </div>
-                   </Col>
+                        <Col lg={4} key={i} onClick={() => temaCount(menu)} style={{ cursor: 'pointer' }}>
+                            <div className="TemaList_Card">
+                                <img src={menu.imgUrl} alt="테마 이미지" />
+                                <div> {menu.temaName}</div>
+                                <StarRatings
+                                    rating={menu.difficulty}
+                                    starRatedColor="red"
+                                    numberOfStars={5}
+                                    starDimension="24px"
+                                    starSpacing="2px"
+                                />
+                            </div>
+                        </Col>
                     ))}
                 </Row>
                 {menuCount < menuList.length && (

@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Song+Myung&display=swap');
+
 /* 전체 폼 컨테이너 */
 .Inserttema_Form {
     background: rgba(0, 0, 0, 0.7);
     padding: 15px;
     border-radius: 8px;
-    width: 50%;
+    width: 45%;
     margin: 0 auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     color: #f0f0f0;
@@ -12,31 +14,32 @@
 
 /* 폼 제목 */
 .Inserttema_Title {
-    font-size: 1.5em;
+    font-size: 2em;
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* 간격 줄이기 */
     color: #ff0000;
     text-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+    font-family: 'Song Myung', serif;
 }
 
 /* 폼 레이블 */
 .Inserttema_Label {
     font-size: 1.5em;
-    margin-bottom: 8px;
+    margin-bottom: 5px; /* 간격 줄이기 */
     display: block;
     color: #ffdddd;
 }
 
 /* 폼 입력 필드 스타일 */
-.form-input, .Inserttema_Select, .form-textarea-center, .form-input-file {
+.Inserttema_Input, .Inserttema_Select, .form-textarea-center, .Inserttema_File {
     width: 100%;
     padding: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* 입력 필드 간격 줄이기 */
     background: rgba(0, 0, 0, 0.5); /* 배경색 수정 */
     border: 1px solid #660000;
     color: #f0f0f0;
     border-radius: 5px;
-    font-size: 2em;
+    font-size: 1.2em;
 }
 
 /* 중앙 정렬을 위한 입력 필드들 */
@@ -45,32 +48,38 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin: 0 auto 15px auto;
+    margin: 0 auto 10px auto; /* 간격 줄이기 */
 }
 
 .Inserttema_Center, .form-textarea-center, .Inserttema_Select-center {
     width: 50%; /* 중앙에 맞게 너비 설정 */
     padding: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* 간격 줄이기 */
     background: rgba(0, 0, 0, 0.5); /* 배경색 수정 */
     border: 1px solid #660000;
     color: #f0f0f0;
     border-radius: 5px;
-    font-size: 0.9em;
+    font-size: 1.2em;
 }
 
-/* 텍스트 영역 */
+/* 텍스트 영역 (테마 설명) */
 .form-textarea-center {
     resize: none;
     height: 120px;
-    font-size: 1.5em;
+    font-size: 1.2em;
+    overflow-y: scroll;  /* 세로 스크롤 추가 */
+    word-break: break-word;  /* 긴 단어가 있을 경우 자동 줄바꿈 */
+    width: 90%;  /* 너비를 90%로 설정하여 양쪽 여백을 확보 */
+    margin: 0 auto;  /* 중앙에 배치 */
+    display: block;  /* 블록 요소로 설정하여 중앙 정렬 적용 */
 }
+
 
 /* 두 개짜리 필드: Flex 적용 */
 .Inserttema_Two {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* 간격 줄이기 */
 }
 
 .Inserttema_Group {
@@ -91,7 +100,7 @@
     cursor: pointer;
     display: block;
     width: 50%; /* 중앙 정렬된 버튼 */
-    margin: 0 auto;
+    margin: 0 auto 10px; /* 간격 줄이기 */
 }
 
 /* 버튼 호버 및 클릭 시 스타일 */

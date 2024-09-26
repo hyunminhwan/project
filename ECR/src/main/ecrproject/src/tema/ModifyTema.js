@@ -32,13 +32,13 @@ function Coordinates(address) {
         });
 }
 
-function ModifyTema() { 
+function ModifyTema() {
     const location = useLocation();
     const { tema } = location.state || {};
     const navigate = useNavigate();
     const [temaEdit, setTemaEdit] = useState({
         temaNo: '',
-        memberId:'',
+        memberId: '',
         cafeName: '',
         temaName: '',
         price: '',
@@ -139,17 +139,17 @@ function ModifyTema() {
         <div className="Modifytema_Form">
             <h2 className="Modifytema_Title">테마 수정</h2>
             <form onSubmit={ModifySubmit} className="Modifytema_Submit">
-                
+
                 <div className="Modifytema_One">
                     <label className="Modifytema_Label">테마 번호:</label>
                     <input name="temaNo" type="text" value={temaEdit.temaNo} onChange={Modify} readOnly className="Modifytema_Center" />
                 </div>
-    
+
                 <div className="Modifytema_One">
                     <label className="Modifytema_Label">아이디:</label>
                     <input name="memberId" type="text" value={temaEdit.memberId} onChange={Modify} readOnly className="Modifytema_Center" />
                 </div>
-    
+
                 <div className="Modifytema_Two">
                     <div className="Modifytema_Group">
                         <label className="Modifytema_Label">카페이름:</label>
@@ -160,7 +160,7 @@ function ModifyTema() {
                         <input name="temaName" type="text" value={temaEdit.temaName} onChange={Modify} required className="Modifytema_Input" />
                     </div>
                 </div>
-    
+
                 <div className="Modifytema_Two">
                     <div className="Modifytema_Group">
                         <label className="Modifytema_Label">소요시간:</label>
@@ -171,12 +171,12 @@ function ModifyTema() {
                         <input name="price" type="number" value={temaEdit.price} onChange={Modify} required className="Modifytema_Input" />
                     </div>
                 </div>
-    
+
                 <div className="Modifytema_One">
                     <label className="Modifytema_Label">테마설명:</label>
                     <textarea name="temaContent" value={temaEdit.temaContent} onChange={Modify} required className="Modifytema_Textarea"></textarea>
                 </div>
-    
+
                 <div className="Modifytema_One">
                     <label className="Modifytema_Label">지역:</label>
                     <select name="location" value={temaEdit.location} onChange={Modify} className="Modifytema_Select_Center">
@@ -187,13 +187,13 @@ function ModifyTema() {
                         <option value="부산">부산</option>
                     </select>
                 </div>
-    
+
                 <div className="Modifytema_One">
                     <label className="Modifytema_Label">주소:</label>
                     <input name="address" type="text" value={temaEdit.address} onChange={Modify} readOnly required className="Modifytema_Center" />
                     <button type="button" onClick={AddressClick} className="form-button">주소 검색</button>
                 </div>
-    
+
                 <div className="Modifytema_Two">
                     <div className="Modifytema_Group">
                         <label className="Modifytema_Label">인원수:</label>
@@ -216,7 +216,7 @@ function ModifyTema() {
                         </select>
                     </div>
                 </div>
-    
+
                 <div className="Modifytema_Two">
                     <div className="Modifytema_Group">
                         <label className="Modifytema_Label">장르:</label>

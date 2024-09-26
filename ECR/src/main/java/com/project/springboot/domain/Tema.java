@@ -40,6 +40,8 @@ public class Tema {
 	@Column(name = "cafe_name")
 	private String cafeName;	//카페이름
 	
+	@Column(name = "cafe_phone")
+	private Long cafePhone;
 	@NonNull
 	private String genre;		//장르
 	private String location;	//지역
