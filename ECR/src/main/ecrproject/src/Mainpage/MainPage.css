@@ -7,6 +7,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow: hidden; /* 불필요한 스크롤 방지 */
   background-image: url('https://media.giphy.com/media/l0MYz1H6iNT9oDfKU/giphy.gif'); /* 배경 이미지 URL */
   background-size: cover;
   background-position: center;
@@ -16,10 +17,15 @@ html, body {
   font-family: 'Song Myung', serif;
 }
 
+/* 섹션을 전체 화면 높이로 설정 */
+#fullpage, .section {
+  height: 100vh; /* 각 섹션의 높이를 화면 전체로 설정 */
+}
+
 #MainPage_a {
   font-family: 'Song Myung', serif;
   font-size: 60px;
-  background-image: linear-gradient(to right, #715d5d, #c54242, #9b1313); /* 그라데이션 */
+  background-image: linear-gradient(to right, #877171, #b76b6b, #574d4d);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -29,18 +35,11 @@ html, body {
 #MainPage_b {
   font-size: 20px;
   font-family: 'Song Myung', serif;
-  background-image: linear-gradient(to right, #a98787, #a16565, #918181); /* 그라데이션 */
+  background-image: linear-gradient(to right, #ff5b5b, #d94e4e, #f56868);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
-}
-
-/* 섹션을 전체 화면 높이로 설정 */
-header, .MainPage_Caution {
-  min-height: 100vh;
-  padding: 20px;
-  box-sizing: border-box;
 }
 
 /* 헤더 */
@@ -53,10 +52,11 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh; /* 섹션 높이를 화면 높이로 설정 */
+  box-sizing: border-box;
 }
 
-
-/* 테마 가운데로  */
+/* 테마 가운데로 */
 .MainPage_Tema_Card {
   display: flex;
   flex-direction: column; /* 요소들을 세로로 나열 */
@@ -64,6 +64,8 @@ header {
   gap: 20px; /* h2와 테마 카드 사이에 간격 추가 */
   padding: 15px;
   background-color: rgba(0, 0, 0, 0.5); /* 배경을 약간 투명하게 설정 */
+  height: 100vh; /* 화면 전체 높이로 설정 */
+  box-sizing: border-box; /* 패딩 포함 */
 }
 
 .MainPage_Tema_Card .MainPage_Tema_h2 {
@@ -88,9 +90,8 @@ header {
   max-width: 2000px; /* 최대 너비 설정 */
 }
 
-/* 테마 카드 */
 .MainPage_Tema {
-  flex: 1 1 ; /* 5개가 한 줄에 들어가도록 카드의 너비를 18%로 설정 */
+  flex: 1 1 ; /* 5개가 한 줄에 들어가도록 카드의 너비를 조정 */
   text-align: center;
   border-radius: 10px;
   padding: 20px;
@@ -111,8 +112,12 @@ header {
   box-shadow: 0 0 15px #ff0000;
 }
 
+/* 주의사항 */
 .Caution {
   text-align: center;
+  padding: 20px;
+  height: 100vh; /* 주의사항 섹션도 화면 높이에 맞게 설정 */
+  box-sizing: border-box;
 }
 
 .Caution img {
@@ -151,6 +156,7 @@ header {
 .Caution_Text {
   color: black;
   font-size: 50px;
+  font-family: 'Song Myung', serif;
 }
 
 .Caution_Text2 {
@@ -173,5 +179,92 @@ footer {
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.5);
   color: #ff0000;
-  
+  height: 100vh; /* 푸터에도 전체 높이 설정 */
+  box-sizing: border-box;
+}
+
+/* 전체 About 섹션 스타일 */
+.MainPage_About {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: rgba(0, 0, 0, 0.5); /* 배경 투명도 설정 */
+  height: 100vh; /* 화면 높이에 맞게 섹션 높이 설정 */
+  box-sizing: border-box;
+}
+
+.About h2.About_Text {
+  font-size: 50px;
+  font-weight: bold;
+  background-image: linear-gradient(to right, #877171, #b76b6b, #574d4d);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
+  margin-bottom: 20px;
+  font-family: 'Song Myung', serif;
+}
+
+.About p.About_Text2 {
+  font-size: 24px;
+  color: #ffffff;
+  line-height: 1.8;
+  margin-bottom: 50px;
+  font-family: 'Song Myung', serif;
+}
+
+/* 4개 아이콘을 포함한 그리드 레이아웃 */
+.About_Icons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4열 그리드 */
+  gap: 30px;
+}
+
+.About_Icons_Item {
+  background-color: rgba(255, 255, 255, 0.1); /* 약간의 투명도 있는 카드 배경 */
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.About_Icons_Item:hover {
+  transform: scale(1.05);
+}
+
+.About_Icons_Item img {
+  width: 90px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.About_Font {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-family: 'Song Myung', serif;
+}
+
+.About_Font2 {
+  font-size: 16px;
+  color: #ffffff;
+  line-height: 1.5;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+  .About_Icons {
+    grid-template-columns: repeat(2, 1fr); /* 작은 화면에서 2열로 변경 */
+  }
+}
+
+@media (max-width: 600px) {
+  .About_Icons {
+    grid-template-columns: 1fr; /* 모바일 화면에서 1열로 변경 */
+  }
+
+  .About_Icons_Item img {
+    width: 70px;
+    height: auto;
+  }
 }

@@ -8,16 +8,22 @@ import clockImg from './img/clock.png';
 import photoImg from './img/photo-camera.png';
 import cctvImg from './img/cctv.png';
 import groupImg from './img/group.png';
-
+import img1 from './img/1.jpg';
 
 function MainPage() {
   const [themes, setthemes] = useState([]);
   const navigate = useNavigate();
+  
   useEffect(() => {
     // fullpage.js 초기화
     const fullPageInstance = new Fullpage('#fullpage', {
       autoScrolling: true,
       navigation: true,
+      scrollingSpeed: 700, // 스크롤 속도 조정
+      anchors: ['main', 'about', 'tema', 'caution', 'footer'], // 각 섹션에 고유 앵커 설정
+      afterLoad: function(origin, destination, direction) {
+        console.log("스크롤이 완료된 후 호출되는 콜백 함수입니다.");
+      }
     });
 
     // 테마 API 호출 & 평점 순으로 상위 5개 띄움
@@ -39,8 +45,8 @@ function MainPage() {
   const themeDetail = (menus) => {
     navigate('/detail', { state: { menus } })
   }
+  
   return (
-    
     <div id="fullpage">
       {/* 1번째 섹션: 메인이미지 */}
       <div className="section">
@@ -50,7 +56,40 @@ function MainPage() {
         </header>
       </div>
 
-      {/* 2번째 섹션: 테마 카드 섹션 */}
+     {/* 2번째 섹션: 이용방법 */}
+     <div className="section">
+        <section className="MainPage_About">
+          <div className="About">
+            <h2 className="About_Text">방탈출 게임</h2> <br />
+            <p id="MainPage_b">"60분 안에 갇혀 있는 방에서 숨겨진 단서를 찾아 탈출하면 됩니다!"<br /> 비디오 게임이 아닌, 실제로 체험하는 놀이문화입니다. 여러분은 어떠한 이유로 다양한 테마룸에 갇히게 됩니다.</p>
+            <br /> <br />
+            <div className="About_Icons">
+              <div className="About_Icons_Item">
+                <img src={img1} alt="Clock Icon" />
+                <p className="About_Font">게임의 핵심은 단서를 조합하여 문제를 해결하는데 있습니다.</p><br/>
+                <p className="About_Font2">주변의 단서를 꼼꼼히 관찰하고 발견하여, <br/>논리적으로 조합해 보세요!<br/>기본 이상의 사고력과 집중력이 있다면 충분히 풀 수 있습니다.</p>
+              </div>
+              <div className="About_Icons_Item">
+                <img src={img1} alt="img1" />
+                <p className="About_Font">방탈출 성공의 키는 소통입니다.</p><br/>
+                <p className="About_Font2">게임을 진행하는 동안 여러분은 동료와 끊임없이 공유해가며 문제를 해결해나가야합니다. <br/>혼자서는 쉽지 않지만, 동료와 함께 협력하면 충분히 해결할 수 있습니다.</p>
+              </div>
+              <div className="About_Icons_Item">
+                <img src={img1} alt="img1" />
+                <p className="About_Font">시간제한이 있다는 것을 기억하세요!</p><br/>
+                <p className="About_Font2">방안에 들어오는 순간! <br /> 60분이라는 시간이 매우 짧게 느껴질 것입니다.<br/> 제한 된 시간안에 침착하게, 단서를 찾아 문제를 해결하세요.</p>
+              </div>
+              <div className="About_Icons_Item">
+                <img src={img1} alt="img1" />
+                <p className="About_Font">방탈출 게임은 안전합니다.</p><br/>
+                <p className="About_Font2">위급 상황시,<br/> 외부 직원과 연락하거나 방안에 구비된 비상열쇠를 <br/>이용해 탈출할 수 있으며, 인화성 물품은 별도 보관함에 보관해야 합니다. <br/>고객들의 안전을 위해 CCTV를 설치 및 운영하고 있습니다.<br /><br /></p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* 3번째 섹션: 테마 카드 섹션 */}
       <div className="section">
         <section className="MainPage_Tema_Card">
           <h2 className="MainPage_Tema_h2"> TEMA</h2>
@@ -81,8 +120,7 @@ function MainPage() {
         </section>
       </div>
 
-
-      {/* 3번째 섹션: 주의사항 */}
+      {/* 4번째 섹션: 주의사항 */}
       <div className="section">
         <section className="MainPage_Caution">
           <div className="Caution">
@@ -114,16 +152,6 @@ function MainPage() {
             </div>
           </div>
         </section>
-      </div>
-
-
-      {/* 푸터 */}
-      <div className="section">
-        <footer>
-          <p>상호: OOOOOOOO | 대표자: OOO | 대표전화: 010-1234-5678</p>
-          <p>이메일: OOOOO@naver.com | 주소: 서울시 강남구 역삼동 OOO</p>
-          <p>사업자번호: 000-00-00000</p>
-        </footer>
       </div>
     </div>
   );
