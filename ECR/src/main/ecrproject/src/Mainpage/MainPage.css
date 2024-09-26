@@ -76,6 +76,7 @@ header {
   -webkit-background-clip: text;
   color: transparent;
   text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
+  font-family: 'Song Myung', serif;
 }
 
 .MainPage_TemaList {

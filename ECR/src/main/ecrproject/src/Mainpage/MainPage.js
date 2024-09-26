@@ -53,7 +53,6 @@ function MainPage() {
       {/* 2번째 섹션: 테마 카드 섹션 */}
       <div className="section">
         <section className="MainPage_Tema_Card">
-          <br />
           <h2 className="MainPage_Tema_h2"> TEMA</h2>
           <div className="MainPage_TemaList">
             {themes.map((theme, index) => (
