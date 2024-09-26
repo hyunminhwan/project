@@ -1,3 +1,4 @@
+/* 컨테이너 배경 및 기본 색상 설정 */
 .ReservationList_Find_Div {
     text-align: center;     /* 텍스트 가운데 정렬 */
     vertical-align: center; /* 세로 가운데 정렬 */
@@ -19,6 +20,8 @@
     animation: ghost 3s infinite;
     transition: color 0.1s ease;
 }
+
+/* 테이블의 타이틀 영역 */
 .ReservationList_Title_Find_Table {
     width: 100%;
     max-width: 1400px;
@@ -26,15 +29,13 @@
     text-align: center;
     border-collapse: collapse;
 }
-
-/* 조회 div th 간격조절 */
 .ReservationList_Title_Find_Table th:nth-child(1) { width: 20%; }
-.ReservationList_Title_Find_Table th:nth-child(2) { width: 45%; }
-.ReservationList_Title_Find_Table th:nth-child(3) { width: 35%; }
+.ReservationList_Title_Find_Table th:nth-child(2) { width: 25%; }
+.ReservationList_Title_Find_Table th:nth-child(3) { width: 25%; }
 
 .ReservationList_Title_Find_Table th {
-    font-size: 1.5em;
-    letter-spacing: 5px;
+    font-size: 1.4em;
+    letter-spacing: 4px;
 }
 .ReservationList_Title_Find_Table td input {
     width: 300px;
@@ -49,9 +50,11 @@
     margin-top: 30px;
     text-align: center;
 }
+
+/* select 박스 스타일 */
 .ReservationList_Title_Find_Table select {
-    width: 200px;
-    max-width: 300px; /* 예약번호 입력 칸 크기 조정 */
+    width: 300px; /* 길이 늘리기 */
+    max-width: 400px; /* 최대 길이 설정 */
     height: 60px;
     padding: 10px;
     font-size: 1.3em;
@@ -61,7 +64,24 @@
     color: #f0f0f0;
     margin-top: 30px;
     text-align: center;
+    cursor: pointer;
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
+
+.ReservationList_Title_Find_Table select option {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: black;
+    padding: 10px;
+    text-align: center;
+}
+
+/* 선택된 옵션 및 hover 시 스타일 */
+.ReservationList_Title_Find_Table select option:hover,
+.ReservationList_Title_Find_Table select option:checked {
+    background-color: rgba(255, 0, 0, 0.7); /* 선택된 항목과 마우스 오버 시 빨간 배경 */
+    color: white; /* 흰색 글씨 */
+}
+
 /* 조회버튼 button 스타일 */
 .ReservationList_Title_Find_Table button {
     width: 100px;
@@ -97,16 +117,20 @@
     margin: 0 auto;
     margin-top: 30px;
     padding: 30px;
+    overflow: hidden; /* 박스 영역을 벗어난 부분 숨기기 */
 }
-
 
 /* 리스트 테이블 스타일 */
 .ReservationList_List_Table {
     width: 100%;
+    table-layout: fixed;        /* 고정된 레이아웃을 적용 */
     max-width: 1400px;
     margin: 0 auto;
     text-align: center;
     border-collapse: collapse;
+    position: relative;
+    overflow-x: auto;           /* 가로 스크롤을 자동으로 추가 */
+    border-bottom: 2px solid rgba(109, 60, 60, 0.6);
 }
 /* 리스트 헤더 스타일 */
 .ReservationList_List_Table th {
@@ -119,14 +143,12 @@
 .ReservationList_List_Table td {
     padding: 15px;
     color: #f0f0f0;
-    font-size: 1.3em;
+    font-size: 1.1em;
     box-shadow: 0 2px 0 rgba(255, 0, 0, 0.6);
-    /* 긴 텍스트가 한 줄로 유지되도록 설정 */
-    white-space: nowrap;      /* 줄바꿈 방지 */
-    overflow: hidden;         /* 넘치는 텍스트 숨김 */
-    text-overflow: ellipsis;  /* 넘치는 부분은 "..."로 표시 */
+    white-space: normal;      /* 줄바꿈 허용 */
+    overflow: visible;        /* 내용이 넘칠 때 보이도록 설정 */
+    border-bottom: 2px solid rgba(109, 60, 60, 0.6);
 }
-
 
 /* 예약관련 button 스타일 */
 .ReservationList_List_Table button {
@@ -164,7 +186,6 @@
     background-color: #cc0000;
     transform: scale(0.98);
 }
-
 
 /* 더보기 버튼 스타일 */
 .ReservationList_MoreButton {

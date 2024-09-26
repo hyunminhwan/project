@@ -85,7 +85,7 @@ function ClientList({ refreshData }) {                               // loginTyp
                 <table className='ClientList_List_Table'>
                     <thead>
                         <tr>
-                        <th>번호</th>
+                        <th>No</th>
                             <th>아이디</th>
                             <th>이름</th>
                             <th>성별</th>

@@ -31,7 +31,7 @@ function Detail() {
                     <Col md={5}>
                         <div className="Detail_Div">
                             <div className="Detail_Info">
-                                <h2>src={`${process.env.REACT_APP_API_BASE_URL}${menus.temaName}`}</h2>
+                                <h2>{menus.temaName}</h2>
                                 <div id="Detail_Content">{menus.temaContent}</div>
                                 <br/>
                                 <div id="Detail_Content">장르 &emsp; {menus.genre}</div>

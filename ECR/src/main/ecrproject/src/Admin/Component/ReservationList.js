@@ -141,7 +141,7 @@ function ReservationList() {
     
     // 날짜 포맷 함수
     const formatDate = (date) => {
-        return date.slice(0,10);
+        return date.slice(2,10);
     }
     // 이용시간 포맷 함수
     const formatUseTime = (time) => {
@@ -156,9 +156,9 @@ function ReservationList() {
                 <table className="ReservationList_Title_Find_Table">
                     <thead>
                         <tr>
-                            <th>🧾전체조회</th>
-                            <th colSpan={2}>📅날짜로 찾기</th>
-                            <th colSpan={2}>🖊️결제상태로 찾기</th>
+                            <th>전체조회</th>
+                            <th colSpan={2}>날짜로 찾기</th>
+                            <th colSpan={2}>결제상태로 찾기</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -213,9 +213,9 @@ function ReservationList() {
                 <table className="ReservationList_List_Table">
                     <thead>
                         <tr>
-                            <th>번호</th>
+                            <th>NO</th>
                             <th>예약날짜</th>
-                            <th>예약번호</th>
+                            <th>번호</th>
                             <th>지역</th>
                             <th>지점명</th>
                             <th>테마이름</th>

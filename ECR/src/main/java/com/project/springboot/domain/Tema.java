@@ -45,7 +45,7 @@ public class Tema {
 	private String location;	//지역
 	private Long difficulty; 	//난이도
 	
-	@Column(name = "tema_content", length = 300)
+	@Column(name = "tema_content", length = 500)
 	private String temaContent;	//내용
 	
 	
