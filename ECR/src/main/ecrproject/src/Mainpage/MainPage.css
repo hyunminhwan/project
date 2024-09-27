@@ -166,11 +166,5 @@ header {
   background-clip: text;
 }
 
-/* 푸터 */
-footer {
-  text-align: center;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #ff0000;
-  
-}
+
+

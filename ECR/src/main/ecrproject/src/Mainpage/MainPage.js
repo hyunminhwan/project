@@ -118,14 +118,7 @@ function MainPage() {
       </div>
 
 
-      {/* 푸터 */}
-      <div className="section">
-        <footer>
-          <p>상호: OOOOOOOO | 대표자: OOO | 대표전화: 010-1234-5678</p>
-          <p>이메일: OOOOO@naver.com | 주소: 서울시 강남구 역삼동 OOO</p>
-          <p>사업자번호: 000-00-00000</p>
-        </footer>
-      </div>
+     
     </div>
   );
 }
