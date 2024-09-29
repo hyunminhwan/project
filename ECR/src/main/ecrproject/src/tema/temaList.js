@@ -7,7 +7,7 @@ import "./temaListCss.css";
 
 function TemaList() {
     let [menuList, setMenuList] = useState([]);
-    let [menuCount, setMenuCount] = useState(9);
+
     let [filterMenuList, setFilterMenuList] = useState([]);
     let [filter, setfilter] = useState({
         genre: '',
@@ -19,6 +19,7 @@ function TemaList() {
 
     const navigate = useNavigate();
 
+    //페이지가 열렸을때 모든테마를 가져옴
     useEffect(() => {
         axios.get('/api/menu')
             .then((result) => {
@@ -40,6 +41,8 @@ function TemaList() {
         setFilterMenuList(filters);
     }, [filter, menuList, search]);
 
+    
+    let [menuCount, setMenuCount] = useState(9);
     const loadMore = () => {
         setMenuCount(p => p + 9);
     };

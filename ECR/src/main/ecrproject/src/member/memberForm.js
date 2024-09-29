@@ -110,7 +110,7 @@ function MemberForm() {
         try {
             await axios.post('/api/insert', insertMem);
             alert('회원가입이 완료되었습니다.');
-            navigate("/");
+            navigate("/login");
         } catch (error) {
             // 서버에서 반환한 에러 메시지를 받아서 처리
             if (error.response && error.response.status === 400) {
