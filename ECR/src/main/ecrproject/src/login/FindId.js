@@ -59,15 +59,12 @@ function FindId() {
                             <td>이메일</td>
                             <td><input type="email" placeholder="ex)name@naver.com" name="memberEmail" /></td>
                         </tr>
-                        <tr colSpan={2}>
-                            <td >
-                                <button type="submit">아이디 찾기</button>
-                                <button type="button" onClick={() => navigate("/findpwd")}>비밀번호 찾기</button>
-                            </td>
-
-                        </tr>
                     </tbody>
                 </table>
+                <div className="button-container">
+                    <button type="submit">아이디 찾기</button>
+                    <button type="button" onClick={() => navigate("/findpwd")}>비밀번호 찾기</button>
+                </div>
             </form>
             {FindId && <p>{FindId}</p>}
         </div>

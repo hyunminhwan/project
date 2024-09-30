@@ -58,6 +58,7 @@ function InsertTema() {
 
         Coordinates(temaInsert.address).then((coordinates) => {
             if (coordinates) {
+                
                 const formData = new FormData();
                 formData.append('memberId', temaInsert.memberId);
                 formData.append('imgUrl', temaInsert.imgUrl);

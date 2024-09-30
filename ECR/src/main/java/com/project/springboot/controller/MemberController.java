@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,7 +80,7 @@ public class MemberController {
 	// 관리자: 회원관리, 업체관리에서 회원삭제 클릭 시 회원삭제
 	@DeleteMapping("/members/{memberId}")
 	public ResponseEntity<Void> deleteMember(@PathVariable("memberId") String memberId) {
-		memberService.deleteMemberAndReservationsAndReviewsAndTemas(memberId);	// 회원의 모든정보 삭제 호출
+		memberService.deleteMemberAndReviewsAndTemas(memberId);	// 회원의 모든정보 삭제 호출
 		return ResponseEntity.noContent().build();
 	}
 
@@ -165,6 +166,13 @@ public class MemberController {
 			return ResponseEntity.status(401).build(); // 비밀번호 불일치
 		}
 	}	
+	
+	 // 회원 정보 수정
+    @PutMapping("/update")
+    public ResponseEntity<Member> updateMember(@RequestBody Member member) {
+        Member updatedMember = memberService.updateMember(member);
+        return ResponseEntity.ok(updatedMember);
+    }
 
 
 }

@@ -12,37 +12,20 @@ function EditMember() {
 
     // 회원 정보 상태 관리
     const [memberData, setMemberData] = useState({
-        memberId: '',
-        memberName: '',
-        memberBirthDate: '',
-        memberGender: '',
+        memberId: loginToMember.member.memberId,
+        memberName: loginToMember.member.memberName,
+        memberBirthDate: loginToMember.member.birthDate,
+        memberGender: loginToMember.member.gender,
         memberPwd: '',
         memberPwdCheck: '',
-        memberPhone: '',
-        memberEmail: ''
+        memberPhone: loginToMember.member.memberPhone,
+        memberEmail: loginToMember.member.memberEmail
     });
 
     // 비밀번호 일치 여부 상태 관리
     const [isPwdMatch, setIsPwdMatch] = useState(null);
 
-    // 컴포넌트 마운트 시 기존 회원 정보를 가져옴
-    useEffect(() => {
-        // 실제 API 주소에 맞게 호출
-        axios.get(`/api/current/${memberId}`) // 현재 로그인된 사용자의 정보를 가져와야 합니다.
-            .then(response => {
-                setMemberData({
-                    memberId: response.data.memberId,
-                    memberName: response.data.memberName,
-                    memberBirthDate: response.data.memberBirthDate,
-                    memberGender: response.data.memberGender,
-                    memberPwd: '', // 비밀번호는 빈칸으로 두기
-                    memberPwdCheck: '',
-                    memberPhone: response.data.memberPhone,
-                    memberEmail: response.data.memberEmail
-                });
-            })
-            .catch(error => console.error('회원 정보 불러오기 오류:', error));
-    }, []);
+   
 
     // 폼 데이터 변경 처리
     const handleChange = (e) => {
@@ -94,8 +77,17 @@ function EditMember() {
             return;
         }
 
+        const dataToSubmit = {
+            memberId: memberData.memberId,
+            memberName: memberData.memberName,
+            birthDate: memberData.memberBirthDate,
+            gender: memberData.memberGender,
+            memberPwd: memberData.memberPwd,
+            memberPhone: memberData.memberPhone,
+            memberEmail: memberData.memberEmail,
+        };
 
-        axios.put('/api/update', memberData)
+        axios.put('/api/update', dataToSubmit)
             .then((result) => {
                 if (result) {
                     alert('회원 정보가 성공적으로 수정되었습니다.');
@@ -205,9 +197,9 @@ function EditMember() {
                         <div className="Remember_Field">
                             <label>핸드폰 번호</label>
                             <input
-                                type="text"
+                                type="number"
                                 name="memberPhone"
-                                value={memberData.memberPhone}
+                                value={"0"+memberData.memberPhone}
                                 onChange={handleChange}
                                 required
                             />

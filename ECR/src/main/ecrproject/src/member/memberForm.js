@@ -8,15 +8,15 @@ function MemberForm() {
     const navigate = useNavigate()
     // 회원가입 폼 데이터 상태 관리
     const [insertMem, setInsertMem] = useState({
-        memberId: '',
-        memberPwd: '',
-        memberPwdCheck: '',
-        memberName: '',
-        memberPhone: '',
-        memberEmail: '', 
+        memberId: '', //아이디
+        memberPwd: '',  //비밀번호
+        memberPwdCheck: '', //아이디체크
+        memberName: '', //이름
+        memberPhone: '', //핸드폰 번호
+        memberEmail: '',  //이메일
         loginType: 1, // 기본 로그인 타입은 일반 사용자
-        birthDate: '', // 생년월일 추가
-        gender: '', // 성별 추가
+        birthDate: '', // 생년월일 
+        gender: '',     //성별
     });
 
     // 아이디 중복 체크 상태 관리
