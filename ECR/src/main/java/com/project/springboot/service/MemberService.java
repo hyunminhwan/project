@@ -57,11 +57,10 @@ public class MemberService {
 
 	// 관리자: 회원삭제
 	@Transactional  // 트랜잭션 설정 추가
-	public void deleteMemberAndReservationsAndReviewsAndTemas(String memberId) {
+	public void deleteMemberAndReviewsAndTemas(String memberId) {
 		if(memberRepository.existsById(memberId)) {
 			temaRepository.deleteByMemberId(memberId);
 			reviewRepository.deleteByUserId(memberId);
-			reservationRepository.deleteByUserId(memberId);
 			memberRepository.deleteById(memberId);
 		} else {
 			throw new IllegalArgumentException("해당 회원을 찾을 수 없습니다");
@@ -114,6 +113,11 @@ public class MemberService {
 		}
 
 		return false; // 회원 정보가 없으면 false 반환
-	}	
+	}
+	
+	// 회원 정보를 업데이트하는 메서드
+    public Member updateMember(Member member) {
+        return memberRepository.save(member); // 변경된 회원 정보를 저장
+    }
 
 }

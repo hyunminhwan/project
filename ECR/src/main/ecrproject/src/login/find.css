@@ -41,8 +41,15 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    width: 100%;
-    margin: 5px 0;
+    flex: 1; /* 버튼이 같은 비율로 공간을 차지하도록 */
+    margin: 0 5px; /* 좌우에 5px 마진 */
+}
+
+/* 버튼 컨테이너 스타일 */
+.button-container {
+    display: flex;
+    justify-content: center; /* 가운데 정렬 */
+    margin-top: 20px; /* 버튼 위에 여백 추가 */
 }
 
 /* 버튼 호버 효과 */
