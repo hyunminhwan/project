@@ -29,7 +29,7 @@ public class ReviewController {
 	}
 	
 	//리뷰 등록
-	@PostMapping
+	@PostMapping("/insert")
 	public Reviews reviewInsert(@RequestBody Reviews reviews) {
 		return reviewService.reviewInsert(reviews);
 	}

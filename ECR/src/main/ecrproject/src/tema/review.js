@@ -39,7 +39,7 @@ function Review({ temaNo }) {
         if (reviewCheck) {
             alert("이미 리뷰를 작성하셨습니다")
         } else {
-            axios.post("/review", {
+            axios.post("/review/insert", {
                 temaNo: temaNo,
                 reviewContent: reviewContent,
                 reviewRating: rating,
