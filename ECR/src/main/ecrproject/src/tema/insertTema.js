@@ -4,7 +4,7 @@ import './insertTemaCss.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-//주소 api
+//주소 카카오api
 function KakaoMap() {
     const script = document.createElement('script');
     script.src = 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';

@@ -176,7 +176,7 @@ function ReservationList() {
                                         selectsRange={true}
                                         startDate={startDate}
                                         endDate={endDate}
-                                        onChange={update => {
+                                        onChange={update => { 
                                             setDateRange(update);                   // 지정날짜 상태 수정
                                         }}
                                         withPortal
