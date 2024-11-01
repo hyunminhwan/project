@@ -13,10 +13,11 @@ function Anc_List() {
     const Anc_Submit = (e) => {
         e.preventDefault();
 
-        axios.post('/board/write2',{ 
+        axios.post('/board/write2', {
             managerId: memberId,
-            boardTitle: title, 
-            boardContent: content })
+            boardTitle: title,
+            boardContent: content
+        })
 
             .then(() => {
                 alert('공지사항이 작성되었습니다.');
@@ -30,15 +31,15 @@ function Anc_List() {
 
     return (
         <div className="Anc_List">
-            <br/><br/>
+            <br /><br />
             <h1>Write</h1>
-            <br/>
+            <br />
             <form onSubmit={Anc_Submit}>
                 <table className="Anc_List_Table">
                     <tbody>
                         <tr>
                             <td >작성자</td>
-                            <td><input type="text" value={memberId}  readOnly/></td>
+                            <td><input type="text" value={memberId} readOnly /></td>
                         </tr>
                         <tr>
                             <td>제목</td>
@@ -48,15 +49,14 @@ function Anc_List() {
                             <td>내용</td>
                             <td><textarea value={content} onChange={(e) => setContent(e.target.value)} rows="10" cols="50"></textarea></td>
                         </tr>
-                        <tr>
-                            <td colSpan="2" align="center">
-                                <input type="submit" value="등록" />
-                                &emsp;
-                                <input type="reset" value="다시쓰기" onClick={() => { setTitle(''); setContent(''); }} />
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
+
+                <div className="Anc_List_Input" colSpan="2" align="center">
+                    <input type="submit" value="등록" />
+                    &emsp;
+                    <input type="reset" value="다시쓰기" onClick={() => { setTitle(''); setContent(''); }} />
+                </div>
             </form>
         </div>
     );

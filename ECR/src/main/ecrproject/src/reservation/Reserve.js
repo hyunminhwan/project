@@ -94,11 +94,14 @@ const handleReserve = () => {
     .then(response => {
         console.log('예약 성공: ', response.data);
         alert('예약되었습니다');
-        navigate('/payment', { state: { reservation: response.data, menu: menus } }); // 예약완료 페이지로 이동(+ 값 보내기)
+        navigate('/payment', { state: { reservation: reservationData, menu: menus } }); // 예약완료 페이지로 이동(+ 값 보내기)
     })
     .catch(error => {
-        alert('예약 중 오류가 발생했습니다');
-        console.log('예약 중 오류발생 : ', error);
+		if (error.response && error.response.status === 409) {
+            alert("이미 예약된 시간대입니다. 다른 시간을 선택해 주세요.");
+        } else {
+            alert('예약 중 오류가 발생했습니다');
+        }
     })
 };
 

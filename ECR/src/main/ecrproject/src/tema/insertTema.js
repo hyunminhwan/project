@@ -4,7 +4,7 @@ import './insertTemaCss.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-//주소 api
+//주소 카카오api
 function KakaoMap() {
     const script = document.createElement('script');
     script.src = 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
@@ -58,6 +58,7 @@ function InsertTema() {
 
         Coordinates(temaInsert.address).then((coordinates) => {
             if (coordinates) {
+                
                 const formData = new FormData();
                 formData.append('memberId', temaInsert.memberId);
                 formData.append('imgUrl', temaInsert.imgUrl);
@@ -132,22 +133,22 @@ function InsertTema() {
                 <div className="Inserttema_Two">
                     <div className="Inserttema_Group">
                         <label className="Inserttema_Label">카페이름</label>
-                        <input name="cafeName" type="text" value={temaInsert.cafeName} onChange={TemaData} required className="form-input" placeholder=''/>
+                        <input name="cafeName" type="text" value={temaInsert.cafeName} onChange={TemaData} required className="Inserttema_Input" placeholder=''/>
                     </div>
                     <div className="Inserttema_Group">
                         <label className="Inserttema_Label">테마이름</label>
-                        <input name="temaName" type="text" value={temaInsert.temaName} onChange={TemaData} required className="form-input" />
+                        <input name="temaName" type="text" value={temaInsert.temaName} onChange={TemaData} required className="Inserttema_Input" />
                     </div>
                 </div>
     
                 <div className="Inserttema_Two">
                     <div className="Inserttema_Group">
                         <label className="Inserttema_Label">소요시간</label>
-                        <input name="timetaken" type="number" value={temaInsert.timetaken} onChange={TemaData} required className="form-input" />
+                        <input name="timetaken" type="number" value={temaInsert.timetaken} onChange={TemaData} required className="Inserttema_Input" />
                     </div>
                     <div className="Inserttema_Group">
                         <label className="Inserttema_Label">가격</label>
-                        <input name="price" type="number" value={temaInsert.price} onChange={TemaData} required className="form-input" />
+                        <input name="price" type="number" value={temaInsert.price} onChange={TemaData} required className="Inserttema_Input" />
                     </div>
                 </div>
     
@@ -209,7 +210,7 @@ function InsertTema() {
                     </div>
                     <div className="Inserttema_Group">
                         <label className="Inserttema_Label">이미지 업로드</label>
-                        <input type="file" accept='image/*' onChange={InsertImg} required className="form-input-file" />
+                        <input type="file" accept='image/*' onChange={InsertImg} required className="Inserttema_File" />
                     </div>
                 </div>
                 <button type="submit" className="form-submit-button">등록</button>

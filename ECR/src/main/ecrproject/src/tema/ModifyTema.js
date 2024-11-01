@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import './ModifyTemaCss.css';
 
 // 주소 API 로드 함수
 function KakaoMap() {
@@ -32,13 +32,13 @@ function Coordinates(address) {
         });
 }
 
-function ModifyTema() { 
+function ModifyTema() {
     const location = useLocation();
     const { tema } = location.state || {};
     const navigate = useNavigate();
     const [temaEdit, setTemaEdit] = useState({
         temaNo: '',
-        memberId:'',
+        memberId: '',
         cafeName: '',
         temaName: '',
         price: '',
@@ -89,7 +89,6 @@ function ModifyTema() {
                 formData.append('latitude', coordinates.latitude);
                 formData.append('longitude', coordinates.longitude);
 
-                // 수정된 데이터 서버에 전송
                 axios.put(`/api/tema`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
@@ -107,7 +106,6 @@ function ModifyTema() {
         });
     };
 
-    // 입력 값 변경 핸들러
     const Modify = (e) => {
         setTemaEdit({
             ...temaEdit,
@@ -115,7 +113,6 @@ function ModifyTema() {
         });
     };
 
-    // 이미지 변경 핸들러
     const ModifyImg = (e) => {
         setTemaEdit({
             ...temaEdit,
@@ -123,7 +120,6 @@ function ModifyTema() {
         });
     };
 
-    // 주소 검색 버튼 핸들러
     const AddressClick = () => {
         new window.daum.Postcode({
             oncomplete: function (data) {
@@ -135,83 +131,113 @@ function ModifyTema() {
         }).open();
     };
 
-    // 컴포넌트 마운트 시 카카오 주소 API 로드
     useEffect(() => {
         KakaoMap();
     }, []);
 
     return (
-        <div className="edit-tema">
-            <h2>테마 수정</h2>
-            <form onSubmit={ModifySubmit}>
-                <label>테마 번호:</label>
-                <input name="temaNo" type="text" value={temaEdit.temaNo} onChange={Modify} readOnly /> <br />
+        <div className="Modifytema_Form">
+            <h2 className="Modifytema_Title">테마 수정</h2>
+            <form onSubmit={ModifySubmit} className="Modifytema_Submit">
 
-                <label>아이디:</label>
-                <input name="temaNo" type="text" value={temaEdit.memberId} onChange={Modify} readOnly /> <br />
+                <div className="Modifytema_One">
+                    <label className="Modifytema_Label">테마 번호:</label>
+                    <input name="temaNo" type="text" value={temaEdit.temaNo} onChange={Modify} readOnly className="Modifytema_Center" />
+                </div>
 
-                <label>카페이름:</label>
-                <input name="cafeName" type="text" value={temaEdit.cafeName} onChange={Modify} required /> <br />
+                <div className="Modifytema_One">
+                    <label className="Modifytema_Label">아이디:</label>
+                    <input name="memberId" type="text" value={temaEdit.memberId} onChange={Modify} readOnly className="Modifytema_Center" />
+                </div>
 
-                <label>테마이름:</label>
-                <input name="temaName" type="text" value={temaEdit.temaName} onChange={Modify} required /><br />
+                <div className="Modifytema_Two">
+                    <div className="Modifytema_Group">
+                        <label className="Modifytema_Label">카페이름:</label>
+                        <input name="cafeName" type="text" value={temaEdit.cafeName} onChange={Modify} required className="Modifytema_Input" />
+                    </div>
+                    <div className="Modifytema_Group">
+                        <label className="Modifytema_Label">테마이름:</label>
+                        <input name="temaName" type="text" value={temaEdit.temaName} onChange={Modify} required className="Modifytema_Input" />
+                    </div>
+                </div>
 
-                <label>가격:</label>
-                <input name="price" type="text" value={temaEdit.price} onChange={Modify} required /><br />
+                <div className="Modifytema_Two">
+                    <div className="Modifytema_Group">
+                        <label className="Modifytema_Label">소요시간:</label>
+                        <input name="timetaken" type="number" value={temaEdit.timetaken} onChange={Modify} required className="Modifytema_Input" />
+                    </div>
+                    <div className="Modifytema_Group">
+                        <label className="Modifytema_Label">가격:</label>
+                        <input name="price" type="number" value={temaEdit.price} onChange={Modify} required className="Modifytema_Input" />
+                    </div>
+                </div>
 
-                <label>소요시간:</label>
-                <input name="timetaken" type="text" value={temaEdit.timetaken} onChange={Modify} required /><br />
+                <div className="Modifytema_One">
+                    <label className="Modifytema_Label">테마설명:</label>
+                    <textarea name="temaContent" value={temaEdit.temaContent} onChange={Modify} required className="Modifytema_Textarea"></textarea>
+                </div>
 
-                <label>테마설명:</label>
-                <textarea name="temaContent" value={temaEdit.temaContent} onChange={Modify} required></textarea><br />
+                <div className="Modifytema_One">
+                    <label className="Modifytema_Label">지역:</label>
+                    <select name="location" value={temaEdit.location} onChange={Modify} className="Modifytema_Select_Center">
+                        <option value="서울">서울</option>
+                        <option value="경기">경기</option>
+                        <option value="인천">인천</option>
+                        <option value="대구">대구</option>
+                        <option value="부산">부산</option>
+                    </select>
+                </div>
 
-                <label>지역:</label>
-                <select name="location" value={temaEdit.location} onChange={Modify}>
-                    <option value="서울">서울</option>
-                    <option value="부산">부산</option>
-                    <option value="대구">대구</option>
-                    <option value="인천">인천</option>
-                </select><br />
+                <div className="Modifytema_One">
+                    <label className="Modifytema_Label">주소:</label>
+                    <input name="address" type="text" value={temaEdit.address} onChange={Modify} readOnly required className="Modifytema_Center" />
+                    <button type="button" onClick={AddressClick} className="form-button">주소 검색</button>
+                </div>
 
-                <label>주소:</label>
-                <input name="address" type="text" value={temaEdit.address} onChange={Modify} readOnly required />
-                <button type="button" onClick={AddressClick}>주소 검색</button><br />
+                <div className="Modifytema_Two">
+                    <div className="Modifytema_Group">
+                        <label className="Modifytema_Label">인원수:</label>
+                        <select name="personnel" value={temaEdit.personnel} onChange={Modify} className="Modifytema_Select">
+                            <option value={2}>2명</option>
+                            <option value={3}>3명</option>
+                            <option value={4}>4명</option>
+                            <option value={5}>5명</option>
+                            <option value={6}>6명</option>
+                        </select>
+                    </div>
+                    <div className="Modifytema_Group">
+                        <label className="Modifytema_Label">난이도:</label>
+                        <select name="difficulty" value={temaEdit.difficulty} onChange={Modify} className="Modifytema_Select">
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
+                        </select>
+                    </div>
+                </div>
 
-                <label>인원수:</label>
-                <select name="personnel" value={temaEdit.personnel} onChange={Modify}>
-                    <option value={2}>2명</option>
-                    <option value={3}>3명</option>
-                    <option value={4}>4명</option>
-                    <option value={5}>5명</option>
-                    <option value={6}>6명</option>
-                </select><br />
-
-                <label>난이도:</label>
-                <select name="difficulty" value={temaEdit.difficulty} onChange={Modify}>
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                    <option value={4}>4</option>
-                    <option value={5}>5</option>
-                </select><br />
-
-                <label>장르:</label>
-                <select name="genre" value={temaEdit.genre} onChange={Modify}>
-                    <option value="미스터리">미스터리</option>
-                    <option value="호러">호러</option>
-                    <option value="SF">SF</option>
-                    <option value="추리">추리</option>
-                    <option value="판타지">판타지</option>
-                    <option value="어드벤처">어드벤처</option>
-                </select><br />
-
-                <input type="file" accept='image/*' onChange={ModifyImg}></input>
-                <button type="submit">수정 하기</button>
+                <div className="Modifytema_Two">
+                    <div className="Modifytema_Group">
+                        <label className="Modifytema_Label">장르:</label>
+                        <select name="genre" value={temaEdit.genre} onChange={Modify} className="Modifytema_Select">
+                            <option value="미스터리">미스터리</option>
+                            <option value="호러">호러</option>
+                            <option value="스릴러">스릴러</option>
+                            <option value="추리">추리</option>
+                            <option value="판타지">판타지</option>
+                            <option value="어드벤처">어드벤처</option>
+                        </select>
+                    </div>
+                    <div className="Modifytema_Group">
+                        <label className="Modifytema_Label">이미지 업로드</label>
+                        <input type="file" accept='image/*' onChange={ModifyImg} required className="Modifytema_Input_File" />
+                    </div>
+                </div>
+                <button type="submit" className="form-submit-button">수정 하기</button>
             </form>
         </div>
     );
-
-
 }
 
 export default ModifyTema;

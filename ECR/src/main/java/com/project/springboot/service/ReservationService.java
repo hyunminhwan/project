@@ -16,6 +16,8 @@ import com.project.springboot.domain.Tema;
 import com.project.springboot.repository.ReservationRepository;
 import com.project.springboot.repository.TemaRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ReservationService {
 
@@ -31,10 +33,26 @@ public class ReservationService {
 		return reservationRepository.findByTemaAndUseDate(tema, useDate);
 	}  
 	
-	// 일반회원: 예약추가
-	public Reservation saveReservation(Reservation reservation) {
-		return reservationRepository.save(reservation);
-	}
+    @Transactional
+    public boolean reserve(Reservation reservation) {
+        // 중복 예약 확인: reservation.getTema().getTemaNo()로 temaNo 값 조회
+        Optional<Reservation> existingReservation = reservationRepository.findByTema_TemaNoAndUseDateAndUseTime(
+                reservation.getTema().getTemaNo(),
+                reservation.getUseDate(),
+                reservation.getUseTime()
+        );
+
+        // 중복 예약이 있을 경우 false 반환
+        if (existingReservation.isPresent()) {
+            return false;
+        }
+
+        // 예약이 가능한 경우 데이터 저장
+        reservation.setPaymentStatus("결제 대기");
+        reservationRepository.save(reservation);
+        return true;
+    }
+
 	
 	
 	

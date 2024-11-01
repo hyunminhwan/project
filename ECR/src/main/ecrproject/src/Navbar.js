@@ -53,7 +53,7 @@ function Navbar() {
               <li className="dropdown">
                 <div >My Page</div>
                 <ul className="dropdown-content">
-                  <li><Link to="/editMember">change information</Link></li> {/* 관계자에게만 보임 */} {/* 관계자 개인정보수정 */}
+                  <li><Link to="/passwordCheck">change information</Link></li> {/* 관계자에게만 보임 */} {/* 관계자 개인정보수정 */}
                 </ul>
               </li>
             ) : (
@@ -62,7 +62,7 @@ function Navbar() {
                   <div>My Page</div>
                   <ul className="dropdown-content">
                     <li><Link to="/checkReserve">Reservation confirmation</Link></li> {/* 개인회원 예약확인*/}
-                    <li><Link to="/editMember">change information</Link></li> {/* 개인회원 개인정보수정 */}
+                    <li><Link to="/passwordCheck">change information</Link></li> {/* 개인회원 개인정보수정 */}
                   </ul>
                 </li>
               )

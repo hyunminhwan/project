@@ -7,7 +7,7 @@ import "./temaListCss.css";
 
 function TemaList() {
     let [menuList, setMenuList] = useState([]);
-    let [menuCount, setMenuCount] = useState(9);
+
     let [filterMenuList, setFilterMenuList] = useState([]);
     let [filter, setfilter] = useState({
         genre: '',
@@ -19,6 +19,7 @@ function TemaList() {
 
     const navigate = useNavigate();
 
+    //페이지가 열렸을때 모든테마를 가져옴
     useEffect(() => {
         axios.get('/api/menu')
             .then((result) => {
@@ -40,6 +41,8 @@ function TemaList() {
         setFilterMenuList(filters);
     }, [filter, menuList, search]);
 
+    
+    let [menuCount, setMenuCount] = useState(9);
     const loadMore = () => {
         setMenuCount(p => p + 9);
     };
@@ -69,64 +72,56 @@ function TemaList() {
                 <Row className="TemaList_Filter">
                     <Form>
                         <Row>
-                            <h4>검색 </h4>
                             <input
                                 type="text"
-                                placeholder="테마 이름을 검색해 주세요"
+                                placeholder="테마 이름을 검색해 주세요."
                                 value={search}
                                 onChange={(c) => setSearch(c.target.value)}
                             />
                             <Col md={3}>
-                                <Form.Group controlId="genre">
-                                    <Form.Label>장르</Form.Label>
-                                    <Form.Select name="genre" onChange={FilterChange}>
+                                    <label>장르</label>
+                                    <select name="genre" onChange={FilterChange}>
                                         <option value="">전체</option>
                                         <option value="미스터리">미스터리</option>
                                         <option value="호러">호러</option>
-                                        <option value="SF">SF</option>
+                                        <option value="스릴러">스릴러</option>
                                         <option value="추리">추리</option>
                                         <option value="판타지">판타지</option>
                                         <option value="어드벤처">어드벤처</option>
-                                    </Form.Select>
-                                </Form.Group>
+                                    </select>
                             </Col>
                             <Col md={3}>
-                                <Form.Group controlId="location">
-                                    <Form.Label>지역</Form.Label>
-                                    <Form.Select name="location" onChange={FilterChange}>
+                                    <label>지역</label>
+                                    <select name="location" onChange={FilterChange}>
                                         <option value="">전체</option>
                                         <option value="서울">서울</option>
-                                        <option value="부산">부산</option>
-                                        <option value="대구">대구</option>
+                                        <option value="경기">경기</option>
                                         <option value="인천">인천</option>
-                                    </Form.Select>
-                                </Form.Group>
+                                        <option value="대구">대구</option>
+                                        <option value="부산">부산</option>
+                                    </select>
                             </Col>
                             <Col md={3}>
-                                <Form.Group controlId="difficulty">
-                                    <Form.Label>난이도</Form.Label>
-                                    <Form.Select name="difficulty" onChange={FilterChange}>
+                                    <label>난이도</label>
+                                    <select name="difficulty" onChange={FilterChange}>
                                         <option value="">전체</option>
                                         <option value={1}>1</option>
                                         <option value={2}>2</option>
                                         <option value={3}>3</option>
                                         <option value={4}>4</option>
                                         <option value={5}>5</option>
-                                    </Form.Select>
-                                </Form.Group>
+                                    </select>
                             </Col>
                             <Col md={3}>
-                                <Form.Group controlId="personnel">
-                                    <Form.Label>인원수</Form.Label>
-                                    <Form.Select name="personnel" onChange={FilterChange}>
+                                    <label>인원수</label>
+                                    <select name="personnel" onChange={FilterChange}>
                                         <option value="">전체</option>
                                         <option value={2}>2명</option>
                                         <option value={3}>3명</option>
                                         <option value={4}>4명</option>
                                         <option value={5}>5명</option>
                                         <option value={6}>6명</option>
-                                    </Form.Select>
-                                </Form.Group>
+                                    </select>
                             </Col>
                         </Row>
                     </Form>
@@ -136,7 +131,7 @@ function TemaList() {
                        <Col lg={4} key={i} onClick={() => temaCount(menu)} style={{ cursor: 'pointer' }}>
                        <div className="TemaList_Card">
                            <img src={menu.imgUrl} alt="테마 이미지" />
-                           <div> {menu.cafeName}</div>
+                           <div> {menu.temaName}</div>
                            <StarRatings
                                rating={menu.difficulty}
                                starRatedColor="red"

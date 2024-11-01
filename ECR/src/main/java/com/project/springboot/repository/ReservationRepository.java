@@ -1,7 +1,9 @@
 package com.project.springboot.repository;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -45,4 +47,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 	// 일반회원: 마이페이지 예약확인에서 예약내역 전체 조회(예약내역 조회)
 	Page<Reservation> findByUserId(String userId, PageRequest pageRequest);
 	
+	 // Tema 객체의 temaNo 필드를 참조하기 위해 Tema_TemaNo으로 변경
+    Optional<Reservation> findByTema_TemaNoAndUseDateAndUseTime(Long temaNo, LocalDate useDate, LocalTime useTime);
 }

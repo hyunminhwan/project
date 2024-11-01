@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Song+Myung&display=swap');
+
+
+/* 전체 폼 컨테이너 */
+.Modifytema_Form {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 8px;
+    width: 45%;  /* 동일한 너비로 조정 */
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #f0f0f0;
+    font-size: 0.9em;
+}
+
+/* 폼 제목 */
+.Modifytema_Title {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 10px; /* 간격 조정 */
+    color: #ff0000;
+    text-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+    font-family: 'Song Myung', serif;
+}
+
+/* 폼 레이블 */
+.Modifytema_Label {
+    font-size: 1.5em;
+    margin-bottom: 5px; /* 간격 조정 */
+    display: block;
+    color: #ffdddd;
+}
+
+/* 폼 입력 필드 스타일 */
+.Modifytema_Input, .Modifytema_Select, .Modifytema_Textarea, .Modifytema_Input_File {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px; /* 필드 간 간격 조정 */
+    background: rgba(0, 0, 0, 0.5); /* 배경색 */
+    border: 1px solid #660000;
+    color: #f0f0f0;
+    border-radius: 5px;
+    font-size: 1.2em;  /* 필드 크기 조정 */
+}
+
+/* 중앙 정렬을 위한 입력 필드들 */
+.Modifytema_One {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto 10px auto; /* 간격 줄이기 */
+}
+
+.Modifytema_Center, .Modifytema_Select_Center {
+    width: 50%; /* 중앙에 맞게 너비 조정 */
+    padding: 8px;
+    margin-bottom: 10px; /* 필드 간 간격 줄이기 */
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #660000;
+    color: #f0f0f0;
+    border-radius: 5px;
+    font-size: 1.2em; /* 폰트 크기 조정 */
+}
+
+/* 텍스트 영역 */
+.Modifytema_Textarea {
+    resize: none;
+    height: 120px;
+    font-size: 1.2em;
+    overflow-y: scroll;  /* 세로 스크롤 추가 */
+    word-break: break-word;  /* 긴 단어가 있을 경우 자동 줄바꿈 */
+    width: 90%;  /* 너비를 90%로 설정하여 양쪽 여백을 확보 */
+    margin: 0 auto;  /* 중앙에 배치 */
+    display: block;  /* 블록 요소로 설정하여 중앙 정렬 적용 */
+}
+
+/* 두 개의 필드: Flex 적용 */
+.Modifytema_Two {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px; /* 간격 줄이기 */
+}
+
+.Modifytema_Group {
+    width: 48%; /* 두 개의 필드를 나란히 배치 */
+}
+
+/* 주소 검색 버튼 및 수정 버튼 */
+.form-button, .form-submit-button {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #f0f0f0;
+    border: 1px solid #660000;
+    padding: 8px 15px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    display: block;
+    width: 50%; /* 중앙 정렬된 버튼 */
+    margin: 0 auto;
+}
+
+/* 버튼 호버 및 클릭 시 스타일 */
+.form-button:hover, .form-submit-button:hover {
+    background-color: #550000;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #ff0000;
+}
+
+.form-button:active, .form-submit-button:active {
+    background-color: #c92020;
+    transform: scale(1.03);
+}

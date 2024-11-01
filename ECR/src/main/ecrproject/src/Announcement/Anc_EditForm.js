@@ -134,9 +134,10 @@ function Anc_EditForm() {
                             </tr>
                         </tbody>
                     </table>
-                    <br />
-                    <button id="edit_button" type="submit">저장하기</button>
-                    <button id="edit_button" type="button" onClick={() => anc_delete(announcement.boardNo)}>삭제하기</button>
+                    <div className="EditForm_Button">
+                        <button id="edit_button" type="submit">저장하기</button>
+                        <button id="edit_button" type="button" onClick={() => anc_delete(announcement.boardNo)}>삭제하기</button>
+                    </div>
                 </form>
             </div>
         </>

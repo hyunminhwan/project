@@ -60,6 +60,7 @@
     white-space: nowrap;      /* 줄바꿈 방지 */
     overflow: hidden;         /* 넘치는 텍스트 숨김 */
     text-overflow: ellipsis;  /* 넘치는 부분은 "..."로 표시 */
+    border-bottom: 2px solid rgba(109, 60, 60, 0.6);
 }
 /* 회원삭제 button 스타일 */
 .CompanyList_List_Table button {

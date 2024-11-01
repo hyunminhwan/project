@@ -19,19 +19,23 @@ function Detail() {
                 <Row className="Detail_Top">
                     {/* 테마 이미지 */}
                     <Col md={7} className="DetailTema_Image">
-                        {/* <img id="a" src={`${process.env.PUBLIC_URL}/img/room${menus.temaNo}.jpg`} alt="테마 이미지" /> */}
                         <img src={menus.imgUrl} alt="테마 이미지" />
                         <br/><br/>
                         {/* 지도 */}
+                        <div className="Detail_Map_Container">
                         <div className="Detail_Map">
                             <Location latitude={menus.latitude} longitude={menus.longitude} />
                         </div>
+                        <div className="Detail_Map_Address">
+                    주소 :{menus.address}
+                </div>
+                </div>
                     </Col>
                     {/* 정보 섹션 및 댓글 */}
                     <Col md={5}>
                         <div className="Detail_Div">
                             <div className="Detail_Info">
-                                <h2>src={`${process.env.REACT_APP_API_BASE_URL}${menus.temaName}`}</h2>
+                                <h2>{menus.temaName}</h2>
                                 <div id="Detail_Content">{menus.temaContent}</div>
                                 <br/>
                                 <div id="Detail_Content">장르 &emsp; {menus.genre}</div>
@@ -53,7 +57,6 @@ function Detail() {
                 {/* 예약하기 */}
                 <Row className="Detail_Reserve">
                     <Col md={8}>
-                    <br/>
                         {loginToMember?.member ? (
                             <Button  id="Detail_Button" onClick={() => {
                                 navigate('/reserve', { state: { menus } });

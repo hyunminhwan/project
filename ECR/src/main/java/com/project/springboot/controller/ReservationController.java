@@ -36,11 +36,20 @@ public class ReservationController {
 	}
 	
 	// 일반회원: 예약 추가 메서드
+	// ReservationController.java
+
 	@PostMapping("/addReserve")
-	public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
-		Reservation savedReservation = reservationService.saveReservation(reservation);
-		return ResponseEntity.ok(savedReservation);
-	}
+    public ResponseEntity<?> addReserve(@RequestBody Reservation reservation) {
+        // 중복 예약 확인 후 예약 처리
+        boolean isReserved = reservationService.reserve(reservation);
+        
+        if (isReserved) {
+            return ResponseEntity.ok("예약이 완료되었습니다.");
+        } else {
+            return ResponseEntity.status(409).body("이미 예약된 시간대입니다. 다른 시간을 선택해 주세요.");
+        }
+    }
+
 	
 	
 	
