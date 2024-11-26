@@ -8,6 +8,8 @@
 </ul>
 <h2>메인페이지</h2>
   <img src="https://github.com/user-attachments/assets/06a4c399-3a5b-4a43-a844-5b9949aecb0b" width="400px" height="300px">
+<h2>테마리스트</h2>
+<img src="https://github.com/user-attachments/assets/bf493f1a-bc63-4cf3-8483-c24829b84d0c"  width="400px" height="300px">
 <h2></h2>
 <h2>기능구현</h2>
 <ol>
