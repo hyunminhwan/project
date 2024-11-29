@@ -47,7 +47,7 @@
 # 기능설명
 ---
 ### 메인페이지
-<img src="https://github.com/user-attachments/assets/06a4c399-3a5b-4a43-a844-5b9949aecb0b" width="800px" height="500px">
+<img src="https://github.com/user-attachments/assets/06a4c399-3a5b-4a43-a844-5b9949aecb0b" width="400px" height="300px">
 
 ### ⭐기능구현
 ---
