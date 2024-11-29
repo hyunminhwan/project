@@ -2,7 +2,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css'; // 방탈출 느낌의 무서운 테마 스타일
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from './store/loginStore';
+import { logout } from '../../store/loginStore';
 
 
 function Navbar() {
