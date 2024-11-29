@@ -4,7 +4,7 @@ import "./login.css";
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import { useDispatch } from "react-redux";
-import { login } from "../store/loginStore";
+import { login } from "../../store/loginStore";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 

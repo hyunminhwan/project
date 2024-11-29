@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "../css/ReservationList.css";
+import "./ReservationList.css";
 
 function ReservationList() {
     // 날짜로 조회 변수

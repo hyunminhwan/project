@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 // css import
-import '../css/CompanyList.css';
+import './CompanyList.css';
 
 function CompanyList({ data, refreshData }) {                                  // loginType이 2인 데이터를 표시할 컴포넌트
     const [members, setMembers] = useState([]);   // 조회한 예약 리스트

@@ -1,8 +1,8 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import Location from "./location";
-import Review from "./review";
-import AvgRating from "./avgRating";
+import Location from "../../components/Location/location";
+import Review from "../../components/Review/review";
+import AvgRating from "../../components/AvgRating/avgRating";
 import { useSelector } from "react-redux";
 import './detailCss.css';
 
