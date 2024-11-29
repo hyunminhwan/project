@@ -28,6 +28,7 @@ import CheckReservationDetails from './reservation/CheckReservationDetails';
 import FindId from './login/FindId';
 import FindPwd from './login/FindPwd';
 import EditMember from './member/editMember';
+import PasswordCheck from './member/passwordCheck';
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
         <Route path='/findid' element={<FindId />} /> {/* 아이디찾기 */}
         <Route path='/findpwd' element={<FindPwd />} />  {/* 비밀번호찾기(변경) */}
         <Route path='/editMember' element={<EditMember />} />  {/* 회원정보수정 */}
+        <Route path='/passwordCheck' element={<PasswordCheck />} />  {/* 회원정보 수정 전 비밀번호 체크 */}
         <Route path='/signup' element={< MemberForm />} />  {/* 회원가입으로 이동 */}
         <Route path='/manage-members' element={< MembershipManagement />} />   {/* 회원 관리 */}
         <Route path='/reserve' element={<Reserve />} />   {/* 예약하기 */}

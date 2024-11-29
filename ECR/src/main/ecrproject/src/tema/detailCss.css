@@ -16,6 +16,18 @@
     border-radius: 10px;
     overflow: hidden;
 }
+.Detail_Map_Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 수직 가운데 정렬 */
+}
+.Detail_Map_Address {
+    color: white; /* 텍스트 색상 */
+    font-size: 20px; /* 폰트 크기 조정 */
+    margin-top: 5px; /* 지도와 주소 사이 간격 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+}
+
 
 /* 예약하기 기능 */
 .Detail_Reserve {

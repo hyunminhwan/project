@@ -40,12 +40,14 @@ public class Tema {
 	@Column(name = "cafe_name")
 	private String cafeName;	//카페이름
 	
+	@Column(name = "cafe_phone")
+	private Long cafePhone;
 	@NonNull
 	private String genre;		//장르
 	private String location;	//지역
 	private Long difficulty; 	//난이도
 	
-	@Column(name = "tema_content", length = 500)
+	@Column(name = "tema_content", length = 300)
 	private String temaContent;	//내용
 	
 	

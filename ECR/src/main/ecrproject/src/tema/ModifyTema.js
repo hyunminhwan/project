@@ -32,13 +32,13 @@ function Coordinates(address) {
         });
 }
 
-function ModifyTema() { 
+function ModifyTema() {
     const location = useLocation();
     const { tema } = location.state || {};
     const navigate = useNavigate();
     const [temaEdit, setTemaEdit] = useState({
         temaNo: '',
-        memberId:'',
+        memberId: '',
         cafeName: '',
         temaName: '',
         price: '',
@@ -139,46 +139,46 @@ function ModifyTema() {
         <div className="Modifytema_Form">
             <h2 className="Modifytema_Title">테마 수정</h2>
             <form onSubmit={ModifySubmit} className="Modifytema_Submit">
-                
+
                 <div className="Modifytema_One">
-                    <label className="Modifytema_Label">테마 번호</label>
+                    <label className="Modifytema_Label">테마 번호:</label>
                     <input name="temaNo" type="text" value={temaEdit.temaNo} onChange={Modify} readOnly className="Modifytema_Center" />
                 </div>
-    
+
                 <div className="Modifytema_One">
-                    <label className="Modifytema_Label">아이디</label>
+                    <label className="Modifytema_Label">아이디:</label>
                     <input name="memberId" type="text" value={temaEdit.memberId} onChange={Modify} readOnly className="Modifytema_Center" />
                 </div>
-    
+
                 <div className="Modifytema_Two">
                     <div className="Modifytema_Group">
-                        <label className="Modifytema_Label">카페이름</label>
+                        <label className="Modifytema_Label">카페이름:</label>
                         <input name="cafeName" type="text" value={temaEdit.cafeName} onChange={Modify} required className="Modifytema_Input" />
                     </div>
                     <div className="Modifytema_Group">
-                        <label className="Modifytema_Label">테마이름</label>
+                        <label className="Modifytema_Label">테마이름:</label>
                         <input name="temaName" type="text" value={temaEdit.temaName} onChange={Modify} required className="Modifytema_Input" />
                     </div>
                 </div>
-    
+
                 <div className="Modifytema_Two">
                     <div className="Modifytema_Group">
-                        <label className="Modifytema_Label">소요시간</label>
+                        <label className="Modifytema_Label">소요시간:</label>
                         <input name="timetaken" type="number" value={temaEdit.timetaken} onChange={Modify} required className="Modifytema_Input" />
                     </div>
                     <div className="Modifytema_Group">
-                        <label className="Modifytema_Label">가격</label>
+                        <label className="Modifytema_Label">가격:</label>
                         <input name="price" type="number" value={temaEdit.price} onChange={Modify} required className="Modifytema_Input" />
                     </div>
                 </div>
-    
+
                 <div className="Modifytema_One">
-                    <label className="Modifytema_Label">테마설명</label>
+                    <label className="Modifytema_Label">테마설명:</label>
                     <textarea name="temaContent" value={temaEdit.temaContent} onChange={Modify} required className="Modifytema_Textarea"></textarea>
                 </div>
-    
+
                 <div className="Modifytema_One">
-                    <label className="Modifytema_Label">지역</label>
+                    <label className="Modifytema_Label">지역:</label>
                     <select name="location" value={temaEdit.location} onChange={Modify} className="Modifytema_Select_Center">
                         <option value="서울">서울</option>
                         <option value="경기">경기</option>
@@ -187,16 +187,16 @@ function ModifyTema() {
                         <option value="부산">부산</option>
                     </select>
                 </div>
-    
+
                 <div className="Modifytema_One">
-                    <label className="Modifytema_Label">주소</label>
+                    <label className="Modifytema_Label">주소:</label>
                     <input name="address" type="text" value={temaEdit.address} onChange={Modify} readOnly required className="Modifytema_Center" />
                     <button type="button" onClick={AddressClick} className="form-button">주소 검색</button>
                 </div>
-    
+
                 <div className="Modifytema_Two">
                     <div className="Modifytema_Group">
-                        <label className="Modifytema_Label">인원수</label>
+                        <label className="Modifytema_Label">인원수:</label>
                         <select name="personnel" value={temaEdit.personnel} onChange={Modify} className="Modifytema_Select">
                             <option value={2}>2명</option>
                             <option value={3}>3명</option>
@@ -206,7 +206,7 @@ function ModifyTema() {
                         </select>
                     </div>
                     <div className="Modifytema_Group">
-                        <label className="Modifytema_Label">난이도</label>
+                        <label className="Modifytema_Label">난이도:</label>
                         <select name="difficulty" value={temaEdit.difficulty} onChange={Modify} className="Modifytema_Select">
                             <option value={1}>1</option>
                             <option value={2}>2</option>
@@ -216,10 +216,10 @@ function ModifyTema() {
                         </select>
                     </div>
                 </div>
-    
+
                 <div className="Modifytema_Two">
                     <div className="Modifytema_Group">
-                        <label className="Modifytema_Label">장르</label>
+                        <label className="Modifytema_Label">장르:</label>
                         <select name="genre" value={temaEdit.genre} onChange={Modify} className="Modifytema_Select">
                             <option value="미스터리">미스터리</option>
                             <option value="호러">호러</option>

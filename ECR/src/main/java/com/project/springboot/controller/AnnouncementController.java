@@ -29,7 +29,8 @@ public class AnnouncementController {
             @PathVariable(name = "page") int page,   // URL 경로에서 페이지 번호를 받아옴
             @PathVariable(name = "size") int size    // URL 경로에서 페이지 크기를 받아옴
     ) {
-        return announcementService.findAll(page, size);
+        return announcementService.findAll(
+        		page, size);
     }
 
     // 공지사항 호출

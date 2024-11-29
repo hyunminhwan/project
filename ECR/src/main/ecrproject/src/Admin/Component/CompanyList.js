@@ -85,7 +85,7 @@ function CompanyList({ data, refreshData }) {                                  /
                 <table className='CompanyList_List_Table'>
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th>번호</th>
                             <th>아이디</th>
                             <th>이름</th>
                             <th>성별</th>

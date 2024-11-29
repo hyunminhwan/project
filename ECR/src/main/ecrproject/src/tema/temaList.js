@@ -7,7 +7,7 @@ import "./temaListCss.css";
 
 function TemaList() {
     let [menuList, setMenuList] = useState([]);
-    let [menuCount, setMenuCount] = useState(9);
+
     let [filterMenuList, setFilterMenuList] = useState([]);
     let [filter, setfilter] = useState({
         genre: '',
@@ -19,6 +19,7 @@ function TemaList() {
 
     const navigate = useNavigate();
 
+    //페이지가 열렸을때 모든테마를 가져옴
     useEffect(() => {
         axios.get('/api/menu')
             .then((result) => {
@@ -40,6 +41,8 @@ function TemaList() {
         setFilterMenuList(filters);
     }, [filter, menuList, search]);
 
+    
+    let [menuCount, setMenuCount] = useState(9);
     const loadMore = () => {
         setMenuCount(p => p + 9);
     };
@@ -81,7 +84,7 @@ function TemaList() {
                                         <option value="">전체</option>
                                         <option value="미스터리">미스터리</option>
                                         <option value="호러">호러</option>
-                                        <option value="SF">SF</option>
+                                        <option value="스릴러">스릴러</option>
                                         <option value="추리">추리</option>
                                         <option value="판타지">판타지</option>
                                         <option value="어드벤처">어드벤처</option>
@@ -92,9 +95,10 @@ function TemaList() {
                                     <select name="location" onChange={FilterChange}>
                                         <option value="">전체</option>
                                         <option value="서울">서울</option>
-                                        <option value="부산">부산</option>
-                                        <option value="대구">대구</option>
+                                        <option value="경기">경기</option>
                                         <option value="인천">인천</option>
+                                        <option value="대구">대구</option>
+                                        <option value="부산">부산</option>
                                     </select>
                             </Col>
                             <Col md={3}>

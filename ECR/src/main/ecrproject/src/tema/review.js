@@ -19,6 +19,9 @@ function Review({ temaNo }) {
     const [editContent, setEditContent] = useState(''); // 수정 중인 리뷰 내용
     const [editRating, setEditRating] = useState(0); // 수정 중인 리뷰 평점
 
+
+
+    const reviewCheck = reviewList.find(review => review.userId === userId);
     useEffect(() => {
         axios.get(`/review/tema/${temaNo}`)
             .then((result) => {
@@ -33,7 +36,7 @@ function Review({ temaNo }) {
     const reviewinsert = (e) => {
         e.preventDefault();
 
-        if (e.target.exists) {
+        if (reviewCheck) {
             alert("이미 리뷰를 작성하셨습니다")
         } else {
             axios.post("/review", {

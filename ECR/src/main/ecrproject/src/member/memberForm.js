@@ -8,15 +8,15 @@ function MemberForm() {
     const navigate = useNavigate()
     // 회원가입 폼 데이터 상태 관리
     const [insertMem, setInsertMem] = useState({
-        memberId: '',
-        memberPwd: '',
-        memberPwdCheck: '',
-        memberName: '',
-        memberPhone: '',
-        memberEmail: '', 
+        memberId: '', //아이디
+        memberPwd: '',  //비밀번호
+        memberPwdCheck: '', //아이디체크
+        memberName: '', //이름
+        memberPhone: '', //핸드폰 번호
+        memberEmail: '',  //이메일
         loginType: 1, // 기본 로그인 타입은 일반 사용자
-        birthDate: '', // 생년월일 추가
-        gender: '', // 성별 추가
+        birthDate: '', // 생년월일 
+        gender: '',     //성별
     });
 
     // 아이디 중복 체크 상태 관리
@@ -110,7 +110,7 @@ function MemberForm() {
         try {
             await axios.post('/api/insert', insertMem);
             alert('회원가입이 완료되었습니다.');
-            navigate("/");
+            navigate("/login");
         } catch (error) {
             // 서버에서 반환한 에러 메시지를 받아서 처리
             if (error.response && error.response.status === 400) {
@@ -235,8 +235,8 @@ function MemberForm() {
                         <label>성별</label>
                         <select name="gender" value={insertMem.gender} onChange={insertform} required>
                             <option value="">성별 선택</option>
-                            <option value="male">남성</option>
-                            <option value="female">여성</option>
+                            <option value="남">남성</option>
+                            <option value="여">여성</option>
                         </select>
                     </div>
 
